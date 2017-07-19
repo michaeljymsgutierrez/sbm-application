@@ -1,3 +1,5 @@
+'use strict';
+
 // Initialize electron application
 var electron = require('electron');
 // Initialize the main electron application 
@@ -11,6 +13,7 @@ app.on('ready', function(){
 	var win  = new BrowserWindow({
 		width: 800,
 		height: 600,
+		icon: __dirname + "/img/icon.png"
 	});
 
 	// Initialize main view
