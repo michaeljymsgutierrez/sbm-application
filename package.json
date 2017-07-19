@@ -13,8 +13,6 @@
   },
   "license": "ISC",
   "dependencies": {
-    "angular": "^1.6.5",
-    "angular-route": "^1.6.5",
     "asar": "^0.13.0",
     "electron": "^1.6.11",
     "electron-prebuilt": "^1.4.13",
