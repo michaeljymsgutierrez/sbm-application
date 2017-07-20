@@ -1,3 +1,5 @@
+'use strict';
+
 // Custom Directives 
 
 // Sidebar Menu
