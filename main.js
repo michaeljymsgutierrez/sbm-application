@@ -9,12 +9,13 @@ var { BrowserWindow } = electron;
 
 // Platform ready
 app.on('ready', function(){
-	// Initialize browser window
-	var win  = new BrowserWindow({
-		width: 800,
-		height: 600,
-		icon: __dirname + "/img/icon.png"
-	});
+	// Initialize browser window and set screen size to full screen
+	var { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
+  	var win = new BrowserWindow({ 
+  		width, 
+  		height , 
+  		icon: __dirname + "/img/icon.png" 
+  	});
 
 	// Initialize main view
 	win.loadURL('file://' + __dirname + '/index.html');
