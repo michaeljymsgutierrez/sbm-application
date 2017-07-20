@@ -1,0 +1,30 @@
+/* Custom CSS */
+/* Roboto Font */
+@font-face {
+  font-family: 'Roboto Regular';
+  src: url("../font/Roboto-Regular.ttf") format("truetype"); }
+
+/* Body Html */
+body, html {
+  font-family: 'Roboto Regular';
+  margin: 0px;
+  overflow-x: hidden;
+  overflow-y: hidden; }
+
+/* side menu */
+div.side-menu {
+  height: 100vh;
+  width: 350px;
+  border-right: 1px solid slategray;
+  background-color: #434343; }
+
+div.side-menu a, div.side-menu div {
+  background-color: #434343;
+  border: none;
+  color: #ffffff; }
+
+div#divider {
+  background-color: #666666; }
+
+i.sm-icon {
+  font-size: 20px; }
