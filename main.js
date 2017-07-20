@@ -20,7 +20,7 @@ app.on('ready', function(){
 	win.loadURL('file://' + __dirname + '/index.html');
 
 	// Load web console
-	win.webContents.openDevTools();
+	// win.webContents.openDevTools();
 
 });
 
