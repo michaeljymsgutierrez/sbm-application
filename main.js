@@ -13,7 +13,7 @@ app.on('ready', function(){
 	var { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
   	var win = new BrowserWindow({ 
   		width, 
-  		height , 
+  		height,
   		icon: __dirname + "/img/icon.png" 
   	});
 
