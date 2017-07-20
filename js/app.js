@@ -1,4 +1,4 @@
 'use strict';
 
 //  Main application module
-var app = angular.module('bms',[]);
+var app = angular.module('bms',['ngRoute']);
