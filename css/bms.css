@@ -43,7 +43,7 @@ div.left-container {
   width: 17.5%; }
 
 div.right-container {
-  float: left;
+  float: right;
   width: 82.4%; }
 
 a.list-group-item, div.list-group-item {
