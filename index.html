@@ -47,17 +47,18 @@
 
 	</head>
 
-<body>
-	<div class="row">
-	      <div class="col-xs-3">
-				<!--  side bar -->
-				<side-menu-bar></side-menu-bar>
-	      </div>
-	      <div class="col-xs-6">
-	      		<!-- main view  -->
-				<ui-view></ui-view>
-	      </div>
-	</div> 
-</body>
+	<body>
+
+		<!-- Sidemenu and main vies container  -->
+		<div class="left-container">
+			<!--  side bar -->
+			<side-menu-bar></side-menu-bar>
+		</div>
+		<div class="right-container">
+			<!-- main view  -->
+			<ui-view></ui-view>
+		</div>
+		
+	</body>
 
 </html>
