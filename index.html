@@ -28,7 +28,7 @@
 		  <script src="./lib/angular/angular.min.js"></script>
 
 		  <!-- angular-route -->
-		  <script src="./lib/angular-route/angular-route.min.js"></script>
+		  <script src="./lib/angular-ui-router/angular-ui-router.min.js"></script>
 		  
 		  <!-- main app -->
 		  <script src="./js/app.js"></script>
@@ -48,8 +48,16 @@
 	</head>
 
 <body>
-	<!-- main view  -->
-	<div ng-view></div>
+	<div class="row">
+	      <div class="col-xs-3">
+				<!--  side bar -->
+				<side-menu-bar></side-menu-bar>
+	      </div>
+	      <div class="col-xs-6">
+	      		<!-- main view  -->
+				<ui-view></ui-view>
+	      </div>
+	</div> 
 </body>
 
 </html>
