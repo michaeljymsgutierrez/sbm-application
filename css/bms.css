@@ -1,17 +1,5 @@
-/* Custom CSS */
-/* Roboto Font */
-@font-face {
-  font-family: 'Roboto Regular';
-  src: url("../font/Roboto-Regular.ttf") format("truetype"); }
-
-/* Body Html */
-body, html {
-  font-family: 'Roboto Regular';
-  margin: 0px;
-  overflow-x: hidden;
-  overflow-y: hidden; }
-
-/* side menu */
+/* Sidemenu Styling */
+/* Side menu */
 div.side-menu {
   height: 100vh;
   width: 240px;
@@ -21,7 +9,7 @@ div.side-menu {
 div.side-menu a, div.side-menu div {
   background-color: #434343;
   border: none;
-  color: #ffffff; }
+  color: #fefefe; }
 
 div#divider {
   background-color: #666666; }
@@ -49,13 +37,66 @@ div.right-container {
 a.list-group-item, div.list-group-item {
   border-radius: 0 !important; }
 
+/* General styling */
+/* Roboto Font */
+@font-face {
+  font-family: 'Roboto Regular';
+  src: url("../font/Roboto-Regular.ttf") format("truetype"); }
+
+/* Body Html */
+body, html {
+  font-family: 'Roboto Regular';
+  margin: 0px;
+  overflow-x: hidden;
+  overflow-y: hidden; }
+
+/* Bar Property */
 div.bar {
   width: 100%;
   height: 30px;
   text-align: center;
-  color: white;
+  color: #fefefe;
   font-size: 15px;
   padding-top: 5px; }
 
+/* Bar color */
 div.bar-blue {
   background-color: #3A7EF3; }
+
+/* Container adoptive height */
+.container-fluid {
+  height: 100vh;
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+/* Dashboard Styling */
+img.home-logo {
+  margin-top: 10%; }
+
+.btn-circle.btn-xl {
+  width: 140px;
+  height: 140px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 50%;
+  background: #fefefe;
+  border: 4px solid #434343; }
+
+i.fa-icon {
+  color: #434343;
+  font-size: 3em; }
+
+.btn-dash {
+  outline-style: none !important;
+  box-shadow: none !important;
+  opacity: 0.5;
+  background-color: #434343 !important; }
+
+div.dashboard-icon {
+  width: 20% !important; }
+
+div.dashboard-label {
+  padding-top: 20px;
+  font-size: 18px;
+  color: #434343; }

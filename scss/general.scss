@@ -1,15 +1,37 @@
-// General styling
+/* General styling */
 
-// Bar styling
+/* Roboto Font */
+@font-face {
+	font-family: 'Roboto Regular';
+	src: url('../font/Roboto-Regular.ttf')format('truetype');
+}
+
+/* Body Html */
+body,html {
+	font-family: 'Roboto Regular';
+	margin: 0px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+/* Bar Property */
 div.bar {
 	width: 100%;
 	height: 30px;
 	text-align: center;
-	color: white;
+	color: $light;
 	font-size: 15px;
 	padding-top: 5px;
 }
 
+/* Bar color */
 div.bar-blue {
 	background-color: #3A7EF3;
+}
+
+/* Container adoptive height */
+.container-fluid {
+	height: 100vh;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
 }
