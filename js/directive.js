@@ -9,3 +9,19 @@ app.directive('sideMenuBar',function(){
 		templateUrl: './template/directive-template/side-menu-bar.html'
 	}
 });
+
+// One space
+app.directive('spO',function(){
+	return {
+		restrict: 'E',
+		template: '&nbsp;'
+	}
+});
+
+// Two space
+app.directive('spT',function(){
+	return {
+		restrict: 'E',
+		template: '&nbsp;&nbsp;'
+	}
+});
