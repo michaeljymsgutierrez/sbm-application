@@ -78,25 +78,29 @@ div.main-container {
 img.home-logo {
   margin-top: 10%; }
 
-.btn-circle.btn-xl {
-  width: 140px;
-  height: 140px;
+button.btn-circle, button.btn-xl {
+  width: 160px;
+  height: 160px;
   padding: 10px 16px;
   font-size: 24px;
   line-height: 1.33;
   border-radius: 50%;
   background: #fefefe;
-  border: 5px solid #434343; }
+  border: 7px solid #434343; }
 
 i.fa-icon {
   color: #434343;
-  font-size: 3em; }
+  font-size: 3.3em; }
 
 .btn-dash {
   outline-style: none !important;
   box-shadow: none !important;
   opacity: 0.5;
-  background-color: #434343 !important; }
+  background-color: #666666 !important; }
+
+button.btn-circle:focus {
+  outline-style: none !important;
+  box-shadow: none !important; }
 
 div.dashboard-icon {
   width: 25% !important; }
@@ -109,4 +113,4 @@ div.dashboard-label {
 div.dashboard-menu {
   width: 1000px;
   margin-left: 41px;
-  margin-top: 46px; }
+  margin-top: 100px; }
