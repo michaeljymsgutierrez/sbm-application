@@ -35,3 +35,9 @@ div.bar-blue {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
 }
+
+/* Main container for sidemenu */
+div.main-container {
+	display: table;
+	width: 100vw;
+}

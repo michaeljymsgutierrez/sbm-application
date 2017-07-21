@@ -69,6 +69,11 @@ div.bar-blue {
   padding-left: 0 !important;
   padding-right: 0 !important; }
 
+/* Main container for sidemenu */
+div.main-container {
+  display: table;
+  width: 100vw; }
+
 /* Dashboard Styling */
 img.home-logo {
   margin-top: 10%; }
@@ -81,7 +86,7 @@ img.home-logo {
   line-height: 1.33;
   border-radius: 50%;
   background: #fefefe;
-  border: 4px solid #434343; }
+  border: 5px solid #434343; }
 
 i.fa-icon {
   color: #434343;
@@ -94,9 +99,14 @@ i.fa-icon {
   background-color: #434343 !important; }
 
 div.dashboard-icon {
-  width: 20% !important; }
+  width: 25% !important; }
 
 div.dashboard-label {
   padding-top: 20px;
-  font-size: 18px;
+  font-size: 19px;
   color: #434343; }
+
+div.dashboard-menu {
+  width: 1000px;
+  margin-left: 41px;
+  margin-top: 46px; }
