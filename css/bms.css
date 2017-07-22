@@ -1,3 +1,6 @@
+/* Import here all scss files */
+/* Put your scss variable here */
+/* Put all you scss file on scss diectory */
 /* Sidemenu Styling */
 /* Side menu */
 div.side-menu {
@@ -44,7 +47,8 @@ a.list-group-item, div.list-group-item {
   src: url("../font/Roboto-Regular.ttf") format("truetype"); }
 
 /* Body Html */
-body, html {
+body,
+html {
   font-family: 'Roboto Regular';
   margin: 0px;
   overflow-x: hidden;
@@ -53,11 +57,11 @@ body, html {
 /* Bar Property */
 div.bar {
   width: 100%;
-  height: 30px;
+  height: 40px;
   text-align: center;
   color: #fefefe;
-  font-size: 15px;
-  padding-top: 5px; }
+  font-size: 18px;
+  padding-top: 8px; }
 
 /* Bar color */
 div.bar-blue {
@@ -114,3 +118,12 @@ div.dashboard-menu {
   width: 1000px;
   margin-left: 41px;
   margin-top: 100px; }
+
+/* Settings Styling */
+div.settings-header {
+  border: none;
+  height: 70px;
+  background-color: lightgray; }
+
+.m-icon-ionic {
+  font-size: 40px; }

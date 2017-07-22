@@ -1,9 +1,15 @@
-// Import here all scss files
+/* Import here all scss files */
 
-// Variables
-$dark:        #434343 !default;
-$light-dark:  #666666 !default;
-$light:       #fefefe !default;
 
-// Sidemenu
-@import 'sidemenu.scss', 'general.scss', 'dashboard.scss'
+/* Put your scss variable here */
+
+$dark: #434343 !default;
+$light-dark: #666666 !default;
+$light: #fefefe !default;
+
+/* Put all you scss file on scss diectory */
+
+@import 'sidemenu.scss',
+'general.scss',
+'dashboard.scss',
+'settings.scss'
