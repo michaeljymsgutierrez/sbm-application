@@ -3,9 +3,32 @@
 div.settings-header {
     border: none;
     height: 70px;
-    background-color: lightgray;
+    background-color: $label-header;
+}
+
+.g-label {
+    color: $label-header-color;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+.s-label {
+    color: #545454;
+    float: left;
+    width: 90px;
+}
+
+.s-label-input {
+    width: 80%;
+    font-size: 16px;
+    border: 1px solid;
 }
 
 .m-icon-ionic {
     font-size: 40px;
+    vertical-align: middle;
+}
+
+.border-less {
+    border: none !important;
 }
