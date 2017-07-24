@@ -9,7 +9,8 @@ div.side-menu {
   border-right: 1px solid slategray;
   background-color: #434343; }
 
-div.side-menu a, div.side-menu div {
+div.side-menu a,
+div.side-menu div {
   background-color: #434343;
   border: none;
   color: #fefefe; }
@@ -37,7 +38,11 @@ div.right-container {
   float: right;
   width: 82.4%; }
 
-a.list-group-item, div.list-group-item {
+div.expander {
+  height: 100%; }
+
+a.list-group-item,
+div.list-group-item {
   border-radius: 0 !important; }
 
 /* General styling */
@@ -86,18 +91,26 @@ a.bar-right:hover {
 
 /* Main container for sidemenu */
 div.main-container {
-  display: table;
   width: 100vw; }
 
 input {
   color: #545454 !important;
   padding: 5px; }
 
+/* Custom List Item */
+.list-item {
+  border: .5px solid #ddd;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #fff; }
+
 /* Dashboard Styling */
 img.home-logo {
   margin-top: 10%; }
 
-button.btn-circle, button.btn-xl {
+button.btn-circle,
+button.btn-xl {
   width: 160px;
   height: 160px;
   padding: 10px 16px;
@@ -133,6 +146,12 @@ div.dashboard-menu {
   width: 1000px;
   margin-left: 41px;
   margin-top: 100px; }
+
+.row-4 {
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  float: right; }
 
 /* Settings Styling */
 div.settings-header {
@@ -172,3 +191,6 @@ span.secs {
   color: lightgray;
   font-size: 24px !important;
   float: right; }
+
+.active-menu {
+  border: 10px solid green !important; }

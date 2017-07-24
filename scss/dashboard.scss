@@ -1,35 +1,36 @@
 /* Dashboard Styling */
 
 img.home-logo {
-	margin-top: 10%;
+    margin-top: 10%;
 }
 
-button.btn-circle ,button.btn-xl {
-  	width: 160px;
-  	height: 160px;
-  	padding: 10px 16px;
-  	font-size: 24px;
-  	line-height: 1.33;
-  	border-radius: 50%;
-  	background: $light;
-  	border: 7px solid $dark;
+button.btn-circle,
+button.btn-xl {
+    width: 160px;
+    height: 160px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 50%;
+    background: $light;
+    border: 7px solid $dark;
 }
 
 i.fa-icon {
-	color: $dark;
-	font-size: 3.3em;
+    color: $dark;
+    font-size: 3.3em;
 }
 
-.btn-dash { 
- 	outline-style: none !important; 
- 	box-shadow: none !important;
- 	opacity: 0.5;
- 	background-color: $light-dark !important;
+.btn-dash {
+    outline-style: none !important;
+    box-shadow: none !important;
+    opacity: 0.5;
+    background-color: $light-dark !important;
 }
 
 button.btn-circle:focus {
- 	outline-style: none !important; 
- 	box-shadow: none !important;
+    outline-style: none !important;
+    box-shadow: none !important;
 }
 
 div.dashboard-icon {
@@ -37,13 +38,20 @@ div.dashboard-icon {
 }
 
 div.dashboard-label {
-	padding-top: 20px;
+    padding-top: 20px;
     font-size: 19px;
     color: $dark;
 }
 
 div.dashboard-menu {
-	width: 1000px;
+    width: 1000px;
     margin-left: 41px;
     margin-top: 100px;
+}
+
+.row-4 {
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: right;
 }
