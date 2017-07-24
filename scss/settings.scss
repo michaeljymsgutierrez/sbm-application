@@ -47,5 +47,6 @@ span.secs {
 }
 
 .active-menu {
-    border: 10px solid green !important;
+    color: $dark !important;
+    background-color: $light !important;
 }

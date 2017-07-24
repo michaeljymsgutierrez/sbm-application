@@ -194,4 +194,5 @@ span.secs {
   float: right; }
 
 .active-menu {
-  border: 10px solid green !important; }
+  color: #434343 !important;
+  background-color: #fefefe !important; }
