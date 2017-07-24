@@ -19,7 +19,7 @@ div.settings-header {
 }
 
 .s-label-input {
-    width: 80%;
+    width: 75%;
     font-size: 16px;
     border: 1px solid;
 }
@@ -31,4 +31,17 @@ div.settings-header {
 
 .border-less {
     border: none !important;
+}
+
+span.secs {
+    font-size: 13px;
+    color: $label-header-color;
+    font-style: italic;
+    float: right;
+}
+
+.dload {
+    color: lightgray;
+    font-size: 24px !important;
+    float: right;
 }

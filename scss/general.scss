@@ -38,6 +38,20 @@ div.bar-blue {
     background-color: $bar-blue;
 }
 
+.bar-right {
+    float: right;
+    padding-right: 8px;
+    color: $light;
+}
+
+a.bar-right {
+    text-decoration: none !important;
+}
+
+a.bar-right:hover {
+    color: $label-header !important;
+}
+
 
 /* Container adoptive height */
 
@@ -57,4 +71,5 @@ div.main-container {
 
 input {
     color: $input-color !important;
+    padding: 5px;
 }
