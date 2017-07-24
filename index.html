@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html ng-app="bms">
-	<head>
-		  <link rel="shortcut icon" type="image/png" href="./img/icon.png" />
-		  <meta charset="utf-8">
-		  <title> Business Management System </title>
-		  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-		  <!-- main css -->
-		  <link rel="stylesheet" href="./css/bms.min.css">
-		  <!-- ionicicons 2.0.1 -->
-		  <link rel="stylesheet" href="./lib/ionicons-2.0.1/css/ionicons.min.css">
-  		  <!-- fontawsome 4.7.0 -->
-		  <link rel="stylesheet" href="./lib/font-awesome-4.7.0/css/font-awesome.min.css">
-  		  <!-- jquery 1.9.1 -->
-		  <script src="./lib/jquery/jquery.min.js"></script>
-  		  <!-- bootstrap css 3.3.7 -->
-		  <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
-		  <!-- bootstrap js 3.3.7 -->
-		  <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
-		  <!-- angularjs main-->
-		  <script src="./lib/angular/angular.min.js"></script>
-		  <!-- angular-route -->
-		  <script src="./lib/angular-ui-router/angular-ui-router.min.js"></script> 
-		  <!-- main app -->
-		  <script src="./js/app.js"></script>
-  		  <!-- states -->
-		  <script src="./js/state.js"></script>
-		  <!-- services -->
-		  <script src="./js/service.js"></script>
-		  <!-- directives -->
-		  <script src="./js/directive.js"></script>
-		  <!-- script -->
-		  <script src="./js/script.js"></script>
-	</head>
-	<body>
-		<!-- Main container -->
-		<div class="main-container">
-			<!-- Sidemenu and main vies container  -->
-			<div class="left-container">
-				<!--  side bar -->
-				<side-menu-bar></side-menu-bar>
-			</div>
-			<div class="right-container">
-				<!-- main view  -->
-				<ui-view></ui-view>
-			</div>
-		</div>
-	</body>
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="./img/icon.png" />
+    <meta charset="utf-8">
+    <title> Business Management System </title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <!-- main css -->
+    <link rel="stylesheet" href="./css/bms.min.css">
+    <!-- ionicicons 2.0.1 -->
+    <link rel="stylesheet" href="./lib/ionicons-2.0.1/css/ionicons.min.css">
+    <!-- fontawsome 4.7.0 -->
+    <link rel="stylesheet" href="./lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!-- jquery 1.9.1 -->
+    <script src="./lib/jquery/jquery.min.js"></script>
+    <!-- bootstrap css 3.3.7 -->
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <!-- bootstrap js 3.3.7 -->
+    <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+    <!-- angularjs main-->
+    <script src="./lib/angular/angular.min.js"></script>
+    <!-- angular-route -->
+    <script src="./lib/angular-ui-router/angular-ui-router.min.js"></script>
+    <!-- main app -->
+    <script src="./js/app.js"></script>
+    <!-- states -->
+    <script src="./js/state.js"></script>
+    <!-- services -->
+    <script src="./js/service.js"></script>
+    <!-- directives -->
+    <script src="./js/directive.js"></script>
+    <!-- script -->
+    <script src="./js/script.js"></script>
+</head>
+
+<body>
+    <!-- Main container -->
+    <div class="main-container">
+        <!-- Sidemenu and main vies container  -->
+        <div class="left-container">
+            <!--  side bar -->
+            <side-menu-bar></side-menu-bar>
+        </div>
+        <div class="right-container">
+            <!-- main view  -->
+            <ui-view></ui-view>
+        </div>
+    </div>
+</body>
+
 </html>
