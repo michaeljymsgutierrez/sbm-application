@@ -142,15 +142,17 @@ div.dashboard-label {
   color: #434343; }
 
 div.dashboard-menu {
-  width: 1000px;
-  margin-left: 41px;
+  width: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
   margin-top: 100px; }
 
 .row-4 {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
-  float: right; }
+  float: left;
+  vertical-align: middle; }
 
 /* Settings Styling */
 div.settings-header {
