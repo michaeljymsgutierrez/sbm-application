@@ -73,3 +73,14 @@ input {
     color: $input-color !important;
     padding: 5px;
 }
+
+
+/* Custom List Item */
+
+.list-item {
+    border: .5px solid #ddd;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+}
