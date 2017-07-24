@@ -78,6 +78,9 @@ div.main-container {
   display: table;
   width: 100vw; }
 
+input {
+  color: #545454 !important; }
+
 /* Dashboard Styling */
 img.home-logo {
   margin-top: 10%; }

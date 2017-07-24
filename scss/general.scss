@@ -35,7 +35,7 @@ div.bar {
 /* Bar color */
 
 div.bar-blue {
-    background-color: #3A7EF3;
+    background-color: $bar-blue;
 }
 
 
@@ -53,4 +53,8 @@ div.bar-blue {
 div.main-container {
     display: table;
     width: 100vw;
+}
+
+input {
+    color: $input-color !important;
 }
