@@ -5,8 +5,7 @@
 /* Side menu */
 div.side-menu {
   height: 100vh;
-  width: 240px;
-  border-right: 1px solid slategray;
+  width: 101%;
   background-color: #434343; }
 
 div.side-menu a,
@@ -99,10 +98,10 @@ input {
 
 /* Custom List Item */
 .list-item {
-  border: .5px solid #ddd;
+  border-bottom: .5px solid #ddd !important;
   display: block;
   padding: 10px 15px;
-  margin-bottom: -1px;
+  margin-bottom: 1px;
   background-color: #fff; }
 
 /* Dashboard Styling */
