@@ -16,6 +16,17 @@ jQuery(document).ready(function() {
                     $('.btn-circle').removeClass('btn-dash');
                 }, 100);
             });
+
+        }, 500);
+
+        setInterval(function() {
+            // Add effects on button click
+            $('.btn-animate').on('click', function() {
+                $('.btn-animate').addClass('btn-animate-click');
+                setTimeout(function() {
+                    $('.btn-animate').removeClass('btn-animate-click')
+                }, 500);
+            });
         }, 500);
 
         // Event listener for adding class on selected on side menu
