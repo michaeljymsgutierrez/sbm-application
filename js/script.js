@@ -17,9 +17,13 @@ jQuery(document).ready(function() {
                 }, 100);
             });
 
-        }, 500);
+            // Event listener for adding class on selected on side menu
+            $('a.menu-link').on('click', function() {
+                $('a.menu-link').removeClass('active-menu');
+                $(this).addClass('active-menu');
+            });
 
-        setInterval(function() {
+
             // Add effects on button click
             $('.btn-animate').on('click', function() {
                 $('.btn-animate').addClass('btn-animate-click');
@@ -27,12 +31,7 @@ jQuery(document).ready(function() {
                     $('.btn-animate').removeClass('btn-animate-click')
                 }, 300);
             });
-        }, 500);
 
-        // Event listener for adding class on selected on side menu
-        $('a.menu-link').on('click', function() {
-            $('a.menu-link').removeClass('active-menu');
-            $(this).addClass('active-menu');
-        });
+        }, 500);
     });
 });
