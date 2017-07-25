@@ -230,3 +230,35 @@ span.secs {
 .active-menu {
   color: #444 !important;
   background-color: #fefefe !important; }
+
+/* Intial Setup Styling */
+div.api-container {
+  vertical-align: middle;
+  border: 1px solid lightgray;
+  width: 505px;
+  height: 70px;
+  text-align: left;
+  padding-left: 10px;
+  padding-top: 8px;
+  vertical-align: middle; }
+
+input.input-api {
+  border: 0px;
+  width: 98%; }
+
+.api-label {
+  padding-left: 4px;
+  padding-bottom: 3px;
+  color: #666666; }
+
+.btn-bar-blue-api {
+  background-color: #3A7EF3;
+  color: #fefefe;
+  border: none;
+  height: 40px;
+  width: 505px;
+  border-radius: 2px;
+  margin-top: 10px; }
+
+.container {
+  margin-top: 15%; }
