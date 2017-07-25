@@ -30,5 +30,11 @@ jQuery(document).ready(function() {
             }, 600);
         });
 
+        /* Resize Left and Right Container on inital setup */
+        if (window.location.hash == '#!/setup') {
+            $('div.left-container').remove();
+            $('div.right-container').css('width', '100vw');
+        }
+
     });
 });
