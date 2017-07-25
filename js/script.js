@@ -25,7 +25,7 @@ jQuery(document).ready(function() {
                 $('.btn-animate').addClass('btn-animate-click');
                 setTimeout(function() {
                     $('.btn-animate').removeClass('btn-animate-click')
-                }, 500);
+                }, 300);
             });
         }, 500);
 
