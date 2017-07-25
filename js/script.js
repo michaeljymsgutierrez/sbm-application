@@ -6,7 +6,6 @@ jQuery(document).ready(function() {
 
     /* Put all your codes here */
     $("body").on('DOMSubtreeModified', ".right-container", function() {
-        console.log("Reinitialize code . . .");
 
         /* Add effects on circle buttons */
         $('.btn-circle').on('click', function() {
