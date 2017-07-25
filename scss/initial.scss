@@ -1,0 +1,37 @@
+/* Intial Setup Styling */
+
+div.api-container {
+    vertical-align: middle;
+    border: 1px solid lightgray;
+    width: 505px;
+    height: 70px;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 8px;
+    vertical-align: middle;
+}
+
+input.input-api {
+    border: 0px;
+    width: 98%;
+}
+
+.api-label {
+    padding-left: 4px;
+    padding-bottom: 3px;
+    color: $light-dark;
+}
+
+.btn-bar-blue-api {
+    background-color: $bar-blue;
+    color: $light;
+    border: none;
+    height: 40px;
+    width: 505px;
+    border-radius: 2px;
+    margin-top: 10px;
+}
+
+.container {
+    margin-top: 15%;
+}
