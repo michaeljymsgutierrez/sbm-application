@@ -15,10 +15,7 @@ div.side-menu div {
   color: #fefefe; }
 
 div#divider {
-  background-color: #fefefe;
-  height: 100px !important;
-  width: 100px;
-  border: 5px solid red !important; }
+  background-color: #fefefe; }
 
 i.sm-icon-ionic {
   font-size: 28px;
@@ -132,6 +129,10 @@ input {
 
 .btn-animate-click {
   color: #3A7EF3; }
+
+/* Remove user selection */
+.dont-touch {
+  user-select: none; }
 
 /* Dashboard Styling */
 img.home-logo {

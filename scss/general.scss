@@ -117,3 +117,10 @@ input {
 .btn-animate-click {
     color: $bar-blue;
 }
+
+
+/* Remove user selection */
+
+.dont-touch {
+    user-select: none;
+}
