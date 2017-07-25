@@ -17,7 +17,10 @@ div.side-menu div {
 }
 
 div#divider {
-    background-color: $light-dark;
+    background-color: $light;
+    height: 100px !important;
+    width: 100px;
+    border: 5px solid red !important;
 }
 
 i.sm-icon-ionic {

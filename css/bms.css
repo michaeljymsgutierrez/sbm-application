@@ -6,16 +6,19 @@
 div.side-menu {
   height: 100vh;
   width: 101%;
-  background-color: #434343; }
+  background-color: #444; }
 
 div.side-menu a,
 div.side-menu div {
-  background-color: #434343;
+  background-color: #444;
   border: none;
   color: #fefefe; }
 
 div#divider {
-  background-color: #666666; }
+  background-color: #fefefe;
+  height: 100px !important;
+  width: 100px;
+  border: 5px solid red !important; }
 
 i.sm-icon-ionic {
   font-size: 28px;
@@ -52,13 +55,19 @@ div.list-group-item {
   font-family: 'Roboto Regular';
   src: url("../font/Roboto-Regular.ttf") format("truetype"); }
 
+/* Custom Font Icomoon */
+@font-face {
+  font-family: 'icomoon';
+  src: url("../font/icomoon.ttf") format("truetype"), url("../font/icomoon.svg") format("svg"); }
+
 /* Body Html */
 body,
 html {
-  font-family: 'Roboto Regular';
+  font-family: 'Roboto Regular' !important;
   margin: 0px;
   overflow-x: hidden;
-  overflow-y: hidden; }
+  overflow-y: hidden;
+  -webkit-font-smoothing: antialiased !important; }
 
 /* Bar Property */
 div.bar {
@@ -106,6 +115,20 @@ input {
   margin-bottom: 1px;
   background-color: #fff; }
 
+/* Custom Icomoon Icons */
+.icon {
+  font-size: 90px !important;
+  font-style: normal;
+  color: #444; }
+
+.icon-wallet:before {
+  font-family: 'icomoon' !important;
+  content: "\e903"; }
+
+.icon-cash_register:before {
+  font-family: 'icomoon' !important;
+  content: "\e90c"; }
+
 /* Dashboard Styling */
 img.home-logo {
   margin-top: 10%; }
@@ -119,10 +142,10 @@ button.btn-xl {
   line-height: 1.33;
   border-radius: 50%;
   background: #fefefe;
-  border: 7px solid #434343; }
+  border: 7px solid #444; }
 
 i.fa-icon {
-  color: #434343;
+  color: #444;
   font-size: 3.3em; }
 
 .btn-dash {
@@ -141,13 +164,17 @@ div.dashboard-icon {
 div.dashboard-label {
   padding-top: 20px;
   font-size: 19px;
-  color: #434343; }
+  color: #444; }
 
 div.dashboard-menu {
   width: 100%;
   padding-left: 40px;
   padding-right: 40px;
   margin-top: 100px; }
+
+i.dash-icon {
+  font-size: 110px;
+  color: #444; }
 
 .row-4 {
   min-height: 1px;
@@ -196,5 +223,5 @@ span.secs {
   float: right; }
 
 .active-menu {
-  color: #434343 !important;
+  color: #444 !important;
   background-color: #fefefe !important; }

@@ -9,14 +9,23 @@
 }
 
 
+/* Custom Font Icomoon */
+
+@font-face {
+    font-family: 'icomoon';
+    src: url("../font/icomoon.ttf") format("truetype"), url("../font/icomoon.svg") format("svg");
+}
+
+
 /* Body Html */
 
 body,
 html {
-    font-family: 'Roboto Regular';
+    font-family: 'Roboto Regular' !important;
     margin: 0px;
     overflow-x: hidden;
     overflow-y: hidden;
+    -webkit-font-smoothing: antialiased !important;
 }
 
 
@@ -83,4 +92,23 @@ input {
     padding: 10px 15px;
     margin-bottom: 1px;
     background-color: #fff;
+}
+
+
+/* Custom Icomoon Icons */
+
+.icon {
+    font-size: 90px !important;
+    font-style: normal;
+    color: $dark;
+}
+
+.icon-wallet:before {
+    font-family: 'icomoon' !important;
+    content: "\e903";
+}
+
+.icon-cash_register:before {
+    font-family: 'icomoon' !important;
+    content: "\e90c";
 }
