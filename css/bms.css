@@ -85,7 +85,8 @@ div.bar-blue {
 .bar-right {
   float: right;
   padding-right: 8px;
-  color: #fefefe; }
+  color: #fefefe;
+  cursor: default; }
 
 a.bar-right {
   text-decoration: none !important; }
@@ -128,6 +129,9 @@ input {
 .icon-cash_register:before {
   font-family: 'icomoon' !important;
   content: "\e90c"; }
+
+.btn-animate-click {
+  color: #3A7EF3; }
 
 /* Dashboard Styling */
 img.home-logo {

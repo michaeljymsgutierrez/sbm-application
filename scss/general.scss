@@ -51,6 +51,7 @@ div.bar-blue {
     float: right;
     padding-right: 8px;
     color: $light;
+    cursor: default;
 }
 
 a.bar-right {
@@ -111,4 +112,8 @@ input {
 .icon-cash_register:before {
     font-family: 'icomoon' !important;
     content: "\e90c";
+}
+
+.btn-animate-click {
+    color: $bar-blue;
 }
