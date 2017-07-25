@@ -4,6 +4,10 @@
 app.config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
+        .state('setup', {
+            url: '/setup',
+            templateUrl: './template/initial-setup/initial-setup.html'
+        })
         .state('dashboard', {
             url: '/dashboard',
             templateUrl: './template/dashboard/dashboard.html'
@@ -18,5 +22,5 @@ app.config(function($stateProvider, $urlRouterProvider) {
         });
 
     // $urlRouterProvider.otherwise('/dashboard');
-    $urlRouterProvider.otherwise('/settings');
+    $urlRouterProvider.otherwise('/setup');
 });
