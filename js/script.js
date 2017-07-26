@@ -35,11 +35,14 @@ jQuery(document).ready(function() {
             $('div.right-container').css('width', '100vw');
         }
 
+        /* Reload browser window temporarily */
         if (JSON.parse(window.localStorage.getItem('reload')) == 'true') {
-            location.reload();
             window.localStorage.removeItem('reload');
+            window.localStorage.setItem('default', 'dashboard');
+            location.reload();
         }
 
+        /* Initial Backdrop */
         $('.custom-backdrop').hide();
     });
 });
