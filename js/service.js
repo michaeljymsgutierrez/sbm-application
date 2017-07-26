@@ -19,14 +19,36 @@ app.service('storage', function($window) {
 });
 
 
-/* Service for validating API url */
+/* Service for validating API url and Key */
 app.service('validateApi', function($resource) {
+    /* validate endpoint */
     this.connect = function(strAPI) {
         return $resource(strAPI, {}, {
             'get': {
                 method: 'GET',
-                isArray: false
+                isArray: false,
+                interceptor: {
+                    response: function(response) {
+                        return response;
+                    }
+                }
             }
         });
-    }
+    };
+
+    /* validate key */
+    this.key = function(strAPI, strKey) {
+        return $resource(strAPI, {}, {
+            'get': {
+                method: 'GET',
+                headers: { 'api-key': strKey },
+                isArray: true,
+                interceptor: {
+                    response: function(response) {
+                        return response;
+                    }
+                }
+            }
+        });
+    };
 });
