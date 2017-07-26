@@ -8,5 +8,7 @@
             <input class="input-api" ng-model="api" placeholder="http://bms.com/api" />
         </div>
         <button class="btn-bar-blue-api" ng-click="validateURL()"> Verify API URL </button>
+        <div class="alert alert-danger initial-alert" ng-show="showAlert">Invalid API URL</div>
     </div>
+
 </div>
