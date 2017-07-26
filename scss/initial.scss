@@ -41,3 +41,22 @@ input.input-api {
     margin: auto;
     margin-top: 50px;
 }
+
+.store-select {
+    border: none;
+    width: 482px;
+    height: 41px;
+    background: #fff;
+    font-size: 15px;
+}
+
+.store-container {
+    vertical-align: middle;
+    border: 1px solid lightgray;
+    width: 505px;
+    height: 58px;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 8px;
+    vertical-align: middle;
+}

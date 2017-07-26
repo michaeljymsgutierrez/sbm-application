@@ -6,7 +6,7 @@
         <h1>BMS</h1>
         <div class="api-container center-block">
             <div class="api-label">Server-side API URL</div>
-            <input class="input-api" ng-model="api" placeholder="http://bms.com/api" />
+            <input type="text" class="input-api" ng-model="api" placeholder="http://bms.com/api" />
         </div>
         <button class="btn-bar-blue-api" ng-click="validateURL()"> Verify API URL </button>
         <div class="alert alert-danger initial-alert" ng-show="showAlert">Invalid API URL</div>
@@ -17,10 +17,22 @@
         <h1>BMS</h1>
         <div class="api-container center-block">
             <div class="api-label">API Key</div>
-            <input class="input-api" ng-model="key" placeholder="MpRyaKpTaW7dwxT1sAiyoXiL" />
+            <input type="text" class="input-api" ng-model="key" placeholder="MpRyaKpTaW7dwxT1sAiyoXiL" />
         </div>
         <button class="btn-bar-blue-api" ng-click="validateKey()"> Verify API key </button>
         <div class="alert alert-danger initial-alert" ng-show="showAlert">Invalid API KEY</div>
+    </div>
+
+    <!--Form 3  -->
+    <div class="container text-center vertical-center" ng-show="form3">
+        <h1>BMS</h1>
+        <div class="store-container center-block">
+            <select ng-model="selected" ng-options="x.store_name for x in storelist" class="store-select">
+                <option value="">Select Store</option>
+            </select>
+        </div>
+        <button class="btn-bar-blue-api" ng-click=""> Get Started </button>
+        <div class="alert alert-danger initial-alert" ng-show="showAlert">Please Select Store</div>
     </div>
 
 </div>
