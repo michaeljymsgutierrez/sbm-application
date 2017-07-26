@@ -19,6 +19,17 @@ app.service('storage', function($window) {
 });
 
 
+/* Service for showing backdrop */
+app.service('backdrop', function() {
+    this.show = function() {
+        jQuery('.custom-backdrop').show();
+    }
+    this.hide = function() {
+        jQuery('.custom-backdrop').hide();
+    }
+});
+
+
 /* Service for validating API url and Key */
 app.service('validateApi', function($resource) {
     /* validate endpoint */

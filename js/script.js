@@ -35,5 +35,11 @@ jQuery(document).ready(function() {
             $('div.right-container').css('width', '100vw');
         }
 
+        if (JSON.parse(window.localStorage.getItem('reload')) == 'true') {
+            location.reload();
+            window.localStorage.removeItem('reload');
+        }
+
+        $('.custom-backdrop').hide();
     });
 });
