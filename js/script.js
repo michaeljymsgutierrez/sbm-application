@@ -1,5 +1,9 @@
 'use strict';
 
+/* Initialize electron API */
+var remote = require('electron').remote;
+
+/* Include all your jQuery code here */
 jQuery(document).ready(function() {
     /* Assure that the side script has been loaded succesfully */
     console.log('Script has been loaded . . .');
@@ -40,6 +44,11 @@ jQuery(document).ready(function() {
             window.localStorage.removeItem('reload');
             window.localStorage.setItem('default', 'dashboard');
             location.reload();
+        }
+
+        /* Remaximized widow */
+        if (remote.getCurrentWindow().isMaximized() == true) {
+            remote.getCurrentWindow().maximize();
         }
 
         /* Initial Backdrop */

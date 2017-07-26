@@ -1,5 +1,8 @@
 'use strict';
 
+/* Initialize electron API */
+var remote = require('electron').remote;
+
 /* Initial Setup controller */
 
 app.controller('setupCtrl', function($scope, validateApi, storage, $state, backdrop, $timeout) {
@@ -55,6 +58,7 @@ app.controller('setupCtrl', function($scope, validateApi, storage, $state, backd
         });
     };
 
+
     /* Fn for saving store */
     $scope.saveStore = function() {
         backdrop.show();
@@ -62,13 +66,17 @@ app.controller('setupCtrl', function($scope, validateApi, storage, $state, backd
             backdrop.hide();
             $scope.showAlert = true;
         } else {
-            $scope.showAlert = false;
-            storage.write('store_id', $scope.selectedStore);
-            storage.write('reload', 'true');
-            $timeout(function() {
+            var pop = confirm('BMS is going to reinitialize . . .');
+            if (pop == true) {
+                $scope.showAlert = false;
+                storage.write('store_id', $scope.selectedStore);
+                storage.write('reload', 'true');
+                remote.getCurrentWindow().minimize();
                 backdrop.hide();
                 $state.go('dashboard');
-            }, 1500);
+            } else {
+                backdrop.hide();
+            }
         }
     }
 });
