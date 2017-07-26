@@ -1,7 +1,8 @@
 <!--Inital Setup Template  -->
 
 <div class="container-fluid">
-    <div class="container text-center vertical-center">
+    <!--Form 1  -->
+    <div class="container text-center vertical-center" ng-show="form1">
         <h1>BMS</h1>
         <div class="api-container center-block">
             <div class="api-label">Server-side API URL</div>
@@ -9,6 +10,17 @@
         </div>
         <button class="btn-bar-blue-api" ng-click="validateURL()"> Verify API URL </button>
         <div class="alert alert-danger initial-alert" ng-show="showAlert">Invalid API URL</div>
+    </div>
+
+    <!--Form 2  -->
+    <div class="container text-center vertical-center" ng-show="form2">
+        <h1>BMS</h1>
+        <div class="api-container center-block">
+            <div class="api-label">API Key</div>
+            <input class="input-api" ng-model="key" placeholder="MpRyaKpTaW7dwxT1sAiyoXiL" />
+        </div>
+        <button class="btn-bar-blue-api" ng-click="validateKey()"> Verify API key </button>
+        <div class="alert alert-danger initial-alert" ng-show="showAlert">Invalid API KEY</div>
     </div>
 
 </div>
