@@ -262,3 +262,8 @@ input.input-api {
 
 .container {
   margin-top: 15%; }
+
+.initial-alert {
+  width: 505px;
+  margin: auto;
+  margin-top: 50px; }
