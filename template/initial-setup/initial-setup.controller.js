@@ -15,8 +15,10 @@ app.controller('setupCtrl', function($scope, validateApi, $q, storage, $resource
     $scope.form2 = false;
     /* Form 3 STORE */
     $scope.form3 = false;
-    /* Store List */
+    /* Store List and selected store */
     $scope.storelist = [];
+    $scope.selectedStore;
+
 
     /* Fn for validating api url */
     $scope.validateURL = function() {
@@ -40,9 +42,20 @@ app.controller('setupCtrl', function($scope, validateApi, $q, storage, $resource
             storage.write('apiKey', $scope.key);
             $scope.storelist = res.data;
             $scope.showAlert = false;
-            $scope.form1 = false;
+            $scope.form2 = false;
+            $scope.form3 = true;
         }, function(err) {
             $scope.showAlert = true;
         });
     };
+
+    /* Fn for saving store */
+    $scope.saveStore = function() {
+        if ($scope.selectedStore == "" || $scope.selectedStore == undefined) {
+            $scope.showAlert = true;
+        } else {
+            $scope.showAlert = false;
+            storage.write('store_id', $scope.selectedStore);
+        }
+    }
 });
