@@ -4,5 +4,8 @@
 /* Settings Controller */
 
 app.controller('settingsCtrl', function($scope, storage) {
-    $scope.data = "THIS IS SETTINGS";
+    console.log('settings controller . . .');
+
+    /* Initialize variables */
+    $scope.settings = {};
 });
