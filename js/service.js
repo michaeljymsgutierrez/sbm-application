@@ -19,6 +19,19 @@ app.service('storage', function($window) {
 });
 
 
+/* Service for toast notification */
+app.service('Toast', function($timeout) {
+    this.show = function(msg) {
+        var toast = jQuery('#snackbar');
+        toast.text(msg);
+        toast.addClass('show');
+        $timeout(function() {
+            toast.removeClass('show');
+        }, 5000);
+    }
+});
+
+
 /* Service for showing backdrop */
 app.service('backdrop', function() {
     this.show = function() {
