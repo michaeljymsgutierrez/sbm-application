@@ -68,7 +68,6 @@ app.controller('setupCtrl', function($scope, validateApi, storage, $state, backd
         } else {
             var pop = confirm('BMS is going to reinitialize . . .');
             if (pop == true) {
-                $scope.showAlert = false;
                 storage.write('store_id', $scope.selectedStore);
                 storage.write('reload', 'true');
                 remote.getCurrentWindow().minimize();
