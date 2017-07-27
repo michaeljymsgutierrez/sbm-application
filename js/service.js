@@ -27,7 +27,7 @@ app.service('Toast', function($timeout) {
         toast.addClass('show');
         $timeout(function() {
             toast.removeClass('show');
-        }, 5000);
+        }, 3000);
     }
 });
 
