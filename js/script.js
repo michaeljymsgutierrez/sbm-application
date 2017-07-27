@@ -25,14 +25,6 @@ jQuery(document).ready(function() {
             $(this).addClass('active-menu');
         });
 
-        /* Add effects on button click */
-        $('.btn-animate').on('click', function() {
-            $('.btn-animate').addClass('btn-animate-click');
-            setTimeout(function() {
-                $('.btn-animate').removeClass('btn-animate-click')
-            }, 600);
-        });
-
         /* Resize Left and Right Container on inital setup */
         if (window.location.hash == '#!/setup') {
             $('div.left-container').remove();
