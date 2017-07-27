@@ -25,3 +25,11 @@ app.directive('spT', function() {
         template: '&nbsp;&nbsp;'
     }
 });
+
+// Four space
+app.directive('spF', function() {
+    return {
+        restrict: 'E',
+        template: '&nbsp;&nbsp;&nbsp;&nbsp;'
+    }
+});
