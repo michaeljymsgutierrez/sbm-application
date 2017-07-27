@@ -114,10 +114,6 @@ input {
     content: "\e90c";
 }
 
-.btn-animate-click {
-    color: $bar-blue;
-}
-
 
 /* Remove user selection */
 
@@ -134,4 +130,25 @@ input {
     height: 100%;
     background: rgba(0, 0, 0, 0.4);
     cursor: wait;
+}
+
+
+/* Styling for button effects */
+
+.button:focus {
+    outline: none;
+}
+
+.button {
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+}
+
+.button:active {
+    background-color: transparent;
+    transform: translateY(4px);
 }
