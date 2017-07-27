@@ -21,8 +21,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/settings',
             templateUrl: './template/settings/settings.html',
             controller: 'settingsCtrl'
+        })
+        .state('sync', {
+            url: '/sync',
+            templateUrl: './template/sync/sync.html',
+            controller: 'syncCtrl'
         });
 
     // $urlRouterProvider.otherwise('/dashboard');
-    $urlRouterProvider.otherwise('/settings');
+    $urlRouterProvider.otherwise('/sync');
 });
