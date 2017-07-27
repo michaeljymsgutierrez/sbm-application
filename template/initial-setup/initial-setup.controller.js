@@ -5,13 +5,11 @@ var remote = require('electron').remote;
 
 /* Initial Setup controller */
 
-app.controller('setupCtrl', function($scope, validateApi, storage, $state, backdrop, $timeout) {
+app.controller('setupCtrl', function($scope, validateApi, storage, $state, backdrop, $timeout, Toast) {
 
     /* API initialization */
     $scope.api = "";
     $scope.key = "";
-    /* Alert visibility */
-    $scope.showAlert = false;
     /* Form 1 API URL */
     $scope.form1 = true;
     /* Form 2 API KEY */
@@ -29,13 +27,16 @@ app.controller('setupCtrl', function($scope, validateApi, storage, $state, backd
         $scope.checkAPI = validateApi.connect($scope.api);
         $scope.checkAPI.get(function(res) {
             backdrop.hide();
-            storage.write('endpoint', $scope.api);
-            $scope.showAlert = false;
-            $scope.form1 = false;
-            $scope.form2 = true;
+            if (res.data == 'Services Endpoint "bms" has been setup successfully.') {
+                storage.write('endpoint', $scope.api);
+                $scope.form1 = false;
+                $scope.form2 = true;
+            } else {
+                Toast.show('Invalid API URL');
+            }
         }, function(err) {
             backdrop.hide();
-            $scope.showAlert = true;
+            Toast.show('Invalid API URL');
             $scope.form1 = true;
         });
     };
@@ -49,12 +50,11 @@ app.controller('setupCtrl', function($scope, validateApi, storage, $state, backd
             backdrop.hide();
             storage.write('apiKey', $scope.key);
             $scope.storelist = res.data;
-            $scope.showAlert = false;
             $scope.form2 = false;
             $scope.form3 = true;
         }, function(err) {
             backdrop.hide();
-            $scope.showAlert = true;
+            Toast.show('Invalid API KEY')
         });
     };
 
@@ -64,7 +64,7 @@ app.controller('setupCtrl', function($scope, validateApi, storage, $state, backd
         backdrop.show();
         if ($scope.selectedStore == "" || $scope.selectedStore == undefined) {
             backdrop.hide();
-            $scope.showAlert = true;
+            Toast.show('Please select store');
         } else {
             var pop = confirm('BMS is going to reinitialize . . .');
             if (pop == true) {
