@@ -14,10 +14,9 @@
 }
 
 .sync-btn {
-    float: right;
     color: $input-color;
-    position: absolute;
-    right: 35px;
+    position: relative;
+    float: right;
     margin-top: -7px;
 }
 
@@ -31,5 +30,4 @@
 
 .total-sync {
     float: right;
-    margin-right: 80px;
 }
