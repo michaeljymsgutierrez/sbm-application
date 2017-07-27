@@ -19,9 +19,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('settings', {
             url: '/settings',
-            templateUrl: './template/settings/settings.html'
+            templateUrl: './template/settings/settings.html',
+            controller: 'settingsCtrl'
         });
 
     // $urlRouterProvider.otherwise('/dashboard');
-    $urlRouterProvider.otherwise('/setup');
+    $urlRouterProvider.otherwise('/settings');
 });
