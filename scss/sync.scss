@@ -1,0 +1,35 @@
+/* Sync Styling*/
+
+.sync-header {
+    border: none;
+    height: 40px;
+    background-color: $label-header;
+}
+
+.sync-left {
+    padding-top: 5px;
+    padding-left: 12px;
+    color: $input-color;
+    font-size: 16px;
+}
+
+.sync-btn {
+    float: right;
+    color: $input-color;
+    position: absolute;
+    right: 35px;
+    margin-top: -7px;
+}
+
+.sync-icon {
+    font-size: 24px;
+}
+
+.sync-list {
+    height: 53px;
+}
+
+.total-sync {
+    float: right;
+    margin-right: 80px;
+}

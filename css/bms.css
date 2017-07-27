@@ -386,3 +386,32 @@ However, delay the fade out process for 2.5 seconds */
   to {
     bottom: 0;
     opacity: 0; } }
+
+/* Sync Styling*/
+.sync-header {
+  border: none;
+  height: 40px;
+  background-color: #f1f1f1; }
+
+.sync-left {
+  padding-top: 5px;
+  padding-left: 12px;
+  color: #545454;
+  font-size: 16px; }
+
+.sync-btn {
+  float: right;
+  color: #545454;
+  position: absolute;
+  right: 35px;
+  margin-top: -7px; }
+
+.sync-icon {
+  font-size: 24px; }
+
+.sync-list {
+  height: 53px; }
+
+.total-sync {
+  float: right;
+  margin-right: 80px; }
