@@ -41,3 +41,28 @@ app.service('backdrop', function() {
         jQuery('.custom-backdrop').hide();
     }
 });
+
+
+/* Service for Executing DB Queries */
+app.service('DBAccess', function() {
+    /* Param must be array */
+    this.execute = function(query, param) {
+        if (param) {
+            connection.query(query, param, function(err, res, fields) {
+                if (err) {
+                    return err;
+                } else {
+                    return res;
+                }
+            });
+        } else {
+            connection.query(query, function(err, res, fields) {
+                if (err) {
+                    return err;
+                } else {
+                    return res;
+                }
+            });
+        }
+    }
+});
