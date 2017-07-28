@@ -33,21 +33,11 @@ app.run(function($state, DBAccess) {
     });
 
     /* Create store_info table */
-    var store_info = "CREATE TABLE IF NOT EXISTS store_info (id INT PRIMARY KEY AUTO_INCREMENT, store_id INT, store_code VARCHAR(25), store_name VARCHAR(25), company VARCHAR(25), location VARCHAR(25))";
+    var store_info = "CREATE TABLE IF NOT EXISTS store_info (id INT PRIMARY KEY AUTO_INCREMENT, store_id INT, store_code VARCHAR(25), store_name VARCHAR(25), company VARCHAR(25), location VARCHAR(25), bank  VARCHAR(25))";
     DBAccess.execute(store_info).then(function(res) {
         console.info('store_info table created');
     }, function(err) {
         console.error(err);
     });
-
-    /* Create bank table */
-    var bank = "CREATE TABLE IF NOT EXISTS bank (id INT PRIMARY KEY AUTO_INCREMENT, bank_name VARCHAR(25))";
-    DBAccess.execute(bank).then(function(res) {
-        console.info('bank table created');
-    }, function(err) {
-        console.log(err);
-    });
-
-
 
 });
