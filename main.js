@@ -1,15 +1,15 @@
 'use strict';
 
-// Initialize electron application
+/* Initialize electron API */
 var electron = require('electron');
-// Initialize the main electron application 
+/* Initialize electron application */
 var { app } = electron;
-// Initialize the Browser window Form
+/* Initialize the Browser window Form */
 var { BrowserWindow } = electron;
 
-// Platform ready
+/* Fomr Rady */
 app.on('ready', function() {
-    // Initialize browser window and set screen size to full screen
+    /* Get device screen resolution */
     var { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
     var win = new BrowserWindow({
         width,
@@ -17,10 +17,12 @@ app.on('ready', function() {
         icon: __dirname + "/img/icon.png"
     });
 
-    // Initialize main view
+    /*  Initialize main view */
     win.loadURL('file://' + __dirname + '/index.html');
 
-    // Load web console
-    // win.webContents.openDevTools();
+    /* Load web console 
+        Uncomment Line to open devtools on start
+    */
+    /* win.webContents.openDevTools();*/
 
 });
