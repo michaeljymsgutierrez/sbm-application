@@ -58,7 +58,6 @@ app.service('DBAccess', function($q) {
                 }
             });
         } else {
-
             connection.query(query, function(err, res, fields) {
                 if (err) {
                     var response = err;
