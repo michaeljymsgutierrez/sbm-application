@@ -53,8 +53,10 @@ app.service('DBAccess', function($q) {
             connection.query(query, param, function(err, res, fields) {
                 if (err) {
                     var response = err;
+                    deferred.reject(response);
                 } else {
                     var response = res;
+                    deferred.resolve(response);
                 }
             });
         } else {
@@ -69,5 +71,10 @@ app.service('DBAccess', function($q) {
             });
         }
         return deferred.promise;
+    }
+
+    /* Terminate connection */
+    this.terminate = function() {
+        connection.end();
     }
 });
