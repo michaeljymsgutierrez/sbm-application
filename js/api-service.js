@@ -2,6 +2,12 @@
 
 /* Include all API service */
 
+/* Get API information */
+var api = {
+    endpoint: JSON.parse(window.localStorage.getItem('endpoint')),
+    key: JSON.parse(window.localStorage.getItem('apiKey'))
+};
+
 /* Service for validating API url and Key */
 app.service('validateApi', function($resource) {
     /* validate endpoint */
@@ -36,7 +42,16 @@ app.service('validateApi', function($resource) {
     };
 });
 
-app.service('StoreInfo', function($resource, storage) {
-    console.log(storage.read('endpoint') + storage.read('apiKey'));
-
+/* Store Information */
+app.service('Store', function($resource, storage) {
+    return $resource(api.endpoint + '/store/:id', { id: '@id' }, {
+        'get': {
+            method: 'GET',
+            headers: { 'api-key': api.key },
+            isArray: false,
+            interceptor: function(response) {
+                return response;
+            }
+        }
+    });
 });
