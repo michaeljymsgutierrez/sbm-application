@@ -7,7 +7,7 @@ var { app } = electron;
 /* Initialize the Browser window Form */
 var { BrowserWindow } = electron;
 
-/* Fomr Rady */
+/* Form Rady */
 app.on('ready', function() {
     /* Get device screen resolution */
     var { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
