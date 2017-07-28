@@ -8,7 +8,7 @@ var mysql = require('mysql');
 var connection = null;
 
 /* Put all your configuration here */
-app.run(function($state) {
+app.run(function($state, DBAccess) {
 
     connection = mysql.createConnection({
         host: 'localhost',
@@ -22,8 +22,17 @@ app.run(function($state) {
         if (err) {
             console.error(err);
         } else {
-            console.info('Database succesfully created');
+            console.info('DB created');
         }
     });
+
+    /* Create store_info table */
+    var store_info = "CREATE TABLE IF NOT EXISTS store_info (id INT PRIMARY KEY AUTO_INCREMENT, store_id INT, store_code VARCHAR(25), store_name VARCHAR(25), company VARCHAR(25))";
+    DBAccess.execute(store_info).then(function(res) {
+        console.info('store_info table created');
+    }, function(err) {
+        console.error(err);
+    });
+
 
 });
