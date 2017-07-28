@@ -14,14 +14,15 @@ app.run(function($state) {
         host: 'localhost',
         user: 'root',
         password: '',
+        database: 'bms_db'
     });
 
     /* Intialize database */
     connection.query('CREATE DATABASE IF NOT EXISTS bms_db', function(err, res, fields) {
         if (err) {
-            console.log(err);
+            console.error(err);
         } else {
-            console.log(res);
+            console.info('Database succesfully created');
         }
     });
 
