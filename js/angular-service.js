@@ -44,25 +44,31 @@ app.service('backdrop', function() {
 
 
 /* Service for Executing DB Queries */
-app.service('DBAccess', function() {
+app.service('DBAccess', function($q) {
     /* Param must be array */
     this.execute = function(query, param) {
+        var deferred = $q.defer();
+        var response;
         if (param) {
             connection.query(query, param, function(err, res, fields) {
                 if (err) {
-                    return err;
+                    var response = err;
                 } else {
-                    return res;
+                    var response = res;
                 }
             });
         } else {
+
             connection.query(query, function(err, res, fields) {
                 if (err) {
-                    return err;
+                    var response = err;
+                    deferred.reject(response);
                 } else {
-                    return res;
+                    var response = res;
+                    deferred.resolve(response);
                 }
             });
         }
+        return deferred.promise;
     }
 });
