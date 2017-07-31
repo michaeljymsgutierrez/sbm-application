@@ -49,7 +49,7 @@ app.run(function($state, DBAccess, Log) {
     });
 
     /* Create reason  table */
-    var reason = "CREATE TABLE IF NOT EXISTS reason (_id INT PRIMARY KEY AUTO_INCREMENT, module VARCHAR(25), reason VARCHAR(25))";
+    var reason = "CREATE TABLE IF NOT EXISTS reason (id INT PRIMARY KEY AUTO_INCREMENT, _id INT , module VARCHAR(25), reason VARCHAR(25))";
     DBAccess.execute(reason, []).then(function(res) {
         console.log("reason table created");
     }, function(err) {
