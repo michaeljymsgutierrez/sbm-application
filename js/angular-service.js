@@ -19,8 +19,8 @@ app.service('storage', function($window) {
 });
 
 
-/* Service for loginng file to txt */
-app.service('log', function() {
+/* Service for logging file to txt */
+app.service('Log', function() {
     this.write = function(msg) {
         var fs = require('fs');
         fs.appendFileSync('log.txt', "\n" + new Date() + ":" + msg);
