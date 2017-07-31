@@ -55,3 +55,17 @@ app.service('Store', function($resource, storage) {
         }
     });
 });
+
+/* Branch Information */
+app.service('Branch', function($resource) {
+    return $resource(api.endpoint + '/store/:id/branch', { id: '@id' }, {
+        'get': {
+            method: 'GET',
+            headers: { 'api-key': api.key },
+            isArray: true,
+            interceptor: function(response) {
+                return response;
+            }
+        }
+    });
+});
