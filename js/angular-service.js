@@ -49,32 +49,21 @@ app.service('DBAccess', function($q) {
     this.execute = function(query, param) {
         var deferred = $q.defer();
         var response;
-        if (param) {
-            connection.query(query, param, function(err, res, fields) {
-                if (err) {
-                    var response = err;
-                    deferred.reject(response);
-                } else {
-                    var response = res;
-                    deferred.resolve(response);
-                }
-            });
-        } else {
-            connection.query(query, function(err, res, fields) {
-                if (err) {
-                    var response = err;
-                    deferred.reject(response);
-                } else {
-                    var response = res;
-                    deferred.resolve(response);
-                }
-            });
-        }
+
+        connection.query(query, param, function(err, res, fields) {
+            if (err) {
+                var response = err;
+                deferred.reject(response);
+            } else {
+                var response = res;
+                deferred.resolve(response);
+            }
+        });
         return deferred.promise;
-    }
+    };
 
     /* Terminate connection */
     this.terminate = function() {
         connection.end();
-    }
+    };
 });
