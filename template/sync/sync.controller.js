@@ -2,13 +2,14 @@
 
 /* Sync Controller */
 
-app.controller('syncCtrl', function($scope, storage, Store, DBAccess) {
+app.controller('syncCtrl', function($q, $scope, storage, Store, Branch, DBAccess, Log) {
     /* Get store id */
     var store_id = storage.read('store_id').store_id;
 
     /* Sync Store  */
     $scope.syncStore = function() {
 
+        /* Get store info */
         Store.get({ id: store_id }, function(res) {
             var response = res;
             DBAccess.execute('SELECT COUNT(*) as count FROM store_info', []).then(function(res) {
@@ -22,12 +23,32 @@ app.controller('syncCtrl', function($scope, storage, Store, DBAccess) {
                     DBAccess.execute(update, param);
                 }
             }, function(err) {
-                console.log(err);
+                Log.write(err);
             });
         }, function(err) {
-            console.log(err);
+            Log.write(err);
         });
-    }
+
+        /* Get branch info */
+        Branch.get({ id: store_id }, function(res) {
+            var response = res;
+            if (response.length != 0) {
+                angular.forEach(response, function(value) {
+                    var update = "UPDATE branch_info SET store_name = ? WHERE _id = ?";
+                    DBAccess.execute(update, [value.store_name, value.store_id]).then(function(res) {
+                        if (res.affectedRows == 0) {
+                            var insert = "INSERT INTO branch_info (_id, store_name) VALUES (?,?)";
+                            DBAccess.execute(insert, [value.store_id, value.store_name]);
+                        }
+                    }, function(err) {
+                        Log.write(err);
+                    });
+                });
+            }
+        }, function(err) {
+            Log.write(err);
+        });
+    };
 
 
 });
