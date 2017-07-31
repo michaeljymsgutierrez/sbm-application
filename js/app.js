@@ -8,7 +8,7 @@ var mysql = require('mysql');
 var connection = null;
 
 /* Put all your configuration here */
-app.run(function($state, DBAccess) {
+app.run(function($state, DBAccess, Log) {
 
     connection = mysql.createConnection({
         host: 'localhost',
@@ -37,7 +37,7 @@ app.run(function($state, DBAccess) {
     DBAccess.execute(store_info, []).then(function(res) {
         console.info('store_info table created');
     }, function(err) {
-        console.error(err);
+        Log.write(err);
     });
 
     /* Create branch_info table */
@@ -45,7 +45,15 @@ app.run(function($state, DBAccess) {
     DBAccess.execute(branch_info, []).then(function(res) {
         console.log('branch_info table created');
     }, function(err) {
-        console.log(err);
+        Log.write(err);
+    });
+
+    /* Create reason  table */
+    var reason = "CREATE TABLE IF NOT EXISTS reason (_id INT PRIMARY KEY AUTO_INCREMENT, module VARCHAR(25), reason VARCHAR(25))";
+    DBAccess.execute(reason, []).then(function(res) {
+        console.log("reason table created");
+    }, function(err) {
+        Log.write(err);
     });
 
 });
