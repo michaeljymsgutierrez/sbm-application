@@ -2,13 +2,13 @@
 
 /* Sync Controller */
 
-app.controller('syncCtrl', function($q, $scope, storage, Store, Branch, Reason, DBAccess, Log) {
+app.controller('syncCtrl', function($q, $scope, storage, backdrop, Store, Branch, Reason, DBAccess, Log) {
     /* Get store id */
     var store_id = storage.read('store_id').store_id;
 
     /* Sync Store  */
     $scope.syncStore = function() {
-
+        backdrop.show();
         /* Get store info */
         Store.get({ id: store_id }, function(res) {
             var response = res;
