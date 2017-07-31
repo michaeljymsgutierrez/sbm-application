@@ -69,3 +69,17 @@ app.service('Branch', function($resource) {
         }
     });
 });
+
+/* Reasons data */
+app.service('Reason', function($resource) {
+    return $resource(api.endpoint + '/store/:id/reasons', { id: '@id' }, {
+        'get': {
+            method: 'GET',
+            headers: { 'api-key': api.key },
+            isArray: true,
+            interceptor: function(response) {
+                return response;
+            }
+        }
+    });
+});
