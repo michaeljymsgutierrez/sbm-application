@@ -49,7 +49,6 @@ app.service('DBAccess', function($q) {
     this.execute = function(query, param) {
         var deferred = $q.defer();
         var response;
-
         connection.query(query, param, function(err, res, fields) {
             if (err) {
                 var response = err;
