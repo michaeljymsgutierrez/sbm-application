@@ -2,7 +2,7 @@
 
 /* Sync Controller */
 
-app.controller('syncCtrl', function($q, $scope, storage, Store, Branch, DBAccess, Log) {
+app.controller('syncCtrl', function($q, $scope, storage, Store, Branch, Reason, DBAccess, Log) {
     /* Get store id */
     var store_id = storage.read('store_id').store_id;
 
@@ -45,6 +45,24 @@ app.controller('syncCtrl', function($q, $scope, storage, Store, Branch, DBAccess
                     });
                 });
             }
+        }, function(err) {
+            Log.write(err);
+        });
+
+        /* Get reason data */
+        Reason.get({ id: store_id }, function(res) {
+            var response = res;
+            angular.forEach(response, function(value) {
+                var update = "UPDATE reason SET reason = ? WHERE _id = ? AND  module = ?";
+                DBAccess.execute(update, [response.text, response.id, response.module]).then(function(res) {
+                    if (res.affectedRows == 0) {
+                        var insert = "INSERT INTO reason (_id, module, reason) VALUES (?,?,?)";
+                        DBAccess.execute(insert, [value.id, value.module, value.text]);
+                    }
+                })
+            }, function(err) {
+                Log.write(err);
+            });
         }, function(err) {
             Log.write(err);
         });
