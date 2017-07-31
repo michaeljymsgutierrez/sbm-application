@@ -19,6 +19,15 @@ app.service('storage', function($window) {
 });
 
 
+/* Service for loginng file to txt */
+app.service('log', function() {
+    this.write = function(msg) {
+        var fs = require('fs');
+        fs.appendFileSync('log.txt', "\n" + new Date() + ":" + msg);
+    }
+});
+
+
 /* Service for toast notification */
 app.service('Toast', function($timeout) {
     this.show = function(msg) {

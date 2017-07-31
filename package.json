@@ -19,6 +19,7 @@
     "asar": "^0.13.0",
     "electron": "^1.6.11",
     "electron-prebuilt": "^1.4.13",
+    "fs": "0.0.1-security",
     "fs-jetpack": "^1.1.0",
     "mysql": "^2.13.0",
     "q": "^1.5.0",
