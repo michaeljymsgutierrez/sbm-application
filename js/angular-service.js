@@ -86,7 +86,7 @@ app.service('dateFormatter', function($filter) {
     /* standard utc */
     this.utc = function(dt) {
         var raw_date = new Date(dt);
-        var date_utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+        var date_utc = new Date(raw_date.getUTCFullYear(), raw_date.getUTCMonth(), raw_date.getUTCDate(), raw_date.getUTCHours(), raw_date.getUTCMinutes(), raw_date.getUTCSeconds());
         return $filter('date')(date_utc, 'yyyy-MM-dd HH:mm:ss');
     }
 
