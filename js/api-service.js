@@ -83,3 +83,17 @@ app.service('Reason', function($resource) {
         }
     });
 });
+
+/* Employee Data and Schedule */
+app.service('Employee', function($resource) {
+    return $resource(api.endpoint + '/store/:id/:path', { id: '@id', path: '@path' }, {
+        'get': {
+            method: 'GET',
+            headers: { 'api-key': api.key },
+            isArray: true,
+            interceptor: function(response) {
+                return response;
+            }
+        }
+    });
+});
