@@ -2,16 +2,35 @@
 
 /* Sync Controller */
 
-app.controller('syncCtrl', function($q, $scope, storage, backdrop, Store, Branch, Reason, DBAccess, Log) {
+app.controller('syncCtrl', function($q, $scope, storage, backdrop, Store, Branch, Reason, DBAccess, Log, Toast) {
     /* Get store id */
     var store_id = storage.read('store_id').store_id;
 
     /* Sync Store  */
     $scope.syncStore = function() {
-        backdrop.auto(5000);
+
+        /* Intialize timeout for showing backdrop and sync based on xhr success 
+           $scope.timeout = N of xhr
+           $scope.timeout = -1 if error on xhr
+           Set $scope.timeout to 0 of and increment as xhr success
+           Change val to N of xhr
+        */
+        $scope.timeout = 0;
+        backdrop.show();
+        $scope.$watch('timeout', function(val) {
+            if (val == 3) {
+                backdrop.hide();
+                Toast.show("Syncing store data successful");
+            } else if (val == -1) {
+                backdrop.hide();
+                Toast.show("Unable to connect to server");
+            }
+        });
+
         /* Get store info */
         Store.get({ id: store_id }, function(res) {
             var response = res;
+            $scope.timeout++;
             DBAccess.execute('SELECT COUNT(*) as count FROM store_info', []).then(function(res) {
                 if (res[0].count == 0) {
                     var insert = "INSERT INTO store_info (store_id, store_code, store_name, company, location, bank) VALUES (?,?,?,?,?,?)";
@@ -26,12 +45,14 @@ app.controller('syncCtrl', function($q, $scope, storage, backdrop, Store, Branch
                 Log.write(err);
             });
         }, function(err) {
+            $scope.timeout = -1;
             Log.write(err);
         });
 
         /* Get branch info */
         Branch.get({ id: store_id }, function(res) {
             var response = res;
+            $scope.timeout++;
             if (response.length != 0) {
                 angular.forEach(response, function(value) {
                     DBAccess.execute('SELECT * FROM branch_info WHERE _id = ?', [value.store_id]).then(function(res) {
@@ -48,12 +69,14 @@ app.controller('syncCtrl', function($q, $scope, storage, backdrop, Store, Branch
                 });
             }
         }, function(err) {
+            $scope.timeout = -1;
             Log.write(err);
         });
 
         /* Get reason data */
         Reason.get({ id: store_id }, function(res) {
             var response = res;
+            $scope.timeout++;
             if (response.length != 0) {
                 angular.forEach(response, function(value) {
                     DBAccess.execute('SELECT * FROM reason WHERE _id = ?', [value.id]).then(function(res) {
@@ -70,6 +93,7 @@ app.controller('syncCtrl', function($q, $scope, storage, backdrop, Store, Branch
                 });
             }
         }, function(err) {
+            $scope.timeout = -1;
             Log.write(err);
         });
     };
