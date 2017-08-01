@@ -8,7 +8,7 @@ app.controller('syncCtrl', function($q, $scope, storage, backdrop, Store, Branch
 
     /* Sync Store  */
     $scope.syncStore = function() {
-        backdrop.show();
+        backdrop.auto(5000);
         /* Get store info */
         Store.get({ id: store_id }, function(res) {
             var response = res;
@@ -34,11 +34,13 @@ app.controller('syncCtrl', function($q, $scope, storage, backdrop, Store, Branch
             var response = res;
             if (response.length != 0) {
                 angular.forEach(response, function(value) {
-                    var update = "UPDATE branch_info SET store_name = ? WHERE _id = ?";
-                    DBAccess.execute(update, [value.store_name, value.store_id]).then(function(res) {
-                        if (res.affectedRows == 0) {
+                    DBAccess.execute('SELECT * FROM branch_info WHERE _id = ?', [value.store_id]).then(function(res) {
+                        if (res.length == 0) {
                             var insert = "INSERT INTO branch_info (_id, store_name) VALUES (?,?)";
                             DBAccess.execute(insert, [value.store_id, value.store_name]);
+                        } else {
+                            var update = "UPDATE branch_info SET store_name = ? WHERE _id = ?";
+                            DBAccess.execute(update, [value.store_name, value.store_id]);
                         }
                     }, function(err) {
                         Log.write(err);
@@ -52,17 +54,21 @@ app.controller('syncCtrl', function($q, $scope, storage, backdrop, Store, Branch
         /* Get reason data */
         Reason.get({ id: store_id }, function(res) {
             var response = res;
-            angular.forEach(response, function(value) {
-                var update = "UPDATE reason SET reason = ? WHERE _id = ? AND  module = ?";
-                DBAccess.execute(update, [response.text, response.id, response.module]).then(function(res) {
-                    if (res.affectedRows == 0) {
-                        var insert = "INSERT INTO reason (_id, module, reason) VALUES (?,?,?)";
-                        DBAccess.execute(insert, [value.id, value.module, value.text]);
-                    }
-                })
-            }, function(err) {
-                Log.write(err);
-            });
+            if (response.length != 0) {
+                angular.forEach(response, function(value) {
+                    DBAccess.execute('SELECT * FROM reason WHERE _id = ?', [value.id]).then(function(res) {
+                        if (res.length == 0) {
+                            var insert = "INSERT INTO reason (_id, module, reason) VALUES (?,?,?)";
+                            DBAccess.execute(insert, [value.id, value.module, value.text]);
+                        } else {
+                            var update = "UPDATE reason SET  module = ?, reason = ? WHERE _id = ?";
+                            DBAccess.execute(update, [value.module, value.text, value.id]);
+                        }
+                    }, function(err) {
+                        Log.write(err);
+                    });
+                });
+            }
         }, function(err) {
             Log.write(err);
         });
