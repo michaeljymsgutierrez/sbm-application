@@ -49,7 +49,7 @@ app.run(function($state, DBAccess, Log) {
     });
 
     /* Create reason  table */
-    var reason = "CREATE TABLE IF NOT EXISTS reason (id INT PRIMARY KEY AUTO_INCREMENT, _id INT , module VARCHAR(25), reason VARCHAR(25))";
+    var reason = "CREATE TABLE IF NOT EXISTS reason (id INT PRIMARY KEY AUTO_INCREMENT, _id INT, module VARCHAR(25), reason VARCHAR(25))";
     DBAccess.execute(reason, []).then(function(res) {
         console.info("reason table created");
     }, function(err) {
@@ -60,6 +60,14 @@ app.run(function($state, DBAccess, Log) {
     var employee = "CREATE TABLE IF NOT EXISTS employee (id INT PRIMARY KEY AUTO_INCREMENT, employee_id VARCHAR(25), user_id VARCHAR(25), name VARCHAR(25), username VARCHAR(25), role VARCHAR(25), active VARCHAR(25), created DATETIME)";
     DBAccess.execute(employee, []).then(function(res) {
         console.info("employee table created");
+    }, function(err) {
+        Log.write(err);
+    });
+
+    /* Create employee schedule table */
+    var employee_schedule = "CREATS TABLE IF NOT EXISTS employee_schedule (id INT PRIMARY KEY AUTO_INCREMENT, _id INT, employee_id VARCHAR(25), date DATETIME, shift VARCHAR(25), start DATETIME, end DATETIME, branch_id VARCHAR(25))";
+    DBAccess.execute(employee_schedule, []).then(function(res) {
+        console.info("employee_schedule table created");
     }, function(err) {
         Log.write(err);
     });
