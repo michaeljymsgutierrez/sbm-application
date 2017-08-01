@@ -2,7 +2,7 @@
 
 /* Sync Controller */
 
-app.controller('syncCtrl', function($q, $scope, storage, backdrop, Store, Branch, Reason, DBAccess, Log, Toast) {
+app.controller('syncCtrl', function($q, $scope, storage, backdrop, dateFormatter, Store, Branch, Reason, DBAccess, Log, Toast, Employee) {
     /* Get store id */
     var store_id = storage.read('store_id').store_id;
 
@@ -98,5 +98,32 @@ app.controller('syncCtrl', function($q, $scope, storage, backdrop, Store, Branch
         });
     };
 
+
+    /* Sync Employee */
+    $scope.syncEmployee = function() {
+        backdrop.auto(5000);
+        /* Get all Employee data */
+        Employee.get({ id: store_id, path: 'employee' }, function(res) {
+            var response = res;
+            angular.forEach(response, function(value) {
+                DBAccess.execute("SELECT * FROM employee WHERE user_id = ?", [value.uid]).then(function(res) {
+                    if (res.length == 0) {
+                        var insert = "INSERT INTO employee (employee_id, user_id, name, username, role, active, created) VALUES (?,?,?,?,?,?,?)";
+                        var param = [value.employee_id, value.uid, value.name, value.username, value.role, value.active, dateFormatter.utc(new Date())];
+                        DBAccess.execute(insert, param);
+                    } else {
+                        var update = "UPDATE employee SET employee_id = ?, name = ?, username = ?, role =?, active = ?, created = ? WHERE user_id = ?";
+                        var param = [value.employee_id, value.name, value.username, value.role, value.active, dateFormatter.utc(new Date()), value.uid];
+                        DBAccess.execute(update, param);
+                    }
+                }, function(err) {
+                    Log.write(err);
+                });
+            });
+        }, function(err) {
+            Log.write(err);
+        });
+
+    };
 
 });
