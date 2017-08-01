@@ -43,7 +43,7 @@ app.run(function($state, DBAccess, Log) {
     /* Create branch_info table */
     var branch_info = "CREATE TABLE IF NOT EXISTS branch_info (id INT PRIMARY KEY AUTO_INCREMENT, _id INT, store_name VARCHAR(25))";
     DBAccess.execute(branch_info, []).then(function(res) {
-        console.log('branch_info table created');
+        console.info('branch_info table created');
     }, function(err) {
         Log.write(err);
     });
@@ -51,7 +51,7 @@ app.run(function($state, DBAccess, Log) {
     /* Create reason  table */
     var reason = "CREATE TABLE IF NOT EXISTS reason (id INT PRIMARY KEY AUTO_INCREMENT, _id INT , module VARCHAR(25), reason VARCHAR(25))";
     DBAccess.execute(reason, []).then(function(res) {
-        console.log("reason table created");
+        console.info("reason table created");
     }, function(err) {
         Log.write(err);
     });
@@ -59,7 +59,7 @@ app.run(function($state, DBAccess, Log) {
     /* Create employee table */
     var employee = "CREATE TABLE IF NOT EXISTS employee (id INT PRIMARY KEY AUTO_INCREMENT, employee_id VARCHAR(25), user_id VARCHAR(25), username VARCHAR(25), role VARCHAR(25), active VARCHAR(25), created DATETIME)";
     DBAccess.execute(employee, []).then(function(res) {
-        console.log("employee table created");
+        console.info("employee table created");
     }, function(err) {
         Log.write(err);
     });
