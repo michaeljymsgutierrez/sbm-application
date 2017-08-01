@@ -57,7 +57,7 @@ app.run(function($state, DBAccess, Log) {
     });
 
     /* Create employee table */
-    var employee = "CREATE TABLE IF NOT EXISTS employee (id INT PRIMARY KEY AUTO_INCREMENT, employee_id VARCHAR(25), user_id VARCHAR(25), username VARCHAR(25), role VARCHAR(25), active VARCHAR(25), created DATETIME)";
+    var employee = "CREATE TABLE IF NOT EXISTS employee (id INT PRIMARY KEY AUTO_INCREMENT, employee_id VARCHAR(25), user_id VARCHAR(25), name VARCHAR(25), username VARCHAR(25), role VARCHAR(25), active VARCHAR(25), created DATETIME)";
     DBAccess.execute(employee, []).then(function(res) {
         console.info("employee table created");
     }, function(err) {
