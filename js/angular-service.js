@@ -42,13 +42,22 @@ app.service('Toast', function($timeout) {
 
 
 /* Service for showing backdrop */
-app.service('backdrop', function() {
+app.service('backdrop', function($timeout) {
+    /* show backdrop */
     this.show = function() {
         jQuery('.custom-backdrop').show();
-    }
+    };
+    /* hide backdrop */
     this.hide = function() {
         jQuery('.custom-backdrop').hide();
-    }
+    };
+    /* show and hide backdrop within duration  */
+    this.auto = function(duration) {
+        jQuery('.custom-backdrop').show();
+        $timeout(function() {
+            jQuery('.custom-backdrop').hide();
+        }, duration);
+    };
 });
 
 
