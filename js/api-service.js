@@ -86,7 +86,7 @@ app.service('Reason', function($resource) {
 
 /* Employee Data and Schedule */
 app.service('Employee', function($resource) {
-    return $resource(api.endpoint + '/store/:id/:path', { id: '@id', path: '@path' }, {
+    return $resource(api.endpoint + '/store/:id/:path/:path2', { id: '@id', path: '@path', path2: '@path2' }, {
         'get': {
             method: 'GET',
             headers: { 'api-key': api.key },
