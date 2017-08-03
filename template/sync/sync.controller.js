@@ -101,11 +101,23 @@ app.controller('syncCtrl', function($q, $scope, storage, backdrop, dateFormatter
 
     /* Sync Employee */
     $scope.syncEmployee = function() {
-        backdrop.auto(5000);
+
+        $scope.timeout = 0;
+        backdrop.show();
+        $scope.$watch('timeout', function(val) {
+            if (val == 2) {
+                backdrop.hide();
+                Toast.show("Syncing store data successful");
+            } else if (val == -1) {
+                backdrop.hide();
+                Toast.show("Unable to connect to server");
+            }
+        });
 
         /* Get all Employee data */
         Employee.get({ id: store_id, path: 'employee' }, function(res) {
             var response = res;
+            $scope.timeout++;
             angular.forEach(response, function(value) {
                 DBAccess.execute("SELECT * FROM employee WHERE user_id = ?", [value.uid]).then(function(res) {
                     if (res.length == 0) {
@@ -122,12 +134,14 @@ app.controller('syncCtrl', function($q, $scope, storage, backdrop, dateFormatter
                 });
             });
         }, function(err) {
+            $scope.timeout = -1;
             Log.write(err);
         });
 
         /* Get all Employee data schdeul */
         Employee.get({ id: store_id, path: "employee", path2: 'schedule' }, function(res) {
             var response = res;
+            $scope.timeout++;
             angular.forEach(response, function(value) {
                 var eid = value.employee_id;
                 var schedule = value.schedule;
@@ -145,6 +159,7 @@ app.controller('syncCtrl', function($q, $scope, storage, backdrop, dateFormatter
                 });
             });
         }, function(err) {
+            $scope.timeout = -1;
             Log.write(err);
         });
     };
