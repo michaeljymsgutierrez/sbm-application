@@ -65,7 +65,7 @@ app.run(function($state, DBAccess, Log) {
     });
 
     /* Create employee schedule table */
-    var employee_schedule = "CREATS TABLE IF NOT EXISTS employee_schedule (id INT PRIMARY KEY AUTO_INCREMENT, _id INT, employee_id VARCHAR(25), date DATETIME, shift VARCHAR(25), start DATETIME, end DATETIME, branch_id VARCHAR(25))";
+    var employee_schedule = "CREATE TABLE IF NOT EXISTS employee_schedule (id INT PRIMARY KEY AUTO_INCREMENT, _id INT, employee_id VARCHAR(25), date DATETIME, shift VARCHAR(255), start DATETIME, end DATETIME, branch_id VARCHAR(25))";
     DBAccess.execute(employee_schedule, []).then(function(res) {
         console.info("employee_schedule table created");
     }, function(err) {
