@@ -11,7 +11,7 @@ var connection = null;
 app.run(function($state, DBAccess, Log) {
 
     connection = mysql.createConnection({
-        host: 'localhost',
+        host: '127.0.0.1',
         user: 'root',
         password: '',
     });
@@ -26,7 +26,7 @@ app.run(function($state, DBAccess, Log) {
     });
 
     connection = mysql.createConnection({
-        host: 'localhost',
+        host: '127.0.0.1',
         user: 'root',
         password: '',
         database: 'bms_db'
