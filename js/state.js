@@ -19,7 +19,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('attendance', {
             url: '/attendance',
-            templateUrl: './template/employee-management/attendance.html'
+            templateUrl: './template/employee-management/attendance.html',
+            controller: 'attendanceCtrl'
         })
         .state('settings', {
             url: '/settings',
