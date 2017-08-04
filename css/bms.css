@@ -105,8 +105,7 @@ a.tab {
 
 a.tab:hover {
   color: #fefefe;
-  text-decoration: none !important;
-  opacity: 1; }
+  text-decoration: none !important; }
 
 a.tab-active {
   opacity: 1; }
