@@ -40,6 +40,42 @@ div.bar {
     padding-top: 8px;
 }
 
+div.bar-tab {
+    position: absolute;
+    bottom: 0;
+    width: 82.4%;
+    height: 60px;
+    text-align: center;
+    color: $light;
+    font-size: 10px;
+    padding-top: 8px;
+    margin-left: 1px;
+}
+
+.tab {
+    margin-top: -5px !important;
+    display: inline-block;
+    width: 150px;
+}
+
+.tab-icon-ion {
+    font-size: 28px;
+}
+
+.tab-icon-fa {
+    margin-bottom: 7px;
+    font-size: 28px !important;
+}
+
+a.tab {
+    color: $light;
+}
+
+a.tab:hover {
+    color: $light;
+    text-decoration: none !important;
+}
+
 
 /* Bar color */
 
