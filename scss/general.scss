@@ -180,8 +180,8 @@ input {
 
 /* Styling for button effects */
 
-.button:focus {
-    outline: none;
+button:focus {
+    outline: 0 !important;
 }
 
 .button {
