@@ -32,3 +32,67 @@ div.clock-container {
     border: 3px solid $dark;
     width: 120px;
 }
+
+.attendance-day {
+    text-transform: uppercase;
+}
+
+.ds-seperator {
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.take-picture {
+    font-size: 40px;
+}
+
+.take-picture span {
+    font-size: 20px !important;
+    font-style: normal;
+    vertical-align: 5px;
+}
+
+.attendance-form {
+    margin-top: 25%;
+    padding-right: 10px;
+}
+
+.attendance-form button {
+    color: $light !important;
+    background-color: $dark;
+}
+
+.attendance-field {
+    border: 1px solid lightgray;
+    margin-top: 10px;
+    padding: 8px;
+    text-align: left;
+}
+
+.field-eid {
+    margin-top: 0px;
+    border-top: none;
+}
+
+.input-label {
+    padding-left: 6px;
+}
+
+.attendance-field input {
+    border: 1px solid $light;
+    width: 100%;
+}
+
+.timein,
+.breakin,
+.timeout,
+.breakout {
+    width: 49.6%;
+}
+
+.time-btn-container {
+    margin-top: 10px;
+    border: 1px solid;
+    padding: 0px;
+    background-color: #444
+}

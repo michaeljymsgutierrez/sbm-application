@@ -9,15 +9,33 @@
             <div class="a-left">
                 <div class="clock-container">
                     <ds-widget-clock show-digital digital-format="'MMMM dd, yyyy'"></ds-widget-clock>
-                    <ds-widget-clock show-digital digital-format="'EEEE'"></ds-widget-clock>
+                    <ds-widget-clock show-digital digital-format="'EEEE'" class="attendance-day"></ds-widget-clock>
                     <ds-widget-clock show-digital digital-format="'hh'" class="display-time"></ds-widget-clock>
-                    <div style="display:inline-block;margin-top: 15px;">:</div>
+                    <div class="ds-seperator">:</div>
                     <ds-widget-clock show-digital digital-format=" 'mm' " class="display-time "></ds-widget-clock>
                     <ds-widget-clock show-digital digital-format=" 'a ' " class="display-time "></ds-widget-clock>
                 </div>
             </div>
-            <div class="a-right ">
-                Attendance section
+            <div class="a-right">
+                <div class="attendance-form">
+                    <button class="btn btn-lg btn-block take-picture-btn"><i class="ion-camera take-picture"> <span>TAKE PICTURE </span></i></button>
+                    <div class="attendance-field">
+                        <div class="input-label">Username</div>
+                        <input type="text" placeholder="Username" />
+                    </div>
+                    <div class="attendance-field field-eid">
+                        <div class="input-label">Employee ID Number</div>
+                        <input type="text" placeholder="Employee ID Number" />
+                    </div>
+                    <div class="time-btn-container">
+                        <button class="btn btn-lg timein">TIME IN</button>
+                        <button class="btn btn-lg timeout">TIME OUT</button>
+                    </div>
+                    <div class="time-btn-container">
+                        <button class="btn btn-lg breakin">BREAK OUT</button>
+                        <button class="btn btn-lg breakout">BREAK IN</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -75,6 +75,7 @@ div.bar {
   font-size: 18px;
   padding-top: 8px; }
 
+/* Tab Property */
 div.bar-tab {
   position: absolute;
   bottom: 0;
@@ -99,11 +100,16 @@ div.bar-tab {
   font-size: 28px !important; }
 
 a.tab {
-  color: #fefefe; }
+  color: #fefefe;
+  opacity: 0.6; }
 
 a.tab:hover {
   color: #fefefe;
-  text-decoration: none !important; }
+  text-decoration: none !important;
+  opacity: 1; }
+
+a.tab-active {
+  opacity: 1; }
 
 /* Bar color */
 div.bar-blue {
@@ -170,8 +176,8 @@ input {
   cursor: wait; }
 
 /* Styling for button effects */
-.button:focus {
-  outline: none; }
+button:focus {
+  outline: 0 !important; }
 
 .button {
   text-align: center;
@@ -533,3 +539,55 @@ div.clock-container {
   display: inline-block;
   border: 3px solid #444;
   width: 120px; }
+
+.attendance-day {
+  text-transform: uppercase; }
+
+.ds-seperator {
+  display: inline-block;
+  margin-top: 15px; }
+
+.take-picture {
+  font-size: 40px; }
+
+.take-picture span {
+  font-size: 20px !important;
+  font-style: normal;
+  vertical-align: 5px; }
+
+.attendance-form {
+  margin-top: 25%;
+  padding-right: 10px; }
+
+.attendance-form button {
+  color: #fefefe !important;
+  background-color: #444; }
+
+.attendance-field {
+  border: 1px solid lightgray;
+  margin-top: 10px;
+  padding: 8px;
+  text-align: left; }
+
+.field-eid {
+  margin-top: 0px;
+  border-top: none; }
+
+.input-label {
+  padding-left: 6px; }
+
+.attendance-field input {
+  border: 1px solid #fefefe;
+  width: 100%; }
+
+.timein,
+.breakin,
+.timeout,
+.breakout {
+  width: 49.6%; }
+
+.time-btn-container {
+  margin-top: 10px;
+  border: 1px solid;
+  padding: 0px;
+  background-color: #444; }
