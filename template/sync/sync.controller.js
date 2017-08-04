@@ -107,7 +107,7 @@ app.controller('syncCtrl', function($q, $scope, storage, backdrop, dateFormatter
         $scope.$watch('timeout', function(val) {
             if (val == 2) {
                 backdrop.hide();
-                Toast.show("Syncing store data successful");
+                Toast.show("Employee sync successful");
             } else if (val == -1) {
                 backdrop.hide();
                 Toast.show("Unable to connect to server");
