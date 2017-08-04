@@ -31,6 +31,14 @@ jQuery(document).ready(function() {
             $(this).addClass('tab-active');
         });
 
+        /* Attendance Form Button event listener */
+        $('.attendance-form button').click(function() {
+            $(this).css('background-color', 'black');
+            setTimeout(function() {
+                $('.attendance-form button').css('background-color', '#444');
+            }, 100);
+        });
+
         /* Resize Left and Right Container on inital setup */
         if (window.location.hash == '#!/setup') {
             $('div.left-container').remove();
