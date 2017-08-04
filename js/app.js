@@ -1,7 +1,7 @@
 'use strict';
 
 /*  Main application module */
-var app = angular.module('bms', ['ui.router', 'ngResource']);
+var app = angular.module('bms', ['ui.router', 'ngResource', 'ds.clock']);
 /* Initialize mysql driver */
 var mysql = require('mysql');
 /* Intialize connection  database connection */
