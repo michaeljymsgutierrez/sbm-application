@@ -1,8 +1,8 @@
 'use strict';
 
-// Custom Directives 
+/* Custom Directives */
 
-// Sidebar Menu
+/* Sidebar Menu */
 app.directive('sideMenuBar', function() {
     return {
         restrict: 'E',
@@ -10,7 +10,7 @@ app.directive('sideMenuBar', function() {
     }
 });
 
-// One space
+/* One space */
 app.directive('spO', function() {
     return {
         restrict: 'E',
@@ -18,7 +18,7 @@ app.directive('spO', function() {
     }
 });
 
-// Two space
+/* Two space */
 app.directive('spT', function() {
     return {
         restrict: 'E',
@@ -26,10 +26,18 @@ app.directive('spT', function() {
     }
 });
 
-// Four space
+/* Four space */
 app.directive('spF', function() {
     return {
         restrict: 'E',
         template: '&nbsp;&nbsp;&nbsp;&nbsp;'
+    }
+});
+
+/* Logo */
+app.directive('mainLogo', function() {
+    return {
+        restrict: 'E',
+        template: '<img src="./img/default_logo.png" class="home-logo" />'
     }
 });
