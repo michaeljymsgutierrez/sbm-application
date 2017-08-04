@@ -17,6 +17,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/employee-home',
             templateUrl: './template/employee-management/employee-home.html'
         })
+        .state('attendance', {
+            url: '/attendance',
+            templateUrl: './template/employee-management/attendance.html'
+        })
         .state('settings', {
             url: '/settings',
             templateUrl: './template/settings/settings.html',
@@ -29,5 +33,5 @@ app.config(function($stateProvider, $urlRouterProvider) {
         });
 
     // $urlRouterProvider.otherwise('/dashboard');
-    $urlRouterProvider.otherwise('/sync');
+    $urlRouterProvider.otherwise('/attendance');
 });
