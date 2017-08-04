@@ -40,6 +40,9 @@ div.bar {
     padding-top: 8px;
 }
 
+
+/* Tab Property */
+
 div.bar-tab {
     position: absolute;
     bottom: 0;
@@ -69,11 +72,17 @@ div.bar-tab {
 
 a.tab {
     color: $light;
+    opacity: 0.6;
 }
 
 a.tab:hover {
     color: $light;
     text-decoration: none !important;
+    opacity: 1;
+}
+
+a.tab-active {
+    opacity: 1;
 }
 
 
