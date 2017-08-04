@@ -229,13 +229,14 @@ div.dashboard-menu {
   width: 100%;
   padding-left: 40px;
   padding-right: 40px;
-  margin-top: 100px; }
+  margin-top: 100px;
+  margin-left: 1px; }
 
 i.dash-icon {
   font-size: 110px;
   color: #444; }
 
-.row-4 {
+.row-icon {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
@@ -473,3 +474,7 @@ However, delay the fade out process for 2.5 seconds */
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
+
+/* Employee Management Styling */
+.employee-row {
+  margin-left: 25%; }
