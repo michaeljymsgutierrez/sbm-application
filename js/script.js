@@ -25,6 +25,12 @@ jQuery(document).ready(function() {
             $(this).addClass('active-menu');
         });
 
+        /*  Event listener for adding class on selected on active tab */
+        $('a.tab').on('click', function() {
+            $('a.tab').removeClass('tab-active');
+            $(this).addClass('tab-active');
+        });
+
         /* Resize Left and Right Container on inital setup */
         if (window.location.hash == '#!/setup') {
             $('div.left-container').remove();
