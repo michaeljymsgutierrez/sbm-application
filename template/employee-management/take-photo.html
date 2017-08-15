@@ -4,11 +4,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <i class="ion-refresh camera-refresh button" ng-click="retakePhoto()"></i>
                 <span class="modal-title">Attendance</span>
-                <i class="ion-camera camera-icon"></i>
+                <i class="ion-camera camera-icon button" ng-click="capture()"></i>
             </div>
             <div class="modal-body">
-                <video id="video" width="568" height="450" autoplay></video>
+                <video id="video" width="568" height="450" autoplay ng-show="videoVisible"></video>
+                <canvas id="canvas" width="568" height="450" ng-show="canvasVisible"></canvas>
             </div>
             <div class="modal-footer">
                 <button class="btn modal-btn cancel" ng-click="closeMe()">Cancel</button>

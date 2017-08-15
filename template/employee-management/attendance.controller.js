@@ -6,6 +6,10 @@ app.controller('attendanceCtrl', function($scope, Modal, ModalService, $q, $elem
 
     /* Function for Taking Photo */
     $scope.takePhoto = function() {
+
+        $scope.videoVisible = true;
+        $scope.canvasVisible = false;
+
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
                 var src = window.URL.createObjectURL(stream);
@@ -18,8 +22,18 @@ app.controller('attendanceCtrl', function($scope, Modal, ModalService, $q, $elem
             Modal.hide();
         };
 
+        $scope.retakePhoto = function() {
+            $scope.videoVisible = true;
+            $scope.canvasVisible = false;
+        };
+
         $scope.capture = function() {
-            console.log("Ready to capture");
+            $scope.videoVisible = false;
+            $scope.canvasVisible = true;
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var video = document.getElementById('video');
+            context.drawImage(video, 0, 0, 568, 450);
         };
 
         ModalService.showModal({
@@ -29,7 +43,6 @@ app.controller('attendanceCtrl', function($scope, Modal, ModalService, $q, $elem
         }).then(function(modal) {
             modal.element.modal();
         });
-
     };
 
 });
