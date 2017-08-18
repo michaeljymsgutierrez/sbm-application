@@ -240,6 +240,16 @@ input[type=number]::-webkit-outer-spin-button {
 .cancel {
   float: left; }
 
+.user-prompt {
+  background-color: #fefefe;
+  color: #444; }
+
+.user {
+  width: 270px; }
+
+.username-input {
+  width: 235px; }
+
 /* Dashboard Styling */
 img.home-logo {
   margin-top: 10%; }

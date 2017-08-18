@@ -266,3 +266,16 @@ input[type=number]::-webkit-outer-spin-button {
 .cancel {
     float: left;
 }
+
+.user-prompt {
+    background-color: $light;
+    color: $dark;
+}
+
+.user {
+    width: 270px;
+}
+
+.username-input {
+    width: 235px;
+}
