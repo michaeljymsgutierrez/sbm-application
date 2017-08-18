@@ -3,13 +3,13 @@
 /* Initialize electron API */
 var remote = require('electron').remote;
 
-/* Include all your jQuery code here */
-jQuery(document).ready(function() {
-    /* Assure that the side script has been loaded succesfully */
-    console.log('Script has been loaded . . .');
+setInterval(function() {
 
-    /* Put all your codes here */
-    $("body").on('DOMSubtreeModified', ".right-container", function() {
+    /* Include all your jQuery code here */
+    jQuery(document).ready(function() {
+
+        /* Assure that the side script has been loaded succesfully */
+        console.log('Script running on background mode . . .');
 
         /* Add effects on circle buttons */
         $('.btn-circle').on('click', function() {
@@ -59,5 +59,7 @@ jQuery(document).ready(function() {
 
         /* Initial Backdrop */
         $('.custom-backdrop').hide();
+
     });
-});
+
+}, 1000);
