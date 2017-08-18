@@ -223,6 +223,25 @@ input[type=number]::-webkit-outer-spin-button {
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(211, 211, 211, 0.4); }
 
+/* Modal Styling */
+.modal-header,
+.modal-footer {
+  color: #fefefe;
+  background-color: #3A7EF3; }
+
+.modal-header {
+  text-align: center; }
+
+.modal-title {
+  font-size: 20px; }
+
+.modal-btn {
+  width: 100px;
+  color: #444; }
+
+.cancel {
+  float: left; }
+
 /* Dashboard Styling */
 img.home-logo {
   margin-top: 10%; }
@@ -590,3 +609,13 @@ div.clock-container {
   border: 1px solid;
   padding: 0px;
   background-color: #444; }
+
+.camera-icon {
+  font-size: 40px;
+  right: 10px;
+  top: 3px;
+  position: absolute; }
+
+.camera-title {
+  vertical-align: 8px;
+  font-weight: bold; }

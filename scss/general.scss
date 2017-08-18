@@ -243,3 +243,29 @@ input[type=number]::-webkit-outer-spin-button {
 ::-webkit-scrollbar-thumb:window-inactive {
     background: rgba(211, 211, 211, 0.4);
 }
+
+
+/* Modal Styling */
+
+.modal-header,
+.modal-footer {
+    color: $light;
+    background-color: $bar-blue;
+}
+
+.modal-header {
+    text-align: center;
+}
+
+.modal-title {
+    font-size: 20px;
+}
+
+.modal-btn {
+    width: 100px;
+    color: $dark;
+}
+
+.cancel {
+    float: left;
+}
