@@ -26,10 +26,7 @@ setInterval(function() {
         });
 
         /*  Event listener for adding class on selected on active tab */
-        $('a.tab').on('click', function() {
-            $('a.tab').removeClass('tab-active');
-            $(this).addClass('tab-active');
-        });
+        // $('div.tab').click(function() { });
 
         /* Attendance Form Button event listener */
         $('.attendance-form button').click(function() {
