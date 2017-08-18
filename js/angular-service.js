@@ -60,6 +60,13 @@ app.service('backdrop', function($timeout) {
     };
 });
 
+/* Service for angular modal service hider */
+app.service('Modal', function(ModalService) {
+    this.hide = function() {
+        ModalService.closeModals();
+        jQuery('.modal-backdrop').remove();
+    };
+});
 
 /* Service for formatting date */
 app.service('dateFormatter', function($filter) {
