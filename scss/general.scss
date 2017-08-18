@@ -59,6 +59,8 @@ div.bar-tab {
     margin-top: -5px !important;
     display: inline-block;
     width: 150px;
+    color: $light;
+    opacity: 0.6;
 }
 
 .tab-icon-ion {
@@ -70,18 +72,13 @@ div.bar-tab {
     font-size: 28px !important;
 }
 
-a.tab {
-    color: $light;
-    opacity: 0.6;
-}
-
-a.tab:hover {
+.tab:hover {
     color: $light;
     text-decoration: none !important;
 }
 
-a.tab-active {
-    opacity: 1;
+.tab-active {
+    opacity: 1 !important;
 }
 
 

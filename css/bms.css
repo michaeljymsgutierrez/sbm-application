@@ -90,7 +90,9 @@ div.bar-tab {
 .tab {
   margin-top: -5px !important;
   display: inline-block;
-  width: 150px; }
+  width: 150px;
+  color: #fefefe;
+  opacity: 0.6; }
 
 .tab-icon-ion {
   font-size: 28px; }
@@ -99,16 +101,12 @@ div.bar-tab {
   margin-bottom: 7px;
   font-size: 28px !important; }
 
-a.tab {
-  color: #fefefe;
-  opacity: 0.6; }
-
-a.tab:hover {
+.tab:hover {
   color: #fefefe;
   text-decoration: none !important; }
 
-a.tab-active {
-  opacity: 1; }
+.tab-active {
+  opacity: 1 !important; }
 
 /* Bar color */
 div.bar-blue {
