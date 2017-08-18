@@ -25,7 +25,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('schedule', {
             url: '/schedule',
             templateUrl: './template/employee-management/schedule.html',
-            controller: ''
+            controller: 'scheduleCtrl'
         })
         .state('settings', {
             url: '/settings',
