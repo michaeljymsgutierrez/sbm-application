@@ -2,6 +2,7 @@
 
 /* Schedule Controller */
 
-app.controller('scheduleCtrl', function() {
+app.controller('scheduleCtrl', function(Username) {
 
+    Username.popup();
 });
