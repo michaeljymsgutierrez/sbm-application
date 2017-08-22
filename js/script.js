@@ -62,6 +62,11 @@ setInterval(function() {
             $('.modal-backdrop').remove();
         }
 
+        /* Class for killing modal service */
+        $('.kill-modal').on('click', function() {
+            $('.modal, .modal-backdrop').remove();
+        });
+
     });
 
 }, 1000);
