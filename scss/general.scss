@@ -281,3 +281,18 @@ input[type=number]::-webkit-outer-spin-button {
 .username-input {
     width: 235px;
 }
+
+.user-btn {
+    border-radius: 1px !important;
+}
+
+.user-prompt button:first-child {
+    background-color: $light;
+    border: 1px solid #d3d3d3;
+}
+
+.user-prompt button:last-child {
+    background-color: #3f3f3f;
+    color: $light;
+    border: 1px solid #2a2a2a;
+}
