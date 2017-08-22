@@ -137,3 +137,17 @@ app.service('DBAccess', function($q) {
         connection.end();
     };
 });
+
+
+/* Service for popping and verifying username */
+app.service('Username', function(ModalService) {
+    /* Function for popup modal username */
+    this.popup = function() {
+        ModalService.showModal({
+            templateUrl: './template/directive-template/username-prompt.html',
+            controller: 'usernameCtrl'
+        }).then(function(modal) {
+            modal.element.modal();
+        });
+    };
+});
