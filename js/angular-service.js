@@ -91,6 +91,11 @@ app.service('dateFormatter', function($filter) {
         return $filter('date')(dt, 'yyyy-MM-dd HH:mm:ss');
     }
 
+    /* date now 24 format */
+    this.now = function() {
+        return $filter('date')(new Date(), 'yyyy-MM-dd HH:mm:ss');
+    }
+
     /* standard utc */
     this.utc = function(dt) {
         var raw_date = new Date(dt);
