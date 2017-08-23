@@ -57,16 +57,8 @@ setInterval(function() {
         /* Initial Backdrop */
         $('.custom-backdrop').hide();
 
-        /* Event for removing backdrop modal */
-        if ($('body').hasClass('modal-open') == false) {
-            $('.modal-backdrop').remove();
-        }
-
-        /* Class for killing modal service */
-        $('.kill-modal').on('click', function() {
-            $('.modal, .modal-backdrop').remove();
-        });
-
+        /* Turn of click event for modal */
+        $('.modal').off('click');
     });
 
 }, 1000);
