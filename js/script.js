@@ -50,7 +50,7 @@ setInterval(function() {
         }
 
         /* Remaximized widow */
-        if (remote.getCurrentWindow().isMaximized() == true) {
+        if (remote.getCurrentWindow().isMinimized() == true) {
             remote.getCurrentWindow().maximize();
         }
 
