@@ -4,6 +4,24 @@
     <div class="bar bar-blue">
         Schedule
     </div>
+    <div class="sticky-header">
+        <div>Date</div>
+        <div>Employee</div>
+        <div>Shift</div>
+        <div>Store Assignment</div>
+    </div>
+    <div class="schedule container-fluid" style="overflow-y:scroll !important;">
+        <table class="table">
+            <tbody>
+                <tr ng-repeat="x in schedule">
+                    <td>{{ x.date | date:'LLLL dd, y' }}</td>
+                    <td>{{ name }}</td>
+                    <td>{{ x.shift }}</td>
+                    <td>{{ x.branch }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="bar-tab bar-blue">
         <div class="tab" ui-sref="attendance">
             <i class="ion-person tab-icon-ion"></i>

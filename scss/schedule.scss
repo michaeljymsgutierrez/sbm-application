@@ -1,0 +1,21 @@
+/* Schedule Styling */
+
+.schedule tbody td {
+    width: 100px;
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.sticky-header {
+    background-color: $table-header;
+}
+
+.sticky-header div {
+    display: inline-block;
+    width: 277px;
+    height: 45px;
+    padding-top: 13px;
+    text-align: center;
+}
