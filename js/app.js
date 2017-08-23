@@ -79,4 +79,12 @@ app.run(function($state, DBAccess, Log) {
     }, function(err) {
         Log.write(err);
     });
+
+    /* Create attendance timelog table */
+    var attendance_timelog = "CREATE TABLE IF NOT EXISTS attendance_time_log (attendance_id INT, musgshot TEXT, filename VARCHAR(25), action VARCHAR(25), created DATETIME)";
+    DBAccess.execute(attendance_timelog, []).then(function(res) {
+        console.info("attendance_time_log table created");
+    }, function(err) {
+        Log.write(err);
+    });
 });
