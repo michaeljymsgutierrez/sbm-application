@@ -72,4 +72,11 @@ app.run(function($state, DBAccess, Log) {
         Log.write(err);
     });
 
+    /* Create attendance table */
+    var attendance = "CREATE TABLE IF NOT EXISTS attendance (id INT PRIMARY KEY AUTO_INCREMENT, schedule_id INT, username VARCHAR(25), employee_id VARCHAR(25), is_synced INT, is_completed INT)";
+    DBAccess.execute(attendance, []).then(function(res) {
+        console.info("attendance table created");
+    }, function(err) {
+        Log.write(err);
+    });
 });
