@@ -18,17 +18,17 @@
             </div>
             <div class="a-right">
                 <div class="attendance-form">
-                    <button class="btn btn-lg btn-block take-picture-btn" ng-click="takePhoto()"><i class="ion-camera take-picture"> <span>TAKE PICTURE </span></i></button>
-                    <div class="attendance-field">
+                    <button class="btn btn-lg btn-block take-picture-btn" ng-click="takePhoto()" ng-class="{'empty-photo': photo_class}"><i class="ion-camera take-picture"> <span>TAKE PICTURE </span></i></button>
+                    <div class="attendance-field" ng-class="{'empty-form': user_class}">
                         <div class="input-label">Username</div>
-                        <input type="text" placeholder="Username" />
+                        <input type="text" placeholder="Username" ng-model="username" />
                     </div>
-                    <div class="attendance-field field-eid">
+                    <div class="attendance-field field-eid" ng-class="{'empty-form': eid_class}">
                         <div class="input-label">Employee ID Number</div>
-                        <input type="text" placeholder="Employee ID Number" />
+                        <input type="text" placeholder="Employee ID Number" ng-model="employee_id" />
                     </div>
                     <div class="time-btn-container">
-                        <button class="btn btn-lg timein">TIME IN</button>
+                        <button class="btn btn-lg timein" ng-click="timein()">TIME IN</button>
                         <button class="btn btn-lg timeout">TIME OUT</button>
                     </div>
                     <div class="time-btn-container">
