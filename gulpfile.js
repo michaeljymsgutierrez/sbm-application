@@ -32,7 +32,7 @@ gulp.task('watch', ['sass'], function() {
 });
 
 gulp.task('compress', function(cb) {
-    pump([gulp.src(['js/*.js', 'template/*.js']),
+    pump([gulp.src(['js/*.js', 'template/**/*.js']),
         uglify(),
         gulp.dest('production-dist')
     ]);
