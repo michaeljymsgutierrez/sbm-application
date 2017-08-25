@@ -588,12 +588,18 @@ div.clock-container {
   margin-top: 15px; }
 
 .take-picture {
-  font-size: 40px; }
+  font-size: 40px;
+  position: absolute;
+  margin-left: -50px;
+  margin-top: -15px; }
 
 .take-picture span {
-  font-size: 20px !important;
-  font-style: normal;
-  vertical-align: 5px; }
+  font-size: 18px !important;
+  font-style: normal; }
+
+.take-picture-btn {
+  height: 52px;
+  border-radius: 4px !important; }
 
 .attendance-form {
   margin-top: 25%;
@@ -630,7 +636,8 @@ div.clock-container {
   margin-top: 10px;
   border: 1px solid;
   padding: 0px;
-  background-color: #444; }
+  background-color: #444;
+  border-radius: 4px; }
 
 .camera-icon {
   font-size: 40px;
