@@ -163,6 +163,8 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
                                                         }
                                                         var param = [entry.id, entry.photo, entry.filename, entry.action, entry.created];
                                                         DBAccess.execute(insertTimein, param);
+                                                        $scope.clearModels();
+                                                        Toast.show('You have timed in');
                                                     }
                                                 },
                                                 function(err) {
@@ -178,7 +180,7 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
                                         Clear models and show toast                                    
                                     */
                                     $scope.clearModels();
-                                    Toast.show('You have already timed in');
+                                    Toast.show('Time out is required to continue time in action');
                                 }
                             },
                             function(err) {
