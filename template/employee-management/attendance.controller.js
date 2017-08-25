@@ -173,17 +173,17 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
                                             Log.write(err);
                                         });
                                 } else {
-                                    /* Execute here attendance verification and entry on attendance_time_log */
-                                    console.log('next action here');
+                                    /* 
+                                        Fallback if user try to time in again
+                                        Clear models and show toast                                    
+                                    */
+                                    $scope.clearModels();
+                                    Toast.show('You have already timed in');
                                 }
                             },
                             function(err) {
                                 Log.write(err);
                             });
-
-                        // console.log(sched_id);
-                        // console.log(data);
-
                     },
                     function(err) {
                         Log.write(err);
