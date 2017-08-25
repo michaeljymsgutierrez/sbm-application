@@ -84,6 +84,10 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
         }
     };
 
+    /* Simple function for clearning input models  */
+    $scope.clearModels = function() {
+        $scope.username = '', $scope.employee_id = '', $scope.mugshot = '';
+    };
 
     /* 
         Function for verifying employee if exists 
@@ -117,52 +121,75 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
 
                 var query = "SELECT * FROM employee_schedule WHERE date = ? AND employee_id = ?";
                 DBAccess.execute(query, [dateSearch, $scope.employee_id]).then(function(res) {
-                    angular.forEach(res, function(value) {
-                        var start = dateFormatter.standard(value.start);
-                        var end = dateFormatter.standard(value.end);
-                        if (dateFormatter.timestamp(timein_value) >= dateFormatter.timestamp(start) && dateFormatter.timestamp(timein_value) <= dateFormatter.timestamp(end)) {
-                            $scope.schedule = value;
-                        } else if (dateFormatter.timestamp(timein_value) >= (dateFormatter.timestamp(start) - 3600) && dateFormatter.timestamp(timein_value) <= dateFormatter.timestamp(end)) {
-                            $scope.schedule = value;
-                        }
-                    });
+                        angular.forEach(res, function(value) {
+                            var start = dateFormatter.standard(value.start);
+                            var end = dateFormatter.standard(value.end);
+                            if (dateFormatter.timestamp(timein_value) >= dateFormatter.timestamp(start) && dateFormatter.timestamp(timein_value) <= dateFormatter.timestamp(end)) {
+                                $scope.schedule = value;
+                            } else if (dateFormatter.timestamp(timein_value) >= (dateFormatter.timestamp(start) - 3600) && dateFormatter.timestamp(timein_value) <= dateFormatter.timestamp(end)) {
+                                $scope.schedule = value;
+                            }
+                        });
+                        // console.log($scope.schedule);
+                        /* username , employee_id and schedule_id */
+                        var username = data[0].username;
+                        var eid = data[0].employee_id;
+                        var sched_id = $scope.schedule._id;
+                        var query = "SELECT * FROM attendance WHERE username = ? AND schedule_id = ?";
 
-                    /* username , employee_id and schedule_id */
-                    var username = data[0].username;
-                    var eid = data[0].employee_id;
-                    var sched_id = $scope.schedule._id;
-                    var query = "SELECT * FROM attendance WHERE username = ? AND schedule_id = ?";
-                    /* 
-                        Insert entry on attendance table if entry does not exist 
-                        Insert entry on attendance_time_log action timein
-                    */
-                    DBAccess.execute(query, [username, sched_id]).then(function(res) {
-                        if (res.length == 0) {
-                            var insert = "INSERT INTO attendance (schedule_id, username, employee_id, is_synced, is_completed) VALUES (?,?,?,?,?)";
-                            var param = [sched_id, username, eid, 0, 0];
-                            DBAccess.execute(insert, param).then(function(res) {
-                                /* attendance_id entry */
-                                var attendance_id = res.insertId;
-                                /* Execute here attendance_time_log entry timein action */
-
-                            }, function(err) {
+                        /* 
+                            Insert entry on attendance table if entry does not exist 
+                            Insert entry on attendance_time_log action timein
+                        */
+                        DBAccess.execute(query, [username, sched_id]).then(function(res) {
+                                if (res.length == 0) {
+                                    var insert = "INSERT INTO attendance (schedule_id, username, employee_id, is_synced, is_completed) VALUES (?,?,?,?,?)";
+                                    var param = [sched_id, username, eid, 0, 0];
+                                    /* Insert First Timein action */
+                                    DBAccess.execute(insert, param).then(function(res) {
+                                            /* attendance_id entry */
+                                            var attendance_id = res.insertId;
+                                            var query = "SELECT * FROM attendance_time_log WHERE attendance_id = ? AND action = 'timein'";
+                                            DBAccess.execute(query, [attendance_id]).then(function(res) {
+                                                    if (res.length == 0) {
+                                                        /* Insert here timein action */
+                                                        var insertTimein = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
+                                                        var entry = {
+                                                            id: attendance_id,
+                                                            photo: $scope.mugshot.replace('data:image/png;base64,', ''),
+                                                            filename: username + dateFormatter.timestamp(new Date()) + '.png',
+                                                            action: 'timein',
+                                                            created: dateFormatter.utc(new Date())
+                                                        }
+                                                        var param = [entry.id, entry.photo, entry.filename, entry.action, entry.created];
+                                                        DBAccess.execute(insertTimein, param);
+                                                    }
+                                                },
+                                                function(err) {
+                                                    Log.write(err);
+                                                });
+                                        },
+                                        function(err) {
+                                            Log.write(err);
+                                        });
+                                } else {
+                                    /* Execute here attendance verification and entry on attendance_time_log */
+                                    console.log('next action here');
+                                }
+                            },
+                            function(err) {
                                 Log.write(err);
                             });
-                        } else {
-                            /* Execute here attendance verification and entry on attendance_time_log */
-                        }
-                    }, function(err) {
+
+                        // console.log(sched_id);
+                        // console.log(data);
+
+                    },
+                    function(err) {
                         Log.write(err);
                     });
-
-                    // console.log(sched_id);
-                    // console.log(data);
-
-                }, function(err) {
-                    Log.write(err);
-                });
             } else {
-                $scope.username = '', $scope.employee_id = '';
+                $scope.clearModels();
                 Toast.show('Employee not found or inactive');
             }
         });
