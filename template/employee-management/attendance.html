@@ -20,11 +20,11 @@
                 <div class="attendance-form">
                     <button class="btn btn-lg btn-block take-picture-btn" ng-click="takePhoto()" ng-class="{'empty-photo': photo_class}"><i class="ion-camera take-picture"></i><span>TAKE PICTURE </span></button>
                     <div class="attendance-field" ng-class="{'empty-form': user_class}">
-                        <div class="input-label">Username</div>
+                        <div class="input-label"><i class="ion-alert-circled warning" ng-if="user_class"> </i>Username</div>
                         <input type="text" placeholder="Username" ng-model="username" />
                     </div>
                     <div class="attendance-field field-eid" ng-class="{'empty-form': eid_class}">
-                        <div class="input-label">Employee ID Number</div>
+                        <div class="input-label"><i class="ion-alert-circled warning" ng-if="eid_class"> </i>Employee ID Number</div>
                         <input type="text" placeholder="Employee ID Number" ng-model="employee_id" />
                     </div>
                     <div class="time-btn-container">

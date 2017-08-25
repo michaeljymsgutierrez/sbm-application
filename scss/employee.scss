@@ -127,9 +127,13 @@ div.clock-container {
 }
 
 .empty-photo {
-    background-color: #ef473a !important;
+    background-color: $assertive !important;
 }
 
 .empty-form {
-    border-left: 4px solid #ef473a !important;
+    border-left: 4px solid $assertive !important;
+}
+
+.warning {
+    color: $assertive;
 }

@@ -663,6 +663,9 @@ div.clock-container {
 .empty-form {
   border-left: 4px solid #ef473a !important; }
 
+.warning {
+  color: #ef473a; }
+
 /* Schedule Styling */
 .schedule tbody td {
   width: 100px;
