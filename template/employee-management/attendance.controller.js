@@ -82,6 +82,13 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
         } else {
             $scope.photo_class = false;
         }
+
+        /* Checker when to execute attendance action */
+        if (!$scope.employee_id || !$scope.mugshot || !$scope.username) {
+            $scope.executeAttendance = 0;
+        } else {
+            $scope.executeAttendance = 1;
+        }
     };
 
     /* Simple function for clearning input models  */
@@ -111,92 +118,92 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
 
         /* Check if forms is empty */
         $scope.checkFormInputs();
-        /* Check if employee exists in database */
-        $scope.verifyEmployee($scope.username, $scope.employee_id);
-        /* Listen for broadcasted event and determine the schedule */
-        $rootScope.$on('attendance_verification', function(event, data) {
-            if (data.length == 1) {
-                var dateSearch = dateFormatter.standardNoTime(new Date()) + " 00:00:00";
-                var timein_value = dateFormatter.standard(new Date());
+        if ($scope.executeAttendance == 1) {
+            /* Check if employee exists in database */
+            $scope.verifyEmployee($scope.username, $scope.employee_id);
+            /* Listen for broadcasted event and determine the schedule */
+            $rootScope.$on('attendance_verification', function(event, data) {
+                if (data.length == 1) {
+                    var dateSearch = dateFormatter.standardNoTime(new Date()) + " 00:00:00";
+                    var timein_value = dateFormatter.standard(new Date());
 
-                var query = "SELECT * FROM employee_schedule WHERE date = ? AND employee_id = ?";
-                DBAccess.execute(query, [dateSearch, $scope.employee_id]).then(function(res) {
-                        angular.forEach(res, function(value) {
-                            var start = dateFormatter.standard(value.start);
-                            var end = dateFormatter.standard(value.end);
-                            if (dateFormatter.timestamp(timein_value) >= dateFormatter.timestamp(start) && dateFormatter.timestamp(timein_value) <= dateFormatter.timestamp(end)) {
-                                $scope.schedule = value;
-                            } else if (dateFormatter.timestamp(timein_value) >= (dateFormatter.timestamp(start) - 3600) && dateFormatter.timestamp(timein_value) <= dateFormatter.timestamp(end)) {
-                                $scope.schedule = value;
-                            }
-                        });
-                        // console.log($scope.schedule);
-                        /* username , employee_id and schedule_id */
-                        var username = data[0].username;
-                        var eid = data[0].employee_id;
-                        var sched_id = $scope.schedule._id;
-                        var query = "SELECT * FROM attendance WHERE username = ? AND schedule_id = ?";
-
-                        /* 
-                            Insert entry on attendance table if entry does not exist 
-                            Insert entry on attendance_time_log action timein
-                        */
-                        DBAccess.execute(query, [username, sched_id]).then(function(res) {
-                                if (res.length == 0) {
-                                    var insert = "INSERT INTO attendance (schedule_id, username, employee_id, is_synced, is_completed) VALUES (?,?,?,?,?)";
-                                    var param = [sched_id, username, eid, 0, 0];
-                                    /* Insert First Timein action */
-                                    DBAccess.execute(insert, param).then(function(res) {
-                                            /* attendance_id entry */
-                                            var attendance_id = res.insertId;
-                                            var query = "SELECT * FROM attendance_time_log WHERE attendance_id = ? AND action = 'timein'";
-                                            DBAccess.execute(query, [attendance_id]).then(function(res) {
-                                                    if (res.length == 0) {
-                                                        /* Insert here timein action */
-                                                        var insertTimein = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
-                                                        var entry = {
-                                                            id: attendance_id,
-                                                            photo: $scope.mugshot.replace('data:image/png;base64,', ''),
-                                                            filename: username + dateFormatter.timestamp(new Date()) + '.png',
-                                                            action: 'timein',
-                                                            created: dateFormatter.utc(new Date())
-                                                        }
-                                                        var param = [entry.id, entry.photo, entry.filename, entry.action, entry.created];
-                                                        DBAccess.execute(insertTimein, param);
-                                                        $scope.clearModels();
-                                                        Toast.show('You have timed in');
-                                                    }
-                                                },
-                                                function(err) {
-                                                    Log.write(err);
-                                                });
-                                        },
-                                        function(err) {
-                                            Log.write(err);
-                                        });
-                                } else {
-                                    /* 
-                                        Fallback if user try to time in again
-                                        Clear models and show toast                                    
-                                    */
-                                    $scope.clearModels();
-                                    Toast.show('Time out is required to continue time in action');
+                    var query = "SELECT * FROM employee_schedule WHERE date = ? AND employee_id = ?";
+                    DBAccess.execute(query, [dateSearch, $scope.employee_id]).then(function(res) {
+                            angular.forEach(res, function(value) {
+                                var start = dateFormatter.standard(value.start);
+                                var end = dateFormatter.standard(value.end);
+                                if (dateFormatter.timestamp(timein_value) >= dateFormatter.timestamp(start) && dateFormatter.timestamp(timein_value) <= dateFormatter.timestamp(end)) {
+                                    $scope.schedule = value;
+                                } else if (dateFormatter.timestamp(timein_value) >= (dateFormatter.timestamp(start) - 3600) && dateFormatter.timestamp(timein_value) <= dateFormatter.timestamp(end)) {
+                                    $scope.schedule = value;
                                 }
-                            },
-                            function(err) {
-                                Log.write(err);
                             });
-                    },
-                    function(err) {
-                        Log.write(err);
-                    });
-            } else {
-                $scope.clearModels();
-                Toast.show('Employee not found or inactive');
-            }
-        });
+                            // console.log($scope.schedule);
+                            /* username , employee_id and schedule_id */
+                            var username = data[0].username;
+                            var eid = data[0].employee_id;
+                            var sched_id = $scope.schedule._id;
+                            var query = "SELECT * FROM attendance WHERE username = ? AND schedule_id = ?";
 
-
+                            /* 
+                                Insert entry on attendance table if entry does not exist 
+                                Insert entry on attendance_time_log action timein
+                            */
+                            DBAccess.execute(query, [username, sched_id]).then(function(res) {
+                                    if (res.length == 0) {
+                                        var insert = "INSERT INTO attendance (schedule_id, username, employee_id, is_synced, is_completed) VALUES (?,?,?,?,?)";
+                                        var param = [sched_id, username, eid, 0, 0];
+                                        /* Insert First Timein action */
+                                        DBAccess.execute(insert, param).then(function(res) {
+                                                /* attendance_id entry */
+                                                var attendance_id = res.insertId;
+                                                var query = "SELECT * FROM attendance_time_log WHERE attendance_id = ? AND action = 'timein'";
+                                                DBAccess.execute(query, [attendance_id]).then(function(res) {
+                                                        if (res.length == 0) {
+                                                            /* Insert here timein action */
+                                                            var insertTimein = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
+                                                            var entry = {
+                                                                id: attendance_id,
+                                                                photo: $scope.mugshot.replace('data:image/png;base64,', ''),
+                                                                filename: username + dateFormatter.timestamp(new Date()) + '.png',
+                                                                action: 'timein',
+                                                                created: dateFormatter.utc(new Date())
+                                                            }
+                                                            var param = [entry.id, entry.photo, entry.filename, entry.action, entry.created];
+                                                            DBAccess.execute(insertTimein, param);
+                                                            $scope.clearModels();
+                                                            Toast.show('You have timed in');
+                                                        }
+                                                    },
+                                                    function(err) {
+                                                        Log.write(err);
+                                                    });
+                                            },
+                                            function(err) {
+                                                Log.write(err);
+                                            });
+                                    } else {
+                                        /* 
+                                            Fallback if user try to time in again
+                                            Clear models and show toast                                    
+                                        */
+                                        $scope.clearModels();
+                                        Toast.show('Time out is required to continue time in action');
+                                    }
+                                },
+                                function(err) {
+                                    Log.write(err);
+                                });
+                        },
+                        function(err) {
+                            Log.write(err);
+                        });
+                } else {
+                    $scope.clearModels();
+                    Toast.show('Employee not found or inactive');
+                }
+            });
+        }
     };
 
 });
