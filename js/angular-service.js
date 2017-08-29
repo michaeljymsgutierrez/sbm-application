@@ -45,17 +45,17 @@ app.service('Toast', function($timeout) {
 app.service('backdrop', function($timeout) {
     /* show backdrop */
     this.show = function() {
-        jQuery('.custom-backdrop').show();
+        jQuery('.custom-backdrop').css({ 'visibility': 'visible' });
     };
     /* hide backdrop */
     this.hide = function() {
-        jQuery('.custom-backdrop').hide();
+        jQuery('.custom-backdrop').css({ 'visibility': 'hidden' });
     };
     /* show and hide backdrop within duration  */
     this.auto = function(duration) {
-        jQuery('.custom-backdrop').show();
+        jQuery('.custom-backdrop').css({ 'visibility': 'visible' });
         $timeout(function() {
-            jQuery('.custom-backdrop').hide();
+            jQuery('.custom-backdrop').css({ 'visibility': 'hidden' });
         }, duration);
     };
 });

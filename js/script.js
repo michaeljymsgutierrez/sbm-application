@@ -54,9 +54,6 @@ setInterval(function() {
             remote.getCurrentWindow().maximize();
         }
 
-        /* Initial Backdrop */
-        $('.custom-backdrop').hide();
-
         /* Turn of click event for modal */
         $('.modal').off('click');
     });
