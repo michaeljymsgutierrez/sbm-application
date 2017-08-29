@@ -115,7 +115,6 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
         Functions: verifyEmployee(), checkFormInputs()
     */
     $scope.timein = function() {
-
         /* Check if forms is empty */
         $scope.checkFormInputs();
         if ($scope.executeAttendance == 1) {
@@ -204,6 +203,15 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
                 }
             });
         }
+    };
+
+    /*
+        Function for attendance Breakout
+        Functions: 
+     */
+    $scope.breakout = function() {
+        /* Check if forms is empty */
+        $scope.checkFormInputs();
     };
 
 });
