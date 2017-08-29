@@ -425,7 +425,7 @@ input.input-api {
   /* Set a default minimum width */
   margin-left: -125px;
   /* Divide value of min-width by 2 */
-  background-color: #333;
+  background-color: rgba(0, 0, 0, 0.7);
   /* Black background color */
   color: #fff;
   /* White text color */
@@ -442,7 +442,9 @@ input.input-api {
   left: 50%;
   /* Center the snackbar */
   bottom: 30px;
-  /* 30px from the bottom */ }
+  /* 30px from the bottom */
+  border-radius: 100px;
+  /* 100px border radius to form oval like shape */ }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
 #snackbar.show {
