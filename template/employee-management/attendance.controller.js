@@ -207,11 +207,83 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
 
     /*
         Function for attendance Breakout
-        Functions: 
+        Functions: checkFormInputs(), verifyEmployee()
      */
     $scope.breakout = function() {
         /* Check if forms is empty */
         $scope.checkFormInputs();
+        if ($scope.executeAttendance == 1) {
+            /* Check if employee exists in database */
+            $scope.verifyEmployee($scope.username, $scope.employee_id);
+            /* Listen for broadcasted event and determine the schedule */
+            $rootScope.$on('attendance_verification', function(event, data) {
+                if (data.length == 1) {
+                    var dateSearch = dateFormatter.standardNoTime(new Date()) + " 00:00:00";
+                    var breakout_value = dateFormatter.standard(new Date());
+
+                    var query = "SELECT * FROM employee_schedule WHERE date = ? AND employee_id = ?";
+                    DBAccess.execute(query, [dateSearch, $scope.employee_id]).then(function(res) {
+                        angular.forEach(res, function(value) {
+                            var start = dateFormatter.standard(value.start);
+                            var end = dateFormatter.standard(value.end);
+                            if (dateFormatter.timestamp(breakout_value) >= dateFormatter.timestamp(start) && dateFormatter.timestamp(breakout_value) <= dateFormatter.timestamp(end)) {
+                                $scope.schedule = value;
+                            }
+                        });
+
+                        /* username , employee_id and schedule_id */
+                        var username = data[0].username;
+                        var eid = data[0].employee_id;
+                        var sched_id = $scope.schedule._id;
+                        var query = "SELECT * FROM attendance WHERE username = ? AND schedule_id = ?";
+
+                        DBAccess.execute(query, [username, sched_id]).then(function(res) {
+                            if (res.length == 1) {
+                                var attendance_id = res[0].id;
+                                var query = "SELECT * FROM attendance_time_log WHERE attendance_id = ? AND action = 'breakout'";
+                                DBAccess.execute(query, [attendance_id]).then(function(res) {
+                                    if (res.length == 0) {
+                                        /* Insert here break out action */
+                                        var insertBreakout = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
+                                        var entry = {
+                                            id: attendance_id,
+                                            photo: $scope.mugshot.replace('data:image/png;base64,', ''),
+                                            filename: username + dateFormatter.timestamp(new Date()) + '.png',
+                                            action: 'breakout',
+                                            created: dateFormatter.utc(new Date())
+                                        }
+                                        var param = [entry.id, entry.photo, entry.filename, entry.action, entry.created];
+                                        DBAccess.execute(insertBreakout, param);
+                                        $scope.clearModels();
+                                        Toast.show('You have breakout in');
+                                    } else {
+                                        /* 
+                                        Fallback if user try to break out again
+                                            Clear models and show toast                                    
+                                        */
+                                        $scope.clearModels();
+                                        Toast.show('You are already out for break');
+                                    }
+                                }, function(err) {
+                                    Log.write(err);
+                                });
+                            } else {
+                                $scope.clearModels();
+                                Toast.show('Timein is required to contiue break out action');
+                            }
+                        }, function(err) {
+                            Log.write(err);
+                        });
+
+                    }, function(err) {
+                        Logw.write(err);
+                    });
+                } else {
+                    $scope.clearModels();
+                    Toast.show('Employee not found or incative');
+                }
+            });
+        }
     };
 
 });
