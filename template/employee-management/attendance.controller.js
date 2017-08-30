@@ -237,7 +237,7 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
                             }
                         });
 
-                        /* Check wether the user has schedule befor execution of timein action */
+                        /* Check wether the user has schedule befor execution of breakout action */
                         if ($scope.schedule != undefined) {
                             /* username , employee_id and schedule_id */
                             var username = data[0].username;
