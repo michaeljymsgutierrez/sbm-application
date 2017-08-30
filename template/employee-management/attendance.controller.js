@@ -138,7 +138,7 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                                 }
                             });
 
-                            /* Check wether the user has schedule befor execution of timein action */
+                            /* Check wether the user has schedule before execution of timein action */
                             if ($scope.schedule != undefined) {
                                 /* username , employee_id and schedule_id */
                                 var username = data[0].username;
@@ -237,7 +237,7 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                             }
                         });
 
-                        /* Check wether the user has schedule befor execution of breakout action */
+                        /* Check wether the user has schedule before execution of breakout action */
                         if ($scope.schedule != undefined) {
                             /* username , employee_id and schedule_id */
                             var username = data[0].username;
@@ -317,8 +317,20 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                     var query = "SELECT * FROM employee_schedule WHERE date = ? AND employee_id = ?";
                     DBAccess.execute(query, [dateSearch, $scope.employee_id]).then(function(res) {
                         angular.forEach(res, function(value) {
-                            console.log(value);
+                            var start = dateFormatter.standard(value.start);
+                            var end = dateFormatter.standard(value.end);
+                            if (dateFormatter.timestamp(breakin_value) >= dateFormatter.timestamp(start) && dateFormatter.timestamp(breakin_value) <= dateFormatter.timestamp(end)) {
+                                $scope.schedule = value;
+                            }
                         });
+
+                        /* Check wether the user has schedule before execution of breakin action */
+                        if ($scope.schedule != undefined) {
+
+                        } else {
+                            $scope.clearModels();
+                            Toast.show('Employee schedule not found. Please check employee schedule.');
+                        }
                     }, function(err) {
                         Log.write(err);
                     });
