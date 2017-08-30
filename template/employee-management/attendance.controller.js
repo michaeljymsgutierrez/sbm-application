@@ -245,6 +245,11 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                             var sched_id = $scope.schedule._id;
                             var query = "SELECT * FROM attendance WHERE username = ? AND schedule_id = ?";
 
+
+                            /* 
+                                Insert entry on attendance table if entry does not exist 
+                                Insert entry on attendance_time_log action breakout
+                            */
                             DBAccess.execute(query, [username, sched_id]).then(function(res) {
                                 if (res.length == 1) {
                                     var attendance_id = res[0].id;
@@ -263,10 +268,10 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                                             var param = [entry.id, entry.photo, entry.filename, entry.action, entry.created];
                                             DBAccess.execute(insertBreakout, param);
                                             $scope.clearModels();
-                                            Toast.show('You have breakout in');
+                                            Toast.show('Your break starts');
                                         } else {
                                             /* 
-                                            Fallback if user try to break out again
+                                                Fallback if user try to break out again
                                                 Clear models and show toast                                    
                                             */
                                             $scope.clearModels();
@@ -326,7 +331,58 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
 
                         /* Check wether the user has schedule before execution of breakin action */
                         if ($scope.schedule != undefined) {
+                            /* username , employee_id and schedule_id */
+                            var username = data[0].username;
+                            var eid = data[0].employee_id;
+                            var sched_id = $scope.schedule._id;
+                            var query = "SELECT * FROM attendance WHERE username = ? AND schedule_id = ?";
 
+
+                            /* 
+                                Insert entry on attendance table if entry does not exist 
+                                Insert entry on attendance_time_log action breakin
+                            */
+                            DBAccess.execute(query, [username, sched_id]).then(function(res) {
+                                if (res.length == 1) {
+                                    var attendance_id = res[0].id;
+                                    var query = "SELECT * FROM attendance_time_log WHERE attendance_id = ? AND action = 'breakin'";
+                                    DBAccess.execute(query, [attendance_id]).then(function(res) {
+                                        if (res.length == 0) {
+                                            /* Insert here break in action */
+                                            var insertBreakin = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
+                                            var entry = {
+                                                id: attendance_id,
+                                                photo: $scope.mugshot.replace('data:image/png;base64,', ''),
+                                                filename: username + dateFormatter.timestamp(new Date()) + '.png',
+                                                action: 'breakin',
+                                                created: dateFormatter.utc(new Date())
+                                            }
+                                            var param = [entry.id, entry.photo, entry.filename, entry.action, entry.created];
+                                            DBAccess.execute(insertBreakin, param);
+                                            $scope.clearModels();
+                                            Toast.show('Your break ends');
+                                        } else {
+                                            /* 
+                                                Fallback if user try to break in again
+                                                Clear models and show toast                                    
+                                            */
+                                            $scope.clearModels();
+                                            Toast.show('Break in required to continue break out action');
+                                        }
+                                    }, function(err) {
+                                        Log.write(err);
+                                    });
+                                } else {
+                                    /* 
+                                        Fallback if user try to break in again
+                                        Clear models and show toast                                    
+                                    */
+                                    $scope.clearModels();
+                                    Toast.show('Break in required to continue break out action');
+                                }
+                            }, function(err) {
+                                Log.write(err);
+                            });
                         } else {
                             $scope.clearModels();
                             Toast.show('Employee schedule not found. Please check employee schedule.');
