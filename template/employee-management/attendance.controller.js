@@ -2,7 +2,7 @@
 
 /* Attendance Controller */
 
-app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalService, DBAccess, $q, $filter, dateFormatter, Toast) {
+app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalService, DBAccess, $q, $filter, dateFormatter, Toast) {
 
     /* Function for Taking Photo */
     $scope.takePhoto = function() {
@@ -287,7 +287,7 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
                             Toast.show('Employee schedule not found. Please check employee schedule.');
                         }
                     }, function(err) {
-                        Logw.write(err);
+                        Log.write(err);
                     });
                 } else {
                     $scope.clearModels();
@@ -314,6 +314,14 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
                     var dateSearch = dateFormatter.standardNoTime(new Date()) + " 00:00:00";
                     var breakin_value = dateFormatter.standard(new Date());
 
+                    var query = "SELECT * FROM employee_schedule WHERE date = ? AND employee_id = ?";
+                    DBAccess.execute(query, [dateSearch, $scope.employee_id]).then(function(res) {
+                        angular.forEach(res, function(value) {
+                            console.log(value);
+                        });
+                    }, function(err) {
+                        Log.write(err);
+                    });
                 } else {
                     $scope.clearModels();
                     Toast.show('Employee not found or inactive');
