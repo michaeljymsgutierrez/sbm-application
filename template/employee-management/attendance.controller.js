@@ -215,7 +215,7 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
     /*
         Function for attendance Breakout
         Functions: checkFormInputs(), verifyEmployee()
-     */
+    */
     $scope.breakout = function() {
         /* Check if forms is empty */
         $scope.checkFormInputs();
@@ -370,7 +370,7 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                                                 Clear models and show toast                                    
                                             */
                                             $scope.clearModels();
-                                            Toast.show('Break in required to continue break out action');
+                                            Toast.show('Your break already ended');
                                         }
                                     }, function(err) {
                                         Log.write(err);
@@ -399,6 +399,15 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                 }
             });
         }
+    };
+
+
+    /*
+        Function for attendance Timeout
+        Functions: checkFormInputs(), verifyEmployee()
+    */
+    $scope.timeout = function() {
+        console.log('Timeout');
     };
 
 });
