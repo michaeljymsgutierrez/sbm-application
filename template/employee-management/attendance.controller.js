@@ -237,51 +237,55 @@ app.controller('attendanceCtrl', function($rootScope, $scope, Modal, ModalServic
                             }
                         });
 
-                        /* username , employee_id and schedule_id */
-                        var username = data[0].username;
-                        var eid = data[0].employee_id;
-                        var sched_id = $scope.schedule._id;
-                        var query = "SELECT * FROM attendance WHERE username = ? AND schedule_id = ?";
+                        /* Check wether the user has schedule befor execution of timein action */
+                        if ($scope.schedule != undefined) {
+                            /* username , employee_id and schedule_id */
+                            var username = data[0].username;
+                            var eid = data[0].employee_id;
+                            var sched_id = $scope.schedule._id;
+                            var query = "SELECT * FROM attendance WHERE username = ? AND schedule_id = ?";
 
-                        DBAccess.execute(query, [username, sched_id]).then(function(res) {
-                            if (res.length == 1) {
-                                var attendance_id = res[0].id;
-                                var query = "SELECT * FROM attendance_time_log WHERE attendance_id = ? AND action = 'breakout'";
-                                DBAccess.execute(query, [attendance_id]).then(function(res) {
-                                    if (res.length == 0) {
-                                        /* Insert here break out action */
-                                        var insertBreakout = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
-                                        var entry = {
-                                            id: attendance_id,
-                                            photo: $scope.mugshot.replace('data:image/png;base64,', ''),
-                                            filename: username + dateFormatter.timestamp(new Date()) + '.png',
-                                            action: 'breakout',
-                                            created: dateFormatter.utc(new Date())
+                            DBAccess.execute(query, [username, sched_id]).then(function(res) {
+                                if (res.length == 1) {
+                                    var attendance_id = res[0].id;
+                                    var query = "SELECT * FROM attendance_time_log WHERE attendance_id = ? AND action = 'breakout'";
+                                    DBAccess.execute(query, [attendance_id]).then(function(res) {
+                                        if (res.length == 0) {
+                                            /* Insert here break out action */
+                                            var insertBreakout = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
+                                            var entry = {
+                                                id: attendance_id,
+                                                photo: $scope.mugshot.replace('data:image/png;base64,', ''),
+                                                filename: username + dateFormatter.timestamp(new Date()) + '.png',
+                                                action: 'breakout',
+                                                created: dateFormatter.utc(new Date())
+                                            }
+                                            var param = [entry.id, entry.photo, entry.filename, entry.action, entry.created];
+                                            DBAccess.execute(insertBreakout, param);
+                                            $scope.clearModels();
+                                            Toast.show('You have breakout in');
+                                        } else {
+                                            /* 
+                                            Fallback if user try to break out again
+                                                Clear models and show toast                                    
+                                            */
+                                            $scope.clearModels();
+                                            Toast.show('You are already out for break');
                                         }
-                                        var param = [entry.id, entry.photo, entry.filename, entry.action, entry.created];
-                                        DBAccess.execute(insertBreakout, param);
-                                        $scope.clearModels();
-                                        Toast.show('You have breakout in');
-                                    } else {
-                                        /* 
-                                        Fallback if user try to break out again
-                                            Clear models and show toast                                    
-                                        */
-                                        $scope.clearModels();
-                                        Toast.show('You are already out for break');
-                                    }
-                                }, function(err) {
-                                    Log.write(err);
-                                });
-                            } else {
-                                $scope.clearModels();
-                                Toast.show('Timein is required to contiue break out action');
-                            }
-                        }, function(err) {
-                            Log.write(err);
-                        });
-
-
+                                    }, function(err) {
+                                        Log.write(err);
+                                    });
+                                } else {
+                                    $scope.clearModels();
+                                    Toast.show('Timein is required to contiue break out action');
+                                }
+                            }, function(err) {
+                                Log.write(err);
+                            });
+                        } else {
+                            $scope.clearModels();
+                            Toast.show('Employee schedule not found. Please check employee schedule.');
+                        }
                     }, function(err) {
                         Logw.write(err);
                     });
