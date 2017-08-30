@@ -121,7 +121,8 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
             /* Check if employee exists in database */
             $scope.verifyEmployee($scope.username, $scope.employee_id);
             /* Listen for broadcasted event and determine the schedule */
-            $rootScope.$on('attendance_verification', function(event, data) {
+            var unregisterTimein = $rootScope.$on('attendance_verification', function(event, data) {
+                unregisterTimein();
                 if (data.length == 1) {
                     var dateSearch = dateFormatter.standardNoTime(new Date()) + " 00:00:00";
                     var timein_value = dateFormatter.standard(new Date());
@@ -222,7 +223,8 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
             /* Check if employee exists in database */
             $scope.verifyEmployee($scope.username, $scope.employee_id);
             /* Listen for broadcasted event and determine the schedule */
-            $rootScope.$on('attendance_verification', function(event, data) {
+            var unregisterBreakout = $rootScope.$on('attendance_verification', function(event, data) {
+                unregisterBreakout();
                 if (data.length == 1) {
                     var dateSearch = dateFormatter.standardNoTime(new Date()) + " 00:00:00";
                     var breakout_value = dateFormatter.standard(new Date());
@@ -314,7 +316,8 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
             /* Check if employee exists in database */
             $scope.verifyEmployee($scope.username, $scope.employee_id);
             /* Listen for broadcasted event and determine the schedule */
-            $rootScope.$on('attendance_verification', function(event, data) {
+            var unregisterBreakin = $rootScope.$on('attendance_verification', function(event, data) {
+                unregisterBreakin();
                 if (data.length == 1) {
                     var dateSearch = dateFormatter.standardNoTime(new Date()) + " 00:00:00";
                     var breakin_value = dateFormatter.standard(new Date());
