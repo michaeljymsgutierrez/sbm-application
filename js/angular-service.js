@@ -100,7 +100,11 @@ app.service('dateFormatter', function($filter) {
     this.utc = function(dt) {
         var raw_date = new Date(dt);
         var date_utc = new Date(raw_date.getUTCFullYear(), raw_date.getUTCMonth(), raw_date.getUTCDate(), raw_date.getUTCHours(), raw_date.getUTCMinutes(), raw_date.getUTCSeconds());
-        return $filter('date')(date_utc, 'yyyy-MM-dd HH:mm:ss');
+        /*
+            $filter('date')(date_utc, 'yyyy-MM-dd HH:mm:ss');
+            Use this if require localtime 24Format to UTC
+        */
+        return $filter('date')(date_utc, 'yyyy-MM-dd h:mm:ss');
     }
 
     /* standard format no time */
