@@ -172,6 +172,8 @@ input {
     background: rgba(0, 0, 0, 0.4);
     cursor: wait;
     visibility: hidden;
+    user-select: none !important;
+    z-index: 999 !important;
 }
 
 
