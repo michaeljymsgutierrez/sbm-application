@@ -117,6 +117,7 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
     $scope.timein = function() {
         /* Check if forms is empty */
         $scope.checkFormInputs();
+        $scope.schedule = undefined;
         if ($scope.executeAttendance == 1) {
             /* Check if employee exists in database */
             $scope.verifyEmployee($scope.username, $scope.employee_id);
@@ -219,6 +220,7 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
     $scope.breakout = function() {
         /* Check if forms is empty */
         $scope.checkFormInputs();
+        $scope.schedule = undefined;
         if ($scope.executeAttendance == 1) {
             /* Check if employee exists in database */
             $scope.verifyEmployee($scope.username, $scope.employee_id);
@@ -312,6 +314,7 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
     $scope.breakin = function() {
         /* Check if forms is empty */
         $scope.checkFormInputs();
+        $scope.schedule = undefined;
         if ($scope.executeAttendance == 1) {
             /* Check if employee exists in database */
             $scope.verifyEmployee($scope.username, $scope.employee_id);
@@ -348,9 +351,18 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                             DBAccess.execute(query, [username, sched_id]).then(function(res) {
                                 if (res.length == 1) {
                                     var attendance_id = res[0].id;
-                                    var query = "SELECT * FROM attendance_time_log WHERE attendance_id = ? AND action = 'breakin'";
+                                    var query = "SELECT * FROM attendance_time_log WHERE attendance_id = ?";
                                     DBAccess.execute(query, [attendance_id]).then(function(res) {
-                                        if (res.length == 0) {
+                                        /* 
+                                            variable action contains all action with attendance_id query
+                                            comeup with this approach to check if breakout exist before breakin
+                                        */
+                                        var action = [];
+                                        angular.forEach(res, function(value) {
+                                            action.push(value.action);
+                                        });
+
+                                        if (action.indexOf('breakout') > 0 && action.indexOf('breakin') < 0) {
                                             /* Insert here break in action */
                                             var insertBreakin = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
                                             var entry = {
@@ -364,7 +376,10 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                                             DBAccess.execute(insertBreakin, param);
                                             $scope.clearModels();
                                             Toast.show('Your break ends');
-                                        } else {
+                                        } else if (action.indexOf('breakout') < 0) {
+                                            $scope.clearModels();
+                                            Toast.show('Break in required to continue break out action');
+                                        } else if (action.indexOf('breakin') > 0) {
                                             /* 
                                                 Fallback if user try to break in again
                                                 Clear models and show toast                                    
@@ -409,6 +424,7 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
     $scope.timeout = function() {
         /* Check if forms is empty */
         $scope.checkFormInputs();
+        $scope.schedule = undefined;
         if ($scope.executeAttendance == 1) {
             /* Check if employee exists in database */
             $scope.verifyEmployee($scope.username, $scope.employee_id);
