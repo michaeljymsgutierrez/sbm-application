@@ -88,7 +88,7 @@ app.service('dateFormatter', function($filter) {
 
     /* standard format */
     this.standard = function(dt) {
-        return $filter('date')(dt, 'yyyy-MM-dd HH:mm:ss');
+        return $filter('date')(dt, 'yyyy-MM-dd HH:mm:00');
     }
 
     /* date now 24 format */
@@ -104,7 +104,7 @@ app.service('dateFormatter', function($filter) {
             $filter('date')(date_utc, 'yyyy-MM-dd HH:mm:ss');
             Use this if require localtime 24Format to UTC
         */
-        return $filter('date')(date_utc, 'yyyy-MM-dd h:mm');
+        return $filter('date')(date_utc, 'yyyy-MM-dd HH:mm:00');
     }
 
     /* standard format no time */
