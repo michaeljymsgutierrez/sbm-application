@@ -132,7 +132,7 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                             angular.forEach(res, function(value) {
                                 var start = dateFormatter.standard(value.start);
                                 var end = dateFormatter.standard(value.end);
-                                if (dateFormatter.timestamp(timein_value) >= dateFormatter.timestamp(start) && dateFormatter.timestamp(timein_value) <= dateFormatter.timestamp(end)) {
+                                if (dateFormatter.timestamp(timein_value) >= dateFormatter.timestamp(start) && dateFormatter.timestamp(timein_value) < dateFormatter.timestamp(end)) {
                                     $scope.schedule = value;
                                 } else if (dateFormatter.timestamp(timein_value) >= (dateFormatter.timestamp(start) - 3600) && dateFormatter.timestamp(timein_value) <= dateFormatter.timestamp(end)) {
                                     $scope.schedule = value;
@@ -417,13 +417,46 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                 unregisterTimein();
                 if (data.length == 1) {
                     var dateSearch = dateFormatter.standardNoTime(new Date()) + " 00:00:00";
-                    var timein_value = dateFormatter.standard(new Date());
+                    var timeout_value = dateFormatter.standard(new Date());
 
                     var query = "SELECT * FROM employee_schedule WHERE date = ? AND employee_id = ?";
                     DBAccess.execute(query, [dateSearch, $scope.employee_id]).then(function(res) {
                         angular.forEach(res, function(value) {
-                            console.log(value);
+                            var start = dateFormatter.standard(value.start);
+                            var end = dateFormatter.standard(value.end);
+                            if (dateFormatter.timestamp(timeout_value) > dateFormatter.timestamp(value.start) && dateFormatter.timestamp(timeout_value) <= dateFormatter.timestamp(value.end)) {
+                                $scope.schedule = value;
+                            } else if (dateFormatter.timestamp(timeout_value) > dateFormatter.timestamp(value.start) && dateFormatter.timestamp(timeout_value) <= (dateFormatter.timestamp(value.end) + 3600)) {
+                                $scope.schedule = value;
+                            }
                         });
+
+                        /* Check wether the user has schedule before execution of timeout action */
+                        if ($scope.schedule != undefined) {
+                            /* username , employee_id and schedule_id */
+                            var username = data[0].username;
+                            var eid = data[0].employee_id;
+                            var sched_id = $scope.schedule._id;
+                            var query = "SELECT * FROM attendance WHERE username = ? AND schedule_id = ?";
+
+                            /* 
+                                    Insert entry on attendance table if entry does not exist 
+                                    Insert entry on attendance_time_log action timeout
+                            */
+                            DBAccess.execute(query, [username, sched_id]).then(function(res) {
+                                if (res.length == 1) {
+                                    // 
+                                } else {
+                                    $scope.clearModels();
+                                    // Toast.show('Timein is required to contiue break out action');
+                                }
+                            }, function(err) {
+                                Log.write(err);
+                            })
+                        } else {
+                            $scope.clearModels();
+                            Toast.show('Employee schedule not found. Please check employee schedule.');
+                        }
                     }, function(err) {
                         Log.write(err);
                     });
