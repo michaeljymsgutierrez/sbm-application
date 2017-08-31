@@ -127,8 +127,8 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                     var dateSearch = dateFormatter.standardNoTime(new Date()) + " 00:00:00";
                     var timein_value = dateFormatter.standard(new Date());
 
-                    var query = "SELECT * FROM employee_schedule WHERE date = ? AND employee_id = ?";
-                    DBAccess.execute(query, [dateSearch, $scope.employee_id]).then(function(res) {
+                    var query = "SELECT * FROM employee_schedule WHERE employee_id = ?";
+                    DBAccess.execute(query, [$scope.employee_id]).then(function(res) {
                             angular.forEach(res, function(value) {
                                 var start = dateFormatter.standard(value.start);
                                 var end = dateFormatter.standard(value.end);
@@ -229,12 +229,12 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                     var dateSearch = dateFormatter.standardNoTime(new Date()) + " 00:00:00";
                     var breakout_value = dateFormatter.standard(new Date());
 
-                    var query = "SELECT * FROM employee_schedule WHERE date = ? AND employee_id = ?";
-                    DBAccess.execute(query, [dateSearch, $scope.employee_id]).then(function(res) {
+                    var query = "SELECT * FROM employee_schedule WHERE employee_id = ?";
+                    DBAccess.execute(query, [$scope.employee_id]).then(function(res) {
                         angular.forEach(res, function(value) {
                             var start = dateFormatter.standard(value.start);
                             var end = dateFormatter.standard(value.end);
-                            if (dateFormatter.timestamp(breakout_value) >= dateFormatter.timestamp(start) && dateFormatter.timestamp(breakout_value) <= dateFormatter.timestamp(end)) {
+                            if (dateFormatter.timestamp(breakout_value) > dateFormatter.timestamp(start) && dateFormatter.timestamp(breakout_value) < dateFormatter.timestamp(end)) {
                                 $scope.schedule = value;
                             }
                         });
@@ -322,12 +322,12 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                     var dateSearch = dateFormatter.standardNoTime(new Date()) + " 00:00:00";
                     var breakin_value = dateFormatter.standard(new Date());
 
-                    var query = "SELECT * FROM employee_schedule WHERE date = ? AND employee_id = ?";
-                    DBAccess.execute(query, [dateSearch, $scope.employee_id]).then(function(res) {
+                    var query = "SELECT * FROM employee_schedule WHERE employee_id = ?";
+                    DBAccess.execute(query, [$scope.employee_id]).then(function(res) {
                         angular.forEach(res, function(value) {
                             var start = dateFormatter.standard(value.start);
                             var end = dateFormatter.standard(value.end);
-                            if (dateFormatter.timestamp(breakin_value) >= dateFormatter.timestamp(start) && dateFormatter.timestamp(breakin_value) <= dateFormatter.timestamp(end)) {
+                            if (dateFormatter.timestamp(breakin_value) > dateFormatter.timestamp(start) && dateFormatter.timestamp(breakin_value) < dateFormatter.timestamp(end)) {
                                 $scope.schedule = value;
                             }
                         });
@@ -407,7 +407,32 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
         Functions: checkFormInputs(), verifyEmployee()
     */
     $scope.timeout = function() {
-        console.log('Timeout');
+        /* Check if forms is empty */
+        $scope.checkFormInputs();
+        if ($scope.executeAttendance == 1) {
+            /* Check if employee exists in database */
+            $scope.verifyEmployee($scope.username, $scope.employee_id);
+            /* Listen for broadcasted event and determine the schedule */
+            var unregisterTimein = $rootScope.$on('attendance_verification', function(event, data) {
+                unregisterTimein();
+                if (data.length == 1) {
+                    var dateSearch = dateFormatter.standardNoTime(new Date()) + " 00:00:00";
+                    var timein_value = dateFormatter.standard(new Date());
+
+                    var query = "SELECT * FROM employee_schedule WHERE date = ? AND employee_id = ?";
+                    DBAccess.execute(query, [dateSearch, $scope.employee_id]).then(function(res) {
+                        angular.forEach(res, function(value) {
+                            console.log(value);
+                        });
+                    }, function(err) {
+                        Log.write(err);
+                    });
+                } else {
+                    $scope.clearModels();
+                    Toast.show('Employee not found or inactive');
+                }
+            });
+        }
     };
 
 });
