@@ -93,7 +93,7 @@ app.service('dateFormatter', function($filter) {
 
     /* date now 24 format */
     this.now = function() {
-        return $filter('date')(new Date(), 'yyyy-MM-dd HH:mm:ss');
+        return $filter('date')(new Date(), 'yyyy-MM-dd HH:mm');
     }
 
     /* standard utc */
