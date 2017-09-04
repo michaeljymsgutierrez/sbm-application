@@ -21,7 +21,7 @@ app.controller('setupCtrl', function($scope, validateApi, storage, $state, backd
     $scope.selectedStore;
 
 
-    /* Fn for validating api url */
+    /* Function for validating api url */
     $scope.validateURL = function() {
         backdrop.show();
         $scope.checkAPI = validateApi.connect($scope.api);
@@ -41,7 +41,7 @@ app.controller('setupCtrl', function($scope, validateApi, storage, $state, backd
         });
     };
 
-    /* Fn for validatin api key */
+    /* Function for validatin api key */
     $scope.validateKey = function() {
         backdrop.show();
         $scope.api = storage.read('endpoint') + "/store/branch";
@@ -59,7 +59,7 @@ app.controller('setupCtrl', function($scope, validateApi, storage, $state, backd
     };
 
 
-    /* Fn for saving store */
+    /* Function for saving store */
     $scope.saveStore = function() {
         backdrop.show();
         if ($scope.selectedStore == "" || $scope.selectedStore == undefined) {
