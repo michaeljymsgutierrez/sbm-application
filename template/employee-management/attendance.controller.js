@@ -62,26 +62,9 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
     */
     $scope.checkFormInputs = function() {
 
-        /* Execute erorr class for username */
-        if (!$scope.username) {
-            $scope.user_class = true;
-        } else {
-            $scope.user_class = false;
-        }
-
-        /* Execute class for employee_id  */
-        if (!$scope.employee_id) {
-            $scope.eid_class = true;
-        } else {
-            $scope.eid_class = false;
-        }
-
-        /* Excute  class for take photo */
-        if (!$scope.mugshot) {
-            $scope.photo_class = true;
-        } else {
-            $scope.photo_class = false;
-        }
+        $scope.user_class = !$scope.username ? true : false;
+        $scope.eid_class = !$scope.employee_id ? true : false;
+        $scope.photo_class = !$scope.mugshot ? true : false;
 
         /* Checker when to execute attendance action */
         if (!$scope.employee_id || !$scope.mugshot || !$scope.username) {
