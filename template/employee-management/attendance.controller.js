@@ -489,15 +489,21 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                                             variable action contains all action with attendance_id query
                                         */
                                         var action = [];
+                                        var breakout_count = 0;
+                                        var breakin_count = 0;
                                         angular.forEach(res, function(value) {
+                                            if (value.action == 'breakin') {
+                                                breakin_count++;
+                                            } else if (value.action == 'breakout') {
+                                                breakout_count++;
+                                            }
                                             action.push(value.action);
                                         });
 
                                         if (action.indexOf('timein') == -1) {
                                             $scope.clearModels();
-                                            Toast.show('Time in is required to contiue time out action - 2');
-
-                                        } else if (((action.indexOf('breakout') != -1 && action.indexOf('breakin') != -1 && action.indexOf('timeout') == -1)) || ((action.indexOf('breakout') == -1 && action.indexOf('breakin') == -1 && action.indexOf('timeout') == -1))) {
+                                            Toast.show('Time in is required to contiue time out action');
+                                        } else if (breakin_count == breakout_count && action.indexOf('timeout') == -1) {
                                             /* Insert here time out action */
                                             var insertTimeout = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
                                             var entry = {
@@ -516,14 +522,13 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
 
                                             $scope.clearModels();
                                             Toast.show('You have timed out');
-                                        } else if (action.indexOf('breakout') != -1 && action.indexOf('breakin') == -1) {
+                                        } else if (action.indexOf('timeout') != -1) {
                                             $scope.clearModels();
-                                            Toast.show('Break in is required to contiue time out action');
+                                            Toast.show('You already have timed out');
                                         } else {
                                             $scope.clearModels();
-                                            Toast.show('Time in is required to contiue time out action');
+                                            Toast.show('Break in is required to contiue time out action');
                                         }
-
                                     }, function(err) {
                                         Log.write(err);
                                     });
