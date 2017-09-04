@@ -286,7 +286,7 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                                     });
                                 } else {
                                     $scope.clearModels();
-                                    Toast.show('Timein is required to contiue break out action');
+                                    Toast.show('Time in is required to continue break out action');
                                 }
                             }, function(err) {
                                 Log.write(err);
@@ -355,7 +355,6 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                                     DBAccess.execute(query, [attendance_id]).then(function(res) {
                                         /* 
                                             variable action contains all action with attendance_id query
-                                            comeup with this approach to check if breakout exist before breakin
                                         */
                                         var action = [];
                                         angular.forEach(res, function(value) {
@@ -375,10 +374,10 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                                             var param = [entry.id, entry.photo, entry.filename, entry.action, entry.created];
                                             DBAccess.execute(insertBreakin, param);
                                             $scope.clearModels();
-                                            Toast.show('Your break ends');
+                                            Toast.show('Your break end');
                                         } else if (action.indexOf('breakout') < 0) {
                                             $scope.clearModels();
-                                            Toast.show('Break in required to continue break out action');
+                                            Toast.show('Break in is required to continue break out action');
                                         } else if (action.indexOf('breakin') > 0) {
                                             /* 
                                                 Fallback if user try to break in again
@@ -396,7 +395,7 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                                         Clear models and show toast                                    
                                     */
                                     $scope.clearModels();
-                                    Toast.show('Break in required to continue break out action');
+                                    Toast.show('Break in is required to continue break out action');
                                 }
                             }, function(err) {
                                 Log.write(err);
@@ -461,10 +460,55 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                             */
                             DBAccess.execute(query, [username, sched_id]).then(function(res) {
                                 if (res.length == 1) {
-                                    // 
+                                    var attendance_id = res[0].id;
+                                    var query = "SELECT * FROM attendance_time_log WHERE attendance_id = ?";
+
+                                    DBAccess.execute(query, [attendance_id]).then(function(res) {
+                                        /* 
+                                            variable action contains all action with attendance_id query
+                                        */
+                                        var action = [];
+                                        angular.forEach(res, function(value) {
+                                            action.push(value.action);
+                                        });
+
+                                        if (action.indexOf('timein') == -1) {
+                                            $scope.clearModels();
+                                            Toast.show('Time in is required to contiue time out action - 2');
+
+                                        } else if (((action.indexOf('breakout') != -1 && action.indexOf('breakin') != -1 && action.indexOf('timeout') == -1)) || ((action.indexOf('breakout') == -1 && action.indexOf('breakin') == -1 && action.indexOf('timeout') == -1))) {
+                                            /* Insert here time out action */
+                                            var insertTimeout = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
+                                            var entry = {
+                                                id: attendance_id,
+                                                photo: $scope.mugshot.replace('data:image/png;base64,', ''),
+                                                filename: username + dateFormatter.timestamp(new Date()) + '.png',
+                                                action: 'timeout',
+                                                created: dateFormatter.utc(new Date())
+                                            }
+                                            var param = [entry.id, entry.photo, entry.filename, entry.action, entry.created];
+                                            DBAccess.execute(insertTimeout, param);
+
+                                            /* Update attendance status */
+                                            var updateAttendance = "UPDATE attendance  SET is_completed = 1 WHERE id = ?";
+                                            DBAccess.execute(updateAttendance, [attendance_id]);
+
+                                            $scope.clearModels();
+                                            Toast.show('Your have timed out');
+                                        } else if (action.indexOf('breakout') != -1 && action.indexOf('breakin') == -1) {
+                                            $scope.clearModels();
+                                            Toast.show('Break in is required to contiue time out action');
+                                        } else {
+                                            $scope.clearModels();
+                                            Toast.show('Time in is required to contiue time out action');
+                                        }
+
+                                    }, function(err) {
+                                        Log.write(err);
+                                    });
                                 } else {
                                     $scope.clearModels();
-                                    // Toast.show('Timein is required to contiue break out action');
+                                    Toast.show('Time in is required to contiue time out action');
                                 }
                             }, function(err) {
                                 Log.write(err);
