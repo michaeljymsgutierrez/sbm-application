@@ -186,12 +186,17 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                                                     Log.write(err);
                                                 });
                                         } else {
-                                            /* 
-                                                Fallback if user try to time in again
-                                                Clear models and show toast                                    
-                                            */
-                                            $scope.clearModels();
-                                            Toast.show('Time out is required to continue time in action');
+                                            if (res[0].is_completed == 0) {
+                                                /* 
+                                                    Fallback if user try to time in again
+                                                    Clear models and show toast                                    
+                                                */
+                                                $scope.clearModels();
+                                                Toast.show('Time out is required to continue time in action');
+                                            } else if (res[0].is_completed == 1) {
+                                                $scope.clearModels();
+                                                Toast.show('Schedule already completed');
+                                            }
                                         }
                                     },
                                     function(err) {
