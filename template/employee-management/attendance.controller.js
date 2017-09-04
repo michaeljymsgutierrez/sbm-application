@@ -257,10 +257,24 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
                             DBAccess.execute(query, [username, sched_id]).then(function(res) {
                                 if (res.length == 1) {
                                     var attendance_id = res[0].id;
-                                    var query = "SELECT * FROM attendance_time_log WHERE attendance_id = ? AND action = 'breakout'";
+                                    var query = "SELECT * FROM attendance_time_log WHERE attendance_id = ?";
                                     DBAccess.execute(query, [attendance_id]).then(function(res) {
-                                        if (res.length == 0) {
-                                            /* Insert here break out action */
+                                        /* 
+                                            variable action contains all action with attendance_id query
+                                        */
+                                        var action = [];
+                                        var breakout_count = 0;
+                                        var breakin_count = 0;
+                                        angular.forEach(res, function(value) {
+                                            if (value.action == 'breakin') {
+                                                breakin_count++;
+                                            } else if (value.action == 'breakout') {
+                                                breakout_count++;
+                                            }
+                                            action.push(value.action);
+                                        });
+
+                                        if (breakin_count == breakout_count) {
                                             var insertBreakout = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
                                             var entry = {
                                                 id: attendance_id,
