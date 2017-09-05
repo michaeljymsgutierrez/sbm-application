@@ -2,19 +2,95 @@
 
 /* Sync Controller */
 
-app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatter', 'Store', 'Branch', 'Reason', 'DBAccess', 'Log', 'Toast', 'Employee', function($q, $scope, storage, backdrop, dateFormatter, Store, Branch, Reason, DBAccess, Log, Toast, Employee) {
+app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatter', 'Store', 'Branch', 'Reason', 'DBAccess', 'Log', 'Toast', 'Employee', 'SyncData', function($q, $scope, storage, backdrop, dateFormatter, Store, Branch, Reason, DBAccess, Log, Toast, Employee, SyncData) {
     /* Get store id */
     var store_id = storage.read('store_id').store_id;
 
-    /* Sync Store  */
-    $scope.syncStore = function() {
+    /*
+        loadUnsync : Reusable function for reloading unsync counts
+    */
+    $scope.loadUnsync = function() {
 
-        /* Intialize timeout for showing backdrop and sync based on xhr success 
+        /*
+            Load unsync attendance count
+            Function for sync attendance to server
+
+        */
+        $scope.attendanceToSync = [];
+        $scope.attendanceCount = 0;
+        var unsyncAttendance = "SELECT a.id, a.schedule_id, a.username, a.employee_id, a.is_completed FROM attendance a WHERE a.is_completed = 1 AND a.is_synced = 0";
+        DBAccess.execute(unsyncAttendance, []).then(function(res) {
+                $scope.attendanceToSync = res;
+                $scope.attendanceCount = res.length;
+                angular.forEach($scope.attendanceToSync, function(value) {
+                    var id = value.id;
+                    var attendanceAction = "SELECT * FROM attendance_time_log WHERE attendance_id = ?";
+                    DBAccess.execute(attendanceAction, [id]).then(function(res) {
+                        var user_actions = res;
+                        value.actions = [];
+                        angular.forEach(user_actions, function(a) {
+                            var action_list = {
+                                action: a.action,
+                                created: dateFormatter.standard(a.created),
+                                mugshot: {
+                                    file: a.mugshot,
+                                    filename: a.filename,
+                                    filepath: "public://attendace/" + a.filename
+                                }
+                            };
+                            value.actions.push(action_list);
+                        });
+                    }, function(err) {
+                        Log.write(err);
+                    });
+                });
+
+                /*
+                    Sync attendance from mobile to backoffice
+                */
+                $scope.syncAttendance = function() {
+                    backdrop.show();
+                    angular.forEach($scope.attendanceToSync, function(data) {
+                        SyncData.send({ param1: store_id, param2: 'attendance', data: data }, function(res) {
+                            $scope.attendanceCount = $scope.attendanceCount - 1;
+                            var sid = res.schedule_id;
+                            var update = "UPDATE attendance SET is_synced = 1 WHERE schedule_id = ?";
+                            DBAccess.execute(update, [sid]);
+                        }, function(err) {
+                            Log.write(err);
+                        });
+                    });
+                    $scope.$watch('attendanceCount', function(val) {
+                        if (val == 0) {
+                            backdrop.hide();
+                        }
+                    });
+                };
+            },
+            function(err) {
+                Log.write(err);
+            });
+
+    };
+
+    /* 
+        Initialized Unsync Data from local 
+        All initialization of unsync count on mobile and creation of functions 
+        for syncing items are all on loadUnsync()
+        Erorrs are also recorded on log.txt
+    */
+    $scope.loadUnsync();
+
+    /* Intialize timeout for showing backdrop and sync based on xhr success 
            $scope.timeout = N of xhr
            $scope.timeout = -1 if error on xhr
            Set $scope.timeout to 0 of and increment as xhr success
            Change val to N of xhr
-        */
+    */
+
+    /* Sync Store  */
+    $scope.syncStore = function() {
+
         $scope.timeout = 0;
         backdrop.show();
         $scope.$watch('timeout', function(val) {

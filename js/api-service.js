@@ -108,7 +108,7 @@ app.service('SyncData', ['$resource', function($resource) {
         'send': {
             method: 'POST',
             headers: { 'api-key': api.key },
-            isArray: true,
+            isArray: false,
             interceptor: function(response) {
                 return response;
             }
