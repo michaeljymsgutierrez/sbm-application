@@ -2,7 +2,7 @@
 
 /* Sync Controller */
 
-app.controller('syncCtrl', function($q, $scope, storage, backdrop, dateFormatter, Store, Branch, Reason, DBAccess, Log, Toast, Employee) {
+app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatter', 'Store', 'Branch', 'Reason', 'DBAccess', 'Log', 'Toast', 'Employee', function($q, $scope, storage, backdrop, dateFormatter, Store, Branch, Reason, DBAccess, Log, Toast, Employee) {
     /* Get store id */
     var store_id = storage.read('store_id').store_id;
 
@@ -164,4 +164,4 @@ app.controller('syncCtrl', function($q, $scope, storage, backdrop, dateFormatter
         });
     };
 
-});
+}]);

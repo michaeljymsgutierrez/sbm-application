@@ -3,7 +3,7 @@
 
 /* Settings Controller */
 
-app.controller('settingsCtrl', function($scope, storage, Toast) {
+app.controller('settingsCtrl', ['$scope', 'storage', 'Toast', function($scope, storage, Toast) {
 
     /* Initialize variables */
     $scope.settings = {};
@@ -13,4 +13,4 @@ app.controller('settingsCtrl', function($scope, storage, Toast) {
         Toast.show('Settings successfully save . . .');
         storage.write('settings', $scope.settings);
     };
-});
+}]);

@@ -2,7 +2,7 @@
 
 /* Attendance Controller */
 
-app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalService, DBAccess, $q, $filter, dateFormatter, Toast) {
+app.controller('attendanceCtrl', ['$rootScope', 'Log', '$scope', 'Modal', 'ModalService', 'DBAccess', '$q', '$filter', 'dateFormatter', 'Toast', function($rootScope, Log, $scope, Modal, ModalService, DBAccess, $q, $filter, dateFormatter, Toast) {
 
     /* Function for Taking Photo */
     $scope.takePhoto = function() {
@@ -542,4 +542,4 @@ app.controller('attendanceCtrl', function($rootScope, Log, $scope, Modal, ModalS
         }
     };
 
-});
+}]);

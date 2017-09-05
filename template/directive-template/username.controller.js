@@ -2,7 +2,7 @@
 
 /* Username Controller */
 
-app.controller('usernameCtrl', function($rootScope, $scope, Toast, Modal, $state, $timeout, DBAccess, Log) {
+app.controller('usernameCtrl', ['$rootScope', '$scope', 'Toast', 'Modal', '$state', '$timeout', 'DBAccess', 'Log', function($rootScope, $scope, Toast, Modal, $state, $timeout, DBAccess, Log) {
 
     /* Function for redirecting to dashbard */
     function gotoDashboard() {
@@ -39,4 +39,4 @@ app.controller('usernameCtrl', function($rootScope, $scope, Toast, Modal, $state
         });
     }, 500);
 
-});
+}]);

@@ -5,7 +5,7 @@ var remote = require('electron').remote;
 
 /* Initial Setup controller */
 
-app.controller('setupCtrl', function($scope, validateApi, storage, $state, backdrop, $timeout, Toast) {
+app.controller('setupCtrl', ['$scope', 'validateApi', 'storage', '$state', 'backdrop', '$timeout', 'Toast', function($scope, validateApi, storage, $state, backdrop, $timeout, Toast) {
 
     /* API initialization */
     $scope.api = "";
@@ -78,4 +78,4 @@ app.controller('setupCtrl', function($scope, validateApi, storage, $state, backd
             }
         }
     }
-});
+}]);

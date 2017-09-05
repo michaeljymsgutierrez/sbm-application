@@ -2,7 +2,7 @@
 
 /* Schedule Controller */
 
-app.controller('scheduleCtrl', function(Username, $rootScope, $scope, DBAccess, Log, $filter) {
+app.controller('scheduleCtrl', ['Username', '$rootScope', '$scope', 'DBAccess', 'Log', '$filter', function(Username, $rootScope, $scope, DBAccess, Log, $filter) {
 
     Username.popup();
 
@@ -22,4 +22,4 @@ app.controller('scheduleCtrl', function(Username, $rootScope, $scope, DBAccess, 
             Log.write(err);
         });
     });
-});
+}]);
