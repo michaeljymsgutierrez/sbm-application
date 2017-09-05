@@ -1,7 +1,7 @@
 'use strict';
 
 // States and Configurations
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
         .state('setup', {
@@ -41,4 +41,4 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
     // $urlRouterProvider.otherwise('/dashboard');
     $urlRouterProvider.otherwise('/attendance');
-});
+}]);
