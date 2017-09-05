@@ -4,7 +4,7 @@
 
 
 /* Service for accessing localStorage */
-app.service('storage', function($window) {
+app.service('storage', ['$window', function($window) {
     /* write fn */
     this.write = function(key, val) {
         var value = angular.toJson(val);
@@ -16,20 +16,20 @@ app.service('storage', function($window) {
         var value = JSON.parse($window.localStorage.getItem(key));
         return value;
     };
-});
+}]);
 
 
 /* Service for logging file to txt */
-app.service('Log', function() {
+app.service('Log', [function() {
     this.write = function(msg) {
         var fs = require('fs');
         fs.appendFileSync('log.txt', "\n" + new Date() + ":" + msg);
     }
-});
+}]);
 
 
 /* Service for toast notification */
-app.service('Toast', function($timeout) {
+app.service('Toast', ['$timeout', function($timeout) {
     this.show = function(msg) {
         var toast = jQuery('#snackbar');
         toast.text(msg);
@@ -38,11 +38,11 @@ app.service('Toast', function($timeout) {
             toast.removeClass('show');
         }, 3000);
     }
-});
+}]);
 
 
 /* Service for showing backdrop */
-app.service('backdrop', function($timeout) {
+app.service('backdrop', ['$timeout', function($timeout) {
     /* show backdrop */
     this.show = function() {
         jQuery('.custom-backdrop').css({ 'visibility': 'visible' });
@@ -58,19 +58,19 @@ app.service('backdrop', function($timeout) {
             jQuery('.custom-backdrop').css({ 'visibility': 'hidden' });
         }, duration);
     };
-});
+}]);
 
 /* Service for angular modal service hider */
-app.service('Modal', function(ModalService) {
+app.service('Modal', ['ModalService', function(ModalService) {
     this.hide = function() {
         ModalService.closeModals();
         jQuery('.modal-backdrop').remove();
         jQuery('.modal').remove();
     };
-});
+}]);
 
 /* Service for formatting date */
-app.service('dateFormatter', function($filter) {
+app.service('dateFormatter', ['$filter', function($filter) {
     /* month */
     this.month = function(dt) {
         return $filter('date')(dt, 'MMM');
@@ -121,11 +121,11 @@ app.service('dateFormatter', function($filter) {
     this.timestamp = function(dt) {
         return Math.floor(new Date(dt).getTime() / 1000);
     }
-});
+}]);
 
 
 /* Service for Executing DB Queries */
-app.service('DBAccess', function($q) {
+app.service('DBAccess', ['$q', function($q) {
     /* Param must be array */
     this.execute = function(query, param) {
         var deferred = $q.defer();
@@ -146,11 +146,11 @@ app.service('DBAccess', function($q) {
     this.terminate = function() {
         connection.end();
     };
-});
+}]);
 
 
 /* Service for popping and verifying username */
-app.service('Username', function(ModalService) {
+app.service('Username', ['ModalService', function(ModalService) {
     /* Function for popup modal username */
     this.popup = function() {
         ModalService.showModal({
@@ -160,4 +160,4 @@ app.service('Username', function(ModalService) {
             modal.element.modal();
         });
     };
-});
+}]);
