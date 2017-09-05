@@ -515,7 +515,8 @@ However, delay the fade out process for 2.5 seconds */
   height: 53px; }
 
 .total-sync {
-  float: right; }
+  float: right;
+  font-size: 13px; }
 
 /* Loading Stlying */
 .loader,
