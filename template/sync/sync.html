@@ -31,8 +31,8 @@
         </div>
         <div class="list-item sync-list">
             <div class="sync-left">Attendance
-                <span class="total-sync">0 items ready for sync  <sp-F></sp-F>
-                <button class="button sync-btn"><i class="ion-android-sync sync-icon"></i></button>
+                <span class="total-sync">{{ attendanceCount }} items ready for sync  <sp-F></sp-F>
+                <button class="button sync-btn" ng-click="syncAttendance()"><i class="ion-android-sync sync-icon"></i></button>
                 </span>
             </div>
         </div>
