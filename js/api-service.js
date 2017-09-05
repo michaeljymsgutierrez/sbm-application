@@ -9,7 +9,7 @@ var api = {
 };
 
 /* Service for validating API url and Key */
-app.service('validateApi', function($resource) {
+app.service('validateApi', ['$resource', function($resource) {
     /* validate endpoint */
     this.connect = function(strAPI) {
         return $resource(strAPI, {}, {
@@ -40,10 +40,10 @@ app.service('validateApi', function($resource) {
             }
         });
     };
-});
+}]);
 
 /* Store Information */
-app.service('Store', function($resource, storage) {
+app.service('Store', ['$resource', 'storage', function($resource, storage) {
     return $resource(api.endpoint + '/store/:id', { id: '@id' }, {
         'get': {
             method: 'GET',
@@ -54,10 +54,10 @@ app.service('Store', function($resource, storage) {
             }
         }
     });
-});
+}]);
 
 /* Branch Information */
-app.service('Branch', function($resource) {
+app.service('Branch', ['$resource', function($resource) {
     return $resource(api.endpoint + '/store/:id/branch', { id: '@id' }, {
         'get': {
             method: 'GET',
@@ -68,10 +68,10 @@ app.service('Branch', function($resource) {
             }
         }
     });
-});
+}]);
 
 /* Reasons data */
-app.service('Reason', function($resource) {
+app.service('Reason', ['$resource', function($resource) {
     return $resource(api.endpoint + '/store/:id/reasons', { id: '@id' }, {
         'get': {
             method: 'GET',
@@ -82,10 +82,10 @@ app.service('Reason', function($resource) {
             }
         }
     });
-});
+}]);
 
 /* Employee Data and Schedule */
-app.service('Employee', function($resource) {
+app.service('Employee', ['$resource', function($resource) {
     return $resource(api.endpoint + '/store/:id/:path/:path2', { id: '@id', path: '@path', path2: '@path2' }, {
         'get': {
             method: 'GET',
@@ -96,4 +96,4 @@ app.service('Employee', function($resource) {
             }
         }
     });
-});
+}]);
