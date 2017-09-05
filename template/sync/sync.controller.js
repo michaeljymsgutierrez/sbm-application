@@ -148,9 +148,13 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                 angular.forEach(schedule, function(schedule_value) {
                     var sid = schedule_value.schedule_id;
                     DBAccess.execute("SELECT * FROM employee_schedule WHERE _id = ?", [sid]).then(function(res) {
-                        var query = "INSERT INTO employee_schedule (_id, employee_id, date, shift, start, end, branch_id) VALUES (?,?,?,?,?,?,?)";
-                        var param = [sid, eid, dateFormatter.standard(new Date(schedule_value.date)), schedule_value.shift, dateFormatter.standard(new Date(schedule_value.shift.split("|")[0])), dateFormatter.standard(new Date(schedule_value.shift.split("|")[1])), schedule_value.store_assignment];
                         if (res.length == 0) {
+                            var query = "INSERT INTO employee_schedule (_id, employee_id, date, shift, start, end, branch_id) VALUES (?,?,?,?,?,?,?)";
+                            var param = [sid, eid, dateFormatter.standard(new Date(schedule_value.date)), schedule_value.shift, dateFormatter.standard(new Date(schedule_value.shift.split("|")[0])), dateFormatter.standard(new Date(schedule_value.shift.split("|")[1])), schedule_value.store_assignment];
+                            DBAccess.execute(query, param);
+                        } else {
+                            var query = "UPDATE employee_schedule SET employee_id = ?, date =?, shift = ?, start = ?, end = ?, branch_id = ? WHERE _id = ?";
+                            var param = [eid, dateFormatter.standard(new Date(schedule_value.date)), schedule_value.shift, dateFormatter.standard(new Date(schedule_value.shift.split("|")[0])), dateFormatter.standard(new Date(schedule_value.shift.split("|")[1])), schedule_value.store_assignment, sid];
                             DBAccess.execute(query, param);
                         }
                     }, function(err) {
