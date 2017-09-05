@@ -8,7 +8,7 @@ var mysql = require('mysql');
 var connection = null;
 
 /* Put all your configuration here */
-app.run(function($state, DBAccess, Log) {
+app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
 
     connection = mysql.createConnection({
         host: '127.0.0.1',
@@ -87,4 +87,4 @@ app.run(function($state, DBAccess, Log) {
     }, function(err) {
         Log.write(err);
     });
-});
+}]);
