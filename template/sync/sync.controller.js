@@ -57,6 +57,7 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                             var update = "UPDATE attendance SET is_synced = 1 WHERE schedule_id = ?";
                             DBAccess.execute(update, [sid]);
                         }, function(err) {
+                            backdrop.hide();
                             Log.write(err);
                         });
                     });
