@@ -97,3 +97,21 @@ app.service('Employee', ['$resource', function($resource) {
         }
     });
 }]);
+
+
+/* 
+    General Service for Sync
+    Method: POST
+*/
+app.service('SyncData', ['$resource', function($resource) {
+    return $resource(api.endpoint + '/store/:param1/:param2/:param3', { param1: '@param1', param2: '@param2', param3: '@param3' }, {
+        'send': {
+            method: 'POST',
+            headers: { 'api-key': api.key },
+            isArray: true,
+            interceptor: function(response) {
+                return response;
+            }
+        }
+    });
+}]);
