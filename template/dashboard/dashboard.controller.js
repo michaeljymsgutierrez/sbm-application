@@ -2,7 +2,7 @@
 
 /* Dashboard Controller */
 
-app.controller('dashboardCtrl', function(DBAccess, $scope) {
+app.controller('dashboardCtrl', ['DBAccess', '$scope', function(DBAccess, $scope) {
 
     /* Get store name for dashboard */
     var storeInfo = "SELECT store_name FROM store_info";
@@ -13,5 +13,4 @@ app.controller('dashboardCtrl', function(DBAccess, $scope) {
             $scope.store_name = res[0].store_name;
         }
     });
-
-});
+}]);
