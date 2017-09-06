@@ -39,6 +39,14 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             controller: 'syncCtrl'
         });
 
-    // $urlRouterProvider.otherwise('/dashboard');
-    $urlRouterProvider.otherwise('/attendance');
+    /* 
+        Define what route should the application will be redirected 
+        Unfortunately angular config do not accet factories and services
+    */
+    if (JSON.parse(window.localStorage.getItem('setup')) == 'complete') {
+        $urlRouterProvider.otherwise('/dashboard');
+    } else {
+        $urlRouterProvider.otherwise('/setup');
+    }
+
 }]);
