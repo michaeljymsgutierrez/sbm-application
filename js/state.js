@@ -41,7 +41,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
     /* 
         Define what route should the application will be redirected 
-        Unfortunately angular config do not accet factories and services
+        Unfortunately angular config do not accept factories and services
     */
     if (JSON.parse(window.localStorage.getItem('setup')) == 'complete') {
         $urlRouterProvider.otherwise('/dashboard');
