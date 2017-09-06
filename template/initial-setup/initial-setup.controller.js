@@ -70,10 +70,12 @@ app.controller('setupCtrl', ['$scope', 'validateApi', 'storage', '$state', 'back
             if (pop == true) {
                 storage.write('store_id', $scope.selectedStore);
                 storage.write('reload', 'true');
+                storage.write('setup', 'complete');
                 remote.getCurrentWindow().minimize();
                 backdrop.hide();
                 $state.go('dashboard');
             } else {
+                storage.write('setup', 'incomplete');
                 backdrop.hide();
             }
         }
