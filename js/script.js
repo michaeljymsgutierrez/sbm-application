@@ -3,6 +3,22 @@
 /* Initialize electron API */
 var remote = require('electron').remote;
 
+/* 
+    Splash Effect on setup
+    Seperate from script cycle
+*/
+$(document).ready(function() {
+    if (window.location.hash == '#!/setup') {
+        $('body').css({ 'opacity': 0 });
+        setTimeout(function() {
+            $('body').animate({
+                'opacity': 1,
+                'transition': '2s ease-in'
+            }, 5000);
+        }, 1000);
+    }
+});
+
 setInterval(function() {
 
     /* Include all your jQuery code here */
