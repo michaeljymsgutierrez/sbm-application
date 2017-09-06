@@ -35,7 +35,7 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                                 mugshot: {
                                     file: a.mugshot,
                                     filename: a.filename,
-                                    filepath: "public://attendace/" + a.filename
+                                    filepath: "public://attendance/" + a.filename
                                 }
                             };
                             value.actions.push(action_list);
