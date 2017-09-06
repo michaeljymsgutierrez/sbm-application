@@ -5,6 +5,7 @@
 app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatter', 'Store', 'Branch', 'Reason', 'DBAccess', 'Log', 'Toast', 'Employee', 'SyncData', function($q, $scope, storage, backdrop, dateFormatter, Store, Branch, Reason, DBAccess, Log, Toast, Employee, SyncData) {
     /* Get store id */
     var store_id = storage.read('store_id').store_id;
+    backdrop.auto(1000);
 
     /*
         loadUnsync : Reusable function for reloading unsync counts
@@ -58,12 +59,14 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                             DBAccess.execute(update, [sid]);
                         }, function(err) {
                             backdrop.hide();
+                            Toast.show('Unable to connect to server');
                             Log.write(err);
                         });
                     });
                     $scope.$watch('attendanceCount', function(val) {
                         if (val == 0) {
                             backdrop.hide();
+                            Toast.show('Attendance synced successful');
                         }
                     });
                 };
