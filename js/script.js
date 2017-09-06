@@ -67,6 +67,11 @@ setInterval(function() {
         if ($('.custom-backdrop').css('visibility') == 'hidden') {
             $('.sync-btn').removeClass('rotate');
         }
+
+        /* Adjusted loader margin on setup container */
+        if ($('div.setup').length != 0) {
+            $('.loader').css({ 'margin-left': '47.5vw' });
+        }
     });
 
 }, 1000);
