@@ -17,7 +17,22 @@
     color: $input-color;
     position: relative;
     float: right;
+    background: $light;
+    border: none;
     margin-top: -7px;
+}
+
+.rotate {
+    -webkit-animation: rotating 2s linear infinite;
+}
+
+@-webkit-keyframes rotating {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 .sync-icon {
