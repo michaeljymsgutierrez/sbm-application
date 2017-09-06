@@ -56,6 +56,17 @@ setInterval(function() {
 
         /* Turn of click event for modal */
         $('.modal').off('click');
+
+        /* Rotate Sync Effect */
+        $('.sync-btn').on('click', function() {
+            var element = $(this);
+            element.addClass('rotate');
+        });
+
+        /* Remove rotate class all over DOM element if backdrop is hidden */
+        if ($('.custom-backdrop').css('visibility') == 'hidden') {
+            $('.sync-btn').removeClass('rotate');
+        }
     });
 
 }, 1000);
