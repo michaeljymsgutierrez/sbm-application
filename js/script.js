@@ -1,8 +1,5 @@
 'use strict';
 
-/* Initialize electron API */
-var remote = require('electron').remote;
-
 /* 
     Splash Effect on setup
     Seperate from script cycle
@@ -19,7 +16,11 @@ $(document).ready(function() {
     }
 });
 
-setInterval(function() {
+/*
+    Script Cycle Function
+    Function for reinitializing assynchronously misc codes
+*/
+function scriptCycle() {
 
     /* Include all your jQuery code here */
     jQuery(document).ready(function() {
@@ -65,11 +66,6 @@ setInterval(function() {
             location.reload();
         }
 
-        /* Remaximized widow */
-        if (remote.getCurrentWindow().isMinimized() == true) {
-            remote.getCurrentWindow().maximize();
-        }
-
         /* Turn of click event for modal */
         $('.modal').off('click');
 
@@ -89,5 +85,6 @@ setInterval(function() {
             $('.loader').css({ 'margin-left': '47.5vw' });
         }
     });
+}
 
-}, 1000);
+setInterval(scriptCycle, 1000);

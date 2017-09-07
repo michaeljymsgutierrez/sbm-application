@@ -66,18 +66,12 @@ app.controller('setupCtrl', ['$scope', 'validateApi', 'storage', '$state', 'back
             backdrop.hide();
             Toast.show('Please select store');
         } else {
-            var pop = confirm('BMS is going to reinitialize . . .');
-            if (pop == true) {
-                storage.write('store_id', $scope.selectedStore);
-                storage.write('reload', 'true');
-                storage.write('setup', 'complete');
-                remote.getCurrentWindow().minimize();
-                backdrop.hide();
-                $state.go('dashboard');
-            } else {
-                storage.write('setup', 'incomplete');
-                backdrop.hide();
-            }
+            storage.write('store_id', $scope.selectedStore);
+            storage.write('reload', 'true');
+            storage.write('setup', 'complete');
+            backdrop.hide();
+            $state.go('dashboard');
+            $('body').css({ 'opacity': 0 });
         }
     }
 }]);
