@@ -16,12 +16,14 @@
 
 ###### Note: This commands are all custom by me on `package.json` and `gulpfile.js`
 
-- ``` npm start ``` - start the application on  dev-mode
+- ``` gulp serve ``` - start the application on dev-mode
 - ``` gulp watch``` - minify and compile SASS on watch mode
 - ``` gulp sass```  - minify and compile SASS for prod
-- ``` npm run build-linux ``` - build linux executable
-- ``` npm run build-macOs ``` - build macOs executable
-- ``` npm run build-windows ``` - build windows executable
+- ``` gulp compress ``` - minify all JS for prod
+- ``` gulp unit-test ``` - execute unit test
+- ``` gulp build-linux ``` - build linux executable
+- ``` gulp build-mac ``` - build macOs executable
+- ``` gulp build-windows ``` - build windows executable
 
 ###### I do not included yet the installer build script because of high resource usage 
 

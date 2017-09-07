@@ -1,38 +1,40 @@
 {
-    "name": "bms-application",
-    "version": "1.0.0",
-    "description": "Bussiness Management System - Desktop Edition",
-    "main": "main.js",
-    "scripts": {
-        "start": "electron main.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": {
-        "name": "Chaelgutierrez",
-        "email": "michael@vielsoft.com"
-    },
-    "license": "ISC",
-    "dependencies": {
-        "asar": "^0.13.0",
-        "fs": "0.0.1-security",
-        "fs-jetpack": "^1.1.0",
-        "gulp-util": "^3.0.8",
-        "mysql": "^2.13.0",
-        "q": "^1.5.0",
-        "rcedit": "^0.9.0"
-    },
-    "devDependencies": {
-        "electron": "^1.7.5",
-        "electron-prebuilt": "^1.4.13",
-        "gulp": "^3.9.1",
-        "gulp-concat": "^2.6.1",
-        "gulp-minify-css": "^1.2.4",
-        "gulp-rename": "^1.2.2",
-        "gulp-sass": "^3.1.0",
-        "gulp-shell": "^0.6.3",
-        "gulp-uglify": "^3.0.0",
-        "gulp-util": "^3.0.8",
-        "pump": "^1.0.2",
-        "shelljs": "^0.7.8"
-    }
+  "name": "bms-application",
+  "version": "1.0.0",
+  "description": "Bussiness Management System - Desktop Edition",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Chaelgutierrez",
+    "email": "michael@vielsoft.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "asar": "^0.13.0",
+    "fs": "0.0.1-security",
+    "fs-jetpack": "^1.1.0",
+    "gulp-util": "^3.0.8",
+    "mysql": "^2.13.0",
+    "q": "^1.5.0",
+    "rcedit": "^0.9.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "electron": "^1.7.5",
+    "electron-prebuilt": "^1.4.13",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-shell": "^0.6.3",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "mocha": "^3.5.0",
+    "pump": "^1.0.2",
+    "shelljs": "^0.7.8"
+  }
 }

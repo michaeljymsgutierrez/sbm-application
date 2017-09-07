@@ -5,6 +5,7 @@ var expect = chai.expect;
 var assert = chai.assert;
 
 /*
+    
     Rules and Formatting for Unit Testing
     Describe First before Expect or Assert
     Do not Describe unrelated functionality outside Parent Describe
@@ -27,7 +28,7 @@ describe('Scenario NO.1', function() {
     });
     describe('Test index 0 == 1', function() {
         it('x[0] should be 1', function() {
-            assert.equal(x[0], 2, "x[0] should be above 1");
+            assert.equal(x[0], 1, "x[0] should be above 1");
         });
     });
 });

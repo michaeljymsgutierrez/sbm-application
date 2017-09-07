@@ -13,6 +13,7 @@ var paths = {
     sass: ['./scss/*.scss']
 };
 
+/* Watch, Compile, Minify SASS to CSS */
 gulp.task('default', ['sass']);
 
 gulp.task('sass', function(done) {
@@ -32,6 +33,7 @@ gulp.task('watch', ['sass'], function() {
     gulp.watch(paths.sass, ['sass']);
 });
 
+/* Compress Tasks for Minifying JS files for Production */
 gulp.task('compress', function(cb) {
     pump([gulp.src(['js/*.js', 'template/**/*.js']),
         uglify(),
@@ -39,6 +41,7 @@ gulp.task('compress', function(cb) {
     ]);
 });
 
+/* Build Tasks for Executable Binaries */
 gulp.task('build-linux', shell.task([
     'electron-packager . --overwrite --platform=linux --arch=x64 --icon=img/icon.png --prune=true --out=release-builds'
 ]));
@@ -51,6 +54,12 @@ gulp.task('build-mac', shell.task([
     'electron-packager . --overwrite --platform=darwin --arch=x64 --icon=img/icon.icns --prune=true --out=release-builds'
 ]));
 
+/* Server Electron */
 gulp.task('serve', shell.task([
     'electron main.js'
+]));
+
+/* Execute Unit testing */
+gulp.task('unit-test', shell.task([
+    'mocha unit-testing/test.js'
 ]));
