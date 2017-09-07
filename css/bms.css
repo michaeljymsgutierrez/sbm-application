@@ -511,14 +511,20 @@ However, delay the fade out process for 2.5 seconds */
   margin-top: -7px; }
 
 .rotate {
-  -webkit-animation: rotating 2s linear infinite; }
+  opacity: 0.5; }
 
+/* 
+use this class for rotating image
+-webkit-animation: rotating 2s linear infinite; 
 @-webkit-keyframes rotating {
-  from {
-    -webkit-transform: rotate(360deg); }
-  to {
-    -webkit-transform: rotate(0deg); } }
-
+    from {
+        -webkit-transform: rotate(360deg);
+    }
+    to {
+        -webkit-transform: rotate(0deg);
+    }
+}
+*/
 .sync-icon {
   font-size: 24px; }
 
