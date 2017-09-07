@@ -6,9 +6,23 @@ var app = angular.module('bms', ['ui.router', 'ngResource', 'ds.clock', 'angular
 var mysql = require('mysql');
 /* Intialize connection  database connection */
 var connection = null;
+/* 
+    Fade Effect on load view
+*/
+var fadeOnLoadView = function() {
+    $('body').css({ 'opacity': 0 });
+    setTimeout(function() {
+        $('body').animate({
+            'opacity': 1,
+            'transition': '2s ease-in'
+        }, 5000);
+    }, 1000);
+};
 
 /* Put all your configuration here */
 app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
+
+    fadeOnLoadView();
 
     connection = mysql.createConnection({
         host: '127.0.0.1',

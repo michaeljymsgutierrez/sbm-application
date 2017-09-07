@@ -1,21 +1,5 @@
 'use strict';
 
-/* 
-    Splash Effect on setup
-    Seperate from script cycle
-*/
-$(document).ready(function() {
-    if (window.location.hash == '#!/setup') {
-        $('body').css({ 'opacity': 0 });
-        setTimeout(function() {
-            $('body').animate({
-                'opacity': 1,
-                'transition': '2s ease-in'
-            }, 5000);
-        }, 1000);
-    }
-});
-
 /*
     Script Cycle Function
     Function for reinitializing assynchronously misc codes
