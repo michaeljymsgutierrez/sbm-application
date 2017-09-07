@@ -506,7 +506,7 @@ However, delay the fade out process for 2.5 seconds */
   color: #545454;
   position: relative;
   float: right;
-  background: #fefefe;
+  background: transparent;
   border: none;
   margin-top: -7px; }
 
@@ -515,9 +515,9 @@ However, delay the fade out process for 2.5 seconds */
 
 @-webkit-keyframes rotating {
   from {
-    -webkit-transform: rotate(0deg); }
+    -webkit-transform: rotate(360deg); }
   to {
-    -webkit-transform: rotate(360deg); } }
+    -webkit-transform: rotate(0deg); } }
 
 .sync-icon {
   font-size: 24px; }

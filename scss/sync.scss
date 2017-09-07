@@ -17,7 +17,7 @@
     color: $input-color;
     position: relative;
     float: right;
-    background: $light;
+    background: transparent;
     border: none;
     margin-top: -7px;
 }
@@ -28,10 +28,10 @@
 
 @-webkit-keyframes rotating {
     from {
-        -webkit-transform: rotate(0deg);
+        -webkit-transform: rotate(360deg);
     }
     to {
-        -webkit-transform: rotate(360deg);
+        -webkit-transform: rotate(0deg);
     }
 }
 
