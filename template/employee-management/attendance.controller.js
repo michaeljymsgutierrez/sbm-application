@@ -41,7 +41,7 @@ app.controller('attendanceCtrl', ['$rootScope', 'Log', '$scope', 'Modal', 'Modal
 
         /* Functionf or saving captured photo */
         $scope.save = function() {
-            $scope.mugshot = canvas.toDataURL();
+            $scope.mugshot = canvas.toDataURL('image/png', 0.5);
             Modal.hide();
         }
 
