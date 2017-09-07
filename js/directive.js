@@ -41,3 +41,10 @@ app.directive('mainLogo', function() {
         template: '<img src="./img/default_logo.png" class="home-logo" />'
     }
 });
+
+app.directive('pad', function() {
+    return {
+        restrict: 'E',
+        template: '<div style="width: 10px; height: 500px"></div>'
+    }
+});
