@@ -69,9 +69,9 @@ function scriptCycle() {
             $('.loader').css({ 'margin-left': '47.5vw' });
         }
 
-        /* Remove drag element */
+        /* Remove drag element and select */
         $('*').attr('ondragstart', 'return false');
-
+        $(document.body).attr('onselectstart', 'return false');
     });
 }
 
