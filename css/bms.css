@@ -189,7 +189,8 @@ button:focus {
 
 .button:active {
   background-color: transparent;
-  transform: translateY(4px); }
+  /* transform: translateY(4px); */
+  opacity: 0.5; }
 
 input:focus,
 button:focus,
@@ -210,10 +211,19 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); }
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  /*
+         -webkit-border-radius: 10px;
+         border-radius: 10px;
+    */ }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
+  /* 
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+
+    */
   background: rgba(211, 211, 211, 0.8);
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); }
 
