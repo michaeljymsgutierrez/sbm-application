@@ -68,6 +68,10 @@ function scriptCycle() {
         if ($('div.setup').length != 0) {
             $('.loader').css({ 'margin-left': '47.5vw' });
         }
+
+        /* Remove drag element */
+        $('*').attr('ondragstart', 'return false');
+
     });
 }
 
