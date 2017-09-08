@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <i class="ion-refresh camera-refresh button" ng-click="retakePhoto()"></i>
                 <span class="modal-title">Attendance</span>
-                <i class="ion-camera camera-icon button" ng-click="capture()"></i>
+                <i class="ion-camera camera-icon"></i>
             </div>
             <div class="modal-body">
                 <video id="video" width="568" height="450" autoplay ng-show="videoVisible"></video>
@@ -14,7 +14,8 @@
             </div>
             <div class="modal-footer">
                 <button class="btn modal-btn cancel" ng-click="cancel()">Cancel</button>
-                <button class="btn modal-btn save" ng-click="save()">Save</button>
+                <button class="btn modal-btn save" ng-click="save()" ng-if="show_save">Save</button>
+                <button class="btn modal-btn save" ng-click="capture()" ng-if="show_capture">Capture</button>
             </div>
         </div>
     </div>
