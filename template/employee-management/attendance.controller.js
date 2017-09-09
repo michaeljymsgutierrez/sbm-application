@@ -17,6 +17,7 @@ app.controller('attendanceCtrl', ['$rootScope', 'Log', '$scope', 'Modal', 'Modal
                 var src = window.URL.createObjectURL(stream);
                 var video = document.getElementById('video');
                 video.src = src;
+                $scope.showFrame = stream.active;
             });
         }
 
