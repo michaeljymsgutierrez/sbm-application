@@ -695,6 +695,16 @@ div.clock-container {
 .warning {
   color: #ef473a; }
 
+.no-device {
+  height: 450px;
+  widows: 568px;
+  font-size: 20px;
+  text-align: center;
+  padding-top: 35%; }
+
+.no-device i {
+  font-size: 35px; }
+
 /* Schedule Styling */
 .schedule tbody td {
   width: 100px;

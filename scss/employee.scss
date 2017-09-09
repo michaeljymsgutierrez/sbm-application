@@ -137,3 +137,15 @@ div.clock-container {
 .warning {
     color: $assertive;
 }
+
+.no-device {
+    height: 450px;
+    widows: 568px;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 35%;
+}
+
+.no-device i {
+    font-size: 35px;
+}
