@@ -18,6 +18,7 @@ app.controller('attendanceCtrl', ['$rootScope', 'Log', '$scope', 'Modal', 'Modal
                 var video = document.getElementById('video');
                 video.src = src;
                 $scope.showFrame = stream.active;
+                $scope.capture_disable = $scope.showFrame == false ? true : false;
             });
         }
 

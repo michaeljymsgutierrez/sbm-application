@@ -18,7 +18,7 @@
             <div class="modal-footer">
                 <button class="btn modal-btn cancel" ng-click="cancel()">Cancel</button>
                 <button class="btn modal-btn save" ng-click="save()" ng-if="show_save">Save</button>
-                <button class="btn modal-btn save" ng-click="capture()" ng-if="show_capture">Capture</button>
+                <button class="btn modal-btn save" ng-click="capture()" ng-if="show_capture" ng-disabled="capture_disable">Capture</button>
             </div>
         </div>
     </div>
