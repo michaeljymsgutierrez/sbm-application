@@ -8,6 +8,8 @@ var sh = require('shelljs');
 var pump = require('pump');
 var uglify = require('gulp-uglify');
 var shell = require('gulp-shell');
+var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
 
 var paths = {
     sass: ['./scss/*.scss']
@@ -63,3 +65,10 @@ gulp.task('serve', shell.task([
 gulp.task('unit-test', shell.task([
     'mocha unit-testing/test.js'
 ]));
+
+/* Custom Linter */
+gulp.task('lint', function() {
+    return gulp.src(['js/*.js', 'template/**/*.js'])
+        .pipe(jshint())
+        .pipe(jshint.reporter('jshint-stylish', { verbose: true }));
+});
