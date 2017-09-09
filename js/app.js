@@ -53,7 +53,7 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         });
 
         /* Create store_info table */
-        var store_info = "CREATE TABLE IF NOT EXISTS store_info (id INT PRIMARY KEY AUTO_INCREMENT, store_id INT, store_code VARCHAR(25), store_name VARCHAR(25), company VARCHAR(25), location VARCHAR(25), bank  VARCHAR(25))";
+        var store_info = "CREATE TABLE IF NOT EXISTS store_info (id INT PRIMARY KEY AUTO_INCREMENT, store_id INT, store_code VARCHAR(255), store_name VARCHAR(255), company VARCHAR(255), location VARCHAR(255), bank  VARCHAR(255))";
         DBAccess.execute(store_info, []).then(function(res) {
             console.info('store_info table created');
         }, function(err) {
@@ -61,7 +61,7 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         });
 
         /* Create branch_info table */
-        var branch_info = "CREATE TABLE IF NOT EXISTS branch_info (id INT PRIMARY KEY AUTO_INCREMENT, _id INT, store_name VARCHAR(25))";
+        var branch_info = "CREATE TABLE IF NOT EXISTS branch_info (id INT PRIMARY KEY AUTO_INCREMENT, _id INT, store_name VARCHAR(255))";
         DBAccess.execute(branch_info, []).then(function(res) {
             console.info('branch_info table created');
         }, function(err) {
@@ -69,7 +69,7 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         });
 
         /* Create reason  table */
-        var reason = "CREATE TABLE IF NOT EXISTS reason (id INT PRIMARY KEY AUTO_INCREMENT, _id INT, module VARCHAR(25), reason VARCHAR(25))";
+        var reason = "CREATE TABLE IF NOT EXISTS reason (id INT PRIMARY KEY AUTO_INCREMENT, _id INT, module VARCHAR(255), reason VARCHAR(255))";
         DBAccess.execute(reason, []).then(function(res) {
             console.info("reason table created");
         }, function(err) {
@@ -77,7 +77,7 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         });
 
         /* Create employee table */
-        var employee = "CREATE TABLE IF NOT EXISTS employee (id INT PRIMARY KEY AUTO_INCREMENT, employee_id VARCHAR(25), user_id VARCHAR(25), name VARCHAR(25), username VARCHAR(25), role VARCHAR(255), active VARCHAR(25), created DATETIME)";
+        var employee = "CREATE TABLE IF NOT EXISTS employee (id INT PRIMARY KEY AUTO_INCREMENT, employee_id VARCHAR(255), user_id VARCHAR(255), name VARCHAR(255), username VARCHAR(255), role VARCHAR(255), active VARCHAR(255), created DATETIME)";
         DBAccess.execute(employee, []).then(function(res) {
             console.info("employee table created");
         }, function(err) {
@@ -85,7 +85,7 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         });
 
         /* Create employee schedule table */
-        var employee_schedule = "CREATE TABLE IF NOT EXISTS employee_schedule (id INT PRIMARY KEY AUTO_INCREMENT, _id INT, employee_id VARCHAR(25), date DATETIME, shift VARCHAR(255), start DATETIME, end DATETIME, branch_id VARCHAR(25))";
+        var employee_schedule = "CREATE TABLE IF NOT EXISTS employee_schedule (id INT PRIMARY KEY AUTO_INCREMENT, _id INT, employee_id VARCHAR(255), date DATETIME, shift VARCHAR(255), start DATETIME, end DATETIME, branch_id VARCHAR(255))";
         DBAccess.execute(employee_schedule, []).then(function(res) {
             console.info("employee_schedule table created");
         }, function(err) {
@@ -93,7 +93,7 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         });
 
         /* Create attendance table */
-        var attendance = "CREATE TABLE IF NOT EXISTS attendance (id INT PRIMARY KEY AUTO_INCREMENT, schedule_id INT, username VARCHAR(25), employee_id VARCHAR(25), is_synced INT, is_completed INT)";
+        var attendance = "CREATE TABLE IF NOT EXISTS attendance (id INT PRIMARY KEY AUTO_INCREMENT, schedule_id INT, username VARCHAR(255), employee_id VARCHAR(255), is_synced INT, is_completed INT)";
         DBAccess.execute(attendance, []).then(function(res) {
             console.info("attendance table created");
         }, function(err) {
@@ -101,7 +101,7 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         });
 
         /* Create attendance timelog table */
-        var attendance_timelog = "CREATE TABLE IF NOT EXISTS attendance_time_log (attendance_id INT, mugshot LONGTEXT, filename VARCHAR(25), action VARCHAR(25), created DATETIME)";
+        var attendance_timelog = "CREATE TABLE IF NOT EXISTS attendance_time_log (attendance_id INT, mugshot LONGTEXT, filename VARCHAR(255), action VARCHAR(255), created DATETIME)";
         DBAccess.execute(attendance_timelog, []).then(function(res) {
             console.info("attendance_time_log table created");
         }, function(err) {
