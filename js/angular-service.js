@@ -24,7 +24,7 @@ app.service('Log', [function() {
     this.write = function(msg) {
         var fs = require('fs');
         fs.appendFileSync('log.txt', "\n" + new Date() + ":" + msg);
-    }
+    };
 }]);
 
 
@@ -37,7 +37,7 @@ app.service('Toast', ['$timeout', function($timeout) {
         $timeout(function() {
             toast.removeClass('show');
         }, 3000);
-    }
+    };
 }]);
 
 
@@ -74,27 +74,27 @@ app.service('dateFormatter', ['$filter', function($filter) {
     /* month */
     this.month = function(dt) {
         return $filter('date')(dt, 'MMM');
-    }
+    };
 
     /* date */
     this.date = function(dt) {
         return $filter('date')(dt, 'dd');
-    }
+    };
 
     /* year */
     this.year = function(dt) {
         return $filter('date')(dt, 'yyyy');
-    }
+    };
 
     /* standard format */
     this.standard = function(dt) {
         return $filter('date')(dt, 'yyyy-MM-dd HH:mm:00');
-    }
+    };
 
     /* date now 24 format */
     this.now = function() {
         return $filter('date')(new Date(), 'yyyy-MM-dd HH:mm:00');
-    }
+    };
 
     /* standard utc */
     this.utc = function(dt) {
@@ -105,22 +105,22 @@ app.service('dateFormatter', ['$filter', function($filter) {
             Use this if require localtime 24Format to UTC
         */
         return $filter('date')(date_utc, 'yyyy-MM-dd HH:mm:00');
-    }
+    };
 
     /* standard format no time */
     this.standardNoTime = function(dt) {
         return $filter('date')(dt, 'yyyy-MM-dd');
-    }
+    };
 
     /* string format */
     this.stringDate = function(dt) {
         return $filter('date')(dt, 'MMMM d, y');
-    }
+    };
 
     /* convert datetime to timestamp */
     this.timestamp = function(dt) {
         return Math.floor(new Date(dt).getTime() / 1000);
-    }
+    };
 }]);
 
 
