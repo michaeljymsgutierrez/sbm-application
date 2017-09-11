@@ -107,5 +107,13 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         }, function(err) {
             Log.write(err);
         });
+
+        /* Create inventory table */
+        var inventory = "CREATE TABLE IF NOT EXISTS inventory (id INT PRIMARY KEY AUTO_INCREMENT, _id INT, name VARCHAR(255), uom VARCHAR(255), initial_qty VARCHAR(255), category_id VARCHAR(255), category_name VARCHAR(255), production_uom VARCHAR(255), production_convertion_qty VARCHAR(255), status INT, created DATETIME)";
+        DBAccess.execute(inventory, []).then(function(res) {
+            console.info("inventory table created");
+        }, function(err) {
+            Log.write(err);
+        });
     };
 }]);
