@@ -726,3 +726,7 @@ div.clock-container {
   height: 45px;
   padding-top: 13px;
   text-align: center; }
+
+/* Inventory Styling */
+.inventory-row {
+  margin-left: 12%; }
