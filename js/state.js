@@ -28,6 +28,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             templateUrl: './template/employee-management/schedule.html',
             controller: 'scheduleCtrl'
         })
+        .state('inventory-home', {
+            url: '/inventory-home',
+            templateUrl: './template/inventory-management/inventory-home.html'
+        })
         .state('settings', {
             url: '/settings',
             templateUrl: './template/settings/settings.html',
