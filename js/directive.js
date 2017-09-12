@@ -38,7 +38,7 @@ app.directive('spF', function() {
 app.directive('mainLogo', function() {
     return {
         restrict: 'E',
-        template: '<img src="./img/default_logo.png" class="home-logo" />'
+        template: '<img src="./img/colored-logo.png" class="home-logo" style="height:178px;width:380px;"/>'
     };
 });
 
