@@ -2,7 +2,7 @@
 
 /* Sync Controller */
 
-app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatter', 'Store', 'Branch', 'Reason', 'DBAccess', 'Log', 'Toast', 'Employee', 'SyncData', function($q, $scope, storage, backdrop, dateFormatter, Store, Branch, Reason, DBAccess, Log, Toast, Employee, SyncData) {
+app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatter', 'Store', 'Branch', 'Reason', 'DBAccess', 'Log', 'Toast', 'Employee', 'SyncData', 'Inventory', function($q, $scope, storage, backdrop, dateFormatter, Store, Branch, Reason, DBAccess, Log, Toast, Employee, SyncData, Inventory) {
     /* Get store id */
     var store_id = storage.read('store_id').store_id;
     backdrop.auto(1000);
@@ -100,7 +100,7 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
         $scope.$watch('timeout', function(val) {
             if (val == 3) {
                 backdrop.hide();
-                Toast.show("Syncing store data successful");
+                Toast.show("Store sync successful");
             } else if (val == -1) {
                 backdrop.hide();
                 Toast.show("Unable to connect to server");
@@ -240,6 +240,46 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                     }, function(err) {
                         Log.write(err);
                     });
+                });
+            });
+        }, function(err) {
+            $scope.timeout = -1;
+            Log.write(err);
+        });
+    };
+
+
+    /* Sync Inventory */
+    $scope.syncInventory = function() {
+        $scope.timeout = 0;
+        backdrop.show();
+        $scope.$watch('timeout', function(val) {
+            if (val == 1) {
+                backdrop.hide();
+                Toast.show("Inventory sync successful");
+            } else if (val == -1) {
+                backdrop.hide();
+                Toast.show("Unable to connect to server");
+            }
+        });
+
+        /*  Get all Inventory data */
+        Inventory.get({ id: store_id, path: 'inventory' }, function(res) {
+            $scope.timeout++;
+            angular.forEach(res, function(value) {
+                var iid = value.id;
+                DBAccess.execute("SELECT * FROM inventory WHERE _id = ?", [iid]).then(function(res) {
+                    if (res.length == 0) {
+                        var query = "INSERT INTO inventory (_id, name, uom, initial_qty, category_id, category_name, production_uom, production_convertion_qty, status, created) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                        var param = [value.id, value.item, value.inventory_uom, value.initial_qty, value.category.name, value.category.name, value.production_uom, value.production_quantity, value.status, dateFormatter.utc(new Date())];
+                        DBAccess.execute(query, param);
+                    } else {
+                        var query = "UPDATE inventory SET name = ?, uom = ?, initial_qty = ?, category_id = ?, category_name = ?, production_uom = ?, production_convertion_qty = ?, status = ?, created = ? WHERE _id = ?";
+                        var param = [value.item, value.inventory_uom, value.initial_qty, value.category.name, value.category.name, value.production_uom, value.production_quantity, value.status, dateFormatter.utc(new Date()), value.id];
+                        DBAccess.execute(query, param);
+                    }
+                }, function(err) {
+                    Log.write(err);
                 });
             });
         }, function(err) {
