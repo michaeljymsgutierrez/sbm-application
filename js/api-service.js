@@ -98,6 +98,19 @@ app.service('Employee', ['$resource', function($resource) {
     });
 }]);
 
+/* Inventory Data */
+app.service('Inventory', ['$resource', function($resource) {
+    return $resource(api.endpoint + "/store/:id/:path/:path2", { id: '@id', path: '@path', path2: '@path2' }, {
+        'get': {
+            method: 'GET',
+            headers: { 'api-key': api.key },
+            isArray: true,
+            interceptor: function(response) {
+                return response;
+            }
+        }
+    });
+}]);
 
 /* 
     General Service for Sync
