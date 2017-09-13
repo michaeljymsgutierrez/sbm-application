@@ -117,7 +117,7 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         });
 
         /* Create inventory_beginning table */
-        var inventory_beginning = "CREATE TABLE IF NOT EXISTS inventory_beginning (id INT PRIMARY KEY AUTO_INCREMENT, inventory_id INT, qty INT, created DATETIME, is_synced INT)";
+        var inventory_beginning = "CREATE TABLE IF NOT EXISTS inventory_beginning (id INT PRIMARY KEY AUTO_INCREMENT, inventory_id INT, qty INT, created_by VARCHAR(255),created DATETIME, is_synced INT)";
         DBAccess.execute(inventory_beginning, []).then(function(res) {
             console.info("inventory_beginning table created");
         }, function(err) {
@@ -125,7 +125,7 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         });
 
         /* Create inventory_actual table */
-        var inventory_actual = "CREATE TABLE IF NOT EXISTS inventory_actual (id INT PRIMARY KEY AUTO_INCREMENT, inventory_id INT, qty INT, created DATETIME, is_synced INT)";
+        var inventory_actual = "CREATE TABLE IF NOT EXISTS inventory_actual (id INT PRIMARY KEY AUTO_INCREMENT, inventory_id INT, qty INT, created_by VARCHAR(255),created DATETIME, is_synced INT)";
         DBAccess.execute(inventory_actual, []).then(function(res) {
             console.info("inventory_actual table created");
         }, function(err) {
