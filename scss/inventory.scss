@@ -3,3 +3,15 @@
 .inventory-row {
     margin-left: 12%;
 }
+
+.inventory-sticky-header {
+    background-color: $table-header;
+}
+
+.inventory-sticky-header div {
+    display: inline-block;
+    width: 90px !important;
+    height: 45px;
+    padding-top: 13px;
+    text-align: center;
+}

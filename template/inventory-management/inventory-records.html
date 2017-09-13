@@ -1,0 +1,44 @@
+<!-- Inventory Records View  -->
+
+<div class="container-fluid">
+    <div class="bar bar-blue">
+        Inventory
+    </div>
+    <div class="inventory-sticky-header">
+        <div>Category</div>
+        <div>Item</div>
+        <div>Beginning</div>
+        <div>Delivery</div>
+        <div>Pull-out</div>
+        <div>Trans-In</div>
+        <div>Trans-Out</div>
+        <div>Sales</div>
+        <div>Wastage</div>
+        <div>Ending</div>
+        <div>Actual</div>
+        <div>UOM</div>
+    </div>
+    <div class="schedule container-fluid" style="overflow-y:scroll !important;height: 81%;">
+        <table class="table">
+            <tbody>
+                <tr ng-repeat="">
+                    <!-- contains all the data queried-->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="bar-tab bar-blue">
+        <div class="tab" ui-sref="inventory-records">
+            <i class="ion-clipboard tab-icon-ion"></i>
+            <div class="tab-label">Records</div>
+        </div>
+        <div class="tab">
+            <i class="ion-minus-circled tab-icon-ion"></i>
+            <div class="tab-label">Waste</div>
+        </div>
+        <div class="tab">
+            <i class="fa fa-balance-scale tab-icon-fa"></i>
+            <div class="tab-label">Actual Count</div>
+        </div>
+    </div>
+</div>
