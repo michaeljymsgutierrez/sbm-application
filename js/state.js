@@ -37,6 +37,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             templateUrl: './template/inventory-management/inventory-records.html',
             controller: 'inventoryRecordsCtrl'
         })
+        .state('inventory-actual', {
+            url: '/inventory-actual',
+            templateUrl: './template/inventory-management/inventory-actual.html',
+            controller: 'inventoryActualCtrl'
+        })
         .state('settings', {
             url: '/settings',
             templateUrl: './template/settings/settings.html',
