@@ -18,7 +18,7 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
                 /* 
                     Get initial item and quantity from inventory 
                 */
-                var query = "SELECT id, initial_qty FROM inventory WHERE status = 1";
+                var query = "SELECT id, initial_qty FROM inventory";
                 DBAccess.execute(query, []).then(function(res) {
                     if (res.length != 0) {
                         angular.forEach(res, function(value) {
@@ -52,7 +52,7 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
                         if (beginning_last == actual_last && count == 0) {
                             console.log("Should now start inventory");
                         } else if (beginning_last != actual_last && count == 0) {
-                            Toast.show("Need to inventory on: " + beginning_last);
+                            Toast.show("Need to end inventory on: " + beginning_last);
                             Transition.go('inventory-actual');
                         } else {
                             console.log("OK");
