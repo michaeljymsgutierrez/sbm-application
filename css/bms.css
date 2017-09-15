@@ -743,3 +743,9 @@ div.clock-container {
   height: 45px;
   padding-top: 13px;
   text-align: center; }
+
+.save-actual {
+  font-size: 30px;
+  position: absolute;
+  margin-top: -8px;
+  margin-left: -40px; }
