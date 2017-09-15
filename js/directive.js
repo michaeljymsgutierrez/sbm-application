@@ -48,3 +48,21 @@ app.directive('pad', function() {
         template: '<div style="width: 10px; height: 500px"></div>'
     };
 });
+
+app.directive('validNumber', function() {
+    return {
+        restrict: 'A',
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModel) {
+            scope.$watch(attrs.ngModel, function(val) {
+                if (val < 0) {
+                    ngModel.$setViewValue('');
+                    ngModel.$render();
+                } else if (isNaN(val) == true) {
+                    ngModel.$setViewValue('');
+                    ngModel.$render();
+                }
+            });
+        }
+    }
+})
