@@ -271,11 +271,11 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                 DBAccess.execute("SELECT * FROM inventory WHERE _id = ?", [iid]).then(function(res) {
                     if (res.length == 0) {
                         var query = "INSERT INTO inventory (_id, name, uom, initial_qty, category_id, category_name, production_uom, production_convertion_qty, status, created) VALUES (?,?,?,?,?,?,?,?,?,?)";
-                        var param = [value.id, value.item, value.inventory_uom, value.initial_qty, value.category.name, value.category.name, value.production_uom, value.production_quantity, value.status, dateFormatter.utc(new Date())];
+                        var param = [value.id, value.item, value.inventory_uom, value.initial_qty, value.category.id, value.category.name, value.production_uom, value.production_quantity, value.status, dateFormatter.utc(new Date())];
                         DBAccess.execute(query, param);
                     } else {
                         var query = "UPDATE inventory SET name = ?, uom = ?, initial_qty = ?, category_id = ?, category_name = ?, production_uom = ?, production_convertion_qty = ?, status = ?, created = ? WHERE _id = ?";
-                        var param = [value.item, value.inventory_uom, value.initial_qty, value.category.name, value.category.name, value.production_uom, value.production_quantity, value.status, dateFormatter.utc(new Date()), value.id];
+                        var param = [value.item, value.inventory_uom, value.initial_qty, value.category.id, value.category.name, value.production_uom, value.production_quantity, value.status, dateFormatter.utc(new Date()), value.id];
                         DBAccess.execute(query, param);
                     }
                 }, function(err) {
