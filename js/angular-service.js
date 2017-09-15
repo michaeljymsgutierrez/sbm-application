@@ -161,3 +161,13 @@ app.service('Username', ['ModalService', function(ModalService) {
         });
     };
 }]);
+
+
+/* Service for transitioninig route with delay*/
+app.service('Transition', ['$state', '$timeout', function($state, $timeout) {
+    this.go = function(route) {
+        $timeout(function() {
+            $state.go(route);
+        }, 1000);
+    };
+}]);
