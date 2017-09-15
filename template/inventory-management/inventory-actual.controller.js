@@ -27,4 +27,11 @@ app.controller('inventoryActualCtrl', ['$scope', '$rootScope', 'Username', '$htt
             Log.write(err);
         });
     });
+
+    /* 
+        Function for saving inventory actual  
+    */
+    $scope.save_inventory_actual = function() {
+        console.log("Save inventory actual")
+    };
 }]);
