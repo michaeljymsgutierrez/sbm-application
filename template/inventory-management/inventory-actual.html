@@ -1,6 +1,6 @@
 <!-- Inventory Records View  -->
 
-<div class="container-fluid">
+<div class="container-fluid inventory-actual">
     <div class="bar bar-blue">
         Inventory Actual
         <button class="bar-right button"><i class="ion-archive save-actual"></i></button>
@@ -11,11 +11,14 @@
         <div>Actual</div>
         <div>UOM</div>
     </div>
-    <div class="schedule container-fluid" style="overflow-y:scroll !important;height: 50px;">
+    <div class="schedule container-fluid" style="overflow-y:scroll !important;height: 81%;">
         <table class="table">
             <tbody>
-                <tr>
-                    <!-- contains all the data queried-->
+                <tr ng-repeat="x in inventory_actual">
+                    <td>{{ x.category }}</td>
+                    <td>{{ x.item }}</td>
+                    <td><input type="text" ng-model="x.qty" valid-number/></td>
+                    <td>{{ x.uom }}</td>
                 </tr>
             </tbody>
         </table>
