@@ -749,3 +749,12 @@ div.clock-container {
   position: absolute;
   margin-top: -8px;
   margin-left: -40px; }
+
+.inventory-actual td {
+  width: 279px !important; }
+
+.inventory-actual td input {
+  text-align: center;
+  border: 2px solid lightgray;
+  border-radius: 4px;
+  background-color: #f6f6f6; }
