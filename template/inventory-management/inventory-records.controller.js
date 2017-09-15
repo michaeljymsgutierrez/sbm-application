@@ -50,11 +50,13 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
                         var count = res[0].count;
                         console.log(beginning_last + " " + actual_last + " " + count);
                         if (beginning_last == actual_last && count == 0) {
-                            console.log("Should now start inventory");
+                            console.log("insert beginning");
                         } else if (beginning_last != actual_last && count == 0) {
                             Toast.show("Need to end inventory on: " + beginning_last);
+                            $rootScope.inventory_status = "Incomplete Actual";
                             Transition.go('inventory-actual');
                         } else {
+                            $scope.status = "Complete Beginning";
                             console.log("OK");
                         }
                     }, function(err) {

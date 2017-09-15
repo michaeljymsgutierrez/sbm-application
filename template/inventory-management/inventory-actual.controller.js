@@ -38,37 +38,38 @@ app.controller('inventoryActualCtrl', ['$scope', '$rootScope', 'Username', '$htt
         } else {
             var query = "SELECT DATE_FORMAT(max(created), '%Y-%m-%d') AS beginning_last, (SELECT DATE_FORMAT(max(created),'%Y-%m-%d') FROM inventory_actual) AS actual_last FROM inventory_beginning";
             DBAccess.execute(query, []).then(function(res) {
-                if (res.length != 0) {
-                    var beginning_last = res[0].beginning_last;
-                    var actual_last = res[0].actual_last;
-                    var datenow = dateFormatter.standardNoTime(new Date);
+                    if (res.length != 0) {
+                        var beginning_last = res[0].beginning_last;
+                        var actual_last = res[0].actual_last;
+                        var datenow = dateFormatter.standardNoTime(new Date);
 
-                    if (beginning_last != actual_last && actual_last != datenow) {
-                        var datelast = datenow + " 15:59:00";
-                        angular.forEach($scope.inventory_actual, function(value) {
-                            /* Insert inventory actual */
-                            var insertInventoryActual = "INSERT INTO inventory_actual (inventory_id, qty, created_by, created, is_synced) VALUES (?,?,?,?,?)";
-                            var paramInventoryActual = [value.id, value.qty, $scope.eid, datelast, 0];
-                            DBAccess.execute(insertInventoryActual, paramInventoryActual);
-                        });
-                        Toast.show("Saving inventory actual transaction successful");
-                        $timeout(function() {
+                        if ($rootScope.inventory_status == "Incomplete Actual") {
+                            var datelast = beginning_last + " 15:59:00";
                             angular.forEach($scope.inventory_actual, function(value) {
-                                /* Insert inventory beginning */
-                                var insertInventoryBeginning = "INSERT INTO inventory_beginning (inventory_id, qty, created_by, created, is_synced) VALUES (?,?,?,?,?)";
-                                var paramInventoryBeginning = [value.id, value.qty, $scope.eid, dateFormatter.utc(new Date()), 0];
-                                DBAccess.execute(insertInventoryBeginning, paramInventoryBeginning);
+                                /* Insert inventory actual */
+                                var insertInventoryActual = "INSERT INTO inventory_actual (inventory_id, qty, created_by, created, is_synced) VALUES (?,?,?,?,?)";
+                                var paramInventoryActual = [value.id, value.qty, $scope.eid, datelast, 0];
+                                DBAccess.execute(insertInventoryActual, paramInventoryActual);
                             });
-                            Toast.show("Started  inventory: " + datenow);
-                        }, 5000);
-                    } else if (beginning_last != actual_last && actual_last == datenow) {
-                        Toast.show("update actual");
+                            Toast.show("Saving inventory actual transaction successful");
+                            $timeout(function() {
+                                angular.forEach($scope.inventory_actual, function(value) {
+                                    /* Insert inventory beginning */
+                                    var insertInventoryBeginning = "INSERT INTO inventory_beginning (inventory_id, qty, created_by, created, is_synced) VALUES (?,?,?,?,?)";
+                                    var paramInventoryBeginning = [value.id, value.qty, $scope.eid, dateFormatter.utc(new Date()), 0];
+                                    DBAccess.execute(insertInventoryBeginning, paramInventoryBeginning);
+                                });
+                                Toast.show("Started  inventory: " + datenow);
+                            }, 5000);
+                            $rootScope.inventory_status = "";
+                        } else {
+                            Toast.show('update actual');
+                        }
                     }
-
-                }
-            }, function(err) {
-                Log.write(err);
-            });
+                },
+                function(err) {
+                    Log.write(err);
+                });
         }
     };
 }]);
