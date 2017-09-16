@@ -45,7 +45,7 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
                         Check if current date is exisiting
                         on inventory_beginning
                     */
-                    var query = "SELECT count(*) AS count FROM inventory_beginning WHERE DATE_FORMAt(created,'%Y-%m-%d') = ?";
+                    var query = "SELECT count(*) AS count FROM inventory_beginning WHERE DATE_FORMAT(created,'%Y-%m-%d') = ?";
                     DBAccess.execute(query, [datenow]).then(function(res) {
                         var count = res[0].count;
                         console.log(beginning_last + " " + actual_last + " " + count);
