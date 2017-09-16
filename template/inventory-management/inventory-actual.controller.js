@@ -70,8 +70,8 @@ app.controller('inventoryActualCtrl', ['$scope', '$rootScope', 'Username', '$htt
                                     var query = count == 0 ? "INSERT INTO inventory_actual (inventory_id, qty, created_by, created, is_synced) VALUES (?,?,?,?,?)" : "UPDATE inventory_actual SET qty = ?, created = ?, created_by = ? WHERE DATE_FORMAT(created,'%Y-%m-%d') = ? AND inventory_id = ?";
                                     var param = count == 0 ? [value.id, value.qty, $scope.eid, dateFormatter.utc(new Date()), 0] : [value.qty, dateFormatter.utc(new Date()), $scope.eid, dateFormatter.standardNoTime(new Date()), value.id];
                                     DBAccess.execute(query, param);
-                                    Toast.show("Saving inventory actual transaction successful");
                                 });
+                                Toast.show("Saving inventory actual transaction successful");
                             }, function(err) {
                                 Log.write(err);
                             });
