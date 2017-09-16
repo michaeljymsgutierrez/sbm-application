@@ -2,7 +2,7 @@
 
 /* Inventory Actual Controller */
 
-app.controller('inventoryActualCtrl', ['$scope', '$rootScope', 'Username', '$http', 'DBAccess', 'Log', 'dateFormatter', 'Toast', function($scope, $rootScope, Username, $http, DBAccess, Log, dateFormatter, Toast) {
+app.controller('inventoryActualCtrl', ['$scope', '$rootScope', 'Username', '$http', 'DBAccess', 'Log', 'dateFormatter', 'Toast', '$timeout', function($scope, $rootScope, Username, $http, DBAccess, Log, dateFormatter, Toast, $timeout) {
 
     Username.popup();
     /* Initialize invetory actual items container */
@@ -44,9 +44,25 @@ app.controller('inventoryActualCtrl', ['$scope', '$rootScope', 'Username', '$htt
                     var datenow = dateFormatter.standardNoTime(new Date);
 
                     if (beginning_last != actual_last && actual_last != datenow) {
-                        console.log('insert beginning and actual');
+                        var datelast = datenow + " 15:59:00";
+                        angular.forEach($scope.inventory_actual, function(value) {
+                            /* Insert inventory actual */
+                            var insertInventoryActual = "INSERT INTO inventory_actual (inventory_id, qty, created_by, created, is_synced) VALUES (?,?,?,?,?)";
+                            var paramInventoryActual = [value.id, value.qty, $scope.eid, datelast, 0];
+                            DBAccess.execute(insertInventoryActual, paramInventoryActual);
+                        });
+                        Toast.show("Saving inventory actual transaction successful");
+                        $timeout(function() {
+                            angular.forEach($scope.inventory_actual, function(value) {
+                                /* Insert inventory beginning */
+                                var insertInventoryBeginning = "INSERT INTO inventory_beginning (inventory_id, qty, created_by, created, is_synced) VALUES (?,?,?,?,?)";
+                                var paramInventoryBeginning = [value.id, value.qty, $scope.eid, dateFormatter.utc(new Date()), 0];
+                                DBAccess.execute(insertInventoryBeginning, paramInventoryBeginning);
+                            });
+                            Toast.show("Started  inventory: " + datenow);
+                        }, 5000);
                     } else if (beginning_last != actual_last && actual_last == datenow) {
-                        console.log('update actual');
+                        Toast.show("update actual");
                     }
 
                 }
