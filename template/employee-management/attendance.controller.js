@@ -51,7 +51,10 @@ app.controller('attendanceCtrl', ['$rootScope', 'Log', '$scope', 'Modal', 'Modal
 
         /* Functionf or saving captured photo */
         $scope.save = function() {
-            $scope.mugshot = canvas.toDataURL('image/png', 0.5);
+            /*
+                Quality: 1.0, 0.5, 0.1
+            */
+            $scope.mugshot = canvas.toDataURL('image/jpeg', 0.5);
             Modal.hide();
         }
 
@@ -160,8 +163,8 @@ app.controller('attendanceCtrl', ['$rootScope', 'Log', '$scope', 'Modal', 'Modal
                                                                 var insertTimein = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
                                                                 var entry = {
                                                                     id: attendance_id,
-                                                                    photo: $scope.mugshot.replace('data:image/png;base64,', ''),
-                                                                    filename: username + dateFormatter.timestamp(new Date()) + '.png',
+                                                                    photo: $scope.mugshot.replace('data:image/jpeg;base64,', ''),
+                                                                    filename: username + dateFormatter.timestamp(new Date()) + '.jpg',
                                                                     action: 'timein',
                                                                     created: dateFormatter.utc(new Date())
                                                                 }
@@ -276,8 +279,8 @@ app.controller('attendanceCtrl', ['$rootScope', 'Log', '$scope', 'Modal', 'Modal
                                             var insertBreakout = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
                                             var entry = {
                                                 id: attendance_id,
-                                                photo: $scope.mugshot.replace('data:image/png;base64,', ''),
-                                                filename: username + dateFormatter.timestamp(new Date()) + '.png',
+                                                photo: $scope.mugshot.replace('data:image/jpeg;base64,', ''),
+                                                filename: username + dateFormatter.timestamp(new Date()) + '.jpg',
                                                 action: 'breakout',
                                                 created: dateFormatter.utc(new Date())
                                             }
@@ -385,8 +388,8 @@ app.controller('attendanceCtrl', ['$rootScope', 'Log', '$scope', 'Modal', 'Modal
                                             var insertBreakin = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
                                             var entry = {
                                                 id: attendance_id,
-                                                photo: $scope.mugshot.replace('data:image/png;base64,', ''),
-                                                filename: username + dateFormatter.timestamp(new Date()) + '.png',
+                                                photo: $scope.mugshot.replace('data:image/jpeg;base64,', ''),
+                                                filename: username + dateFormatter.timestamp(new Date()) + '.jpg',
                                                 action: 'breakin',
                                                 created: dateFormatter.utc(new Date())
                                             }
@@ -506,8 +509,8 @@ app.controller('attendanceCtrl', ['$rootScope', 'Log', '$scope', 'Modal', 'Modal
                                             var insertTimeout = "INSERT INTO attendance_time_log (attendance_id, mugshot, filename, action, created) VALUES (?,?,?,?,?)";
                                             var entry = {
                                                 id: attendance_id,
-                                                photo: $scope.mugshot.replace('data:image/png;base64,', ''),
-                                                filename: username + dateFormatter.timestamp(new Date()) + '.png',
+                                                photo: $scope.mugshot.replace('data:image/jpeg;base64,', ''),
+                                                filename: username + dateFormatter.timestamp(new Date()) + '.jpg',
                                                 action: 'timeout',
                                                 created: dateFormatter.utc(new Date())
                                             }
