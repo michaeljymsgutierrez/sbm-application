@@ -46,7 +46,7 @@ app.controller('attendanceCtrl', ['$rootScope', 'Log', '$scope', 'Modal', 'Modal
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
             var video = document.getElementById('video');
-            context.drawImage(video, 0, 0, 568, 450);
+            context.drawImage(video, 0, 0, 568, 426);
         };
 
         /* Functionf or saving captured photo */
