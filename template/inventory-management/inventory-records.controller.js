@@ -50,7 +50,18 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
                         var count = res[0].count;
                         console.log(beginning_last + " " + actual_last + " " + count);
                         if (beginning_last == actual_last && count == 0) {
-                            console.log("insert beginning");
+                            var query = "SELECT inventory_id , qty FROM inventory_actual WHERE DATE_FORMAT(created,'%Y-%m-%d') = (SELECT DATE_FORMAT(max(created),'%Y-%m-%d'))";
+                            DBAccess.execute(query, []).then(function(res) {
+                                angular.forEach(res, function(value) {
+                                    var insertInventoryBeginning = "INSERT INTO inventory_beginning (inventory_id, qty, created_by, created, is_synced) VALUES (?,?,?,?,?)";
+                                    var param = [value.inventory_id, value.qty, eid, dateFormatter.utc(new Date()), 0];
+                                    DBAccess.execute(insertInventoryBeginning, param);
+                                });
+                                Toast.show("Started inventory: " + dateFormatter.standardNoTime(new Date()));
+                                $scope.status = "Complete Beginning";
+                            }, function(err) {
+                                Log.write(err);
+                            });
                         } else if (beginning_last != actual_last && count == 0) {
                             Toast.show("Need to end inventory on: " + beginning_last);
                             $rootScope.inventory_status = "Incomplete Actual";
