@@ -26,8 +26,19 @@
     <div class="schedule container-fluid" style="overflow-y:scroll !important;height: 81%;">
         <table class="table">
             <tbody>
-                <tr>
-                    <!-- contains all the data queried-->
+                <tr ng-repeat="x in inventory_records">
+                    <td>{{ x.category }}</td>
+                    <td>{{ x.item }}</td>
+                    <td>{{ x.beginning }}</td>
+                    <td>{{ x.delivery }}</td>
+                    <td>{{ x.pullout }}</td>
+                    <td>{{ x.transin }}</td>
+                    <td>{{ x.transout }}</td>
+                    <td>{{ x.sales }}</td>
+                    <td>{{ x.wastage }}</td>
+                    <td>{{ x.beginning }}</td>
+                    <td>{{ x.actual }}</td>
+                    <td>{{ x.uom }}</td>
                 </tr>
             </tbody>
         </table>
