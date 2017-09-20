@@ -5,10 +5,41 @@
 app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBAccess', 'dateFormatter', 'Toast', 'Log', 'Transition', 'Calendar', function($scope, $rootScope, Username, DBAccess, dateFormatter, Toast, Log, Transition, Calendar) {
 
     Username.popup();
+    /*
+        Initialize date picker for selected date on inventory 
+        and datePicker listener
+    */
+    $scope.inventoryRecordsSelectedDate = new Date();
+    var dateSelected = dateFormatter.standardNoTime($scope.inventoryRecordsSelectedDate);
+    $scope.inventory_records = [];
+    var query = "SELECT i.id, i.name AS item, i.category_name AS category, i.uom AS uom ," +
+        "IFNULL((SELECT qty FROM inventory_beginning WHERE inventory_id = i.id AND DATE_FORMAT(created,'%Y-%m-%d') = ?),0) AS beginning, " +
+        "(0) AS delivery, " +
+        "(0) AS pullout, " +
+        "(0) AS transin, " +
+        "(0) AS transout, " +
+        "(0) AS sales, " +
+        "(0) AS wastage, " +
+        "(SELECT (beginning)) AS ending, " +
+        "IFNULL((SELECT qty FROM inventory_actual WHERE inventory_id = i.id AND DATE_FORMAT(created,'%Y-%m-%d') = ?),0) AS actual " +
+        " FROM inventory i  WHERE status = 1";
+    DBAccess.execute(query, [dateSelected, dateSelected]).then(function(res) {
+        $scope.inventory_records = res;
+    }, function(err) {
+        console.log(err);
+    });
+
+    $rootScope.$on('date-picker', function(event, data) {
+        if (data) {
+            $scope.inventoryRecordsSelectedDate = new Date(data);
+        }
+    });
+
     /* Function  for calendar popup*/
     $scope.calendarPopup = function() {
         Calendar.popup();
     };
+
     var unregisterUser = $rootScope.$on('user', function(event, data) {
         unregisterUser();
         /* Employee ID */
