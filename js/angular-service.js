@@ -121,6 +121,11 @@ app.service('dateFormatter', ['$filter', function($filter) {
     this.timestamp = function(dt) {
         return Math.floor(new Date(dt).getTime() / 1000);
     };
+
+    /* convert timestamp to regular date */
+    this.fromTimestamp = function(dt) {
+        return new Date(dt * 1000);
+    }
 }]);
 
 
