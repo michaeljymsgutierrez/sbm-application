@@ -3,7 +3,7 @@
 <div class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content number-pad">
-            <div class="numpad-out">{{ output }}</div>
+            <input class="numpad-out" ng-model="output" />
             <div class="pads">
                 <button ng-click="updateOutput('1')">1</button>
                 <button ng-click="updateOutput('2')">2</button>
@@ -14,11 +14,11 @@
                 <button ng-click="updateOutput('7')">7</button>
                 <button ng-click="updateOutput('8')">8</button>
                 <button ng-click="updateOutput('9')">9</button>
-                <button>DEL</button>
-                <button>0</button>
-                <button>CLEAR</button>
-                <button class="numpad-cancel">CANCEL</button>
-                <button class="numpad-ok">OK</button>
+                <button ng-click="delete()">DEL</button>
+                <button ng-click="updateOutput('9')">0</button>
+                <button ng-click="clear()">CLEAR</button>
+                <button class="numpad-cancel" ng-click="cancel()">CANCEL</button>
+                <button class="numpad-ok" ng-click="ok()">OK</button>
             </div>
         </div>
     </div>
