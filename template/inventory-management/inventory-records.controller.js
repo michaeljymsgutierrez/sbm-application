@@ -48,7 +48,6 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
                     var query = "SELECT count(*) AS count FROM inventory_beginning WHERE DATE_FORMAT(created,'%Y-%m-%d') = ?";
                     DBAccess.execute(query, [datenow]).then(function(res) {
                         var count = res[0].count;
-                        console.log(beginning_last + " " + actual_last + " " + count);
                         if (beginning_last == actual_last && count == 0) {
                             var query = "SELECT inventory_id , qty FROM inventory_actual WHERE DATE_FORMAT(created,'%Y-%m-%d') = (SELECT DATE_FORMAT(max(created),'%Y-%m-%d'))";
                             DBAccess.execute(query, []).then(function(res) {

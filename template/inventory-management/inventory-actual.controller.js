@@ -76,7 +76,7 @@ app.controller('inventoryActualCtrl', ['$scope', '$rootScope', 'Username', '$htt
                                 Log.write(err);
                             });
                         } else {
-                            Toast.show('update actual');
+                            Toast.show('Update actual');
                         }
                     }
                 },
