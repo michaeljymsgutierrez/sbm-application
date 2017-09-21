@@ -9,7 +9,7 @@
             <button class="category" ng-repeat="x in category" ng-click="filterByCategory(x)">{{ x }}</button>
         </div>
         <div class="waste-item">
-            <div ng-repeat="x in inventory_display">{{ x.name }}</div>
+            <div ng-repeat="x in inventory_display" ng-click="addItem(x)">{{ x.name }}</div>
         </div>
         <div class="waste-info">
             <div class="waste-info-header">
