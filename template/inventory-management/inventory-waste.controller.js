@@ -2,7 +2,7 @@
 
 /* Inventory Waste Controller */
 
-app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootScope', 'Log', 'dateFormatter', function($scope, DBAccess, Username, $rootScope, Log, dateFormatter) {
+app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootScope', 'Log', 'dateFormatter', 'NumberPad', function($scope, DBAccess, Username, $rootScope, Log, dateFormatter, NumberPad) {
 
     Username.popup();
     /*
@@ -52,6 +52,14 @@ app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootSc
                 }
             });
         }
+    };
+
+
+    /*
+        Function for adding item to wastage
+    */
+    $scope.addItem = function(item) {
+        NumberPad.show();
     };
 
 }]);

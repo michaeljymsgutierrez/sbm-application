@@ -195,3 +195,16 @@ app.service('Transition', ['$state', '$timeout', function($state, $timeout) {
         }, 1000);
     };
 }]);
+
+
+/* Service for number key pad */
+app.service('NumberPad', ['ModalService', function(ModalService) {
+    this.show = function() {
+        ModalService.showModal({
+            templateUrl: './template/directive-template/number-pad.html',
+            controller: 'numberPadCtrl'
+        }).then(function(modal) {
+            modal.element.modal();
+        });
+    };
+}]);
