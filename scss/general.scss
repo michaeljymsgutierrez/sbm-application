@@ -348,3 +348,31 @@ input[type=number]::-webkit-outer-spin-button {
     color: #FFFFFF;
     border: transparent;
 }
+
+.number-pad {
+    border-radius: 0px !important;
+    padding: 5px;
+    margin-top: 80px !important;
+}
+
+.numpad-out {
+    height: 95px;
+    border: 4px solid $dark;
+}
+
+.pads div {
+    margin-top: 5px;
+    width: 193.6px;
+    height: 80px;
+    font-size: 35px;
+    text-align: center;
+    padding-top: 20px;
+    background-color: $dark;
+    color: #FFFFFF;
+    display: inline-block;
+}
+
+.pads div.numpad-cancel,
+.pads div.numpad-ok {
+    width: 292.2px;
+}
