@@ -321,7 +321,8 @@ input[type=number]::-webkit-outer-spin-button {
   border: 4px solid #444;
   font-size: 65px; }
 
-.pads div {
+.pads button {
+  border: none;
   margin-top: 5px;
   width: 193.6px;
   height: 80px;
@@ -332,8 +333,11 @@ input[type=number]::-webkit-outer-spin-button {
   color: #FFFFFF;
   display: inline-block; }
 
-.pads div.numpad-cancel,
-.pads div.numpad-ok {
+.pads button:active {
+  opacity: 0.5; }
+
+.pads button.numpad-cancel,
+.pads button.numpad-ok {
   width: 292.2px; }
 
 /* Dashboard Styling */
