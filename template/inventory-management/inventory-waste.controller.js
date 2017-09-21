@@ -5,6 +5,18 @@
 app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootScope', 'Log', 'dateFormatter', function($scope, DBAccess, Username, $rootScope, Log, dateFormatter) {
 
     Username.popup();
+    /*
+        Load all inventory wastage reasons
+    */
+    $scope.reason = [];
+    var reasonQuery = "SELECT * FROM reason WHERE module = 'inventory_wastage'";
+    DBAccess.execute(reasonQuery, []).then(function(res) {
+        $scope.reason = res;
+        console.log($scope.reason);
+    }, function(err) {
+        Log.write(err);
+    });
+
     var unregisterUser = $rootScope.$on('user', function(event, data) {
         unregisterUser();
         $scope.user = data;
