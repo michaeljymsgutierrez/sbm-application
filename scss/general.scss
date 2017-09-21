@@ -359,6 +359,8 @@ input[type=number]::-webkit-outer-spin-button {
     height: 95px;
     border: 4px solid $dark;
     font-size: 65px;
+    width: 588px;
+    color: #323232 !important;
 }
 
 .pads button {
@@ -368,7 +370,6 @@ input[type=number]::-webkit-outer-spin-button {
     height: 80px;
     font-size: 35px;
     text-align: center;
-    padding-top: 20px;
     background-color: $dark;
     color: #FFFFFF;
     display: inline-block;
