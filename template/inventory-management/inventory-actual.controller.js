@@ -11,10 +11,16 @@ app.controller('inventoryActualCtrl', ['$scope', '$rootScope', 'Username', '$htt
         unregisterUser();
         /* Employee ID */
         $scope.eid = data.id
-        var query = "SELECT id, name AS item, category_name AS category ,uom FROM inventory WHERE status = 1";
-        DBAccess.execute(query, []).then(function(res) {
-            /* Contain items to be actual */
-            $scope.inventory_actual = res;
+        var loadInventoryActual = "SELECT inventory_id, qty FROM  inventory_actual WHERE DATE_FORMAT(created,'%Y-%m-%d') = ?";
+        DBAccess.execute(loadInventoryActual, [dateFormatter.standardNoTime(new Date)]).then(function(res) {
+            var query = res.length == 0 ? "SELECT id, name AS item, category_name AS category ,uom FROM inventory WHERE status = 1" : "SELECT id, i.name AS item, i.category_name AS category ,i.uom, (SELECT ia.qty FROM inventory_actual ia WHERE ia.inventory_id = i.id AND DATE_FORMAT(created,'%Y-%m-%d') = ?) AS qty FROM inventory i WHERE i.status = 1";
+            var param = res.length == 0 ? [] : [dateFormatter.standardNoTime(new Date)];
+            DBAccess.execute(query, param).then(function(res) {
+                /* Contains items to be actual */
+                $scope.inventory_actual = res;
+            }, function(err) {
+                Log.write(err);
+            });
         }, function(err) {
             Log.write(err);
         });
