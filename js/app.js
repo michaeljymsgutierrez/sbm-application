@@ -22,7 +22,7 @@ var fadeOnLoadView = function() {
 /* Put all your configuration here */
 app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
 
-    // fadeOnLoadView();
+    fadeOnLoadView();
 
     connection = mysql.createConnection({
         host: '127.0.0.1',
