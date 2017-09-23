@@ -992,6 +992,9 @@ div.clock-container {
   padding-top: 15px !important;
   padding-bottom: 15px !important; }
 
+.inventory {
+  padding-bottom: 100px; }
+
 .inventory tbody tr:last-child {
   border-bottom: 1px solid lightgray; }
 
