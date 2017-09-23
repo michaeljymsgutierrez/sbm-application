@@ -191,3 +191,21 @@
 .waste-table-container td:nth-child(1) button:active {
     opacity: 0.5;
 }
+
+.inventory tbody td {
+    width: 100px;
+    text-align: center;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.inventory tbody tr:last-child {
+    border-bottom: 1px solid lightgray;
+}
+
+.inventory tbody tr td:nth-child(2) {
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}
