@@ -138,13 +138,21 @@
     border-bottom: 1px solid lightgray;
 }
 
-.waste-table-container td:nth-child(1),
-.waste-table-container td:nth-child(3) {
+.waste-table-container td:nth-child(1) {
     overflow: hidden !important;
     text-overflow: ellipsis;
     white-space: nowrap;
     display: block;
     text-align: left;
+    padding-top: 7px;
+}
+
+.waste-table-container td:nth-child(3) {
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    text-align: center;
     padding-top: 7px;
 }
 
