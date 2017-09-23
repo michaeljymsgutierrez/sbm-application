@@ -69,19 +69,21 @@
 
 .waste-menu {
     width: 210px;
-    height: 85%;
+    height: 90%;
     overflow-x: hidden;
     overflow-y: scroll;
+    padding-bottom: 100px;
 }
 
 .waste-item {
-    border-left: 2px solid lightgray;
+    overflow-x: hidden;
+    overflow-y: scroll;
     width: 580px;
-    height: 85%;
+    height: 90%;
+    padding-bottom: 100px;
 }
 
 .waste-info {
-    border-left: 2px solid lightgray;
     width: 328px;
     height: 85%;
 }
@@ -124,8 +126,9 @@
 .waste-table-container {
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 453px;
+    height: 90%;
     width: 333px;
+    padding-bottom: 100px;
 }
 
 .waste-table-container td {
@@ -180,7 +183,7 @@
 .waste-item div {
     border: 1px solid lightgray;
     box-shadow: 1px 1px 0px 0px lightgray;
-    width: 180px;
+    width: 175px;
     height: 80px;
     margin-top: 8px;
     margin-left: 10px;
