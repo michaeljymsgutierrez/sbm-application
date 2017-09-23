@@ -923,9 +923,20 @@ div.clock-container {
 
 .waste-table-container td {
   text-align: center;
-  border-bottom: 1px solid lightgray;
   width: 108px;
   height: 40px; }
+
+.waste-table-container tr {
+  border-bottom: 1px solid lightgray; }
+
+.waste-table-container td:nth-child(1),
+.waste-table-container td:nth-child(3) {
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  text-align: left;
+  padding-top: 7px; }
 
 .waste-menu .category {
   width: 200px;
@@ -956,18 +967,11 @@ div.clock-container {
   text-align: center;
   padding-top: 28px; }
 
-td.delete-waste {
-  color: #ef473a;
-  width: 10px;
-  position: absolute;
-  font-size: 20px;
-  margin-left: 5px;
-  margin-top: 5px;
-  border: none; }
-
-td.delete-waste button {
+.waste-table-container td:nth-child(1) button {
   border: none;
-  background: #FFFFFF; }
+  background: #FFFFFF;
+  color: #ef473a;
+  font-size: 20px; }
 
-td.delete-waste button:active {
+.waste-table-container td:nth-child(1) button:active {
   opacity: 0.5; }
