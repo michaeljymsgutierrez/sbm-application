@@ -30,7 +30,9 @@ app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootSc
             $scope.inventory_display = res;
             /* Load category from database */
             angular.forEach($scope.inventory_display, function(value) {
-                $scope.category.push(value.category_name);
+                if ($scope.category.indexOf(value.category_name) == -1) {
+                    $scope.category.push(value.category_name);
+                }
             });
         }, function(err) {
             Log.write(err);
