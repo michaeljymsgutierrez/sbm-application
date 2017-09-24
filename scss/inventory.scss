@@ -33,3 +33,22 @@
     border-radius: 4px;
     background-color: $bg-gray;
 }
+
+.date-filter {
+    height: 45px;
+    background-color: $dark;
+}
+
+.filter-right {
+    color: $light;
+    font-size: 32px;
+    float: right;
+    padding-right: 8px;
+}
+
+.filter-left {
+    color: $light;
+    font-size: 32px;
+    float: left;
+    padding-left: 8px;
+}

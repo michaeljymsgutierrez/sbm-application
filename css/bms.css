@@ -758,3 +758,19 @@ div.clock-container {
   border: 2px solid lightgray;
   border-radius: 4px;
   background-color: #f6f6f6; }
+
+.date-filter {
+  height: 45px;
+  background-color: #444; }
+
+.filter-right {
+  color: #fefefe;
+  font-size: 32px;
+  float: right;
+  padding-right: 8px; }
+
+.filter-left {
+  color: #fefefe;
+  font-size: 32px;
+  float: left;
+  padding-left: 8px; }
