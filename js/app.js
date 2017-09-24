@@ -22,7 +22,7 @@ var fadeOnLoadView = function() {
 /* Put all your configuration here */
 app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
 
-    fadeOnLoadView();
+    // fadeOnLoadView();
 
     connection = mysql.createConnection({
         host: '127.0.0.1',
@@ -133,7 +133,7 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         });
 
         /* Create inventory_waste table */
-        var inventory_waste = "CREATE TABLE IF NOT EXISTS inventory_waste (id INT PRIMARY KEY AUTO_INCREMENT, inventory_id INT, qty INT, created DATETIME, is_synced INT, reason LONGTEXT)";
+        var inventory_waste = "CREATE TABLE IF NOT EXISTS inventory_waste (id INT PRIMARY KEY AUTO_INCREMENT, inventory_id INT, qty INT, created_by VARCHAR(255), created DATETIME, is_synced INT, reason LONGTEXT)";
         DBAccess.execute(inventory_waste, []).then(function(res) {
             console.info("inventory_waste table created");
         }, function(err) {
