@@ -2,9 +2,13 @@
 
 /* Inventory Records Controller */
 
-app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBAccess', 'dateFormatter', 'Toast', 'Log', 'Transition', function($scope, $rootScope, Username, DBAccess, dateFormatter, Toast, Log, Transition) {
+app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBAccess', 'dateFormatter', 'Toast', 'Log', 'Transition', 'Calendar', function($scope, $rootScope, Username, DBAccess, dateFormatter, Toast, Log, Transition, Calendar) {
 
     Username.popup();
+    /* Function  for calendar popup*/
+    $scope.calendarPopup = function() {
+        Calendar.popup();
+    };
     var unregisterUser = $rootScope.$on('user', function(event, data) {
         unregisterUser();
         /* Employee ID */
