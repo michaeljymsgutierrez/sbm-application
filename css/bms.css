@@ -761,16 +761,22 @@ div.clock-container {
 
 .date-filter {
   height: 45px;
-  background-color: #444; }
+  background-color: #444;
+  color: #fefefe;
+  text-align: center; }
 
 .filter-right {
-  color: #fefefe;
   font-size: 32px;
   float: right;
   padding-right: 8px; }
 
 .filter-left {
-  color: #fefefe;
   font-size: 32px;
   float: left;
   padding-left: 8px; }
+
+.date-filter span {
+  font-size: 22px;
+  position: absolute;
+  margin-left: -38px;
+  padding-top: 10px; }
