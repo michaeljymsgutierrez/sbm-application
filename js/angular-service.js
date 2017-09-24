@@ -163,6 +163,20 @@ app.service('Username', ['ModalService', function(ModalService) {
 }]);
 
 
+/* Service for popping calendar */
+app.service('Calendar', ['ModalService', function(ModalService) {
+    /* Function for popup modal calendar */
+    this.popup = function() {
+        ModalService.showModal({
+            templateUrl: './template/directive-template/calendar.html',
+            controller: 'inventoryRecordsCtrl'
+        }).then(function(modal) {
+            modal.element.modal();
+        });
+    };
+}]);
+
+
 /* Service for transitioninig route with delay*/
 app.service('Transition', ['$state', '$timeout', function($state, $timeout) {
     this.go = function(route) {
