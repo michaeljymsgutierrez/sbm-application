@@ -66,7 +66,7 @@ app.controller('inventoryActualCtrl', ['$scope', '$rootScope', 'Username', '$htt
                                     DBAccess.execute(insertInventoryBeginning, paramInventoryBeginning);
                                 });
                                 Toast.show("Started  inventory: " + datenow);
-                            }, 5000);
+                            }, 3000);
                             $rootScope.inventory_status = "";
                         } else if ($scope.inventory_status = "Complete Beginning") {
                             var query = "SELECT count(*) AS count FROM inventory_actual WHERE DATE_FORMAT(created,'%Y-%m-%d') = ?";
