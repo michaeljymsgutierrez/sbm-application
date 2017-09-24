@@ -169,7 +169,7 @@ app.service('Calendar', ['ModalService', function(ModalService) {
     this.popup = function() {
         ModalService.showModal({
             templateUrl: './template/directive-template/calendar.html',
-            controller: 'inventoryRecordsCtrl'
+            controller: 'calendarCtrl'
         }).then(function(modal) {
             modal.element.modal();
         });
