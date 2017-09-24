@@ -9,6 +9,9 @@ function scriptCycle() {
     /* Include all your jQuery code here */
     jQuery(document).ready(function() {
 
+        /* Assure that the side script has been loaded succesfully */
+        console.log('Script running on background mode . . .');
+
         /* Add effects on circle buttons */
         $('.btn-circle').on('click', function() {
             $(this).addClass('btn-dash');
@@ -70,11 +73,7 @@ function scriptCycle() {
         $('*').attr('ondragstart', 'return false');
         $(document.body).attr('onselectstart', 'return false');
 
-        /* Remove extra modal thats is prohibited */
-        if (jQuery('.modal').length == 2) {
-            jQuery('.modal:last').remove();
-        }
     });
 }
 
-setInterval(scriptCycle, 10);
+setInterval(scriptCycle, 1000);
