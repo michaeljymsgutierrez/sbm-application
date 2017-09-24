@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta encoding="UTF-8" />
+    <title>angular-date-picker</title>
+    <link rel="icon" type="image/png" href="//cdn.rawgit.com/myplanet/gh-pages-theme/v1.0.3/assets/favicon.png" />
+    <link rel="stylesheet" href="//cdn.rawgit.com/myplanet/gh-pages-theme/v1.0.3/assets/fonts.css" />
+    <link rel="stylesheet" href="//cdn.rawgit.com/myplanet/gh-pages-theme/v1.0.3/theme.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css" />
+    <link rel="stylesheet" href="//cdn.rawgit.com/myplanet/angular-date-picker/v1.3.4/angular-date-picker.css" />
+    <style>
+    .showcase-example {
+        text-align: center;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+    .showcase-example input {
+        font-family: TradeGothic, sans-serif;
+        font-size: 1em;
+        margin-top: 8px;
+        color: #333;
+        width: 6em;
+    }
+    </style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.9/angular.js"></script>
+    <script src="//cdn.rawgit.com/myplanet/angular-date-picker/v1.3.4/angular-date-picker.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+
+        angular.module('demo', [ 'mp.datePicker' ]).run(function ($rootScope) {
+            $rootScope.formatDateYYYYMMDD = function (date) {
+                function pad(n) {
+                    return n < 10 ? '0' + n : n;
+                }
+
+                return date && date.getFullYear()
+                    + '-' + pad(date.getMonth() + 1)
+                    + '-' + pad(date.getDate());
+            };
+
+            $rootScope.parseDateYYYYMMDD = function (s) {
+                var tokens = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+
+                return tokens && new Date(tokens[1], tokens[2] - 1, tokens[3]);
+            };
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="content-wrap">
+            <a href="https://www.myplanet.com/tags/labs/" class="logo" title="Myplanet">Myplanet</a>
+            <h1><a href=".">angular-date-picker</a></h1>
+            <h2>Lightweight calendar for Angular</h2>
+        </div>
+    </header>
+    <nav>
+        <div class="content-wrap">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#download">Download <strong>v1.3.4</strong></a></li>
+                <li><a href="#usage">Usage</a></li>
+                <li><a href="https://github.com/myplanet/angular-date-picker">View on <strong>GitHub</strong></a></li>
+            </ul>
+        </div>
+    </nav>
+    <article ng-app="demo">
+        <section class="showcase">
+            <div class="content-wrap">
+                <div class="showcase-example">
+                    <date-picker ng-model="date">
+                    </date-picker>
+
+                    <input type="text" ng-model="date">
+                </div>
+                <div class="showcase-content">
+                    <h3>Live Demo</h3>
+
+                    <p>Click to pick dates or enter date values into the input element.</p>
+
+                    <h4>Demo Source</h4>
+
+                    <pre><code class="lang-html"><!--
+-->&lt;date-picker ng-model=&quot;date&quot;&gt;
+&lt;/date-picker&gt;
+
+&lt;input type=&quot;text&quot; ng-model=&quot;date&quot;&gt;<!--
+                    --></code></pre>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="content-wrap">
+                <h3 id="overview">Overview</h3>
+
+                <p><strong>angular-date-picker</strong> is a lightweight calendar that acts
+                    like a custom input element through regular <a href="https://docs.angularjs.org/api/ng/directive/ngModel">ngModel</a> bindings. It is:</p>
+
+                <ul>
+                    <li><a href="https://docs.angularjs.org/guide/i18n">Localizable</a></li>
+                    <li>Pure CSS &ndash; does not use any images</li>
+                    <li>Pure Angular &ndash; does not rely on any other libraries</li>
+                    <li>Compatible with IE8+</li>
+                </ul>
+            </div>
+        </section>
+        <section>
+            <div class="content-wrap">
+                <h3 id="download">Download</h3>
+
+                <p>Grab the latest from <a href="https://github.com/myplanet/angular-date-picker/releases">GitHub</a> or use your favorite package manager:</p>
+
+                <h4>Via Bower</h4>
+
+                <pre><code class="lang-sh">bower install angular-date-picker</code></pre>
+
+                <h4>Via NPM</h4>
+
+                <pre><code class="lang-sh">npm install angular-date-picker</code></pre>
+
+                <h3 id="usage">Usage</h3>
+
+                <p>Include <strong>angular-date-picker.js</strong> in your application,
+                    after Angular is included. Also include <strong>angular-date-picker.css</strong>
+                    to get the bare minimum styling.</p>
+
+                <pre><code class="lang-html"><!--
+-->&lt;link rel=&quot;stylesheet&quot; href=&quot;path/to/angular-date-picker.css&quot;&gt;
+&lt;script src=&quot;path/to/angular.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;path/to/angular-date-picker.js&quot;&gt;&lt;/script&gt;<!--
+                --></code></pre>
+
+                <p>You may use an AMD or CommonJS loader as well.</p>
+
+                <p>Initialize your Angular application with the <strong>mp.datePicker</strong> module as a dependency:</p>
+
+                <pre><code class="lang-js"><!--
+-->angular.module('app', [ 'mp.datePicker' ]);<!--
+                --></code></pre>
+
+                <p>Then use the <code>&lt;date-picker&gt;</code> element along with an <code>ng-model</code> directive for two-way binding with a scope variable:</p>
+
+                <pre><code class="lang-html"><!--
+-->&lt;date-picker ng-model=&quot;date&quot;&gt;
+&lt;/date-picker&gt;<!--
+                --></code></pre>
+
+                <p>The date format is set to the active locale by default. To use a custom format, first set up a formatter and a parser in your scope:</p>
+
+                <pre><code class="lang-js"><!--
+-->$scope.formatDate = function (date) {
+    function pad(n) {
+        return n &lt; 10 ? '0' + n : n;
+    }
+
+    return date &amp;&amp; date.getFullYear()
+        + '-' + pad(date.getMonth() + 1)
+        + '-' + pad(date.getDate());
+};
+
+$scope.parseDate = function (s) {
+    var tokens = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+
+    return tokens &amp;&amp; new Date(tokens[1], tokens[2] - 1, tokens[3]);
+};<!--
+                --></code></pre>
+
+                <p>Then pass these functions to the <code><a href="#format-date">format-date</a></code> and <code><a href="#parse-date">parse-date</a></code> attributes:</p>
+
+                <pre><code class="lang-html"><!--
+-->&lt;date-picker ng-model=&quot;date&quot; format-date=&quot;formatDate&quot; parse-date=&quot;parseDate&quot;&gt;
+&lt;/date-picker&gt;
+&lt;input ng-model=&quot;date&quot;&gt;<!--
+                --></code></pre>
+
+                <p><a href="javascript:void(0)" ng-click="isFormattingExampleShown = !isFormattingExampleShown">Toggle Example</a></p>
+
+                <div ng-if="isFormattingExampleShown" ng-init="date = null; formatDate = formatDateYYYYMMDD; parseDate = parseDateYYYYMMDD">
+                    <date-picker ng-model="date" format-date="formatDate" parse-date="parseDate"></date-picker>
+                    <input ng-model="date">
+                </div>
+
+                <h4>Attributes</h4>
+
+                <dl>
+                    <dt id="format-date">format-date</dt>
+                    <dd><strong>Optional.</strong> Allows for custom formatting of date values selected by the date picker, before they are fed back to the model. This must be a function that takes a <code>Date</code> object and returns a string. By default, <code>Date.prototype.toLocaleDateString()</code> is used.</dd>
+
+                    <dt id="parse-date">parse-date</dt>
+                    <dd><strong>Optional.</strong> Allows for custom parsing of date values coming from the model. This must be a function that takes a string and returns a <code>Date</code> object. By default, the <code>Date</code> constructor is used.</dd>
+
+                    <dt>on-date-selected</dt>
+                    <dd><strong>Optional.</strong> Expression to evaluate when a date is picked. This is a convenience feature to do things like close a calendar dropdown when a date is picked, especially for cases where watching the model for changes may not be enough. <strong>Example:</strong> <code>on-date-selected="closeDropdown()"</code></dd>
+                </dl>
+
+                <h4>Localization</h4>
+
+                <p>The following properties of the <a href="https://docs.angularjs.org/api/ng/service/$locale">$locale</a> service are being used for rendering localized month names, days of the week, and also for determining the first day of the week:</p>
+
+                <ul>
+                    <li><code>DATETIME_FORMATS.FIRSTDAYOFWEEK</code></li>
+                    <li><code>DATETIME_FORMATS.MONTH</code></li>
+                    <li><code>DATETIME_FORMATS.SHORTMONTH</code></li>
+                    <li><code>DATETIME_FORMATS.DAY</code></li>
+                </ul>
+
+                <h4>Theming</h4>
+
+                <p>You can override the styles defined in <strong>angular-date-picker.css</strong> to match the style of your application. The classes and specifiers that are used are:</p>
+
+                <dl>
+                    <dt>.angular-date-picker</dt>
+                    <dd>The top-level container for the entire component.</dd>
+
+                    <dt>.angular-date-picker > ._month</dt>
+                    <dd>The header containing the month and year.</dd>
+
+                    <dt>.angular-date-picker > ._month > button</dt>
+                    <dd>The previous month and next month buttons.</dd>
+
+                    <dt>.angular-date-picker > ._month > button._previous</dt>
+                    <dd>The previous month button.</dd>
+
+                    <dt>.angular-date-picker > ._month > button._next</dt>
+                    <dd>The next month button.</dd>
+
+                    <dt>.angular-date-picker > ._days</dt>
+                    <dd>The container that holds day of week headers and days of the month.</dd>
+
+                    <dt>.angular-date-picker > ._days > ._day-of-week</dt>
+                    <dd>A day of week header.</dd>
+
+                    <dt>.angular-date-picker > ._days > ._day</dt>
+                    <dd>Any day.</dd>
+
+                    <dt>.angular-date-picker > ._days > ._day.-padding</dt>
+                    <dd>A day from an adjacent month.</dd>
+
+                    <dt>.angular-date-picker > ._days > ._day.-selected</dt>
+                    <dd>The selected day.</dd>
+
+                    <dt>.angular-date-picker > ._days > ._day.-today</dt>
+                    <dd>If the current month is being shown, this marks today.</dd>
+                </dl>
+
+                <h3>License</h3>
+
+                <p><a href="//cdn.rawgit.com/myplanet/angular-date-picker/v1.3.4/LICENSE.txt">MIT</a></p>
+             </div>
+        </section>
+    </article>
+    <footer>
+        <div class="content-wrap">
+            Made with <span class="love" title="love">love</span> by
+            <a href="https://github.com/atesgoral">Ates</a>
+            from
+            <a href="http://myplanet.com/">Myplanet</a>.
+        </div>
+    </footer>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        
+        ga('create', 'UA-61981778-1', 'auto');
+        ga('send', 'pageview');
+    </script>    
+</body>
+</html>

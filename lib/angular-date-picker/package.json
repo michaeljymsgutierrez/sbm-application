@@ -1,0 +1,91 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "angular-date-picker",
+        "scope": null,
+        "escapedName": "angular-date-picker",
+        "name": "angular-date-picker",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/home/vielsoft-dev-6/Desktop/sbm-application"
+    ]
+  ],
+  "_from": "angular-date-picker@latest",
+  "_id": "angular-date-picker@1.3.5",
+  "_inCache": true,
+  "_location": "/angular-date-picker",
+  "_nodeVersion": "6.0.0",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/angular-date-picker-1.3.5.tgz_1471634151305_0.8260684974957258"
+  },
+  "_npmUser": {
+    "name": "atesgoral",
+    "email": "ates@magnetiq.com"
+  },
+  "_npmVersion": "3.8.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "angular-date-picker",
+    "scope": null,
+    "escapedName": "angular-date-picker",
+    "name": "angular-date-picker",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-date-picker/-/angular-date-picker-1.3.5.tgz",
+  "_shasum": "0dc7236cd404e76cfb17bec3bede60d757d3b5b1",
+  "_shrinkwrap": null,
+  "_spec": "angular-date-picker",
+  "_where": "/home/vielsoft-dev-6/Desktop/sbm-application",
+  "author": {
+    "name": "Ates Goral",
+    "email": "ates.g@myplanet.com"
+  },
+  "bugs": {
+    "url": "https://github.com/myplanet/angular-date-picker/issues"
+  },
+  "dependencies": {},
+  "description": "Lightweight Calendar for Angular",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "0dc7236cd404e76cfb17bec3bede60d757d3b5b1",
+    "tarball": "https://registry.npmjs.org/angular-date-picker/-/angular-date-picker-1.3.5.tgz"
+  },
+  "gitHead": "95714009a18747eba68fc141f86cd69b92cc0132",
+  "homepage": "https://github.com/myplanet/angular-date-picker#readme",
+  "keywords": [
+    "angular",
+    "calendar",
+    "date"
+  ],
+  "license": "MIT",
+  "main": "angular-date-picker.js",
+  "maintainers": [
+    {
+      "name": "atesgoral",
+      "email": "ates@magnetiq.com"
+    },
+    {
+      "name": "unframework",
+      "email": "nick.matantsev@gmail.com"
+    }
+  ],
+  "name": "angular-date-picker",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/myplanet/angular-date-picker.git"
+  },
+  "scripts": {},
+  "version": "1.3.5"
+}
