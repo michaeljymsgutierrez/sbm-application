@@ -140,10 +140,11 @@ app.service('SyncInventory', ['$http', '$q', function($http, $q) {
         $http({
             url: api.endpoint + '/store/' + id + '/inventory',
             method: 'POST',
-            headers: { 'api-key': api.key }
+            headers: { 'api-key': api.key },
+            data: { data: data }
         }).then(function(res) {
             if (res.status == 200 && res.statusText == 'OK') {
-                deferred.resolve(data);
+                deferred.resolve(res.config.data.data);
             }
         }, function(err) {
             deferred.reject(err);
