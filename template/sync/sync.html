@@ -8,7 +8,7 @@
     <div class="list-group">
         <!--Server to Device section  -->
         <div class="list-item sync-header">
-            <span class="g-label ">Server to Device</span>
+            <span class="g-label">Server to Device</span>
         </div>
         <div class="list-item sync-list">
             <div class="sync-left">Store
@@ -20,87 +20,87 @@
                 <button class="sync-btn" ng-click="syncEmployee()"><i class="ion-android-sync sync-icon"></i></button>
             </div>
         </div>
-        <div class="list-item sync-list" ng-click="syncInventory()">
+        <div class="list-item sync-list">
             <div class="sync-left">Inventory
-                <button class="sync-btn"><i class="ion-android-sync sync-icon"></i></button>
+                <button class="sync-btn" ng-click="syncInventory()"><i class="ion-android-sync sync-icon"></i></button>
             </div>
         </div>
         <!--Server to Device section  -->
         <div class="list-item sync-header">
-            <span class="g-label ">Device to Server</span>
+            <span class="g-label">Device to Server</span>
         </div>
         <div class="list-item sync-list">
             <div class="sync-left">Attendance
                 <span class="total-sync">{{ attendanceCount }} items ready for sync  <sp-F></sp-F>
-                <button class="sync-btn" ng-click="syncAttendance()" ng-disabled="attendanceCount == 0" ng-class="{'disable-sync': attendanceCount == 0 }"><i class="ion-android-sync sync-icon"></i></button>
+                <button class="sync-btn" ng-click="syncAttendanceFromDevice()" ng-disabled="attendanceCount == 0" ng-class="{'disable-sync': attendanceCount == 0 }"><i class="ion-android-sync sync-icon"></i></button>
                 </span>
             </div>
         </div>
         <div class="list-item sync-list">
             <div class="sync-left">Cash Manangement
                 <span class="total-sync">0 items ready for sync  <sp-F></sp-F>
-                    <button class="sync-btn "><i class="ion-android-sync sync-icon "></i></button>
+                    <button class="sync-btn"><i class="ion-android-sync sync-icon"></i></button>
                 </span>
 
             </div>
         </div>
-        <div class="list-item sync-list ">
-            <div class="sync-left ">Warehouse
+        <div class="list-item sync-list">
+            <div class="sync-left">Warehouse
                 <span class="total-sync">0 items ready for sync  <sp-F></sp-F>
-                     <button class="sync-btn "><i class="ion-android-sync sync-icon "></i></button>
+                     <button class="sync-btn"><i class="ion-android-sync sync-icon"></i></button>
                 </span>
 
             </div>
         </div>
-        <div class="list-item sync-list ">
-            <div class="sync-left ">Warehouse Approved Order Requests
-                <button class="sync-btn "><i class="ion-android-sync sync-icon "></i></button>
+        <div class="list-item sync-list">
+            <div class="sync-left">Warehouse Approved Order Requests
+                <button class="sync-btn"><i class="ion-android-sync sync-icon"></i></button>
             </div>
         </div>
-        <div class="list-item sync-list ">
-            <div class="sync-left ">Warehouse Approved Pull-out Requests
-                <button class="sync-btn "><i class="ion-android-sync sync-icon "></i></button>
+        <div class="list-item sync-list">
+            <div class="sync-left">Warehouse Approved Pull-out Requests
+                <button class="sync-btn"><i class="ion-android-sync sync-icon"></i></button>
             </div>
         </div>
-        <div class="list-item sync-list ">
-            <div class="sync-left ">Transfer
+        <div class="list-item sync-list">
+            <div class="sync-left">Transfer
                 <span class="total-sync">0 items ready for sync <sp-F></sp-F>
-                    <button class="sync-btn "><i class="ion-android-sync sync-icon "></i></button>
+                    <button class="sync-btn"><i class="ion-android-sync sync-icon"></i></button>
                 </span>
 
             </div>
         </div>
-        <div class="list-item sync-list ">
-            <div class="sync-left ">Transfer In Approved Requests
-                <button class="sync-btn "><i class="ion-android-sync sync-icon "></i></button>
+        <div class="list-item sync-list">
+            <div class="sync-left">Transfer In Approved Requests
+                <button class="sync-btn"><i class="ion-android-sync sync-icon"></i></button>
             </div>
         </div>
-        <div class="list-item sync-list ">
-            <div class="sync-left ">Transfer Out Approved Requests
-                <button class="sync-btn "><i class="ion-android-sync sync-icon "></i></button>
+        <div class="list-item sync-list">
+            <div class="sync-left">Transfer Out Approved Requests
+                <button class="sync-btn"><i class="ion-android-sync sync-icon"></i></button>
             </div>
         </div>
-        <div class="list-item sync-list ">
-            <div class="sync-left ">Inventory
-                <span class="total-sync">0 items ready for sync  <sp-F></sp-F>
-                    <button class="sync-btn "><i class="ion-android-sync sync-icon "></i></button>
+        <div class="list-item sync-list">
+            <div class="sync-left">Inventory
+                <span class="total-sync">{{ inventoryCount }} items ready for sync  <sp-F></sp-F>
+                    <button class="sync-btn" ng-click="syncInventoryFromDevice()"  ng-disabled="inventoryCount == 0" ng-class="{'disable-sync': inventoryCount == 0 }"><i class="ion-android-sync sync-icon"></i></button>
                 </span>
             </div>
         </div>
-        <div class="list-item sync-list ">
-            <div class="sync-left ">Production
+        <div class="list-item sync-list">
+            <div class="sync-left">Production
                 <span class="total-sync">0 items ready for sync <sp-F></sp-F>
-                    <button class="sync-btn "><i class="ion-android-sync sync-icon "></i></button>
+                    <button class="sync-btn"><i class="ion-android-sync sync-icon"></i></button>
                 </span>
             </div>
         </div>
-        <div class="list-item sync-list ">
-            <div class="sync-left ">Cashier
+        <div class="list-item sync-list">
+            <div class="sync-left">Cashier
                 <span class="total-sync">0 items ready for sync  <sp-F></sp-F>
-                    <button class="sync-btn "><i class="ion-android-sync sync-icon "></i></button>
+                    <button class="sync-btn"><i class="ion-android-sync sync-icon"></i></button>
                 </span>
             </div>
         </div>
-        <div class="list-item sync-list "> </div>
+        <div class="list-item sync-list"> </div>
     </div>
 </div>
