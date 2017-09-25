@@ -13,6 +13,17 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
         $scope.output = $scope.output.concat(key);
     };
 
+    /*
+        Make sure that rootScope numpad_sender checked
+        Condition if broacasted data is from inventory waste
+        To set quantity for edit
+    */
+    if ($rootScope.numpad_sender == "inventory-waste") {
+        if ($rootScope.item.qty) {
+            $scope.output = $rootScope.item.qty.toString();
+        }
+    }
+
     /* Functions for numpad actions */
     $scope.delete = function() {
         $scope.output = $scope.output.slice(0, -1);
@@ -25,6 +36,10 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
     };
     $scope.ok = function() {
         if ($scope.output != "") {
+            /*
+                Make sure that rootScope numpad_sender checked
+                Condition if broacasted data is from inventory waste
+            */
             if ($rootScope.numpad_sender == "inventory-waste") {
                 var id = $rootScope.item.id;
                 var query = "SELECT qty FROM inventory_actual WHERE created = (SELECT max(created) FROM inventory_actual) AND inventory_id = ?";

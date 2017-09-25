@@ -12,10 +12,12 @@ app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootSc
     var reasonQuery = "SELECT * FROM reason WHERE module = 'inventory_wastage'";
     DBAccess.execute(reasonQuery, []).then(function(res) {
         $scope.reason = res;
-        console.log($scope.reason);
     }, function(err) {
         Log.write(err);
     });
+
+    /* Main container for wastage item  */
+    // $scope.waste_item = [];
 
     var unregisterUser = $rootScope.$on('user', function(event, data) {
         unregisterUser();
@@ -60,6 +62,12 @@ app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootSc
     */
     $scope.addItem = function(item) {
         NumberPad.show();
+        $rootScope.numpad_sender = "inventory-waste";
+        $rootScope.item = item;
+        var unregisterNumpad = $rootScope.$on('numpad:inventory-waste', function(event, data) {
+            unregisterNumpad();
+            $rootScope.item.qty = parseInt(data);
+        });
     };
 
 }]);
