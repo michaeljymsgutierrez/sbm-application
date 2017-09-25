@@ -2,7 +2,7 @@
 
 /* Sync Controller */
 
-app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatter', 'Store', 'Branch', 'Reason', 'DBAccess', 'Log', 'Toast', 'Employee', 'SyncData', 'Inventory', function($q, $scope, storage, backdrop, dateFormatter, Store, Branch, Reason, DBAccess, Log, Toast, Employee, SyncData, Inventory) {
+app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatter', 'Store', 'Branch', 'Reason', 'DBAccess', 'Log', 'Toast', 'Employee', 'SyncData', 'Inventory', 'SyncInventory', function($q, $scope, storage, backdrop, dateFormatter, Store, Branch, Reason, DBAccess, Log, Toast, Employee, SyncData, Inventory, SyncInventory) {
     /* Get store id */
     var store_id = storage.read('store_id').store_id;
     backdrop.auto(1000);
@@ -49,7 +49,7 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                 /*
                     Sync attendance from mobile to backoffice
                 */
-                $scope.syncAttendance = function() {
+                $scope.syncAttendanceFromDevice = function() {
                     backdrop.show();
                     angular.forEach($scope.attendanceToSync, function(data) {
                         SyncData.send({ param1: store_id, param2: 'attendance', data: data }, function(res) {
@@ -74,6 +74,59 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
             function(err) {
                 Log.write(err);
             });
+
+
+        /*
+            Load unysnc inventory count
+            Function for sync inventory to server
+            
+        */
+        $scope.inventoryToSync = [];
+        $scope.inventoryActual = [];
+        $scope.inventoryWaste = [];
+        $scope.inventoryCount = 0;
+        var unsyncActual = "SELECT ia.id, ia.created, ia.qty AS quantity, (SELECT user_id FROM employee WHERE id = ia.created_by) AS created_by_id, (SELECT username FROM employee WHERE id = ia.created_by) AS created_by_name, (SELECT _id FROM inventory WHERE id = ia.inventory_id) AS item_id, ('actual') AS transaction_type FROM inventory_actual ia WHERE is_synced = 0";
+        DBAccess.execute(unsyncActual, []).then(function(res) {
+            /* Initial Inventory Actual */
+            $scope.inventoryActual = res;
+            var unsyncWaste = "SELECT iw.id, iw.reason, iw.created, iw.qty AS quantity, (SELECT user_id FROM employee WHERE id = iw.created_by) AS created_by_id, (SELECT username FROM employee WHERE id = iw.created_by) AS created_by_name, (SELECT _id FROM inventory WHERE id = iw.inventory_id) AS item_id, ('waste') AS transaction_type FROM inventory_waste iw WHERE is_synced = 0";
+            DBAccess.execute(unsyncWaste, []).then(function(res) {
+                /* Initial Inventory Waste */
+                $scope.inventoryWaste = res;
+                $scope.inventoryCount = $scope.inventoryActual.length + $scope.inventoryWaste.length;
+
+                $scope.syncInventoryFromDevice = function() {
+                    backdrop.show();
+                    $scope.inventoryToSync = $scope.inventoryWaste.concat($scope.inventoryActual);
+                    angular.forEach($scope.inventoryToSync, function(data) {
+                        data.created = dateFormatter.standard(data.created);
+                        SyncInventory.send(store_id, data).then(function(res) {
+                            $scope.inventoryCount = $scope.inventoryCount - 1;
+                            if (res.transaction_type == 'actual') {
+                                var updateActual = "UPDATE inventory_actual SET is_synced = 1 WHERE id = ?";
+                                DBAccess.execute(updateActual, [res.id]);
+                            } else if (res.transaction_type == 'waste') {
+                                var updateWaste = "UPDATE inventory_waste SET is_synced = 1 WHERE id = ?";
+                                DBAccess.execute(updateWaste, [res.id]);
+                            }
+                        }, function(err) {
+                            Log.write(err);
+                        });
+                    });
+                    $scope.$watch('inventoryCount', function(val) {
+                        if (val == 0) {
+                            backdrop.hide();
+                            Toast.show('Inventory synced successful');
+                        }
+                    });
+                };
+
+            }, function(err) {
+                Log.write(err);
+            });
+        }, function(err) {
+            Log.write(err);
+        });
 
     };
 
