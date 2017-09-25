@@ -7,9 +7,9 @@ app.controller('calendarCtrl', ['$rootScope', '$scope', 'dateFormatter', 'Modal'
     /*
         Function for fetching selected date from calendar
     */
-    $rootScope.$broadcast('date-picker', dateFormatter.standardNoTime(new Date($scope.datePicker)));
+    $rootScope.$broadcast('date-picker', $scope.datePicker);
     $rootScope.dateChange = function() {
-        $rootScope.$broadcast('date-picker', dateFormatter.standardNoTime(new Date($scope.datePicker)));
+        $rootScope.$broadcast('date-picker', $scope.datePicker);
     };
 
     /*
