@@ -128,3 +128,26 @@ app.service('SyncData', ['$resource', function($resource) {
         }
     });
 }]);
+
+
+/*
+    Service for SyncInventory
+    With Custom Response due to lack of proper response
+*/
+app.service('SyncInventory', ['$http', '$q', function($http, $q) {
+    this.send = function(id, data) {
+        var deferred = $q.defer();
+        $http({
+            url: api.endpoint + '/store/' + id + '/inventory',
+            method: 'POST',
+            headers: { 'api-key': api.key }
+        }).then(function(res) {
+            if (res.status == 200 && res.statusText == 'OK') {
+                deferred.resolve(data);
+            }
+        }, function(err) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    };
+}]);
