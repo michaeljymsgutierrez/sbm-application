@@ -34,7 +34,7 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
                     } else if ($scope.output == 0) {
                         Toast.show("Requested quantity must be greater than 0");
                     } else {
-                        $rootScope.$broadcast('numpad:input', $scope.output);
+                        $rootScope.$broadcast('numpad:inventory-waste', $scope.output);
                     }
                 }, function(err) {
                     Log.write(err);
