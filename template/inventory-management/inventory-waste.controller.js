@@ -86,8 +86,8 @@ app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootSc
         $scope.waste_item = [];
         angular.forEach($scope.inventory_item, function(value) {
             if (value.qty && value.reason) {
-                var insertInventoryWastage = "INSERT INTO inventory_waste (inventory_id, qty, created, is_synced, reason) VALUES (?,?,?,?,?)";
-                var param = [value.id, value.qty, dateFormatter.utc(new Date()), 0, value.reason];
+                var insertInventoryWastage = "INSERT INTO inventory_waste (inventory_id, qty, created_by, created, is_synced, reason) VALUES (?,?,?,?,?,?)";
+                var param = [value.id, value.qty, $scope.user.id, dateFormatter.utc(new Date()), 0, value.reason];
                 DBAccess.execute(insertInventoryWastage, param);
             }
         });
