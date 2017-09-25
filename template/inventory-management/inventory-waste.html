@@ -24,28 +24,28 @@
             <div class="waste-table-container">
                 <table class="waste-item-table">
                     <tbody>
-                        <tr>
-                            <td>Coke</td>
-                            <td>1</td>
-                            <td>Spoiled</td>
+                        <tr ng-repeat="x in inventory_display" ng-if="x.qty">
+                            <td>{{ x.name }}</td>
+                            <td>{{ x.qty }}</td>
+                            <td>Reason</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <div class="bar-tab bar-blue">
-        <div class="tab" ui-sref="inventory-records">
-            <i class="ion-clipboard tab-icon-ion"></i>
-            <div class="tab-label">Records</div>
+    <div class=" bar-tab bar-blue ">
+        <div class="tab " ui-sref="inventory-records ">
+            <i class="ion-clipboard tab-icon-ion "></i>
+            <div class="tab-label ">Records</div>
         </div>
-        <div class="tab" ui-sref="inventory-waste">
-            <i class="ion-minus-circled tab-icon-ion"></i>
-            <div class="tab-label">Waste</div>
+        <div class="tab " ui-sref="inventory-waste ">
+            <i class="ion-minus-circled tab-icon-ion "></i>
+            <div class="tab-label ">Waste</div>
         </div>
-        <div class="tab" ui-sref="inventory-actual">
-            <i class="fa fa-balance-scale tab-icon-fa"></i>
-            <div class="tab-label">Actual Count</div>
+        <div class="tab " ui-sref="inventory-actual ">
+            <i class="fa fa-balance-scale tab-icon-fa "></i>
+            <div class="tab-label ">Actual Count</div>
         </div>
     </div>
 </div>
