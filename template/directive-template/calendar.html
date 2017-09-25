@@ -3,10 +3,10 @@
 <div class="modal fade calendar">
     <div class="modal-dialog">
         <div class="modal-content">
-            <date-picker ng-model="date"></date-picker>
+            <date-picker ng-model="datePicker" ng-change="dateChange()"></date-picker>
             <div class="modal-footer user-prompt">
-                <button class="btn modal-btn kill-modal cancel user-btn">OK</button>
-                <button class="btn modal-btn submit user-btn">CANCEL</button>
+                <button class="btn modal-btn kill-modal cancel user-btn">CANCEL</button>
+                <button class="btn modal-btn submit user-btn">OK</button>
             </div>
         </div>
     </div>
