@@ -6,7 +6,7 @@
     </div>
     <div class="date-filter">
         <i class="ion-chevron-left filter-left button"></i>
-        <span class="button" ng-click="calendarPopup()">Date</span>
+        <span class="button" ng-click="calendarPopup()">{{ inventoryRecordsSelectedDate | date: 'LLLL dd, yyyy - EEEE'}}</span>
         <i class="ion-chevron-right filter-right button"></i>
     </div>
     <div class="inventory-sticky-header">
