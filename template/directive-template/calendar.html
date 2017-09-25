@@ -5,8 +5,8 @@
         <div class="modal-content">
             <date-picker ng-model="datePicker" ng-change="dateChange()"></date-picker>
             <div class="modal-footer user-prompt">
-                <button class="btn modal-btn kill-modal cancel user-btn">CANCEL</button>
-                <button class="btn modal-btn submit user-btn">OK</button>
+                <button class="btn modal-btn kill-modal cancel user-btn" ng-click="calendarCancel()">CANCEL</button>
+                <button class="btn modal-btn submit user-btn" ng-click="calendarOk()">OK</button>
             </div>
         </div>
     </div>
