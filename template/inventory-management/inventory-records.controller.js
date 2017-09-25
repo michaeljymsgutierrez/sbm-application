@@ -107,8 +107,8 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
                     DBAccess.execute(query, [datenow]).then(function(res) {
                         var count = res[0].count;
                         if (beginning_last == actual_last && count == 0) {
-                            var query = "SELECT inventory_id , qty FROM inventory_actual WHERE DATE_FORMAT(created,'%Y-%m-%d') = (SELECT DATE_FORMAT(max(created),'%Y-%m-%d'))";
-                            DBAccess.execute(query, []).then(function(res) {
+                            var query = "SELECT inventory_id , qty FROM inventory_actual WHERE DATE_FORMAT(created,'%Y-%m-%d') = ?";
+                            DBAccess.execute(query, [actual_last]).then(function(res) {
                                 angular.forEach(res, function(value) {
                                     var insertInventoryBeginning = "INSERT INTO inventory_beginning (inventory_id, qty, created_by, created, is_synced) VALUES (?,?,?,?,?)";
                                     var param = [value.inventory_id, value.qty, eid, dateFormatter.utc(new Date()), 0];
