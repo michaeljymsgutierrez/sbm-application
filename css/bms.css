@@ -46,6 +46,10 @@ a.list-group-item,
 div.list-group-item {
   border-radius: 0 !important; }
 
+a.list-group-item:hover {
+  background-color: #3A7EF3 !important;
+  color: #FFFFFF !important; }
+
 /* General styling */
 /* Roboto Font */
 @font-face {

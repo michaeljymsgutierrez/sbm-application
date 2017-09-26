@@ -55,3 +55,8 @@ a.list-group-item,
 div.list-group-item {
     border-radius: 0 !important;
 }
+
+a.list-group-item:hover {
+    background-color: $bar-blue !important;
+    color: #FFFFFF !important;
+}
