@@ -371,6 +371,7 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 65px;
     width: 588px;
     color: #323232 !important;
+    background-color: #FFFFFF;
 }
 
 .pads button {
@@ -392,4 +393,9 @@ input[type=number]::-webkit-outer-spin-button {
 .pads button.numpad-cancel,
 .pads button.numpad-ok {
     width: 292.2px;
+}
+
+.select-reason {
+    height: 35px;
+    width: 237px;
 }
