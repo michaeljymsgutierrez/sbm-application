@@ -2,7 +2,7 @@
 
 /* Number Pad Controller */
 
-app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'Log', 'Toast', function($scope, $rootScope, Modal, DBAccess, Log, Toast) {
+app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'Log', 'Toast', 'Reasons', function($scope, $rootScope, Modal, DBAccess, Log, Toast, Reasons) {
     /*
         Initialize output as numpad numeric output
     */
@@ -51,6 +51,7 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
                     } else {
                         $rootScope.$broadcast('numpad:inventory-waste', $scope.output);
                         Modal.hide();
+                        Reasons.show();
                     }
                 }, function(err) {
                     Log.write(err);

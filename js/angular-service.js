@@ -208,3 +208,16 @@ app.service('NumberPad', ['ModalService', function(ModalService) {
         });
     };
 }]);
+
+
+/* Service for reason */
+app.service('Reasons', ['ModalService', function(ModalService) {
+    this.show = function() {
+        ModalService.showModal({
+            templateUrl: './template/directive-template/reason.html',
+            controller: 'reasonCtrl'
+        }).then(function(modal) {
+            modal.element.modal();
+        });
+    };
+}]);
