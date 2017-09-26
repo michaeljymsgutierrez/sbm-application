@@ -51,6 +51,7 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
                     } else {
                         $rootScope.$broadcast('numpad:inventory-waste', $scope.output);
                         Modal.hide();
+                        $rootScope.reason_sender = "inventory-waste";
                         Reasons.show();
                     }
                 }, function(err) {
