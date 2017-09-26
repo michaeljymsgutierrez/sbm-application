@@ -122,6 +122,14 @@ div.bar-blue {
   color: #fefefe;
   cursor: default; }
 
+.bar-right span {
+  position: absolute;
+  margin-left: -50px; }
+
+.bar-right i {
+  position: absolute;
+  margin-left: -80px; }
+
 a.bar-right {
   text-decoration: none !important; }
 
