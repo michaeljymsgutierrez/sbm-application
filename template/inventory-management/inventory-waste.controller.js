@@ -18,7 +18,6 @@ app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootSc
             angular.forEach($scope.inventory_display, function(value) {
                 $scope.category.push(value.category_name);
             });
-
         }, function(err) {
             Log.write(err);
         });
