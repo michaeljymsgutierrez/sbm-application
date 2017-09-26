@@ -822,9 +822,10 @@ div.clock-container {
   float: left; }
 
 .waste-menu {
-  border-left: 2px solid lightgray;
   width: 210px;
-  height: 85%; }
+  height: 85%;
+  overflow-x: hidden;
+  overflow-y: scroll; }
 
 .waste-item {
   border-left: 2px solid lightgray;
@@ -877,3 +878,16 @@ div.clock-container {
   border-bottom: 1px solid lightgray;
   width: 108px;
   height: 40px; }
+
+.waste-menu .category {
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  padding-top: 12px; }
+
+.waste-menu .category {
+  background-color: #444;
+  color: #FFFFFF;
+  border: none;
+  margin: 1px;
+  margin-left: 2px !important; }
