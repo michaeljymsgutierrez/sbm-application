@@ -16,9 +16,6 @@ app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootSc
         Log.write(err);
     });
 
-    /* Main container for wastage item  */
-    // $scope.waste_item = [];
-
     var unregisterUser = $rootScope.$on('user', function(event, data) {
         unregisterUser();
         $scope.user = data;
