@@ -853,3 +853,27 @@ div.clock-container {
   text-align: right;
   padding-left: 15px;
   padding-top: 15px; }
+
+.item-header div {
+  float: left;
+  width: 108px;
+  text-align: center;
+  height: 40px;
+  padding-top: 10px; }
+
+.item-header {
+  border-bottom: 1px solid lightgray;
+  width: 334px;
+  height: 40px; }
+
+.waste-table-container {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 453px;
+  width: 333px; }
+
+.waste-table-container td {
+  text-align: center;
+  border-bottom: 1px solid lightgray;
+  width: 108px;
+  height: 40px; }
