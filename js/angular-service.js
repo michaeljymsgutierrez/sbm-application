@@ -125,7 +125,12 @@ app.service('dateFormatter', ['$filter', function($filter) {
     /* convert timestamp to regular date */
     this.fromTimestamp = function(dt) {
         return new Date(dt * 1000);
-    }
+    };
+
+    /* format date to slash */
+    this.slashFormat = function(dt) {
+        return $filter('date')(dt, 'MM/d/yyyy');
+    };
 }]);
 
 
