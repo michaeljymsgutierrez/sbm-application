@@ -2,7 +2,7 @@
 
 /* Inventory Waste Controller */
 
-app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootScope', 'Log', 'dateFormatter', 'NumberPad', function($scope, DBAccess, Username, $rootScope, Log, dateFormatter, NumberPad) {
+app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootScope', 'Log', 'dateFormatter', 'NumberPad', 'Toast', function($scope, DBAccess, Username, $rootScope, Log, dateFormatter, NumberPad, Toast) {
 
     Username.popup();
     /*
@@ -16,13 +16,13 @@ app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootSc
         Log.write(err);
     });
 
-    var unregisterUser = $rootScope.$on('user', function(event, data) {
-        unregisterUser();
-        $scope.user = data;
+    /*
+        Function for initializing inventory
+    */
+    var initInventory = function() {
         $scope.inventory_display = [];
-        $scope.category = ['All'];
         $scope.datenow = dateFormatter.slashFormat(new Date());
-
+        $scope.category = ['All'];
         var query = "SELECT id, _id, name, uom, category_name FROM inventory WHERE status = 1";
         DBAccess.execute(query, []).then(function(res) {
             /* Contain inventory item */
@@ -35,6 +35,12 @@ app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootSc
         }, function(err) {
             Log.write(err);
         });
+    };
+
+    var unregisterUser = $rootScope.$on('user', function(event, data) {
+        unregisterUser();
+        $scope.user = data;
+        initInventory();
     });
 
     /*
@@ -69,6 +75,22 @@ app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootSc
                 $rootScope.item.reason = data;
             });
         });
+    };
+
+    /*
+        Function for saving inventory wastage
+    */
+    $scope.saveWastage = function() {
+        $scope.waste_item = [];
+        angular.forEach($scope.inventory_item, function(value) {
+            if (value.qty && value.reason) {
+                var insertInventoryWastage = "INSERT INTO inventory_waste (inventory_id, qty, created, is_synced, reason) VALUES (?,?,?,?,?)";
+                var param = [value.id, value.qty, dateFormatter.utc(new Date()), 0, value.reason];
+                DBAccess.execute(insertInventoryWastage, param);
+            }
+        });
+        initInventory();
+        Toast.show("Transaction saving successful");
     };
 
 }]);
