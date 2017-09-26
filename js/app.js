@@ -131,5 +131,13 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         }, function(err) {
             Log.write(err);
         });
+
+        /* Create inventory_waste table */
+        var inventory_waste = "CREATE TABLE IF NOT EXISTS inventory_waste (id INT PRIMARY KEY AUTO_INCREMENT, inventory_id INT, created DATETIME, is_synced INT, reason LONGTEXT)";
+        DBAccess.execute(inventory_waste, []).then(function(res) {
+            console.info("inventory_waste table created");
+        }, function(err) {
+            Log.write(err);
+        });
     };
 }]);
