@@ -60,3 +60,48 @@
     width: 77%;
     padding-top: 9px;
 }
+
+.inventory-waste div.waste-item,
+.inventory-waste div.waste-menu,
+.inventory-waste div.waste-info {
+    float: left;
+}
+
+.waste-menu {
+    border-left: 2px solid lightgray;
+    width: 210px;
+    height: 85%;
+}
+
+.waste-item {
+    border-left: 2px solid lightgray;
+    width: 580px;
+    height: 85%;
+}
+
+.waste-info {
+    border-left: 2px solid lightgray;
+    width: 328px;
+    height: 85%;
+}
+
+.waste-info-header {
+    height: 80px;
+    width: 334px;
+    background-color: $dark;
+    color: $light;
+}
+
+.waste-info-header div.data {
+    float: right;
+    text-align: right;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+.waste-info-header div.header {
+    float: left;
+    text-align: right;
+    padding-left: 15px;
+    padding-top: 15px;
+}
