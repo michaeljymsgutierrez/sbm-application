@@ -64,6 +64,10 @@ app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootSc
         var unregisterNumpad = $rootScope.$on('numpad:inventory-waste', function(event, data) {
             unregisterNumpad();
             $rootScope.item.qty = parseInt(data);
+            var unregisterReason = $rootScope.$on('reason:inventory-waste', function(event, data) {
+                unregisterReason();
+                $rootScope.item.reason = data;
+            });
         });
     };
 
