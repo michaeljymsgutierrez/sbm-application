@@ -2,7 +2,7 @@
 
 /* Inventory Waste Controller */
 
-app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootScope', 'Log', function($scope, DBAccess, Username, $rootScope, Log) {
+app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootScope', 'Log', 'dateFormatter', function($scope, DBAccess, Username, $rootScope, Log, dateFormatter) {
 
     Username.popup();
     var unregisterUser = $rootScope.$on('user', function(event, data) {
@@ -10,6 +10,7 @@ app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootSc
         $scope.user = data;
         $scope.inventory_display = [];
         $scope.category = ['All'];
+        $scope.datenow = dateFormatter.slashFormat(new Date());
 
         var query = "SELECT id, _id, name, uom, category_name FROM inventory WHERE status = 1";
         DBAccess.execute(query, []).then(function(res) {
