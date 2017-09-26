@@ -73,6 +73,13 @@ function scriptCycle() {
         $('*').attr('ondragstart', 'return false');
         $(document.body).attr('onselectstart', 'return false');
 
+        /* Add active class for category */
+        $('button.category').click(function() {
+            var element = $(this);
+            $('button.category').removeClass('active-category');
+            element.addClass('active-category');
+        });
+
     });
 }
 
