@@ -7,14 +7,14 @@
                 <span class="modal-title">Select Reason</span>
             </div>
             <div class="modal-body">
-                <select class="select-reason">
+                <select class="select-reason" ng-model="selected_reason">
                     <option value="">Reason</option>
                     <option value ="{{ x }}"ng-repeat="x in reason">{{ x }}</option>
                 </select>
             </div>
             <div class="modal-footer user-prompt">
-                <button class="btn modal-btn cancel user-btn">Cancel</button>
-                <button class="btn modal-btn submit user-btn">Select</button>
+                <button class="btn modal-btn cancel user-btn" ng-click="cancel()">Cancel</button>
+                <button class="btn modal-btn submit user-btn" ng-click="select()">Select</button>
             </div>
         </div>
     </div>
