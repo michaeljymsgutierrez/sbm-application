@@ -891,3 +891,8 @@ div.clock-container {
   border: none;
   margin: 1px;
   margin-left: 2px !important; }
+
+.active-category {
+  background-color: #FFFFFF !important;
+  color: black !important;
+  border: 1px solid lightgray !important; }
