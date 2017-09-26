@@ -7,8 +7,9 @@
                 <span class="modal-title">Select Reason</span>
             </div>
             <div class="modal-body">
-                <select>
+                <select class="select-reason">
                     <option value="">Reason</option>
+                    <option value ="{{ x }}"ng-repeat="x in reason">{{ x }}</option>
                 </select>
             </div>
             <div class="modal-footer user-prompt">
