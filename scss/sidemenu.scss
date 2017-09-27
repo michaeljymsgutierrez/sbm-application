@@ -14,6 +14,7 @@ div.side-menu div {
     background-color: $dark;
     border: none;
     color: $light;
+    height: 60px;
 }
 
 div#divider {
@@ -59,4 +60,13 @@ div.list-group-item {
 a.list-group-item:hover {
     background-color: $bar-blue !important;
     color: #FFFFFF !important;
+}
+
+i.attendance-icon {
+    font-size: 35px !important;
+    font-weight: bold !important;
+}
+
+.side-bar-icon {
+    width: 35px !important
 }

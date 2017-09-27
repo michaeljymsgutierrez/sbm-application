@@ -1,61 +1,64 @@
 <!-- Side menu template -->
 
-<div class="side-menu list-group">
+<div class="side-menu list-group side-bar">
     <div class=" list-group-item">
         <center class="title-menu">Menu</center>
     </div>
     <a class="list-group-item menu-link" ui-sref="dashboard">
-        <i class="ion-home sm-icon-ionic"></i>
-        <sp-o></sp-o>
-        Home
+        <label class="side-bar-icon">
+            <i class="ion-home sm-icon-ionic"></i>
+        </label> Home
     </a>
-    <a class="list-group-item menu-link" ui-sref="employee-home">
-        <i class="ion-calendar sm-icon-ionic"></i>
-        <sp-o></sp-o>
-        Employee Management
+    <a class="list-group-item menu-link" ui-sref="attendance">
+        <label class="side-bar-icon">
+            <i class="ion-ios-person-outline sm-icon-ionic attendance-icon"></i>
+        </label> Attendance
     </a>
-    <a class="list-group-item menu-link">
-        <i class="ion-card sm-icon-ionic"></i>
-        <sp-o></sp-o>
-        Cash Management
+    <a class="list-group-item menu-link" ui-sref="schedule">
+        <label class="side-bar-icon">
+            <i class="ion-calendar sm-icon-ionic"></i>
+        </label> Schedule
     </a>
-    <a class="list-group-item menu-link" ui-sref="inventory-home">
-        <i class="ion-clipboard sm-icon-ionic"></i>
-        <sp-t></sp-t>
-        Inventory Management
-    </a>
-    <a class="list-group-item menu-link">
-        <i class="ion-bag sm-icon-ionic"></i>
-        <sp-t></sp-t>
-        Warehouse
+    <a class="list-group-item menu-link" ui-sref="inventory-records">
+        <label class="side-bar-icon">
+            <i class="ion-clipboard sm-icon-ionic"></i>
+        </label> Inventory
     </a>
     <a class="list-group-item menu-link">
-        <i class="ion-arrow-swap sm-icon-ionic"></i>
-        <sp-o></sp-o>
-        Store Transfer
+        <label class="side-bar-icon">
+        <i class="ion-bag sm-icon-ionic">
+        </label></i> Warehouse
     </a>
     <a class="list-group-item menu-link">
+        <label class="side-bar-icon">
+        <i class="ion-arrow-swap sm-icon-ionic">
+        </label></i> Store Transfer
+    </a>
+    <a class="list-group-item menu-link">
+        <label class="side-bar-icon">
         <i class="ion-android-cart sm-icon-ionic"></i>
-        <sp-o></sp-o>
-        Sales Transaction
+        </label> Sales Summary
     </a>
-
-    <div id="divider"></div>
+    <a class="list-group-item menu-link">
+        <label class="side-bar-icon">
+        <i class="ion-card sm-icon-ionic"></i>
+        </label> Cash Management
+    </a>
 
     <a class="list-group-item menu-link" ui-sref="settings">
+        <label class="side-bar-icon">
         <i class="ion-settings sm-icon-ionic"></i>
-        <sp-o></sp-o>
-        Settings
+        </label> Settings
     </a>
     <a class="list-group-item menu-link" ui-sref="sync">
-        <i class="ion-android-sync sm-icon-ionic"></i>
-        <sp-t></sp-t>
-        Sync
+        <label class="side-bar-icon">
+        <i class="ion-ios-loop-strong sm-icon-ionic"></i>
+        </label> Sync
     </a>
     <a class="list-group-item menu-link">
-        <i class="ion-log-out sm-icon-ionic"></i>
-        <sp-o></sp-o>
-        Logout
+        <label class="side-bar-icon">
+        <i class="fa fa-sign-out sm-icon-ionic"></i> 
+        </label> Logout
     </a>
     <div class="list-group-item expander"></div>
 </div>

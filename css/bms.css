@@ -12,7 +12,8 @@ div.side-menu a,
 div.side-menu div {
   background-color: #444;
   border: none;
-  color: #fefefe; }
+  color: #fefefe;
+  height: 60px; }
 
 div#divider {
   background-color: #666666; }
@@ -49,6 +50,13 @@ div.list-group-item {
 a.list-group-item:hover {
   background-color: #3A7EF3 !important;
   color: #FFFFFF !important; }
+
+i.attendance-icon {
+  font-size: 35px !important;
+  font-weight: bold !important; }
+
+.side-bar-icon {
+  width: 35px !important; }
 
 /* General styling */
 /* Roboto Font */
