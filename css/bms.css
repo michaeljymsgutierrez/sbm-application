@@ -180,6 +180,26 @@ input {
   font-family: 'icomoon' !important;
   content: "\e90c"; }
 
+.icon-request_in:before {
+  font-family: 'icomoon' !important;
+  font-style: normal;
+  content: "\e907"; }
+
+.icon-truck_left:before {
+  font-family: 'icomoon' !important;
+  font-style: normal;
+  content: "\e905"; }
+
+.icon-truck_right:before {
+  font-family: 'icomoon' !important;
+  font-style: normal;
+  content: "\e906"; }
+
+.icon-request_minus:before {
+  font-family: 'icomoon' !important;
+  font-style: normal;
+  content: "\e908"; }
+
 /* Remove user selection */
 .dont-touch {
   user-select: none; }
