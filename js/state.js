@@ -34,17 +34,17 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         })
         .state('inventory-records', {
             url: '/inventory-records',
-            templateUrl: './template/inventory-management/inventory-records.html',
+            templateUrl: './template/inventory-management/inventory/inventory-records.html',
             controller: 'inventoryRecordsCtrl'
         })
         .state('inventory-actual', {
             url: '/inventory-actual',
-            templateUrl: './template/inventory-management/inventory-actual.html',
+            templateUrl: './template/inventory-management/inventory/inventory-actual.html',
             controller: 'inventoryActualCtrl'
         })
         .state('inventory-waste', {
             url: '/inventory-waste',
-            templateUrl: './template/inventory-management/inventory-waste.html',
+            templateUrl: './template/inventory-management/inventory/inventory-waste.html',
             controller: 'inventoryWasteCtrl'
         })
         .state('settings', {
