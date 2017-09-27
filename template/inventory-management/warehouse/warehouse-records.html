@@ -1,0 +1,49 @@
+<!-- Warehouse Records View  -->
+
+<div class="container-fluid">
+    <div class="bar bar-blue">
+        Warehouse
+    </div>
+    <div class="date-filter">
+        <i class="ion-chevron-left filter-left button" ng-click="previous()"></i>
+        <span class="button" ng-click=""> DATE </span>
+        <i class="ion-chevron-right filter-right button" ng-click="next()"></i>
+    </div>
+    <div class="sticky-header">
+        <div>Type of Transaction</div>
+        <div>Requestor</div>
+        <div>Transaction #</div>
+        <div>Status</div>
+    </div>
+    <div class="warehouse container-fluid" style="overflow-y:scroll !important;height: 81%;">
+        <table class="table">
+            <tbody>
+                <!-- Repeat data Here  -->
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="bar-tab bar-blue">
+        <div class="tab" ui-sref="warehouse-records">
+            <i class="ion-clipboard tab-icon-ion"></i>
+            <div class="tab-label">Records</div>
+        </div>
+        <div class="tab" ui-sref="">
+            <i class="icon-request_in tab-icon-ion"></i>
+            <div class="tab-label">Order</div>
+        </div>
+        <div class="tab" ui-sref="">
+            <i class="icon-truck_left tab-icon-fa"></i>
+            <div class="tab-label">Delivery</div>
+        </div>
+        <div class="tab" ui-sref="warehouse-records">
+            <i class="icon-request_minus tab-icon-ion"></i>
+            <div class="tab-label">Pullout Requests</div>
+        </div>
+        <div class="tab" ui-sref="">
+            <i class="icon-truck_right tab-icon-ion"></i>
+            <div class="tab-label">Pullout Dispatch</div>
+        </div>
+    </div>
+</div>
