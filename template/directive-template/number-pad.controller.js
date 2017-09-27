@@ -42,7 +42,7 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
             */
             if ($rootScope.numpad_sender == "inventory-waste") {
                 var id = $rootScope.item.id;
-                var query = "SELECT ib.qty , (SELECT SUM(qty) FROM inventory_waste WHERE inventory_id = ?) AS waste_qty FROM inventory_beginning ib WHERE ib.created = (SELECT max(created) FROM inventory_beginning) AND ib.inventory_id = ?";
+                var query = "SELECT ib.qty , IFNULL((SELECT SUM(qty) FROM inventory_waste WHERE inventory_id = ? AND DATE_FORMAT(created,'%Y-%m-%d') = (SELECT DATE_FORMAT(max(created),'%Y-%m-%d') FROM inventory_waste)),0) AS waste_qty FROM inventory_beginning ib WHERE ib.created = (SELECT max(created) FROM inventory_beginning) AND ib.inventory_id = ?";
                 DBAccess.execute(query, [id, id]).then(function(res) {
                         if (parseInt($scope.output) > (parseInt(res[0].qty) - parseInt(res[0].waste_qty))) {
                             Toast.show("Requested quantity is greater than item stack quantity");
