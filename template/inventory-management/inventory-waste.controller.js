@@ -93,4 +93,14 @@ app.controller('inventoryWasteCtrl', ['$scope', 'DBAccess', 'Username', '$rootSc
         Toast.show("Transaction saving successful");
     };
 
+    /* Function for delete item from waste list */
+    $scope.deleteItem = function(id) {
+        angular.forEach($scope.inventory_item, function(value) {
+            if (value.id == id) {
+                delete value['qty'];
+                delete value['reason'];
+            }
+        });
+    };
+
 }]);
