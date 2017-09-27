@@ -955,3 +955,12 @@ div.clock-container {
   float: left;
   text-align: center;
   padding-top: 28px; }
+
+td.delete-waste {
+  color: #ef473a;
+  width: 10px;
+  position: absolute;
+  font-size: 20px;
+  margin-left: 5px;
+  margin-top: 5px;
+  border: none; }

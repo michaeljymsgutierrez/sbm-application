@@ -1,169 +1,179 @@
-    /* Inventory Styling */
-    
-    .inventory-row {
-        margin-left: 12%;
-    }
-    
-    .inventory-sticky-header {
-        background-color: $table-header;
-    }
-    
-    .inventory-sticky-header div {
-        display: inline-block;
-        width: 90px !important;
-        height: 45px;
-        padding-top: 13px;
-        text-align: center;
-    }
-    
-    .save-actual {
-        font-size: 30px;
-        position: absolute;
-        margin-top: -8px;
-        margin-left: -40px;
-    }
-    
-    .inventory-actual td {
-        width: 279px !important;
-    }
-    
-    .inventory-actual td input {
-        text-align: center;
-        border: 2px solid lightgray;
-        border-radius: 4px;
-        background-color: $bg-gray;
-    }
-    
-    .date-filter {
-        height: 45px;
-        background-color: $dark;
-        color: $light;
-        text-align: center;
-    }
-    
-    .filter-right {
-        font-size: 32px;
-        float: right;
-        padding-right: 8px;
-    }
-    
-    .filter-left {
-        font-size: 32px;
-        float: left;
-        padding-left: 8px;
-    }
-    
-    .date-filter span {
-        font-size: 22px;
-        position: absolute;
-        margin-left: -538px;
-        width: 77%;
-        padding-top: 9px;
-    }
-    
-    .inventory-waste div.waste-item,
-    .inventory-waste div.waste-menu,
-    .inventory-waste div.waste-info {
-        float: left;
-    }
-    
-    .waste-menu {
-        width: 210px;
-        height: 85%;
-        overflow-x: hidden;
-        overflow-y: scroll;
-    }
-    
-    .waste-item {
-        border-left: 2px solid lightgray;
-        width: 580px;
-        height: 85%;
-    }
-    
-    .waste-info {
-        border-left: 2px solid lightgray;
-        width: 328px;
-        height: 85%;
-    }
-    
-    .waste-info-header {
-        height: 80px;
-        width: 334px;
-        background-color: $dark;
-        color: $light;
-    }
-    
-    .waste-info-header div.data {
-        float: right;
-        text-align: right;
-        padding-right: 15px;
-        padding-top: 15px;
-    }
-    
-    .waste-info-header div.header {
-        float: left;
-        text-align: right;
-        padding-left: 15px;
-        padding-top: 15px;
-    }
-    
-    .item-header div {
-        float: left;
-        width: 108px;
-        text-align: center;
-        height: 40px;
-        padding-top: 10px;
-    }
-    
-    .item-header {
-        border-bottom: 1px solid lightgray;
-        width: 334px;
-        height: 40px;
-    }
-    
-    .waste-table-container {
-        overflow-y: scroll;
-        overflow-x: hidden;
-        height: 453px;
-        width: 333px;
-    }
-    
-    .waste-table-container td {
-        text-align: center;
-        border-bottom: 1px solid lightgray;
-        width: 108px;
-        height: 40px;
-    }
-    
-    .waste-menu .category {
-        width: 200px;
-        height: 50px;
-        text-align: center;
-        padding-top: 12px;
-    }
-    
-    .waste-menu .category {
-        background-color: $dark;
-        color: #FFFFFF;
-        border: none;
-        margin: 1px;
-        margin-left: 2px !important;
-    }
-    
-    .active-category {
-        background-color: #FFFFFF !important;
-        color: black !important;
-        border: 1px solid lightgray !important;
-    }
-    
-    .waste-item div {
-        border: 1px solid lightgray;
-        box-shadow: 1px 1px 0px 0px lightgray;
-        width: 180px;
-        height: 80px;
-        margin-top: 8px;
-        margin-left: 10px;
-        float: left;
-        text-align: center;
-        padding-top: 28px;
-    }
+/* Inventory Styling */
+
+.inventory-row {
+    margin-left: 12%;
+}
+
+.inventory-sticky-header {
+    background-color: $table-header;
+}
+
+.inventory-sticky-header div {
+    display: inline-block;
+    width: 90px !important;
+    height: 45px;
+    padding-top: 13px;
+    text-align: center;
+}
+
+.save-actual {
+    font-size: 30px;
+    position: absolute;
+    margin-top: -8px;
+    margin-left: -40px;
+}
+
+.inventory-actual td {
+    width: 279px !important;
+}
+
+.inventory-actual td input {
+    text-align: center;
+    border: 2px solid lightgray;
+    border-radius: 4px;
+    background-color: $bg-gray;
+}
+
+.date-filter {
+    height: 45px;
+    background-color: $dark;
+    color: $light;
+    text-align: center;
+}
+
+.filter-right {
+    font-size: 32px;
+    float: right;
+    padding-right: 8px;
+}
+
+.filter-left {
+    font-size: 32px;
+    float: left;
+    padding-left: 8px;
+}
+
+.date-filter span {
+    font-size: 22px;
+    position: absolute;
+    margin-left: -538px;
+    width: 77%;
+    padding-top: 9px;
+}
+
+.inventory-waste div.waste-item,
+.inventory-waste div.waste-menu,
+.inventory-waste div.waste-info {
+    float: left;
+}
+
+.waste-menu {
+    width: 210px;
+    height: 85%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.waste-item {
+    border-left: 2px solid lightgray;
+    width: 580px;
+    height: 85%;
+}
+
+.waste-info {
+    border-left: 2px solid lightgray;
+    width: 328px;
+    height: 85%;
+}
+
+.waste-info-header {
+    height: 80px;
+    width: 334px;
+    background-color: $dark;
+    color: $light;
+}
+
+.waste-info-header div.data {
+    float: right;
+    text-align: right;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+.waste-info-header div.header {
+    float: left;
+    text-align: right;
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
+.item-header div {
+    float: left;
+    width: 108px;
+    text-align: center;
+    height: 40px;
+    padding-top: 10px;
+}
+
+.item-header {
+    border-bottom: 1px solid lightgray;
+    width: 334px;
+    height: 40px;
+}
+
+.waste-table-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 453px;
+    width: 333px;
+}
+
+.waste-table-container td {
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    width: 108px;
+    height: 40px;
+}
+
+.waste-menu .category {
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    padding-top: 12px;
+}
+
+.waste-menu .category {
+    background-color: $dark;
+    color: #FFFFFF;
+    border: none;
+    margin: 1px;
+    margin-left: 2px !important;
+}
+
+.active-category {
+    background-color: #FFFFFF !important;
+    color: black !important;
+    border: 1px solid lightgray !important;
+}
+
+.waste-item div {
+    border: 1px solid lightgray;
+    box-shadow: 1px 1px 0px 0px lightgray;
+    width: 180px;
+    height: 80px;
+    margin-top: 8px;
+    margin-left: 10px;
+    float: left;
+    text-align: center;
+    padding-top: 28px;
+}
+
+td.delete-waste {
+    color: $assertive;
+    width: 10px;
+    position: absolute;
+    font-size: 20px;
+    margin-left: 5px;
+    margin-top: 5px;
+    border: none;
+}
