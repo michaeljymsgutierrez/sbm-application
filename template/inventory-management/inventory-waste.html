@@ -26,7 +26,7 @@
                 <table class="waste-item-table">
                     <tbody>
                         <tr ng-repeat="x in inventory_item" ng-if="x.qty && x.reason">
-                            <td class="delete-waste"><i class="ion-trash-a"></i></td>
+                            <td class="delete-waste"><button><i class="ion-trash-a"></i></button></td>
                             <td>{{ x.name }}</td>
                             <td>{{ x.qty }}</td>
                             <td>{{ x.reason }}</td>

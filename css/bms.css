@@ -964,3 +964,10 @@ td.delete-waste {
   margin-left: 5px;
   margin-top: 5px;
   border: none; }
+
+td.delete-waste button {
+  border: none;
+  background: #FFFFFF; }
+
+td.delete-waste button:active {
+  opacity: 0.5; }
