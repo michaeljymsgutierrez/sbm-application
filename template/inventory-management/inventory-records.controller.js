@@ -21,11 +21,11 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
             "(0) AS transin, " +
             "(0) AS transout, " +
             "(0) AS sales, " +
-            "(0) AS wastage, " +
-            "(SELECT (beginning)) AS ending, " +
+            "IFNULL((SELECT SUM(qty) FROM inventory_waste WHERE inventory_id = i.id AND DATE_FORMAT(created,'%Y-%m-%d') =?),0) AS wastage, " +
+            "(SELECT (beginning - wastage)) AS ending, " +
             "IFNULL((SELECT qty FROM inventory_actual WHERE inventory_id = i.id AND DATE_FORMAT(created,'%Y-%m-%d') = ?),0) AS actual " +
             " FROM inventory i  WHERE status = 1";
-        DBAccess.execute(query, [dateSelected, dateSelected]).then(function(res) {
+        DBAccess.execute(query, [dateSelected, dateSelected, dateSelected]).then(function(res) {
             $scope.inventory_records = res;
         }, function(err) {
             Log.write(err);
