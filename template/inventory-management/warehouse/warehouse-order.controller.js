@@ -2,6 +2,11 @@
 
 /* Warehouse order Controller */
 
-app.controller('warehouseOrderCtrl', ['$scope', function($scope) {
-    $scope.data = "WAREHOUSE ORDER";
+app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', function($scope, Username, $rootScope) {
+    Username.popup();
+
+    var unregisterUser = $rootScope.$on('user', function(event, data) {
+        unregisterUser();
+        $scope.user = data;
+    });
 }]);
