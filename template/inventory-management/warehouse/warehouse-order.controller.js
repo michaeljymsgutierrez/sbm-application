@@ -5,6 +5,9 @@
 app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAccess', function($scope, Username, $rootScope, DBAccess) {
     Username.popup();
 
+    /* 
+        Initialize Warehouse Item 
+    */
     var initWarehouse = function() {
         $scope.warehouse_display = [];
         $scope.category = ['All'];
@@ -23,6 +26,22 @@ app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
         }, function(err) {
             Log.write(err);
         });
+    };
+
+    /*
+        Function for Filterin Warehous Item by category
+    */
+    $scope.filterByCategory = function(x) {
+        $scope.warehouse_display = [];
+        if (x == 'All') {
+            $scope.warehouse_display = $scope.warehouse_item;
+        } else {
+            angular.forEach($scope.warehouse_item, function(value) {
+                if (x == value.category_name) {
+                    $scope.warehouse_display.push(value);
+                }
+            });
+        }
     };
 
     var unregisterUser = $rootScope.$on('user', function(event, data) {
