@@ -1031,3 +1031,8 @@ div.clock-container {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap; }
+
+/* Warehouse Styling */
+.warehouse table td {
+  text-align: center;
+  border-bottom: 1px solid lightgray; }
