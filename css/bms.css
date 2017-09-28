@@ -1061,7 +1061,7 @@ div.clock-container {
   padding-bottom: 100px; }
 
 .wo-order {
-  width: 339px;
+  width: 337.2px;
   height: 530px; }
 
 .wo-item,
@@ -1088,3 +1088,21 @@ div.clock-container {
   float: left;
   text-align: center;
   padding-top: 28px; }
+
+.wo-info-header {
+  background-color: #444;
+  color: #FFFFFF;
+  height: 80px; }
+
+.wo-info-header .wo-label {
+  float: left;
+  padding-left: 7px;
+  width: 162px;
+  padding-top: 8px; }
+
+.wo-info-header .wo-info {
+  float: right;
+  text-align: right;
+  width: 162px;
+  padding-right: 7px;
+  padding-top: 8px; }
