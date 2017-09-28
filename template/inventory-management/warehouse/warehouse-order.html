@@ -6,28 +6,46 @@
         <button class="bar-right button" ng-click=""><i class="ion-archive save-wo"></i><span>Save</span></button>
     </div>
     <div class="warehouse-order container-fluid">
-
+        <div class="wo-category">
+            <button>{{ data }}</button>
+        </div>
+        <div class="wo-item">
+            <div>{{ data }}</div>
+        </div>
+        <div class="wo-order">
+            <div class="wo-info-header">
+                <div class="wo-label">
+                    <div>ORDER WAREHOUSE #</div>
+                    <div>USER</div>
+                    <div>DATE</div>
+                </div>
+                <div class="wo-info">
+                    <div>4122-GGGDHHA</div>
+                    <div>Chael Gutierrez</div>
+                    <div>09/28/2017</div>
+                </div>
+            </div>
+        </div>
+        <div class=" bar-tab bar-blue ">
+            <div class="tab" ui-sref="warehouse-records">
+                <i class="ion-clipboard tab-icon-ion"></i>
+                <div class="tab-label">Records</div>
+            </div>
+            <div class="tab" ui-sref="warehouse-order">
+                <i class="icon-request_in tab-icon-ion"></i>
+                <div class="tab-label">Order</div>
+            </div>
+            <div class="tab" ui-sref="">
+                <i class="icon-truck_left tab-icon-fa"></i>
+                <div class="tab-label">Delivery</div>
+            </div>
+            <div class="tab" ui-sref="warehouse-records">
+                <i class="icon-request_minus tab-icon-ion"></i>
+                <div class="tab-label">Pullout Requests</div>
+            </div>
+            <div class="tab" ui-sref="">
+                <i class="icon-truck_right tab-icon-ion"></i>
+                <div class="tab-label">Pullout Dispatch</div>
+            </div>
+        </div>
     </div>
-    <div class=" bar-tab bar-blue ">
-        <div class="tab" ui-sref="warehouse-records">
-            <i class="ion-clipboard tab-icon-ion"></i>
-            <div class="tab-label">Records</div>
-        </div>
-        <div class="tab" ui-sref="warehouse-order">
-            <i class="icon-request_in tab-icon-ion"></i>
-            <div class="tab-label">Order</div>
-        </div>
-        <div class="tab" ui-sref="">
-            <i class="icon-truck_left tab-icon-fa"></i>
-            <div class="tab-label">Delivery</div>
-        </div>
-        <div class="tab" ui-sref="warehouse-records">
-            <i class="icon-request_minus tab-icon-ion"></i>
-            <div class="tab-label">Pullout Requests</div>
-        </div>
-        <div class="tab" ui-sref="">
-            <i class="icon-truck_right tab-icon-ion"></i>
-            <div class="tab-label">Pullout Dispatch</div>
-        </div>
-    </div>
-</div>
