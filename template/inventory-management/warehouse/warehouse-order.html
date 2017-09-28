@@ -7,10 +7,10 @@
     </div>
     <div class="warehouse-order container-fluid">
         <div class="wo-category">
-            <button>{{ data }}</button>
+            <button ng-repeat="x in category">{{ x }}</button>
         </div>
         <div class="wo-item">
-            <div>{{ data }}</div>
+            <div ng-repeat="x in warehouse_item">{{ x.name }}</div>
         </div>
         <div class="wo-order">
             <div class="wo-info-header">
