@@ -25,8 +25,12 @@ app.controller('reasonCtrl', ['$scope', 'DBAccess', '$rootScope', 'Log', 'Modal'
 
     /*
         Reason button functions
+        check sender by logging rootScope reason_sender remove
     */
     $scope.cancel = function() {
+        if ($rootScope.reason_sender == "inventory-waste") {
+            delete $rootScope.item['qty'];
+        }
         Modal.hide();
     };
     $scope.select = function() {
