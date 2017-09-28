@@ -140,6 +140,14 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
             Log.write(err);
         });
 
+        /* Create warehouse_request table */
+        var warehouse_request = "CREATE TABLE IF NOT EXISTS warehouse_request (id INT PRIMARY KEY AUTO_INCREMENT, item_id INT, quantity INT, approved_quantity INT, reason VARCHAR(255), transation_id INT)";
+        DBAccess.execute(warehouse_request, []).then(function(res) {
+            console.info("warehouse_request table created");
+        }, function(err) {
+            Log.write(err);
+        });
+
         /* Create warehouse_transaction table */
         var warehouse_transaction = "CREATE TABLE IF NOT EXISTS warehouse_transaction (id INT PRIMARY KEY AUTO_INCREMENT, type VARCHAR(255), transaction_number VARCHAR(255), created_by VARCHAR(255), status INT, created DATETIME, is_synced INT)";
         DBAccess.execute(warehouse_transaction, []).then(function(res) {
