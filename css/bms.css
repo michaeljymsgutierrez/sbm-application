@@ -1036,3 +1036,55 @@ div.clock-container {
 .warehouse-records table td {
   text-align: center;
   border-bottom: 1px solid lightgray; }
+
+.save-wo {
+  font-size: 30px;
+  position: absolute;
+  margin-top: -8px;
+  margin-left: -40px; }
+
+.wo-category {
+  height: 530px;
+  width: 214px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-left: 2px;
+  padding-bottom: 100px; }
+
+.wo-item {
+  height: 530px;
+  width: 574px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-bottom: 100px; }
+
+.wo-order {
+  width: 339px;
+  height: 530px; }
+
+.wo-item,
+.wo-category,
+.wo-order {
+  float: left; }
+
+.wo-category button {
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  margin-top: 2px;
+  color: #FFFFFF;
+  background-color: #444;
+  border: none; }
+
+.wo-item div {
+  border: 1px solid lightgray;
+  box-shadow: 1px 1px 0px 0px lightgray;
+  width: 175px;
+  height: 80px;
+  margin-top: 8px;
+  margin-left: 10px;
+  float: left;
+  text-align: center;
+  padding-top: 28px; }
