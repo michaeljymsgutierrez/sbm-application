@@ -1044,7 +1044,7 @@ div.clock-container {
   margin-left: -40px; }
 
 .wo-category {
-  height: 672px;
+  height: 650px;
   width: 214px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -1052,7 +1052,7 @@ div.clock-container {
   padding-bottom: 100px; }
 
 .wo-item {
-  height: 672px;
+  height: 650px;
   width: 574px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -1062,7 +1062,7 @@ div.clock-container {
 
 .wo-order {
   width: 337.2px;
-  height: 672px; }
+  height: 650px; }
 
 .wo-item,
 .wo-category,
@@ -1106,3 +1106,11 @@ div.clock-container {
   width: 162px;
   padding-right: 7px;
   padding-top: 8px; }
+
+.wo-item-header div {
+  width: 168px;
+  float: left;
+  height: 40px;
+  border-bottom: 1px solid lightgray;
+  text-align: center;
+  padding-top: 10px; }

@@ -13,7 +13,7 @@
 }
 
 .wo-category {
-    height: 672px;
+    height: 650px;
     width: 214px;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -22,7 +22,7 @@
 }
 
 .wo-item {
-    height: 672px;
+    height: 650px;
     width: 574px;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -33,7 +33,7 @@
 
 .wo-order {
     width: 337.2px;
-    height: 672px;
+    height: 650px;
 }
 
 .wo-item,
@@ -83,4 +83,13 @@
     width: 162px;
     padding-right: 7px;
     padding-top: 8px;
+}
+
+.wo-item-header div {
+    width: 168px;
+    float: left;
+    height: 40px;
+    border-bottom: 1px solid lightgray;
+    text-align: center;
+    padding-top: 10px;
 }
