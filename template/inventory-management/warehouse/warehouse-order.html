@@ -7,7 +7,7 @@
     </div>
     <div class="warehouse-order container-fluid">
         <div class="wo-category">
-            <button ng-repeat="x in category">{{ x }}</button>
+            <button ng-repeat="x in category" ng-click="filterByCategory(x)">{{ x }}</button>
         </div>
         <div class="wo-item">
             <div ng-repeat="x in warehouse_item">{{ x.name }}</div>
