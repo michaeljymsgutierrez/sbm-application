@@ -1,6 +1,6 @@
 <!-- Warehouse Records View  -->
 
-<div class="warehouse container-fluid">
+<div class="warehouse-records container-fluid">
     <div class="bar bar-blue">
         Warehouse
     </div>
@@ -20,10 +20,10 @@
             <tbody>
                 <!-- Repeat data Here  -->
                 <tr>
-                    <td>SAMPLE 1</td>
-                    <td>SAMPLE 1</td>
-                    <td>SAMPLE 1</td>
-                    <td>SAMPLE 1</td>
+                    <td>{{ data }}</td>
+                    <td>{{ data }}</td>
+                    <td>{{ data }}</td>
+                    <td>{{ data }}</td>
                 </tr>
             </tbody>
         </table>
@@ -33,7 +33,7 @@
             <i class="ion-clipboard tab-icon-ion"></i>
             <div class="tab-label">Records</div>
         </div>
-        <div class="tab" ui-sref="">
+        <div class="tab" ui-sref="warehouse-order">
             <i class="icon-request_in tab-icon-ion"></i>
             <div class="tab-label">Order</div>
         </div>

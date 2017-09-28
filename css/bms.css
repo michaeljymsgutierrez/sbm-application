@@ -1033,6 +1033,6 @@ div.clock-container {
   white-space: nowrap; }
 
 /* Warehouse Styling */
-.warehouse table td {
+.warehouse-records table td {
   text-align: center;
   border-bottom: 1px solid lightgray; }
