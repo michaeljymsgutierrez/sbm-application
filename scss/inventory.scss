@@ -218,9 +218,9 @@
     border-bottom: 1px solid lightgray;
 }
 
-.inventory tbody tr td:nth-child(2) {
-    overflow: hidden !important;
+.inventory tbody tr td {
+    max-width: 100px;
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    display: block;
 }
