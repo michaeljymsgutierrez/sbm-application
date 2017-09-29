@@ -1114,3 +1114,9 @@ div.clock-container {
   border-bottom: 1px solid lightgray;
   text-align: center;
   padding-top: 10px; }
+
+.wo-selected {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 528px;
+  margin-top: 40px; }
