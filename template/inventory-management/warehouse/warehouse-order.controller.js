@@ -2,7 +2,7 @@
 
 /* Warehouse order Controller */
 
-app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAccess', 'dateFormatter', function($scope, Username, $rootScope, DBAccess, dateFormatter) {
+app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAccess', 'dateFormatter', 'storage', function($scope, Username, $rootScope, DBAccess, dateFormatter, storage) {
     Username.popup();
 
     /* 
@@ -12,6 +12,8 @@ app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
         $scope.warehouse_display = [];
         $scope.category = ['All'];
         $scope.datenow = dateFormatter.slashFormat(new Date());
+        $scope.employee_name = $scope.user.name;
+        $scope.transaction_no = storage.read('store_code') + "-WO-" + dateFormatter.timestamp(new Date());
         var query = "SELECT id, _id, name, uom, category_name FROM inventory WHERE status = 1";
         DBAccess.execute(query, []).then(function(res) {
             /* Contain Warehouse Item */
@@ -48,7 +50,6 @@ app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
     var unregisterUser = $rootScope.$on('user', function(event, data) {
         unregisterUser();
         $scope.user = data;
-        $scope.employee_name = $scope.user.name;
         initWarehouse();
     });
 }]);
