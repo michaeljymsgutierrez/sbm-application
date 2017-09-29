@@ -21,6 +21,9 @@ app.controller('reasonCtrl', ['$scope', 'DBAccess', '$rootScope', 'Log', 'Modal'
         }, function(err) {
             Log.write(err);
         });
+        if ($rootScope.item.reason) {
+            $scope.selected_reason = $rootScope.item.reason;
+        }
     }
 
     /*
