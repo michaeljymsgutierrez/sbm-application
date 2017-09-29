@@ -31,7 +31,7 @@
             </div>
             <div class="wo-selected">
                 <table>
-                    <tr ng-repeat="x in warehouse_item" ng-if="x.qty">
+                    <tr ng-repeat="x in warehouse_item" ng-if="x.qty" ng-click="addItem(x)">
                         <td><button ng-click=""><i class="ion-trash-a"></i></button></td>
                         <td>{{ x.name }}</td>
                         <td>{{ x.qty }}</td>

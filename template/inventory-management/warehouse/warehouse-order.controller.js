@@ -69,7 +69,16 @@ app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
     /*
         Save warehouse order
     */
-    $scope.saveWarehouseOrder = function() {};
+    $scope.saveWarehouseOrder = function() {
+        console.log(1);
+    };
+
+    /*
+        Delete item function
+    */
+    $scope.deleteItem = function() {
+
+    };
 
 
 }]);
