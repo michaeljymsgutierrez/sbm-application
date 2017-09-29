@@ -889,7 +889,7 @@ div.clock-container {
 
 .waste-info-header {
   height: 80px;
-  width: 334px;
+  width: 335.2px;
   background-color: #444;
   color: #fefefe; }
 
@@ -921,7 +921,7 @@ div.clock-container {
   overflow-y: scroll;
   overflow-x: hidden;
   height: 90%;
-  width: 333px;
+  width: 335.2px;
   padding-bottom: 100px; }
 
 .waste-table-container td {
