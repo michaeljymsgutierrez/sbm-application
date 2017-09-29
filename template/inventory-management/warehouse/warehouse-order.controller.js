@@ -76,8 +76,12 @@ app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
     /*
         Delete item function
     */
-    $scope.deleteItem = function() {
-
+    $scope.deleteItem = function(id) {
+        angular.forEach($scope.warehouse_item, function(value) {
+            if (value.id == id) {
+                delete value['qty'];
+            }
+        });
     };
 
 
