@@ -163,6 +163,7 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
         /* Get store info */
         Store.get({ id: store_id }, function(res) {
             var response = res;
+            storage.write('store_code', response.store_code);
             $scope.timeout++;
             DBAccess.execute('SELECT COUNT(*) AS count FROM store_info', []).then(function(res) {
                 if (res[0].count == 0) {
