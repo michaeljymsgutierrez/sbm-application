@@ -103,7 +103,7 @@
 
 .wo-selected table tr td {
     border-bottom: 1px solid lightgray;
-    width: 163px;
+    width: 148.2px;
     height: 47px;
     padding-top: 14px;
     float: left;
@@ -112,4 +112,20 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.wo-selected table tr td:first-child {
+    width: 30px;
+    button {
+        border: none;
+        margin-left: -14px;
+        background-color: #FFFFFF;
+        color: $assertive;
+        font-size: 22px;
+        margin-top: -8px;
+        position: absolute;
+    }
+    button:active {
+        opacity: 0.5;
+    }
 }
