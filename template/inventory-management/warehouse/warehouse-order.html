@@ -3,14 +3,14 @@
 <div class="container-fluid">
     <div class="bar bar-blue">
         Warehouse Order
-        <button class="bar-right button" ng-click=""><i class="ion-archive save-wo"></i><span>Save</span></button>
+        <button class="bar-right button" ng-click="saveWarehouseOrder()"><i class="ion-archive save-wo"></i><span>Save</span></button>
     </div>
     <div class="warehouse-order container-fluid">
         <div class="wo-category">
             <button class="category" ng-repeat="x in category" ng-click="filterByCategory(x)">{{ x }}</button>
         </div>
         <div class="wo-item">
-            <div ng-repeat="x in warehouse_display">{{ x.name }}</div>
+            <div ng-repeat="x in warehouse_display" ng-click="addItem(x)">{{ x.name }}</div>
         </div>
         <div class="wo-order">
             <div class="wo-info-header">
@@ -28,6 +28,14 @@
             <div class="wo-item-header">
                 <div>ITEM</div>
                 <div>QTY</div>
+            </div>
+            <div class="wo-selected">
+                <table>
+                    <tr ng-repeat="x in warehouse_item" ng-if="x.qty">
+                        <td>{{ x.name }}</td>
+                        <td>{{ x.qty }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div class=" bar-tab bar-blue ">

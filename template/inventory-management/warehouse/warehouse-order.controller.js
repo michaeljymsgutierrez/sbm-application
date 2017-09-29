@@ -2,7 +2,7 @@
 
 /* Warehouse order Controller */
 
-app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAccess', 'dateFormatter', 'storage', function($scope, Username, $rootScope, DBAccess, dateFormatter, storage) {
+app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAccess', 'dateFormatter', 'storage', 'NumberPad', function($scope, Username, $rootScope, DBAccess, dateFormatter, storage, NumberPad) {
     Username.popup();
 
     /* 
@@ -52,4 +52,24 @@ app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
         $scope.user = data;
         initWarehouse();
     });
+
+    /*
+        Add warehouse item
+    */
+    $scope.addItem = function(item) {
+        NumberPad.show();
+        $rootScope.numpad_sender = "warehouse-order";
+        $rootScope.item = item;
+        var unregisterNumpad = $rootScope.$on('numpad:warehouse-order', function(event, data) {
+            unregisterNumpad();
+            $rootScope.item.qty = parseInt(data);
+        });
+    }
+
+    /*
+        Save warehouse order
+    */
+    $scope.saveWarehouseOrder = function() {};
+
+
 }]);
