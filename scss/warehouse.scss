@@ -100,3 +100,16 @@
     height: 528px;
     margin-top: 40px;
 }
+
+.wo-selected table tr td {
+    border-bottom: 1px solid lightgray;
+    width: 163px;
+    height: 47px;
+    padding-top: 14px;
+    float: left;
+    text-align: center;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
