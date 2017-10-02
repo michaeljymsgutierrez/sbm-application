@@ -2,7 +2,7 @@
 
 /* Warehouse order Controller */
 
-app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAccess', 'dateFormatter', 'storage', 'NumberPad', function($scope, Username, $rootScope, DBAccess, dateFormatter, storage, NumberPad) {
+app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAccess', 'dateFormatter', 'storage', 'NumberPad', 'Log', function($scope, Username, $rootScope, DBAccess, dateFormatter, storage, NumberPad, Log) {
     Username.popup();
 
     /* 
@@ -70,10 +70,21 @@ app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
         Save warehouse order
     */
     $scope.saveWarehouseOrder = function() {
-        angular.forEach($scope.warehouse_item, function(value) {
-            if (value.qty) {
-                console.log(value);
-            }
+        var insertWarehouseOrder = "INSERT INTO warehouse_transaction (type,transaction_number, status, created_by, created, is_synced) VALUES (?,?,?,?,?,?)";
+        var warehouseOrderParam = ['order_warehouse', $scope.transaction_no, 0, $scope.user.id, dateFormatter.utc(new Date()), 0];
+        DBAccess.execute(insertWarehouseOrder, warehouseOrderParam).then(function(res) {
+            $scope.tid = res.insertId;
+            angular.forEach($scope.warehouse_item, function(value) {
+                if (value.qty) {
+                    var insertWareahouseRequet = "INSERT INTO warehouse_request (item_id, quantity, approved_quantity, reason, transaction_id) VALUES (?,?,?,?,?)";
+                    var warehouseRequestParam = [value.id, value.qty, '', '', $scope.tid];
+                    DBAccess.execute(insertWareahouseRequet, warehouseRequestParam);
+                    console.log(value);
+                }
+            });
+            initWarehouse();
+        }, function(err) {
+            Log.write(err);
         });
     };
 
