@@ -141,7 +141,7 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         });
 
         /* Create warehouse_request table */
-        var warehouse_request = "CREATE TABLE IF NOT EXISTS warehouse_request (id INT PRIMARY KEY AUTO_INCREMENT, item_id INT, quantity INT, approved_quantity INT, reason VARCHAR(255), transation_id INT)";
+        var warehouse_request = "CREATE TABLE IF NOT EXISTS warehouse_request (id INT PRIMARY KEY AUTO_INCREMENT, item_id INT, quantity INT, approved_quantity INT, reason VARCHAR(255), transaction_id INT)";
         DBAccess.execute(warehouse_request, []).then(function(res) {
             console.info("warehouse_request table created");
         }, function(err) {
