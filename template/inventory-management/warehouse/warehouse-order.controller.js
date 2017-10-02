@@ -79,7 +79,7 @@ app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
             unregisterWarehouse();
             if (data == 'save') {
                 var insertWarehouseOrder = "INSERT INTO warehouse_transaction (type,transaction_number, status, created_by, created, is_synced) VALUES (?,?,?,?,?,?)";
-                var warehouseOrderParam = ['order_warehouse', $scope.transaction_no, 0, $scope.user.id, dateFormatter.utc(new Date()), 0];
+                var warehouseOrderParam = ['order_commissary', $scope.transaction_no, 0, $scope.user.id, dateFormatter.utc(new Date()), 0];
                 DBAccess.execute(insertWarehouseOrder, warehouseOrderParam).then(function(res) {
                     $scope.tid = res.insertId;
                     angular.forEach($scope.warehouse_item, function(value) {
