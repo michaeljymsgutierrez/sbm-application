@@ -70,7 +70,11 @@ app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
         Save warehouse order
     */
     $scope.saveWarehouseOrder = function() {
-        console.log(1);
+        angular.forEach($scope.warehouse_item, function(value) {
+            if (value.qty) {
+                console.log(value);
+            }
+        });
     };
 
     /*
