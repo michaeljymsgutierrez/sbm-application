@@ -150,12 +150,22 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                 });
 
                 $scope.syncWarehouseFromDevice = function() {
+                    backdrop.show();
                     angular.forEach($scope.warehouseOrder, function(value) {
                         SyncData.send({ param1: store_id, param2: 'commissary', data: value }, function(res) {
-                            console.log(res);
+                            var id = res.transaction_id;
+                            $scope.warehouseCount--;
+                            var updateWarehouseTransaction = "UPDATE warehouse_transaction SET is_synced = 1 WHERE id = ?";
+                            DBAccess.execute(updateWarehouseTransaction, [id]);
                         }, function(err) {
                             Log.write(err);
                         });
+                    });
+                    $scope.$watch('warehouseCount', function(val) {
+                        if (val == 0) {
+                            backdrop.hide();
+                            Toast.show('Warehouse synced successful');
+                        }
                     });
                 };
             });
