@@ -145,10 +145,19 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                 var query = "SELECT (SELECT _id FROM inventory WHERE id = wr.item_id) AS item_id, (SELECT name FROM inventory WHERE id = wr.item_id) AS item_name, (SELECT uom FROM inventory WHERE id = wr.item_id) AS item_uom, quantity, (NULL) AS reason FROM warehouse_request wr WHERE wr.transaction_id = ?";
                 DBAccess.execute(query, [tid]).then(function(res) {
                     value.items = res;
-                    console.log(value);
                 }, function(err) {
                     Log.write(err);
                 });
+
+                $scope.syncWarehouseFromDevice = function() {
+                    angular.forEach($scope.warehouseOrder, function(value) {
+                        SyncData.send({ param1: store_id, param2: 'commissary', data: value }, function(res) {
+                            console.log(res);
+                        }, function(err) {
+                            Log.write(err);
+                        });
+                    });
+                };
             });
         }, function(err) {
             Log.write(err);
