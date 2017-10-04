@@ -388,6 +388,11 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
 
     /* Sync Warehouse Approved Order Request */
     $scope.syncWarehouseAOR = function() {
-        console.log(1);
+        SyncData.fetch({ param1: store_id, param2: 'commissary', param3: 'order' }, function(res) {
+            console.log(res);
+        }, function(err) {
+            Log.write(err);
+        });
+
     };
 }]);
