@@ -1040,6 +1040,9 @@ div.clock-container {
   height: 51px;
   padding-top: 16px !important; }
 
+.warehouse-records table td:nth-child(3) {
+  color: #3A7EF3; }
+
 .save-wo {
   font-size: 30px;
   position: absolute;

@@ -8,6 +8,10 @@
     padding-top: 16px !important;
 }
 
+.warehouse-records table td:nth-child(3) {
+    color: $bar-blue;
+}
+
 .save-wo {
     font-size: 30px;
     position: absolute;
