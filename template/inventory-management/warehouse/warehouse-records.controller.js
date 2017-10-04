@@ -12,8 +12,10 @@ app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$root
         $scope.warehouse_records = [];
         var query = "SELECT wt.id, wt.type, wt.transaction_number,(SELECT name FROM employee WHERE id = wt.created_by) AS name, status, created FROM warehouse_transaction wt";
         DBAccess.execute(query, []).then(function(res) {
-            console.log(res);
             $scope.warehouse_records = res;
+            angular.forEach($scope.warehouse_records, function(value) {
+                console.log(value);
+            });
         }, function() {
             Log.write(err);
         });
