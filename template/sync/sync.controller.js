@@ -386,4 +386,8 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
         });
     };
 
+    /* Sync Warehouse Approved Order Request */
+    $scope.syncWarehouseAOR = function() {
+        console.log(1);
+    };
 }]);
