@@ -110,6 +110,8 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                                 DBAccess.execute(updateWaste, [res.id]);
                             }
                         }, function(err) {
+                            backdrop.hide();
+                            Toast.show('Unable to connect to server');
                             Log.write(err);
                         });
                     });
@@ -158,6 +160,8 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                             var updateWarehouseTransaction = "UPDATE warehouse_transaction SET is_synced = 1 WHERE id = ?";
                             DBAccess.execute(updateWarehouseTransaction, [id]);
                         }, function(err) {
+                            backdrop.hide();
+                            Toast.show('Unable to connect to server');
                             Log.write(err);
                         });
                     });
