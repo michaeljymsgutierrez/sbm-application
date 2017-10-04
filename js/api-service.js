@@ -125,6 +125,14 @@ app.service('SyncData', ['$resource', function($resource) {
             interceptor: function(response) {
                 return response;
             }
+        },
+        'fetch': {
+            method: 'GET',
+            headers: { 'api-key': api.key },
+            isArray: true,
+            interceptor: function(response) {
+                return response;
+            }
         }
     });
 }]);
