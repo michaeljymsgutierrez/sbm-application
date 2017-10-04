@@ -389,7 +389,10 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
     /* Sync Warehouse Approved Order Request */
     $scope.syncWarehouseAOR = function() {
         SyncData.fetch({ param1: store_id, param2: 'commissary', param3: 'order' }, function(res) {
-            console.log(res);
+            var warehouseApprovedOrderRequest = res;
+            angular.forEach(warehouseApprovedOrderRequest, function(value) {
+                console.log(value);
+            });
         }, function(err) {
             Log.write(err);
         });
