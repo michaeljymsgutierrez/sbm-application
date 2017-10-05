@@ -320,7 +320,7 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
             Log.write(err);
         });
 
-        /* Get all Employee data schdeul */
+        /* Get all Employee data schdule */
         Employee.get({ id: store_id, path: "employee", path2: 'schedule' }, function(res) {
             var response = res;
             $scope.timeout++;
@@ -437,8 +437,27 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                             Log.write(err);
                         });
                     } else {
-                        value.tid = res[0].id;
-                        console.log(value);
+                        /*
+                            Update warehouse approved order request
+                        */
+                        $scope.tid = res[0].id;
+                        $scope.updateItem = value;
+                        angular.forEach($scope.updateItem.items, function(value) {
+                            var item_id = value.item_id;
+                            value.tid = $scope.tid;
+                            var selectId = "SELECT id FROM inventory WHERE _id = ?";
+                            DBAccess.execute(selectId, [item_id]).then(function(res) {
+                                value.item_id = res[0].id;
+                            }, function(err) {
+                                Log.write(err);
+                            });
+                        });
+
+                        /*
+                            Update warehouse transaction status from warehous approved order request
+                        */
+                        var updateStatus = "UPDATE warehouse_transaction SET status = ? WHERE transaction_number = ?";
+                        DBAccess.execute(updateStatus, [value.status, value.transaction_number]);
                     }
                 }, function(err) {
                     Log.write(err);
