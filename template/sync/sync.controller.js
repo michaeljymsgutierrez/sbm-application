@@ -437,6 +437,7 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                             Log.write(err);
                         });
                     } else {
+                        value.tid = res[0].id;
                         console.log(value);
                     }
                 }, function(err) {
