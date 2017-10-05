@@ -409,12 +409,13 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                                 /* Transaction ID from insert transaction */
                                 $scope.tid = res.insertId;
                                 angular.forEach(items, function(value) {
+                                    value.tid = $scope.tid;
                                     var selectId = "SELECT id FROM inventory WHERE _id = ?";
                                     DBAccess.execute(selectId, [value.item_id]).then(function(res) {
                                         $scope.inventory_id = res[0].id;
                                         /* API From backend should return the actual quantity */
                                         var insertWarehouseRequest = "INSERT INTO warehouse_request (item_id, approved_quantity, transaction_id) VALUES (?,?,?)";
-                                        var param = [$scope.inventory_id, value.qty == null ? 0 : value.qty, $scope.tid];
+                                        var param = [$scope.inventory_id, value.qty == null ? 0 : value.qty, value.tid];
                                         DBAccess.execute(insertWarehouseRequest, param);
                                     }, function(err) {
                                         Log.write(err);
