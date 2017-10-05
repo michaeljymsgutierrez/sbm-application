@@ -399,13 +399,26 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                 DBAccess.execute(query, [value.transaction_number]).then(function(res) {
                     if (res.length == 0) {
                         var selectEmployee = "SELECT id FROM employee WHERE username = ?";
+                        /* Fetch ID from employee table */
                         DBAccess.execute(selectEmployee, [value.created_by_name]).then(function(res) {;
                             var id = res[0].id;
                             var insertWarehouseTransaction = "INSERT INTO warehouse_transaction (type, transaction_number, created_by, status, created, is_synced) VALUES (?,?,?,?,?,?)";
                             var param = ['order_commissary', value.transaction_number, id, value.status, value.created, 1];
                             var items = value.items;
                             DBAccess.execute(insertWarehouseTransaction, param).then(function(res) {
-                                var tid = res.insertId;;
+                                /* Transaction ID from insert transaction */
+                                $scope.tid = res.insertId;
+                                angular.forEach(items, function(value) {
+                                    var selectId = "SELECT id FROM inventory WHERE _id = ?";
+                                    DBAccess.execute(selectId, [value.item_id]).then(function(res) {
+                                        $scope.inventory_id = res[0].id;
+                                        var insertWarehouseRequest = "INSERT INTO warehouse_request (item_id, approved_quantity, transaction_id) VALUES (?,?,?)";
+                                        var param = [$scope.inventory_id, value.qty == null ? 0 : value.qty, $scope.tid];
+                                        DBAccess.execute(insertWarehouseRequest, param);
+                                    }, function(err) {
+                                        Log.write(err);
+                                    });
+                                });
                             }, function(err) {
                                 Log.write(err);
                             });
