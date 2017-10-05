@@ -395,14 +395,14 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
         SyncData.fetch({ param1: store_id, param2: 'commissary', param3: 'order' }, function(res) {
             var warehouseApprovedOrderRequest = res;
             angular.forEach(warehouseApprovedOrderRequest, function(value) {
-                console.log(value);
                 var query = "SELECT id FROM warehouse_transaction WHERE transaction_number = ?";
                 DBAccess.execute(query, [value.transaction_number]).then(function(res) {
                     if (res.length == 0) {
                         var selectEmployee = "SELECT id FROM employee WHERE username = ?";
                         DBAccess.execute(selectEmployee, [value.created_by_name]).then(function(res) {;
                             var id = res[0].id;
-                            console.log(id);
+                            var insertWarehouseTransaction = "INSERT INTO warehouse_transaction (type, transaction_number, created_by, status, created, is_synced) VALUES (?,?,?,?,?,?)";
+                            var param = ['order_commissary', value.transaction_number, id, value.status, value.created, 1];
                         }, function(err) {
                             Log.write(err);
                         });
