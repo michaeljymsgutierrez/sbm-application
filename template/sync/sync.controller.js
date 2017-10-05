@@ -403,6 +403,12 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                             var id = res[0].id;
                             var insertWarehouseTransaction = "INSERT INTO warehouse_transaction (type, transaction_number, created_by, status, created, is_synced) VALUES (?,?,?,?,?,?)";
                             var param = ['order_commissary', value.transaction_number, id, value.status, value.created, 1];
+                            var items = value.items;
+                            DBAccess.execute(insertWarehouseTransaction, param).then(function(res) {
+                                var tid = res.insertId;;
+                            }, function(err) {
+                                Log.write(err);
+                            });
                         }, function(err) {
                             Log.write(err);
                         });
