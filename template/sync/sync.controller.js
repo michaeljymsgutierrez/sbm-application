@@ -392,7 +392,21 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
 
     /* Sync Warehouse Approved Order Request */
     $scope.syncWarehouseAOR = function() {
+
+        $scope.timeout = 0;
+        backdrop.show();
+        $scope.$watch('timeout', function(val) {
+            if (val == 1) {
+                backdrop.hide();
+                Toast.show("Warehouse Approved Order Request sync successful");
+            } else if (val == -1) {
+                backdrop.hide();
+                Toast.show("Unable to connect to server");
+            }
+        });
+
         SyncData.fetch({ param1: store_id, param2: 'commissary', param3: 'order' }, function(res) {
+            $scope.timeout++;
             var warehouseApprovedOrderRequest = res;
             angular.forEach(warehouseApprovedOrderRequest, function(value) {
                 var query = "SELECT id FROM warehouse_transaction WHERE transaction_number = ?";
@@ -466,6 +480,7 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                 });
             });
         }, function(err) {
+            $scope.timeout = -1;
             Log.write(err);
         });
     };
