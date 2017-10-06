@@ -72,29 +72,28 @@ app.controller('warehouseOrderCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
     $scope.saveWarehouseOrder = function() {
         angular.forEach($scope.warehouse_item, function(value) {
             if (value.qty) {
-                $rootScope.$broadcast('warehouse-order:status', 'save');
+                $scope.warehouse_order_status = 'save';
             }
         });
-        var unregisterWarehouse = $rootScope.$on('warehouse-order:status', function(event, data) {
-            unregisterWarehouse();
-            if (data == 'save') {
-                var insertWarehouseOrder = "INSERT INTO warehouse_transaction (type,transaction_number, status, created_by, created, is_synced) VALUES (?,?,?,?,?,?)";
-                var warehouseOrderParam = ['order_commissary', $scope.transaction_no, 0, $scope.user.id, dateFormatter.utc(new Date()), 0];
-                DBAccess.execute(insertWarehouseOrder, warehouseOrderParam).then(function(res) {
-                    $scope.tid = res.insertId;
-                    angular.forEach($scope.warehouse_item, function(value) {
-                        if (value.qty) {
-                            var insertWareahouseRequet = "INSERT INTO warehouse_request (item_id, quantity, approved_quantity, reason, transaction_id) VALUES (?,?,?,?,?)";
-                            var warehouseRequestParam = [value.id, value.qty, '', '', $scope.tid];
-                            DBAccess.execute(insertWareahouseRequet, warehouseRequestParam);
-                        }
-                    });
-                    initWarehouse();
-                }, function(err) {
-                    Log.write(err);
+
+        if ($scope.warehouse_order_status == 'save') {
+            var insertWarehouseOrder = "INSERT INTO warehouse_transaction (type,transaction_number, status, created_by, created, is_synced) VALUES (?,?,?,?,?,?)";
+            var warehouseOrderParam = ['order_commissary', $scope.transaction_no, 0, $scope.user.id, dateFormatter.utc(new Date()), 0];
+            DBAccess.execute(insertWarehouseOrder, warehouseOrderParam).then(function(res) {
+                $scope.tid = res.insertId;
+                angular.forEach($scope.warehouse_item, function(value) {
+                    if (value.qty) {
+                        var insertWareahouseRequet = "INSERT INTO warehouse_request (item_id, quantity, approved_quantity, reason, transaction_id) VALUES (?,?,?,?,?)";
+                        var warehouseRequestParam = [value.id, value.qty, '', '', $scope.tid];
+                        DBAccess.execute(insertWareahouseRequet, warehouseRequestParam);
+                    }
                 });
-            }
-        });
+                initWarehouse();
+                $scope.warehouse_order_status = 'nothing-to-save';
+            }, function(err) {
+                Log.write(err);
+            });
+        }
         Toast.show("Saving warehouse request transction successful");
     };
 
