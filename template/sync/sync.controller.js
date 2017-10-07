@@ -2,7 +2,7 @@
 
 /* Sync Controller */
 
-app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatter', 'Store', 'Branch', 'Reason', 'DBAccess', 'Log', 'Toast', 'Employee', 'SyncData', 'Inventory', 'SyncInventory', function($q, $scope, storage, backdrop, dateFormatter, Store, Branch, Reason, DBAccess, Log, Toast, Employee, SyncData, Inventory, SyncInventory) {
+app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatter', 'Store', 'Branch', 'Reason', 'DBAccess', 'Log', 'Toast', 'Employee', 'SyncData', 'Inventory', 'SyncInventory', '$timeout', 'WarehouseTN', function($q, $scope, storage, backdrop, dateFormatter, Store, Branch, Reason, DBAccess, Log, Toast, Employee, SyncData, Inventory, SyncInventory, $timeout, WarehouseTN) {
     /* Get store id */
     var store_id = storage.read('store_id').store_id;
     backdrop.auto(1000);
@@ -392,11 +392,12 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
 
     /* Sync Warehouse Approved Order Request */
     $scope.syncWarehouseAOR = function() {
-
+        $scope.postTransaction = 0;
+        $scope.postTransactionTimeout = 0;
         $scope.timeout = 0;
         backdrop.show();
         $scope.$watch('timeout', function(val) {
-            if (val == 1) {
+            if (val == 2) {
                 backdrop.hide();
                 Toast.show("Warehouse Approved Order Request sync successful");
             } else if (val == -1) {
@@ -404,9 +405,33 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                 Toast.show("Unable to connect to server");
             }
         });
+        /*
+            POST transaction numbers after fetching warehouse approved request
+        */
+        $scope.$watch('postTransaction', function(val) {
+            if ($scope.postTransaction == 1) {
+                $scope.transactions = [];
+                $timeout(function() {
+                    var getTansactionNumbers = "SELECT transaction_number FROM warehouse_transaction";
+                    DBAccess.execute(getTansactionNumbers, []).then(function(res) {
+                        angular.forEach(res, function(value) {
+                            $scope.transactions.push(value.transaction_number);
+                        });
+                        WarehouseTN.send(store_id, $scope.transactions).then(function(res) {
+                            $scope.timeout++;
+                        }, function(err) {
+                            $scope.timeout = -1;
+                            Log.write(err);
+                        });
+                    });
+                }, $scope.postTransactionTimeout);
+            }
+        });
 
         SyncData.fetch({ param1: store_id, param2: 'commissary', param3: 'order' }, function(res) {
             $scope.timeout++;
+            $scope.postTransaction = 1;
+            $scope.postTransactionTimeout = res.length * 100;
             var warehouseApprovedOrderRequest = res;
             angular.forEach(warehouseApprovedOrderRequest, function(value) {
                 var query = "SELECT id FROM warehouse_transaction WHERE transaction_number = ?";
@@ -416,7 +441,7 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                         /* 
                             Fetch ID from employee table 
                         */
-                        DBAccess.execute(selectEmployee, [value.created_by_name]).then(function(res) {;
+                        DBAccess.execute(selectEmployee, [value.created_by_name]).then(function(res) {
                             var id = res[0].id;
                             var insertWarehouseTransaction = "INSERT INTO warehouse_transaction (type, transaction_number, created_by, status, created, is_synced) VALUES (?,?,?,?,?,?)";
                             var param = ['order_commissary', value.transaction_number, id, value.status, value.created, 1];
