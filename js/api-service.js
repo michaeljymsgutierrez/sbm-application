@@ -160,3 +160,26 @@ app.service('SyncInventory', ['$http', '$q', function($http, $q) {
         return deferred.promise;
     };
 }]);
+
+
+/*
+    Service for Sync Warehouse Transaction Numbers
+*/
+app.service('WarehouseTN', ['$http', '$q', function($http, $q) {
+    this.send = function(id, data) {
+        var deferred = $q.defer();
+        $http({
+            url: api.endpoint + '/store/' + id + '/commissary/order',
+            method: 'POST',
+            headers: { 'api-key': api.key },
+            data: { transaction_numbers: data }
+        }).then(function(res) {
+            if (res.status == 200 && res.statusText == 'OK') {
+                deferred.resolve(res.config.data.data);
+            }
+        }, function(err) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    };
+}]);
