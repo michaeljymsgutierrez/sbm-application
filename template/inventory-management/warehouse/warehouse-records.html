@@ -7,7 +7,7 @@
     </div>
     <div class="date-filter">
         <i class="ion-chevron-left filter-left button" ng-click="previous()"></i>
-        <span class="button" ng-click=""> DATE </span>
+        <span class="button" ng-click="calendarPopup()"> {{ warehouseRecordsSelectedDate | date: 'LLLL dd, yyyy - EEEE' }}</span>
         <i class="ion-chevron-right filter-right button" ng-click="next()"></i>
     </div>
     <div class="sticky-header">
