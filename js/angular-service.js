@@ -221,3 +221,10 @@ app.service('Reasons', ['ModalService', function(ModalService) {
         });
     };
 }]);
+
+/* Removed _ from string */
+app.filter('remove_', function() {
+    return function(input) {
+        return input.replace('_', ' ');
+    };
+});
