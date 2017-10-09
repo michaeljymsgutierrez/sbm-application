@@ -382,6 +382,9 @@ input[type=number]::-webkit-outer-spin-button {
   height: 35px;
   width: 237px; }
 
+.capitalize {
+  text-transform: capitalize; }
+
 /* Dashboard Styling */
 img.home-logo {
   margin-top: 10%; }
