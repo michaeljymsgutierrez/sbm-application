@@ -228,3 +228,15 @@ app.filter('remove_', function() {
         return input.replace('_', ' ');
     };
 });
+
+/* Service for transaction flilter popup */
+app.service('TransactionFilter', ['ModalService', function(ModalService) {
+    this.show = function() {
+        ModalService.showModal({
+            templateUrl: './template/directive-template/transaction-filter.html',
+            controller: 'transactionFilterCtrl'
+        }).then(function(modal) {
+            modal.element.modal();
+        });
+    };
+}]);

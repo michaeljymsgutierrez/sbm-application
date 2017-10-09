@@ -2,7 +2,7 @@
 
 /* Warehouse records controller */
 
-app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$rootScope', 'Log', 'Calendar', 'dateFormatter', function($scope, Username, DBAccess, $rootScope, Log, Calendar, dateFormatter) {
+app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$rootScope', 'Log', 'Calendar', 'dateFormatter', 'TransactionFilter', function($scope, Username, DBAccess, $rootScope, Log, Calendar, dateFormatter, TransactionFilter) {
     Username.popup();
 
     $scope.warehouseRecordsSelectedDate = new Date();
@@ -33,6 +33,12 @@ app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$root
         var nextDate = dateFormatter.timestamp($scope.warehouseRecordsSelectedDate) + 86400;
         $scope.warehouseRecordsSelectedDate = dateFormatter.standardNoTime(dateFormatter.fromTimestamp(nextDate));
         $scope.initRecord();
+    };
+
+
+    /* Filter function */
+    $scope.filterBy = function() {
+        TransactionFilter.show();
     };
 
     /* 
