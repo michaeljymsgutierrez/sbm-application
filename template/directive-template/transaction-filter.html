@@ -2,15 +2,22 @@
 
 <div class="modal fade-in">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content transaction-type">
             <div class="modal-header">
-                {{ data }}
+                Filter by Transaction
             </div>
             <div class="modal-body">
-                {{ data }}
+                <select class="transaction-select">
+                    <option>All</option>
+                    <option>Order Commissary</option>
+                    <option>Commissary Delivery</option>
+                    <option>Pullout Request</option>
+                    <option>Pullout Dispatch</option>
+                </select>
             </div>
             <div class="modal-footer">
-                {{ data }}
+                <button class="btn cancel">Cancel</button>
+                <button class="btn">Select</button>
             </div>
         </div>
     </div>
