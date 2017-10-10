@@ -21,6 +21,24 @@ app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$root
         }
     });
 
+    /*
+        Transaction Type Filter
+    */
+    $rootScope.$on('filter:transaction-type', function(event, data) {
+        $scope.warehouse_records = [];
+        if ($scope.records.length > 0) {
+            if (data == 'all') {
+                $scope.warehouse_records = $scope.records;
+            } else {
+                angular.forEach($scope.records, function(value) {
+                    if (value.type == data) {
+                        $scope.warehouse_records.push(value);
+                    }
+                });
+            }
+        }
+    });
+
     /* Previous date filter */
     $scope.previous = function() {
         var prevDate = dateFormatter.timestamp($scope.warehouseRecordsSelectedDate) - 86400;
@@ -47,12 +65,14 @@ app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$root
     $scope.initRecord = function() {
         /* Warehouse records main container */
         $scope.warehouse_records = [];
+        $scope.records = [];
         var dateSelected = dateFormatter.standardNoTime($scope.warehouseRecordsSelectedDate);
         var query = "SELECT wt.id, wt.type, wt.transaction_number,(SELECT name FROM employee WHERE id = wt.created_by) AS name, status, created FROM warehouse_transaction wt WHERE DATE_FORMAT(wt.created,'%Y-%m-%d') = ?";
         DBAccess.execute(query, [dateSelected]).then(function(res) {
             $scope.warehouse_records = res;
+            $scope.records = res;
             angular.forEach($scope.warehouse_records, function(value) {
-                console.log(value);
+                // console.log(value);
             });
         }, function(err) {
             Log.write(err);
