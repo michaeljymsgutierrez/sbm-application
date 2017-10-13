@@ -245,7 +245,6 @@ app.service('TransactionFilter', ['ModalService', function(ModalService) {
 /* Service for general modal item popup */
 app.service('ItemModal', ['ModalService', function(ModalService) {
     this.show = function(path, ctrl) {
-        console.log(path + " " + ctrl);
         ModalService.showModal({
             templateUrl: path,
             controller: ctrl
