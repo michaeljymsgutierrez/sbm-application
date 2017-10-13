@@ -2,7 +2,7 @@
 
 /* Warehouse records controller */
 
-app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$rootScope', 'Log', 'Calendar', 'dateFormatter', 'TransactionFilter', function($scope, Username, DBAccess, $rootScope, Log, Calendar, dateFormatter, TransactionFilter) {
+app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$rootScope', 'Log', 'Calendar', 'dateFormatter', 'TransactionFilter', 'ModalService', 'Modal', 'ItemModal', function($scope, Username, DBAccess, $rootScope, Log, Calendar, dateFormatter, TransactionFilter, ModalService, Modal, ItemModal) {
     Username.popup();
 
     $scope.warehouseRecordsSelectedDate = new Date();
@@ -96,6 +96,6 @@ app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$root
         Function for show items by transaction
     */
     $scope.showItems = function() {
-        console.log(1);
+        ItemModal.show('./template/inventory-management/warehouse/warehouse-item.html', 'warehouseItemCtrl');
     };
 }]);
