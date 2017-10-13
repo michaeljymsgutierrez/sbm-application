@@ -1195,3 +1195,14 @@ div.clock-container {
 
 .transaction-btn:hover {
   cursor: pointer; }
+
+.modal .warehouse-item .modal-header {
+  height: 55px;
+  color: #FFFFFF;
+  text-align: left;
+  font-size: 20px; }
+  .modal .warehouse-item .modal-header button {
+    background-color: transparent;
+    font-size: 28px;
+    padding-right: 10px;
+    margin-top: -20px; }
