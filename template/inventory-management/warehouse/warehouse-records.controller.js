@@ -72,7 +72,13 @@ app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$root
             $scope.warehouse_records = res;
             $scope.records = res;
             angular.forEach($scope.warehouse_records, function(value) {
-                // console.log(value);
+                var tid = value.id;
+                var getItem = "SELECT wr.quantity, wr.approved_quantity, (SELECT name FROM inventory WHERE id = wr.item_id) AS item, (SELECT uom FROM inventory WHERE id = wr.item_id ) AS uom FROM warehouse_request wr WHERE wr.transaction_id = ?";
+                DBAccess.execute(getItem, [tid]).then(function(res) {
+                    value.items = res;
+                }, function(err) {
+                    Log.write(err);
+                });
             });
         }, function(err) {
             Log.write(err);
@@ -85,4 +91,11 @@ app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$root
         unregisteUser();
         $scope.user = data;
     });
+
+    /*
+        Function for show items by transaction
+    */
+    $scope.showItems = function() {
+        console.log(1);
+    };
 }]);
