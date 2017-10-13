@@ -22,7 +22,7 @@
                 <tr ng-repeat="x in warehouse_records">
                     <td class="capitalize">{{ x.type | remove_ }}</td>
                     <td>{{ x.name }}</td>
-                    <td class="transaction-btn" ng-click="showItems()">{{ x.transaction_number }}</td>
+                    <td class="transaction-btn" ng-click="showItems(x)">{{ x.transaction_number }}</td>
                     <td>{{ x.status ? 'Approved': 'Pending' }}</td>
                 </tr>
             </tbody>

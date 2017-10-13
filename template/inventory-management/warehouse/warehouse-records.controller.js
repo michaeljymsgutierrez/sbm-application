@@ -95,7 +95,8 @@ app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$root
     /*
         Function for show items by transaction
     */
-    $scope.showItems = function() {
+    $scope.showItems = function(items) {
         ItemModal.show('./template/inventory-management/warehouse/warehouse-item.html', 'warehouseItemCtrl');
+        $rootScope.warehouse_item_record = items;
     };
 }]);
