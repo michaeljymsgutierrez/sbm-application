@@ -157,6 +157,7 @@
 
 .modal .warehouse-item {
     .modal-header {
+        border: none;
         height: 55px;
         color: #FFFFFF;
         text-align: left;
@@ -166,6 +167,24 @@
             font-size: 28px;
             padding-right: 10px;
             margin-top: -20px;
+        }
+    }
+    .modal-body {
+        padding: 0px !important;
+        .header {
+            font-size: 15px;
+            padding: 15px;
+            height: 140px;
+            background-color: $dark;
+            color: #FFFFFF;
+            .detail {
+                margin-top: 10px;
+                width: 282px;
+                float: left;
+                div {
+                    width: 115px;
+                }
+            }
         }
     }
 }

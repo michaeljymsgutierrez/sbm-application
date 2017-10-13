@@ -1197,6 +1197,7 @@ div.clock-container {
   cursor: pointer; }
 
 .modal .warehouse-item .modal-header {
+  border: none;
   height: 55px;
   color: #FFFFFF;
   text-align: left;
@@ -1206,3 +1207,18 @@ div.clock-container {
     font-size: 28px;
     padding-right: 10px;
     margin-top: -20px; }
+
+.modal .warehouse-item .modal-body {
+  padding: 0px !important; }
+  .modal .warehouse-item .modal-body .header {
+    font-size: 15px;
+    padding: 15px;
+    height: 140px;
+    background-color: #444;
+    color: #FFFFFF; }
+    .modal .warehouse-item .modal-body .header .detail {
+      margin-top: 10px;
+      width: 282px;
+      float: left; }
+      .modal .warehouse-item .modal-body .header .detail div {
+        width: 115px; }
