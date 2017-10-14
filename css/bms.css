@@ -385,6 +385,11 @@ input[type=number]::-webkit-outer-spin-button {
 .capitalize {
   text-transform: capitalize; }
 
+.ellipser {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
 .transaction-type {
   width: 268px;
   margin-left: 30%;
