@@ -170,6 +170,7 @@
         }
     }
     .modal-body {
+        border-radius: 0px;
         padding: 0px !important;
         .header {
             font-size: 15px;
@@ -186,6 +187,14 @@
                     width: 127px;
                     font-weight: bold;
                 }
+            }
+        }
+        .item-header {
+            width: 598px;
+            background-color: $table-header;
+            div {
+                float: left;
+                width: 148.2px;
             }
         }
     }
