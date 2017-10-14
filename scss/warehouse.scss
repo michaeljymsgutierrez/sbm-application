@@ -171,7 +171,6 @@
         }
     }
     .modal-body {
-        height: 600px;
         border-radius: 0px !important;
         padding: 0px !important;
         .header {
@@ -202,7 +201,7 @@
         .item-content {
             overflow-x: hidden;
             overflow-y: scroll;
-            height: 600px;
+            height: 400px;
             .items {
                 div {
                     border-bottom: 1px solid lightgray;

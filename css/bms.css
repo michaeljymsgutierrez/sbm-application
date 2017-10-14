@@ -1215,7 +1215,6 @@ div.clock-container {
       padding-right: 10px;
       margin-top: -20px; }
   .modal .warehouse-item .modal-body {
-    height: 600px;
     border-radius: 0px !important;
     padding: 0px !important; }
     .modal .warehouse-item .modal-body .header {
@@ -1241,7 +1240,7 @@ div.clock-container {
     .modal .warehouse-item .modal-body .item-content {
       overflow-x: hidden;
       overflow-y: scroll;
-      height: 600px; }
+      height: 400px; }
       .modal .warehouse-item .modal-body .item-content .items div {
         border-bottom: 1px solid lightgray;
         text-align: center;
