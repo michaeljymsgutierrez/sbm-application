@@ -11,19 +11,19 @@
             <div class="modal-body">
                 <div class="header">
                     <div class="detail">
-                        <div>Date</div>
+                        <div>Date</div>: {{ data.created | date: 'LLLL dd, yyyy' }}
+                    </div>
+                    <div class="detail ellipser">
+                        <div>Transaction #</div>: {{ data.transaction_number }}
+                    </div>
+                    <div class="detail capitalize">
+                        <div>Transaction Type</div>: {{ data.type | remove_ }}
                     </div>
                     <div class="detail">
-                        <div>Transaction #</div>
+                        <div>Status</div>: {{ data.status ? 'Approved': 'Pending' }}
                     </div>
                     <div class="detail">
-                        <div>Transction Type</div>
-                    </div>
-                    <div class="detail">
-                        <div>Status</div>
-                    </div>
-                    <div class="detail">
-                        <div>Requestor</div>
+                        <div>Requestor</div>: {{ data.name }}
                     </div>
                 </div>
             </div>
