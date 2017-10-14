@@ -1248,4 +1248,5 @@ div.clock-container {
         width: 147px;
         height: 50px;
         float: left;
-        padding-top: 15px; }
+        padding-top: 15px;
+        padding-left: 8px; }

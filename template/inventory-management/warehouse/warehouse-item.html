@@ -33,11 +33,11 @@
                     <div>UOM</div>
                 </div>
                 <div class="item-content">
-                    <div class="items">
-                        <div>1</div>
-                        <div>1</div>
-                        <div>1</div>
-                        <div>1</div>
+                    <div class="items" ng-repeat="y in data.items">
+                        <div class="ellipser">{{ y.item }}</div>
+                        <div class="ellipser">{{ y.quantity }}</div>
+                        <div class="ellipser">{{ y.approved_quantity }}</div>
+                        <div class="ellipser">{{ y.uom }}</div>
                     </div>
                 </div>
             </div>
