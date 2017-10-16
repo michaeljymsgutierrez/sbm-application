@@ -13,7 +13,7 @@
                     <div class="detail">
                         <div>Date</div>: {{ data.created | date: 'LLLL dd, yyyy' }}
                     </div>
-                    <div class="detail ellipser">
+                    <div class="detail ellipser" title="{{ data.transaction_number }}">
                         <div>Transaction #</div>: {{ data.transaction_number }}
                     </div>
                     <div class="detail capitalize">
