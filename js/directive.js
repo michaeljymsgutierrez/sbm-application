@@ -77,9 +77,18 @@ app.directive('warehouseTab', function() {
     };
 });
 
+
 /* Inventory Tab Directive */
 app.directive('inventoryTab', function() {
     return {
         templateUrl: './template/directive-template/inventory-tab.html'
+    };
+});
+
+
+/* Inventory Tab Directive */
+app.directive('attendanceTab', function() {
+    return {
+        templateUrl: './template/directive-template/attendance-tab.html'
     };
 });
