@@ -216,3 +216,39 @@
         }
     }
 }
+
+.wd-search-bar {
+    height: 50px;
+    color: #FFFFFF;
+    background-color: $dark;
+    div {
+        float: left;
+    }
+    .order-no {
+        // border: 1px solid #FFFFFF;
+        padding-top: 3px;
+        margin-left: 5px;
+        width: 50%;
+        input {
+            width: 380px;
+            margin-left: 8px;
+            border: 0px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: transparent;
+            border: none;
+            font-size: 25px;
+        }
+    }
+    .delivery-no {
+        padding-top: 10px;
+        width: 48%;
+        input {
+            width: 380px;
+            border: 0px;
+            margin-left: 8px;
+            border-radius: 5px;
+        }
+    }
+}

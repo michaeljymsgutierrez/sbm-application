@@ -1249,3 +1249,31 @@ div.clock-container {
         float: left;
         padding-top: 15px;
         padding-left: 8px; }
+
+.wd-search-bar {
+  height: 50px;
+  color: #FFFFFF;
+  background-color: #444; }
+  .wd-search-bar div {
+    float: left; }
+  .wd-search-bar .order-no {
+    padding-top: 3px;
+    margin-left: 5px;
+    width: 50%; }
+    .wd-search-bar .order-no input {
+      width: 380px;
+      margin-left: 8px;
+      border: 0px;
+      border-radius: 5px; }
+    .wd-search-bar .order-no button {
+      background-color: transparent;
+      border: none;
+      font-size: 25px; }
+  .wd-search-bar .delivery-no {
+    padding-top: 10px;
+    width: 48%; }
+    .wd-search-bar .delivery-no input {
+      width: 380px;
+      border: 0px;
+      margin-left: 8px;
+      border-radius: 5px; }
