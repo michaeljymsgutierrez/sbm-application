@@ -1277,3 +1277,6 @@ div.clock-container {
       border: 0px;
       margin-left: 8px;
       border-radius: 5px; }
+
+.warehouse-delivery .sticky-header div {
+  width: 157px; }
