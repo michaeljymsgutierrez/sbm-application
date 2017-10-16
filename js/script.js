@@ -72,6 +72,8 @@ function scriptCycle() {
         /* Remove drag element and select */
         $('*').attr('ondragstart', 'return false');
         $(document.body).attr('onselectstart', 'return false');
+        $('input').attr('ondragstart', 'return true');
+        $('input').attr('onselectstart', 'return true');
 
         /* Add active class for category */
         $('button.category').click(function() {
