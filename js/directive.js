@@ -42,6 +42,7 @@ app.directive('mainLogo', function() {
     };
 });
 
+/* Padding directive */
 app.directive('pad', function() {
     return {
         restrict: 'E',
@@ -49,6 +50,7 @@ app.directive('pad', function() {
     };
 });
 
+/* Filter directive for non iteger value */
 app.directive('validNumber', function() {
     return {
         restrict: 'A',
@@ -65,4 +67,12 @@ app.directive('validNumber', function() {
             });
         }
     }
-})
+});
+
+
+/* Warehouse Tab Directive */
+app.directive('warehouseTab', function() {
+    return {
+        templateUrl: './template/directive-template/warehouse-tab.html'
+    };
+});
