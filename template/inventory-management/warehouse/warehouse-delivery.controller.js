@@ -5,5 +5,9 @@
 */
 
 app.controller('warehouseDeliveryCtrl', ['$scope', function($scope) {
-    $scope.data = "Warehouse Delivery";
+    /*
+        Initialize scopes
+    */
+    $scope.order_no = "";
+    $scope.delivery_no = "";
 }]);
