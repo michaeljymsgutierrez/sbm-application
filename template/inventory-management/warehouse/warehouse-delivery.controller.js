@@ -23,12 +23,16 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
             if ($scope.order_no != "") {
                 var query = "SELECT * FROM warehouse_transaction WHERE transaction_number = ?";
                 DBAccess.execute(query, [$scope.order_no]).then(function(res) {
-                    if (res[0].is_synced == 0) {
-                        Toast.show("Warehouse transaction is unsynced");
-                    } else if (res[0].status == 0) {
-                        Toast.show("Warehouse transaction is waiting for approval");
+                    if (res.length != 0) {
+                        if (res[0].is_synced == 0) {
+                            Toast.show("Warehouse transaction is unsynced");
+                        } else if (res[0].status == 0) {
+                            Toast.show("Warehouse transaction is waiting for approval");
+                        } else {
+                            var tid = res[0].id;
+                        }
                     } else {
-                        console.log(res);
+                        Toast.show("Invalid wrehouse transaction number");
                     }
                 }, function(err) {
                     Log.write(err);
