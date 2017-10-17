@@ -76,3 +76,10 @@ app.directive('warehouseTab', function() {
         templateUrl: './template/directive-template/warehouse-tab.html'
     };
 });
+
+/* Inventory Tab Directive */
+app.directive('inventoryTab', function() {
+    return {
+        templateUrl: './template/directive-template/inventory-tab.html'
+    };
+});
