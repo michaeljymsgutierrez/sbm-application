@@ -4,7 +4,7 @@
     Warehouse Delivery Controller
 */
 
-app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', function($scope, DBAccess, Username) {
+app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$rootScope', function($scope, DBAccess, Username, $rootScope) {
 
     Username.popup();
     /*
@@ -12,11 +12,16 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', funct
     */
     $scope.order_no = "";
     $scope.delivery_no = "";
+    var unregisterUser = $rootScope.$on('user', function(event, data) {
+        unregisterUser();
+        $scope.user = data;
 
-    /*
-        Function for search transaction number
-    */
-    $scope.searchTransaction = function() {
-        console.log($scope.order_no);
-    };
+        /*
+            Function for search transaction number
+        */
+        $scope.searchTransaction = function() {
+            console.log($scope.order_no);
+        };
+
+    });
 }]);
