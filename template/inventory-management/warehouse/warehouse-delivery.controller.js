@@ -4,7 +4,7 @@
     Warehouse Delivery Controller
 */
 
-app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$rootScope', function($scope, DBAccess, Username, $rootScope) {
+app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$rootScope', 'Toast', function($scope, DBAccess, Username, $rootScope, Toast) {
 
     Username.popup();
     /*
@@ -20,7 +20,11 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
             Function for search transaction number
         */
         $scope.searchTransaction = function() {
-            console.log($scope.order_no);
+            if ($scope.order_no != "") {
+
+            } else {
+                Toast.show("Please input order no");
+            }
         };
 
     });
