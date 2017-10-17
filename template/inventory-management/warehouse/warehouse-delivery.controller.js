@@ -15,6 +15,6 @@ app.controller('warehouseDeliveryCtrl', ['$scope', function($scope) {
         Function for search transaction number
     */
     $scope.searchTransaction = function() {
-        console.log($scoep.order_no);
+        console.log($scope.order_no);
     };
 }]);
