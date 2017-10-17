@@ -4,7 +4,9 @@
     Warehouse Delivery Controller
 */
 
-app.controller('warehouseDeliveryCtrl', ['$scope', function($scope) {
+app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', function($scope, DBAccess, Username) {
+
+    Username.popup();
     /*
         Initialize scopes
     */
