@@ -32,7 +32,7 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                         } else {
                             /* Transaction ID for order delivery items */
                             var tid = res[0].id;
-                            var query = "SELECT wr.item_id, wr.quantity, wr.approved_quantity, (SELECT name FROM inventory WHERE id = wr.item_id) AS item, (SELECT uom FROM inventory WHERE id = wr.item_id) AS uom FROM warehouse_request wr WHERE wr.transaction_id = ?";
+                            var query = "SELECT wr.item_id, wr.quantity, wr.approved_quantity, (SELECT name FROM inventory WHERE id = wr.item_id) AS item, (SELECT uom FROM inventory WHERE id = wr.item_id) AS uom, (SELECT category_name FROM inventory WHERE id = wr.item_id) AS category FROM warehouse_request wr WHERE wr.transaction_id = ?";
                             DBAccess.execute(query, [tid]).then(function(res) {
                                 $scope.order_delivery_item = res;
                             }, function(err) {
