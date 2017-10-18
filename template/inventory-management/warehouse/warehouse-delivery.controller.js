@@ -12,6 +12,7 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
     */
     $scope.order_no = "";
     $scope.delivery_no = "";
+    $scope.order_delivery_item = [];
     var unregisterUser = $rootScope.$on('user', function(event, data) {
         unregisterUser();
         $scope.user = data;
@@ -32,6 +33,7 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                             var tid = res[0].id;
                             var query = "SELECT wr.item_id, wr.quantity, wr.approved_quantity, (SELECT name FROM inventory WHERE id = wr.item_id) AS item, (SELECT uom FROM inventory WHERE id = wr.item_id) AS uom FROM warehouse_request wr WHERE wr.transaction_id = ?";
                             DBAccess.execute(query, [tid]).then(function(res) {
+                                $scope.order_delivery_item = res;
                                 console.log(res);
                             }, function(err) {
                                 Log.write(err);
