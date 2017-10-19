@@ -1297,7 +1297,8 @@ div.clock-container {
     max-width: 157px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; }
+    white-space: nowrap;
+    vertical-align: 10px; }
     .warehouse-delivery .wd-table td input {
       width: 120px;
       border: 2px solid #d3d3d3;
