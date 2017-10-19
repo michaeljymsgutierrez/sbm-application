@@ -259,4 +259,23 @@
             width: 157px;
         }
     }
+    .wd-table {
+        overflow-y: scroll !important;
+        height: 81%;
+        td {
+            border-bottom: 1px solid lightgray;
+            width: 157px;
+            text-align: center;
+            max-width: 157px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            input {
+                width: 120px;
+                border: 2px solid #d3d3d3;
+                background-color: #f6f6f6;
+                border-radius: 4px;
+            }
+        }
+    }
 }
