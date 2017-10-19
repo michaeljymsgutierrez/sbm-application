@@ -19,6 +19,21 @@
             <div>Delivered</div>
             <div>UOM</div>
         </div>
+        <div class="container-fluid wd-table">
+            <table class="table">
+                <tbody>
+                    <tr ng-repeat="x in order_delivery_item">
+                        <td class="truncate">{{ x.category }}</td>
+                        <td class="truncate">{{ x.item }}</td>
+                        <td>{{ x.quantity }}</td>
+                        <td>{{ x.approved_quantity }}</td>
+                        <td>test</td>
+                        <td><input type="text" /></td>
+                        <td>{{ x.uom }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <warehouse-tab></warehouse-tab>
     </div>
 </div>
