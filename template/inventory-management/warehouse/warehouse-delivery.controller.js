@@ -51,10 +51,33 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
         };
 
         /*
-            Function for saving delivery transaction
+            Function for saving delivery transaction    
         */
         $scope.saveDelivery = function() {
-            console.log($scope.order_delivery_item);
+            if ($scope.order_delivery_item.length == 0) {
+                Toast.show("Please select transaction first");
+            } else {
+                /*
+                    Initialize quantity checker for items
+                */
+                $scope.checkQuantity = 0;
+                $scope.itemLength = $scope.order_delivery_item.length;
+
+                angular.forEach($scope.order_delivery_item, function(value) {
+                    if (value.delivered != "") {
+                        $scope.checkQuantity++;
+                    }
+                });
+
+                $scope.$watch('checkQuantity', function(value) {
+                    console.log($scope.checkQuantity + " " + $scope.itemLength);
+                    if ($scope.checkQuantity == $scope.itemLength) {
+
+                    } else {
+                        Toast.show("Please input delivered quantity");
+                    }
+                });
+            }
         };
 
     });
