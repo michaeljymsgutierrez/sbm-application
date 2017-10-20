@@ -70,9 +70,12 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                 });
 
                 $scope.$watch('checkQuantity', function(value) {
-                    console.log($scope.checkQuantity + " " + $scope.itemLength);
                     if ($scope.checkQuantity == $scope.itemLength) {
+                        if ($scope.delivery_no != "") {
 
+                        } else {
+                            Toast.show("Please input delivery number");
+                        }
                     } else {
                         Toast.show("Please input delivered quantity");
                     }
