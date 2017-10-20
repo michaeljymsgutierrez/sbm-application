@@ -50,5 +50,12 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
             }
         };
 
+        /*
+            Function for saving delivery transaction
+        */
+        $scope.saveDelivery = function() {
+            console.log($scope.order_delivery_item);
+        };
+
     });
 }]);
