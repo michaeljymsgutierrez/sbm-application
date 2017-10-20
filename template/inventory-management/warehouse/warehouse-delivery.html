@@ -14,7 +14,6 @@
             <div>Category</div>
             <div>Item</div>
             <div>Ordered</div>
-            <!-- <div>Approved by Admin</div> -->
             <div>Approved by Warehouse</div>
             <div>Delivered</div>
             <div>UOM</div>
@@ -27,8 +26,7 @@
                         <td class="truncate">{{ x.item }}</td>
                         <td>{{ x.quantity }}</td>
                         <td>{{ x.approved_quantity }}</td>
-                        <!-- <td>test</td> -->
-                        <td><input type="text" /></td>
+                        <td><input type="text" ng-model="x.delivered" /></td>
                         <td>{{ x.uom }}</td>
                     </tr>
                 </tbody>
@@ -37,3 +35,6 @@
         <warehouse-tab></warehouse-tab>
     </div>
 </div>
+
+<!-- <div>Approved by Admin</div> -->
+<!-- <td>test</td> -->
