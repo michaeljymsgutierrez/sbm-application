@@ -7,8 +7,12 @@ before_script:
   - 'npm install -g gulp'
   - 'npm install -g electron'
   - 'npm install -g electron-prebuilt'
+  - 'npm install -g electron-packager'
+  - 'npm install -g electron-builder'
   - 'npm install'
 
 after_script: 
   - 'gulp sass'
   - 'gulp serve'
+  - 'gulp build-linux'
+  - 'electron-builder -l deb'
