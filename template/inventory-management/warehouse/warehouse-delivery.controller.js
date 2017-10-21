@@ -80,10 +80,15 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                     if ($scope.checkQuantity == $scope.itemLength) {
                         if ($scope.delivery_no != "") {
                             $scope.id = $scope.user.id;
-                            var query = "SELECT * FROM warehouse_transaction WHERE transaction_number = ? AND type = ?";
-                            var param = [$scope.delivery_no, 'commissary_delivery'];
+                            $scope.tid = $scope.warehouseTransaction.id;
+                            var query = "SELECT count(*) AS count FROM warehouse_response WHERE transaction_id = ?";
+                            var param = [$scope.tid];
                             DBAccess.execute(query, param).then(function(res) {
-                                if (res.length == 0) {
+                                if (res[0].count == 0) {
+                                    console.log(0);
+                                    /*
+                                        Insert Warehouse Transaction and response
+                                    */
                                     var insertWarehouseDelivery = "INSERT INTO warehouse_transaction (type, transaction_number, created_by, status, created, is_synced) VALUES (?,?,?,?,?,?)";
                                     var param = ['commissary_delivery', $scope.delivery_no, $scope.id, 1, dateFormatter.utc(new Date()), 0];
                                     DBAccess.execute(insertWarehouseDelivery, param).then(function(res) {
@@ -103,6 +108,8 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                                     }, function(err) {
                                         Log.write(err);
                                     });
+                                } else {
+                                    console.log(1);
                                 }
                             }, function(err) {
                                 Log.write(err);
