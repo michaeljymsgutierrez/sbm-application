@@ -41,8 +41,6 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                                 /*
                                     Break Point
                                 */
-                                console.log($scope.warehouseTransaction);
-                                console.log(res);
                                 $scope.order_delivery_item = res;
                             }, function(err) {
                                 Log.write(err);
@@ -63,43 +61,60 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
             Function for saving delivery transaction    
         */
         $scope.saveDelivery = function() {
-            // if ($scope.order_delivery_item.length == 0) {
-            //     Toast.show("Please select transaction first");
-            // } else {
-            //     /*
-            //         Initialize quantity checker for items
-            //     */
-            //     $scope.checkQuantity = 0;
-            //     $scope.itemLength = $scope.order_delivery_item.length;
+            if ($scope.order_delivery_item.length == 0) {
+                Toast.show("Please select transaction first");
+            } else {
+                /*
+                    Initialize quantity checker for items
+                */
+                $scope.checkQuantity = 0;
+                $scope.itemLength = $scope.order_delivery_item.length;
 
-            //     angular.forEach($scope.order_delivery_item, function(value) {
-            //         if (value.delivered != "") {
-            //             $scope.checkQuantity++;
-            //         }
-            //     });
+                angular.forEach($scope.order_delivery_item, function(value) {
+                    if (value.delivered != "") {
+                        $scope.checkQuantity++;
+                    }
+                });
 
-            //     $scope.$watch('checkQuantity', function(value) {
-            //         if ($scope.checkQuantity == $scope.itemLength) {
-            //             if ($scope.delivery_no != "") {
-            //                 var id = $scope.user.id;
-            //                 var query = "SELECT * FROM warehouse_transaction WHERE transaction_number = ? AND type = ?";
-            //                 var param = [$scope.delivery_no, 'commissary_delivery'];
-            //                 DBAccess.execute(query, [$scope.delivery_no]).then(function(res) {
-            //                     if (res.length == 0) {
-            //                         var insertWarehouseDelivery = "INSERT INTO warehouse_transaction (transaction_number, created_by, status, created, is_synced) VALUES (?,?,?,?,?)";
-            //                         var param = [$scope.delivery_no];
-            //                     }
-            //                 }, function(err) {
-            //                     Log.write(err);
-            //                 });
-            //             } else {
-            //                 Toast.show("Please input delivery number");
-            //             }
-            //         } else {
-            //             Toast.show("Please input delivered quantity");
-            //         }
-            //     });
-            // }
+                $scope.$watch('checkQuantity', function(value) {
+                    if ($scope.checkQuantity == $scope.itemLength) {
+                        if ($scope.delivery_no != "") {
+                            $scope.id = $scope.user.id;
+                            var query = "SELECT * FROM warehouse_transaction WHERE transaction_number = ? AND type = ?";
+                            var param = [$scope.delivery_no, 'commissary_delivery'];
+                            DBAccess.execute(query, param).then(function(res) {
+                                if (res.length == 0) {
+                                    var insertWarehouseDelivery = "INSERT INTO warehouse_transaction (type, transaction_number, created_by, status, created, is_synced) VALUES (?,?,?,?,?,?)";
+                                    var param = ['commissary_delivery', $scope.delivery_no, $scope.id, 1, dateFormatter.utc(new Date()), 0];
+                                    DBAccess.execute(insertWarehouseDelivery, param).then(function(res) {
+                                        if (res.insertId) {
+                                            /*
+                                                crid: commissary request id
+                                                tid: transaction id
+                                            */
+                                            var crId = res.insertId;
+                                            var tid = $scope.warehouseTransaction.id;
+                                            angular.forEach($scope.order_delivery_item, function(value) {
+                                                var insertWarehouseResponse = "INSERT INTO warehouse_response (warehouse_request_id, quantity, transaction_id) VALUES (?,?,?)";
+                                                var param = [crId, parseInt(value.delivered), tid];
+                                                DBAccess.execute(insertWarehouseResponse, param);
+                                            });
+                                        }
+                                    }, function(err) {
+                                        Log.write(err);
+                                    });
+                                }
+                            }, function(err) {
+                                Log.write(err);
+                            });
+                        } else {
+                            Toast.show("Please input delivery number");
+                        }
+                    } else {
+                        Toast.show("Please input delivered quantity");
+                    }
+                });
+            }
         };
 
     });
