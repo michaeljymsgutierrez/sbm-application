@@ -35,9 +35,9 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                             Toast.show("Warehouse transaction is waiting for approval");
                         } else {
                             /* Transaction ID for order delivery items */
-                            var tid = res[0].id;
-                            var query = "SELECT wr.item_id, wr.quantity, wr.approved_quantity, (SELECT name FROM inventory WHERE id = wr.item_id) AS item, (SELECT uom FROM inventory WHERE id = wr.item_id) AS uom, (SELECT category_name FROM inventory WHERE id = wr.item_id) AS category FROM warehouse_request wr WHERE wr.transaction_id = ?";
-                            DBAccess.execute(query, [tid]).then(function(res) {
+                            $scope.transactionId = res[0].id;
+                            var query = "SELECT wr.id, wr.item_id, wr.quantity, wr.approved_quantity, (SELECT name FROM inventory WHERE id = wr.item_id) AS item, (SELECT uom FROM inventory WHERE id = wr.item_id) AS uom, (SELECT category_name FROM inventory WHERE id = wr.item_id) AS category FROM warehouse_request wr WHERE wr.transaction_id = ?";
+                            DBAccess.execute(query, [$scope.transactionId]).then(function(res) {
                                 /*
                                     Break Point
                                 */
@@ -79,41 +79,7 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                 $scope.$watch('checkQuantity', function(value) {
                     if ($scope.checkQuantity == $scope.itemLength) {
                         if ($scope.delivery_no != "") {
-                            $scope.id = $scope.user.id;
-                            $scope.tid = $scope.warehouseTransaction.id;
-                            var query = "SELECT count(*) AS count FROM warehouse_response WHERE transaction_id = ?";
-                            var param = [$scope.tid];
-                            DBAccess.execute(query, param).then(function(res) {
-                                if (res[0].count == 0) {
-                                    console.log(0);
-                                    /*
-                                        Insert Warehouse Transaction and response
-                                    */
-                                    var insertWarehouseDelivery = "INSERT INTO warehouse_transaction (type, transaction_number, created_by, status, created, is_synced) VALUES (?,?,?,?,?,?)";
-                                    var param = ['commissary_delivery', $scope.delivery_no, $scope.id, 1, dateFormatter.utc(new Date()), 0];
-                                    DBAccess.execute(insertWarehouseDelivery, param).then(function(res) {
-                                        if (res.insertId) {
-                                            /*
-                                                crid: commissary request id
-                                                tid: transaction id
-                                            */
-                                            var crId = res.insertId;
-                                            var tid = $scope.warehouseTransaction.id;
-                                            angular.forEach($scope.order_delivery_item, function(value) {
-                                                var insertWarehouseResponse = "INSERT INTO warehouse_response (warehouse_request_id, quantity, transaction_id) VALUES (?,?,?)";
-                                                var param = [crId, parseInt(value.delivered), tid];
-                                                DBAccess.execute(insertWarehouseResponse, param);
-                                            });
-                                        }
-                                    }, function(err) {
-                                        Log.write(err);
-                                    });
-                                } else {
-                                    console.log(1);
-                                }
-                            }, function(err) {
-                                Log.write(err);
-                            });
+                            var query = ""
                         } else {
                             Toast.show("Please input delivery number");
                         }
