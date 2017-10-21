@@ -24,6 +24,10 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
             if ($scope.order_no != "") {
                 var query = "SELECT * FROM warehouse_transaction WHERE transaction_number = ? AND type = ?";
                 DBAccess.execute(query, [$scope.order_no, 'order_commissary']).then(function(res) {
+                    /*
+                        Fetch warehouse transaction data 
+                    */
+                    $scope.warehouseTransaction = res[0];
                     if (res.length != 0) {
                         if (res[0].is_synced == 0) {
                             Toast.show("Warehouse transaction is unsynced");
@@ -37,6 +41,7 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                                 /*
                                     Break Point
                                 */
+                                console.log($scope.warehouseTransaction);
                                 console.log(res);
                                 $scope.order_delivery_item = res;
                             }, function(err) {
