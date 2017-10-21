@@ -79,7 +79,29 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                 $scope.$watch('checkQuantity', function(value) {
                     if ($scope.checkQuantity == $scope.itemLength) {
                         if ($scope.delivery_no != "") {
-                            var query = ""
+                            /*
+                                Check if one of the item id exists on warehouse response
+                            */
+                            var query = "SELECT * FROM warehouse_response WHERE warehouse_request_id = ?";
+                            var param = [$scope.order_delivery_item[0].id];
+                            DBAccess.execute(query, param).then(function(res) {
+                                if (res.length == 0) {
+                                    var insertWarehouseTransaction = "INSERT INTO warehouse_transaction (type, transaction_number, created_by, status, created, is_synced) VALUES (?,?,?,?,?,?)";
+                                    var param = ['commissary_delivery', $scope.delivery_no, $scope.user.id, 0, dateFormatter.utc(new Date()), 0];
+                                    DBAccess.execute(insertWarehouseTransaction, param).then(function(res) {
+                                        var tid = res.insertId;
+                                        angular.forEach($scope.order_delivery_item, function(value) {
+                                            var insertWarehouseResponse = "INSERT INTO warehouse_response (warehouse_request_id, quantity, transaction_id) VALUES (?,?,?)";
+                                            var param = [value.id, parseInt(value.delivered), tid];
+                                            DBAccess.execute(insertWarehouseResponse, param);
+                                        });
+                                    }, function(err) {
+                                        Log.write(err);
+                                    });
+                                }
+                            }, function(err) {
+                                Log.write(err);
+                            });
                         } else {
                             Toast.show("Please input delivery number");
                         }
