@@ -8,11 +8,14 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
 
     Username.popup();
     /*
-        Initialize scopes
+        Initialize order delivery scopes
     */
-    $scope.order_no = "";
-    $scope.delivery_no = "";
-    $scope.order_delivery_item = [];
+    $scope.initOrderDelivery = function() {
+        $scope.order_no = "";
+        $scope.delivery_no = "";
+        $scope.order_delivery_item = [];
+    };
+    $scope.initOrderDelivery();
     var unregisterUser = $rootScope.$on('user', function(event, data) {
         unregisterUser();
         $scope.user = data;
@@ -95,6 +98,18 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                                             var param = [value.id, parseInt(value.delivered), tid];
                                             DBAccess.execute(insertWarehouseResponse, param);
                                         });
+                                        Toast.show("Warehouse delivery transaction successful");
+                                        $scope.initOrderDelivery();
+                                    }, function(err) {
+                                        Log.write(err);
+                                    });
+                                } else {
+                                    /* Get transaction id from warehouse response query for update */
+                                    $scope.result = res[0].transaction_id;
+                                    var updateWarehouseTransaction = "UPDATE warehouse_transaction SET transaction_number = ? WHERE id = ?";
+                                    var param = [$scope.delivery_no, $scope.result];
+                                    DBAccess.execute(updateWarehouseTransaction, param).then(function(res) {
+                                        console.log(res);
                                     }, function(err) {
                                         Log.write(err);
                                     });
