@@ -89,6 +89,10 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                             var param = [$scope.order_delivery_item[0].id];
                             DBAccess.execute(query, param).then(function(res) {
                                 if (res.length == 0) {
+                                    /*
+                                        Insert warehouse transaction and response
+                                        Warehouse Delivery
+                                    */
                                     var insertWarehouseTransaction = "INSERT INTO warehouse_transaction (type, transaction_number, created_by, status, created, is_synced) VALUES (?,?,?,?,?,?)";
                                     var param = ['commissary_delivery', $scope.delivery_no, $scope.user.id, 0, dateFormatter.utc(new Date()), 0];
                                     DBAccess.execute(insertWarehouseTransaction, param).then(function(res) {
@@ -106,10 +110,20 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                                 } else {
                                     /* Get transaction id from warehouse response query for update */
                                     $scope.result = res[0].transaction_id;
+                                    /*
+                                        Update warehouse transaction and response
+                                        Warehouse Delivery
+                                    */
                                     var updateWarehouseTransaction = "UPDATE warehouse_transaction SET transaction_number = ? WHERE id = ?";
                                     var param = [$scope.delivery_no, $scope.result];
                                     DBAccess.execute(updateWarehouseTransaction, param).then(function(res) {
-                                        console.log(res);
+                                        angular.forEach($scope.order_delivery_item, function(value) {
+                                            var updateWarehouseResponse = "UPDATE warehouse_response SET quantity = ? WHERE warehouse_request_id = ? AND transaction_id = ?";
+                                            var param = [parseInt(value.delivered), value.id, $scope.result];
+                                            DBAccess.execute(updateWarehouseResponse, param);
+                                            Toast.show("Updating warehouse delivery transaction successful");
+                                            $scope.initOrderDelivery();
+                                        });
                                     }, function(err) {
                                         Log.write(err);
                                     });
