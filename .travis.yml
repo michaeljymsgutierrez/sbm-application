@@ -13,6 +13,5 @@ before_script:
 
 after_script: 
   - 'gulp sass'
-  - 'gulp serve'
-  - 'gulp build-linux'
-  - 'electron-builder -l deb'
+  - 'gulp compress'
+  - 'gulp lint'
