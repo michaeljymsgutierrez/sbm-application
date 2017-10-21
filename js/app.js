@@ -155,5 +155,13 @@ app.run(['$state', 'DBAccess', 'Log', function($state, DBAccess, Log) {
         }, function(err) {
             Log.write(err);
         });
+
+        /*Create warehouse response */
+        var warehouse_response = "CREATE TABLE IF NOT EXISTS warehouse_response (id INT PRIMARY KEY AUTO_INCREMENT, warehouse_request_id INT, quantity INT, transaction_id TEXT)";
+        DBAccess.execute(warehouse_response, []).then(function(res) {
+            console.info("warehouse response table created");
+        }, function(err) {
+            Log.write(err);
+        });
     };
 }]);
