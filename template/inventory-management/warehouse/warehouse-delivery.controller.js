@@ -48,7 +48,6 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                                 "(SELECT category_name FROM inventory WHERE id = wr.item_id) AS category " +
                                 "FROM warehouse_request wr WHERE wr.transaction_id = ?";
                             DBAccess.execute(query, [$scope.transactionId]).then(function(res) {
-                                console.log(res);
                                 /*
                                     Break Point
                                 */
