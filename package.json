@@ -5,7 +5,7 @@
     "main": "main.js",
     "scripts": {
         "start": "electron main.js",
-        "test": "electron-builder linux deb"
+        "test": "electron-builder -mwl"
     },
     "author": {
         "name": "Chaelgutierrez",
