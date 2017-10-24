@@ -73,6 +73,8 @@ app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$root
             $scope.records = res;
             angular.forEach($scope.warehouse_records, function(value) {
                 if (value.type == "order_commissary") {
+                    var status = value.status;
+                    value.status = status ? 'Approved' : 'Pending';
                     /*
                         Commissary Order item query
                     */
@@ -84,6 +86,8 @@ app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$root
                         Log.write(err);
                     });
                 } else if (value.type == "commissary_delivery") {
+                    var status = value.status;
+                    value.status = status ? 'Completed' : 'Incomplete';
                     /*
                         Commissary Delivery item query
                     */
