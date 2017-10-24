@@ -129,14 +129,23 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                                         Log.write(err);
                                     });
                                 } else {
+                                    /*
+                                        Set Status for Complete / Incomplete Delivery
+                                    */
+                                    if ($scope.isIncomplete > 0) {
+                                        $scope.status = 0;
+                                    } else {
+                                        $scope.status = 1;
+                                    }
+
                                     /* Get transaction id from warehouse response query for update */
                                     $scope.result = res[0].transaction_id;
                                     /*
                                         Update warehouse transaction and response
                                         Warehouse Delivery
                                     */
-                                    var updateWarehouseTransaction = "UPDATE warehouse_transaction SET transaction_number = ? WHERE id = ?";
-                                    var param = [$scope.delivery_no, $scope.result];
+                                    var updateWarehouseTransaction = "UPDATE warehouse_transaction SET transaction_number = ?, status = ? WHERE id = ?";
+                                    var param = [$scope.delivery_no, $scope.status, $scope.result];
                                     DBAccess.execute(updateWarehouseTransaction, param).then(function(res) {
                                         angular.forEach($scope.order_delivery_item, function(value) {
                                             var updateWarehouseResponse = "UPDATE warehouse_response SET quantity = ? WHERE warehouse_request_id = ? AND transaction_id = ?";
