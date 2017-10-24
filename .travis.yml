@@ -1,9 +1,12 @@
 language: node_js
-sudo: false
+sudo: true
 node_js:
   - '6.11.1'
 
 before_script: 
+  - 'add-apt-repository ppa:ubuntu-wine/ppa'
+  - 'apt-get update'
+  - 'apt-get install -y wine1.7'
   - 'npm install -g gulp'
   - 'npm install -g electron'
   - 'npm install -g electron-prebuilt'
