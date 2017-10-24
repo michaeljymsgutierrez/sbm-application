@@ -72,13 +72,30 @@ app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$root
             $scope.warehouse_records = res;
             $scope.records = res;
             angular.forEach($scope.warehouse_records, function(value) {
-                var tid = value.id;
-                var getItem = "SELECT wr.quantity, wr.approved_quantity, (SELECT name FROM inventory WHERE id = wr.item_id) AS item, (SELECT uom FROM inventory WHERE id = wr.item_id ) AS uom FROM warehouse_request wr WHERE wr.transaction_id = ?";
-                DBAccess.execute(getItem, [tid]).then(function(res) {
-                    value.items = res;
-                }, function(err) {
-                    Log.write(err);
-                });
+                if (value.type == "order_commissary") {
+                    /*
+                        Commissary Order item query
+                    */
+                    var tid = value.id;
+                    var getItem = "SELECT wr.quantity, wr.approved_quantity, (SELECT name FROM inventory WHERE id = wr.item_id) AS item, (SELECT uom FROM inventory WHERE id = wr.item_id ) AS uom FROM warehouse_request wr WHERE wr.transaction_id = ?";
+                    DBAccess.execute(getItem, [tid]).then(function(res) {
+                        value.items = res;
+                    }, function(err) {
+                        Log.write(err);
+                    });
+                } else if (value.type == "commissary_delivery") {
+                    /*
+                        Commissary Delivery item query
+                    */
+                    var tid = value.id;
+                    var getItem = "SELECT wp.quantity, (SELECT name FROM inventory WHERE id = wp.warehouse_request_id ) AS item, (SELECT uom FROM inventory WHERE id = wp.warehouse_request_id ) AS uom FROM warehouse_response wp WHERE wp.transaction_id = ?";
+                    DBAccess.execute(getItem, [tid]).then(function(res) {
+                        value.items = res;
+                    }, function(err) {
+                        Log.write(err);
+                    });
+
+                }
             });
         }, function(err) {
             Log.write(err);
