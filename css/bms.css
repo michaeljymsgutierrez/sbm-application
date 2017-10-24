@@ -1243,6 +1243,8 @@ div.clock-container {
       .modal .warehouse-item .modal-body .item-header div {
         float: left;
         width: 148.2px; }
+      .modal .warehouse-item .modal-body .item-header .no-approved-qty-header {
+        width: 197px; }
     .modal .warehouse-item .modal-body .item-content {
       overflow-x: hidden;
       overflow-y: scroll;
@@ -1255,6 +1257,8 @@ div.clock-container {
         float: left;
         padding-top: 15px;
         padding-left: 8px; }
+      .modal .warehouse-item .modal-body .item-content .items .no-approved-qty {
+        width: 196px; }
 
 .wd-search-bar {
   height: 50px;

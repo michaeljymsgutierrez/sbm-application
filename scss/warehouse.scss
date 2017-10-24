@@ -197,6 +197,9 @@
                 float: left;
                 width: 148.2px;
             }
+            .no-approved-qty-header {
+                width: 197px;
+            }
         }
         .item-content {
             overflow-x: hidden;
@@ -211,6 +214,9 @@
                     float: left;
                     padding-top: 15px;
                     padding-left: 8px;
+                }
+                .no-approved-qty {
+                    width: 196px;
                 }
             }
         }
