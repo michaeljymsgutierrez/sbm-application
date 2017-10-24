@@ -20,24 +20,24 @@
                         <div>Transaction Type</div>: {{ data.type | remove_ }}
                     </div>
                     <div class="detail">
-                        <div>Status</div>: {{ data.status ? 'Approved': 'Pending' }}
+                        <div>Status</div>: {{ data.status }}
                     </div>
                     <div class="detail">
                         <div>Requestor</div>: {{ data.name }}
                     </div>
                 </div>
                 <div class="item-header">
-                    <div>Item</div>
-                    <div>Quantity</div>
-                    <div>Approved</div>
-                    <div>UOM</div>
+                    <div ng-class="{'no-approved-qty-header': hideApprovedQty }">Item</div>
+                    <div ng-class="{'no-approved-qty-header': hideApprovedQty }">Quantity</div>
+                    <div ng-hide="hideApprovedQty">Approved</div>
+                    <div ng-class="{'no-approved-qty-header': hideApprovedQty }">UOM</div>
                 </div>
                 <div class="item-content">
                     <div class="items" ng-repeat="y in data.items">
-                        <div class="ellipser">{{ y.item }}</div>
-                        <div class="ellipser">{{ y.quantity }}</div>
-                        <div class="ellipser">{{ y.approved_quantity }}</div>
-                        <div class="ellipser">{{ y.uom }}</div>
+                        <div class="ellipser" ng-class="{'no-approved-qty': hideApprovedQty }">{{ y.item }}</div>
+                        <div class="ellipser" ng-class="{'no-approved-qty': hideApprovedQty }">{{ y.quantity }}</div>
+                        <div class="ellipser" ng-hide="hideApprovedQty">{{ y.approved_quantity }}</div>
+                        <div class="ellipser" ng-class="{'no-approved-qty': hideApprovedQty }">{{ y.uom }}</div>
                     </div>
                 </div>
             </div>
