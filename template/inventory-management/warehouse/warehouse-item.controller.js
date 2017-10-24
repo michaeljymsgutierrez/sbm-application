@@ -8,6 +8,7 @@ app.controller('warehouseItemCtrl', ['$scope', '$rootScope', 'Modal', function($
     /*
         Function for close transaction summary
     */
+    $scope.hideApprovedQty = $scope.data.type == 'commissary_delivery' ? 1 : 0;
     $scope.closeSummary = function() {
         Modal.hide();
     };
