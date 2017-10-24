@@ -80,16 +80,29 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                 */
                 $scope.checkQuantity = 0;
                 $scope.itemLength = $scope.order_delivery_item.length;
+                $scope.isIncomplete = 0;
+                $scope.status = 0;
 
                 angular.forEach($scope.order_delivery_item, function(value) {
                     if (value.delivered != "") {
                         $scope.checkQuantity++;
+                        if (value.delivered != value.approved_quantity) {
+                            $scope.isIncomplete++;
+                        }
                     }
                 });
 
                 $scope.$watch('checkQuantity', function(value) {
                     if ($scope.checkQuantity == $scope.itemLength) {
                         if ($scope.delivery_no != "") {
+                            /*
+                                Set Status for Complete / Incomplete Delivery
+                            */
+                            if ($scope.isIncomplete > 0) {
+                                $scope.status = 0;
+                            } else {
+                                $scope.status = 1;
+                            }
                             /*
                                 Check if one of the item id exists on warehouse response
                             */
@@ -102,7 +115,7 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                                         Warehouse Delivery
                                     */
                                     var insertWarehouseTransaction = "INSERT INTO warehouse_transaction (type, transaction_number, created_by, status, created, is_synced) VALUES (?,?,?,?,?,?)";
-                                    var param = ['commissary_delivery', $scope.delivery_no, $scope.user.id, 0, dateFormatter.utc(new Date()), 0];
+                                    var param = ['commissary_delivery', $scope.delivery_no, $scope.user.id, $scope.status, dateFormatter.utc(new Date()), 0];
                                     DBAccess.execute(insertWarehouseTransaction, param).then(function(res) {
                                         var tid = res.insertId;
                                         angular.forEach($scope.order_delivery_item, function(value) {
