@@ -23,7 +23,7 @@
                     <td class="capitalize">{{ x.type | remove_ }}</td>
                     <td>{{ x.name }}</td>
                     <td class="transaction-btn" ng-click="showItems(x)">{{ x.transaction_number }}</td>
-                    <td>{{ x.status ? 'Approved': 'Pending' }}</td>
+                    <td>{{ x.status }}</td>
                 </tr>
             </tbody>
         </table>
