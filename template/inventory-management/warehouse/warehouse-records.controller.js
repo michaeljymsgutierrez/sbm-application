@@ -92,7 +92,10 @@ app.controller('warehouseRecordsCtrl', ['$scope', 'Username', 'DBAccess', '$root
                         Commissary Delivery item query
                     */
                     var tid = value.id;
-                    var getItem = "SELECT wp.quantity, (SELECT name FROM inventory WHERE id = wp.warehouse_request_id ) AS item, (SELECT uom FROM inventory WHERE id = wp.warehouse_request_id ) AS uom FROM warehouse_response wp WHERE wp.transaction_id = ?";
+                    var getItem = "SELECT wp.quantity, " +
+                        "(SELECT name FROM inventory WHERE id = (SELECT wr.item_id FROM warehouse_request wr WHERE wr.id = wp.warehouse_request_id )) AS item, " +
+                        "(SELECT uom FROM inventory WHERE id = (SELECT wr.item_id FROM warehouse_request wr WHERE wr.id = wp.warehouse_request_id )) AS uom " +
+                        "FROM warehouse_response wp WHERE wp.transaction_id = ?";
                     DBAccess.execute(getItem, [tid]).then(function(res) {
                         value.items = res;
                     }, function(err) {
