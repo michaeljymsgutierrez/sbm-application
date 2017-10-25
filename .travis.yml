@@ -3,9 +3,9 @@ sudo: true
 node_js:
   - '6.11.1'
 before_install:
-  - 'sudo add-apt-repository ppa:ricotz/unstable -y'
-  - 'sudo apt-get update'
-  - 'sudo apt-get install wine-stable -y'
+  - 'sudo add-apt-repository ppa:ubuntu-wine/ppa -y'
+  - 'sudo apt-get update -y'
+  - 'sudo apt-get install wine1.8 winetricks -y'
 before_script: 
   - 'npm install -g gulp'
   - 'npm install -g electron'
