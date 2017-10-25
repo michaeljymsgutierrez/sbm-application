@@ -3,9 +3,9 @@ sudo: true
 node_js:
   - '6.11.1'
 before_install:
-  - 'sudo dpkg --add-architecture i386'
+  - 'sudo add-apt-repository ppa:ricotz/unstable -y'
   - 'sudo apt-get update -y'
-  - 'sudo apt-get install --install-recommends wine-staging'
+  - 'sudo apt install wine-stable -y'
 before_script: 
   - 'npm install -g gulp'
   - 'npm install -g electron'
@@ -13,7 +13,6 @@ before_script:
   - 'npm install -g electron-packager'
   - 'npm install -g electron-builder'
   - 'npm install'
-
 after_script: 
   - 'gulp sass'
   - 'gulp compress'
