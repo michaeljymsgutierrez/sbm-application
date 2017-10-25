@@ -149,7 +149,11 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
             angular.forEach($scope.warehouseOrder, function(value) {
                 if (value.transaction_type == 'order_commissary') {
                     var tid = value.transaction_id;
-                    var query = "SELECT (SELECT _id FROM inventory WHERE id = wr.item_id) AS item_id, (SELECT name FROM inventory WHERE id = wr.item_id) AS item_name, (SELECT uom FROM inventory WHERE id = wr.item_id) AS item_uom, quantity, (NULL) AS reason FROM warehouse_request wr WHERE wr.transaction_id = ?";
+                    var query = "SELECT (SELECT _id FROM inventory WHERE id = wr.item_id) AS item_id, " +
+                        "(SELECT name FROM inventory WHERE id = wr.item_id) AS item_name, " +
+                        "(SELECT uom FROM inventory WHERE id = wr.item_id) AS item_uom, " +
+                        "quantity, (NULL) AS reason " +
+                        "FROM warehouse_request wr WHERE wr.transaction_id = ?";
                     DBAccess.execute(query, [tid]).then(function(res) {
                         value.items = res;
                     }, function(err) {
