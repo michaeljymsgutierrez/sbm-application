@@ -138,19 +138,36 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
         $scope.warehouseToSync = [];
         $scope.warehouseOrder = [];
         $scope.warehouseCount = 0;
-        var unsyncWarehouse = "SELECT DATE_FORMAT(wt.created,'%Y-%m-%d %H:%i:%s') AS created, (SELECT username FROM employee WHERE id = wt.created_by) AS created_by_name, (SELECT user_id FROM employee WHERE id = wt.created_by) AS created_by_id ,(NULL) AS reason,(NULL) AS request_number, wt.id AS transaction_id, wt.transaction_number, wt.type AS transaction_type FROM warehouse_transaction wt WHERE is_synced = 0";
+        var unsyncWarehouse = "SELECT DATE_FORMAT(wt.created,'%Y-%m-%d %H:%i:%s') AS created, " +
+            "(SELECT username FROM employee WHERE id = wt.created_by) AS created_by_name, " +
+            "(SELECT user_id FROM employee WHERE id = wt.created_by) AS created_by_id ," +
+            "(NULL) AS reason, (NULL) AS request_number, wt.id AS transaction_id, wt.transaction_number, wt.type AS transaction_type " +
+            "FROM warehouse_transaction wt WHERE is_synced = 0";
         DBAccess.execute(unsyncWarehouse, []).then(function(res) {
             $scope.warehouseCount = res.length;
             $scope.warehouseOrder = res;
             angular.forEach($scope.warehouseOrder, function(value) {
-                var tid = value.transaction_id;
-                var query = "SELECT (SELECT _id FROM inventory WHERE id = wr.item_id) AS item_id, (SELECT name FROM inventory WHERE id = wr.item_id) AS item_name, (SELECT uom FROM inventory WHERE id = wr.item_id) AS item_uom, quantity, (NULL) AS reason FROM warehouse_request wr WHERE wr.transaction_id = ?";
-                DBAccess.execute(query, [tid]).then(function(res) {
-                    value.items = res;
-                }, function(err) {
-                    Log.write(err);
-                });
-
+                if (value.transaction_type == 'order_commissary') {
+                    var tid = value.transaction_id;
+                    var query = "SELECT (SELECT _id FROM inventory WHERE id = wr.item_id) AS item_id, (SELECT name FROM inventory WHERE id = wr.item_id) AS item_name, (SELECT uom FROM inventory WHERE id = wr.item_id) AS item_uom, quantity, (NULL) AS reason FROM warehouse_request wr WHERE wr.transaction_id = ?";
+                    DBAccess.execute(query, [tid]).then(function(res) {
+                        value.items = res;
+                    }, function(err) {
+                        Log.write(err);
+                    });
+                } else if (value.transaction_type == 'commissary_delivery') {
+                    var tid = value.transaction_id;
+                    var query = "SELECT (SELECT _id FROM inventory WHERE id = (SELECT wr.item_id FROM warehouse_request wr WHERE wr.id = wp.warehouse_request_id )) AS item_id, " +
+                        "(SELECT name FROM inventory WHERE id = (SELECT wr.item_id FROM warehouse_request wr WHERE wr.id = wp.warehouse_request_id )) AS item_name, " +
+                        "(SELECT uom FROM inventory WHERE id =  (SELECT wr.item_id FROM warehouse_request wr WHERE wr.id = wp.warehouse_request_id )) AS item_uom, " +
+                        "quantity, (NULL) AS reason " +
+                        "FROM warehouse_response wp WHERE wp.transaction_id = ?";
+                    DBAccess.execute(query, [tid]).then(function(res) {
+                        value.items = res;
+                    }, function(err) {
+                        Log.write(err);
+                    });
+                }
                 $scope.syncWarehouseFromDevice = function() {
                     backdrop.show();
                     angular.forEach($scope.warehouseOrder, function(value) {
