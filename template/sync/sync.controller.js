@@ -504,8 +504,8 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                             var selectId = "SELECT id FROM inventory WHERE _id = ?";
                             DBAccess.execute(selectId, [item_id]).then(function(res) {
                                 value.item_id = res[0].id;
-                                var updateQuantity = "UPDATE warehouse_request SET approved_quantity = ? WHERE transaction_id = ?";
-                                DBAccess.execute(updateQuantity, [value.quantity, value.tid]);
+                                var updateQuantity = "UPDATE warehouse_request SET approved_quantity = ? WHERE transaction_id = ? AND item_id = ?";
+                                DBAccess.execute(updateQuantity, [value.quantity, value.tid, res[0].id]);
                             }, function(err) {
                                 Log.write(err);
                             });
