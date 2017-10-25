@@ -3,9 +3,9 @@ sudo: true
 node_js:
   - '6.11.1'
 before_install:
-  - 'sudo add-apt-repository ppa:ubuntu-wine/ppa -y'
+  - 'sudo dpkg --add-architecture i386'
   - 'sudo apt-get update -y'
-  - 'sudo apt-get install -y wine1.7 -y'
+  - 'sudo apt-get install --install-recommends wine-staging'
 before_script: 
   - 'npm install -g gulp'
   - 'npm install -g electron'
