@@ -3,9 +3,10 @@ sudo: true
 node_js:
   - '6.11.1'
 before_install:
-  - 'sudo add-apt-repository ppa:ricotz/unstable -y'
-  - 'sudo apt-get update -y'
-  - 'sudo apt install wine-stable -y'
+  - 'sudo dpkg --add-architecture i386 -y'
+  - 'sudo apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/ -y'
+  - 'wget https://dl.winehq.org/wine-builds/Release.key && sudo apt-key add Release.key -y'
+  - 'sudo apt update -y && sudo apt install winehq-stable -y'
 before_script: 
   - 'npm install -g gulp'
   - 'npm install -g electron'
