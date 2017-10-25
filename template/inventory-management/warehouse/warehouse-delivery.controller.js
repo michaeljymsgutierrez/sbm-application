@@ -86,7 +86,7 @@ app.controller('warehouseDeliveryCtrl', ['$scope', 'DBAccess', 'Username', '$roo
                 angular.forEach($scope.order_delivery_item, function(value) {
                     if (value.delivered != "") {
                         $scope.checkQuantity++;
-                        if (value.delivered != value.approved_quantity) {
+                        if (value.delivered < value.approved_quantity) {
                             $scope.isIncomplete++;
                         }
                     }
