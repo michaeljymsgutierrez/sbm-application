@@ -6,7 +6,7 @@ before_install:
   - 'sudo dpkg --add-architecture i386 -y'
   - 'sudo apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/ -y'
   - 'wget https://dl.winehq.org/wine-builds/Release.key && sudo apt-key add Release.key -y'
-  - 'sudo apt update -y && sudo apt install winehq-stable -y'
+  - 'sudo apt-get update -y && sudo apt-get install winehq-stable -y'
 before_script: 
   - 'npm install -g gulp'
   - 'npm install -g electron'
