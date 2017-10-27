@@ -162,12 +162,14 @@ app.controller('syncCtrl', ['$q', '$scope', 'storage', 'backdrop', 'dateFormatte
                 } else if (value.transaction_type == 'commissary_delivery') {
                     var tid = value.transaction_id;
                     var query = "SELECT (SELECT _id FROM inventory WHERE id = (SELECT wr.item_id FROM warehouse_request wr WHERE wr.id = wp.warehouse_request_id )) AS item_id, " +
+                        "(SELECT wt.transaction_number FROM warehouse_transaction wt WHERE wt.id = (SELECT wr.transaction_id  FROM warehouse_request wr WHERE wr.id = wp.warehouse_request_id)) AS request_number," +
                         "(SELECT name FROM inventory WHERE id = (SELECT wr.item_id FROM warehouse_request wr WHERE wr.id = wp.warehouse_request_id )) AS item_name, " +
                         "(SELECT uom FROM inventory WHERE id =  (SELECT wr.item_id FROM warehouse_request wr WHERE wr.id = wp.warehouse_request_id )) AS item_uom, " +
                         "quantity, (NULL) AS reason " +
                         "FROM warehouse_response wp WHERE wp.transaction_id = ?";
                     DBAccess.execute(query, [tid]).then(function(res) {
                         value.items = res;
+                        value.request_number = res[0].request_number;
                     }, function(err) {
                         Log.write(err);
                     });
