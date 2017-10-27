@@ -12,7 +12,7 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
     */
     $scope.inventoryRecordsSelectedDate = new Date();
     $scope.initRecord = function() {
-        var dateSelected = dateFormatter.standardNoTime($scope.inventoryRecordsSelectedDate);
+        $scope.dateSelected = dateFormatter.standardNoTime($scope.inventoryRecordsSelectedDate);
         $scope.inventory_records = [];
         var query = "SELECT i.id, i.name AS item, i.category_name AS category, i.uom AS uom ," +
             "IFNULL((SELECT qty FROM inventory_beginning WHERE inventory_id = i.id AND DATE_FORMAT(created,'%Y-%m-%d') = ?),0) AS beginning, " +
@@ -25,8 +25,19 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
             "(SELECT (beginning - wastage)) AS ending, " +
             "IFNULL((SELECT qty FROM inventory_actual WHERE inventory_id = i.id AND DATE_FORMAT(created,'%Y-%m-%d') = ?),0) AS actual " +
             " FROM inventory i  WHERE status = 1";
-        DBAccess.execute(query, [dateSelected, dateSelected, dateSelected]).then(function(res) {
+        DBAccess.execute(query, [$scope.dateSelected, $scope.dateSelected, $scope.dateSelected]).then(function(res) {
             $scope.inventory_records = res;
+            /*
+                Get Delivery Item quantity
+            */
+            console.log($scope.inventory_records);
+            var getDelivery = "SELECT wt.id FROM warehouse_transaction wt WHERE DATE_FORMAT(created,'%Y-%m-%d') = ? AND type = 'commissary_delivery'";
+            var param = [$scope.dateSelected];
+            DBAccess.execute(getDelivery, param).then(function(res) {
+                console.log(res);
+            }, function(err) {
+                Log.write(err);
+            });
         }, function(err) {
             Log.write(err);
         });
