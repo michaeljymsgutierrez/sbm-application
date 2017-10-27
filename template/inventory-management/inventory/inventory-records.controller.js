@@ -11,6 +11,49 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
         Next and Previous date selector
     */
     $scope.inventoryRecordsSelectedDate = new Date();
+
+    $scope.initDelivery = function() {
+        /* 
+            Get warehouse transaction id for commissary_delivery 
+        */
+        $scope.warehouse_delivery = [];
+        var getDelivery = "SELECT id FROM warehouse_transaction WHERE DATE_FORMAT(created,'%Y-%m-%d') = ? AND type = 'commissary_delivery'";
+        var param = [$scope.dateSelected];
+        DBAccess.execute(getDelivery, param).then(function(res) {
+            $scope.warehouse_delivery = res;
+            $scope.deliveryCount = 0;
+            angular.forEach($scope.warehouse_delivery, function(value) {
+                var query = "SELECT wr.warehouse_request_id AS wr_id, wr.quantity FROM warehouse_response wr WHERE wr.transaction_id = ?";
+                DBAccess.execute(query, [value.id]).then(function(res) {
+                    value.items = res;
+                    $scope.deliveryCount++;
+                }, function(err) {
+                    Log.write(err);
+                });
+            });
+
+            $scope.$watch('deliveryCount', function(value) {
+                if (value == $scope.warehouse_delivery.length) {
+                    angular.forEach($scope.warehouse_delivery, function(value) {
+                        angular.forEach(value.items, function(valueItem) {
+                            var getItemId = "SELECT item_id FROM warehouse_request WHERE id = ?";
+                            DBAccess.execute(getItemId, [valueItem.wr_id]).then(function(res) {
+                                valueItem.item_id = res[0].item_id;
+                            }, function(err) {
+                                Log.write(err);
+                            });
+                        });
+                    });
+                }
+            });
+            console.log($scope.inventory_records);
+            console.log($scope.warehouse_delivery);
+
+        }, function(err) {
+            Log.write(err);
+        });
+    };
+
     $scope.initRecord = function() {
         $scope.dateSelected = dateFormatter.standardNoTime($scope.inventoryRecordsSelectedDate);
         $scope.inventory_records = [];
@@ -27,17 +70,7 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
             " FROM inventory i  WHERE status = 1";
         DBAccess.execute(query, [$scope.dateSelected, $scope.dateSelected, $scope.dateSelected]).then(function(res) {
             $scope.inventory_records = res;
-            /*
-                Get Delivery Item quantity
-            */
-            console.log($scope.inventory_records);
-            var getDelivery = "SELECT wt.id FROM warehouse_transaction wt WHERE DATE_FORMAT(created,'%Y-%m-%d') = ? AND type = 'commissary_delivery'";
-            var param = [$scope.dateSelected];
-            DBAccess.execute(getDelivery, param).then(function(res) {
-                console.log(res);
-            }, function(err) {
-                Log.write(err);
-            });
+            $scope.initDelivery();
         }, function(err) {
             Log.write(err);
         });
