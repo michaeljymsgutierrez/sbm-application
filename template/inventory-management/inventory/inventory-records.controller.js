@@ -14,7 +14,7 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
 
     $scope.initDelivery = function() {
         /* 
-            Get warehouse transaction id for commissary_delivery 
+            Get warehouse transaction id for warehouse_delivery 
         */
         $scope.warehouse_delivery = [];
         var getDelivery = "SELECT id FROM warehouse_transaction WHERE DATE_FORMAT(created,'%Y-%m-%d') = ? AND type = 'commissary_delivery'";
@@ -32,23 +32,30 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
                 });
             });
 
-            $scope.$watch('deliveryCount', function(value) {
-                if (value == $scope.warehouse_delivery.length) {
-                    angular.forEach($scope.warehouse_delivery, function(value) {
-                        angular.forEach(value.items, function(valueItem) {
-                            var getItemId = "SELECT item_id FROM warehouse_request WHERE id = ?";
-                            DBAccess.execute(getItemId, [valueItem.wr_id]).then(function(res) {
-                                valueItem.item_id = res[0].item_id;
-                            }, function(err) {
-                                Log.write(err);
+            /*
+                This block of codes set the quantity of delivery on inventory item
+            */
+            setTimeout(function() {
+                angular.forEach($scope.warehouse_delivery, function(value) {
+                    angular.forEach(value.items, function(valueItem) {
+                        var getItemId = "SELECT item_id FROM warehouse_request WHERE id = ?";
+                        DBAccess.execute(getItemId, [valueItem.wr_id]).then(function(res) {
+                            valueItem.item_id = res[0].item_id;
+                            /* 
+                                Part where item_id is compared to inventory id
+                                to set the delivered quantity
+                            */
+                            angular.forEach($scope.inventory_records, function(valueInventory) {
+                                if (valueInventory.id == valueItem.item_id) {
+                                    valueInventory.delivery = valueInventory.delivery + valueItem.quantity;
+                                }
                             });
+                        }, function(err) {
+                            Log.write(err);
                         });
                     });
-                }
-            });
-            console.log($scope.inventory_records);
-            console.log($scope.warehouse_delivery);
-
+                });
+            }, 50);
         }, function(err) {
             Log.write(err);
         });
@@ -59,11 +66,7 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
         $scope.inventory_records = [];
         var query = "SELECT i.id, i.name AS item, i.category_name AS category, i.uom AS uom ," +
             "IFNULL((SELECT qty FROM inventory_beginning WHERE inventory_id = i.id AND DATE_FORMAT(created,'%Y-%m-%d') = ?),0) AS beginning, " +
-            "(0) AS delivery, " +
-            "(0) AS pullout, " +
-            "(0) AS transin, " +
-            "(0) AS transout, " +
-            "(0) AS sales, " +
+            "(0) AS delivery, (0) AS pullout, (0) AS transin, (0) AS transout, (0) AS sales, " +
             "IFNULL((SELECT SUM(qty) FROM inventory_waste WHERE inventory_id = i.id AND DATE_FORMAT(created,'%Y-%m-%d') =?),0) AS wastage, " +
             "(SELECT (beginning - wastage)) AS ending, " +
             "IFNULL((SELECT qty FROM inventory_actual WHERE inventory_id = i.id AND DATE_FORMAT(created,'%Y-%m-%d') = ?),0) AS actual " +
