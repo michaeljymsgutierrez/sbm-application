@@ -64,14 +64,34 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
                         Log.write(err);
                     });
             } else if ($rootScope.numpad_sender == "warehouse-pulloutrequest") {
-                var id = $rootScope.item.id;
+                // var id = $rootScope.item.id;
+                // var dateNow = dateFormatter.standardNoTime(new Date);
+                // var query = "SELECT ib.qty , IFNULL((SELECT SUM(qty) FROM inventory_waste WHERE inventory_id = ? AND DATE_FORMAT(created,'%Y-%m-%d') = ? ),0) AS waste_qty FROM inventory_beginning ib WHERE ib.created = (SELECT max(created) FROM inventory_beginning) AND ib.inventory_id = ?";
+                // DBAccess.execute(query, [id, dateNow, id]).then(function(res) {
+                //     console.log(res);
+                // }, function(err) {
+                //     Log.write(err);
+                // });
                 var dateNow = dateFormatter.standardNoTime(new Date);
-                console.log($rootScope.item);
+                var query = "SELECT * FROM warehouse_transaction WHERE DATE_FORMAT(created,'%Y-%m-%d') = ? AND type = ?";
+                DBAccess.execute(query, [dateNow, 'commissary_delivery']).then(function(res) {
+                    $scope.delivery = res;
+                    angular.forEach($scope.delivery, function(value) {
+                        var query = "SELECT quantity AS qty, warehouse_request_id AS wrid FROM warehouse_response WHERE transaction_id = ?";
+                        DBAccess.execute(query, [value.id]).then(function(res) {
+                            value.items = res;
+                        }, function(err) {
+                            Log.write(err);
+                        });
+                    });
+                    console.log($scope.delivery);
+                }, function(err) {
+                    Log.write(err);
+                });
             } else if ($rootScope.numpad_sender == "warehouse-order") {
                 $rootScope.$broadcast('numpad:warehouse-order', $scope.output);
                 Modal.hide();
             }
         }
     };
-
 }]);
