@@ -64,14 +64,16 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
                         Log.write(err);
                     });
             } else if ($rootScope.numpad_sender == "warehouse-pulloutrequest") {
-                // var id = $rootScope.item.id;
-                // var dateNow = dateFormatter.standardNoTime(new Date);
-                // var query = "SELECT ib.qty , IFNULL((SELECT SUM(qty) FROM inventory_waste WHERE inventory_id = ? AND DATE_FORMAT(created,'%Y-%m-%d') = ? ),0) AS waste_qty FROM inventory_beginning ib WHERE ib.created = (SELECT max(created) FROM inventory_beginning) AND ib.inventory_id = ?";
-                // DBAccess.execute(query, [id, dateNow, id]).then(function(res) {
-                //     console.log(res);
-                // }, function(err) {
-                //     Log.write(err);
-                // });
+                /*
+                var id = $rootScope.item.id;
+                var dateNow = dateFormatter.standardNoTime(new Date);
+                var query = "SELECT ib.qty , IFNULL((SELECT SUM(qty) FROM inventory_waste WHERE inventory_id = ? AND DATE_FORMAT(created,'%Y-%m-%d') = ? ),0) AS waste_qty FROM inventory_beginning ib WHERE ib.created = (SELECT max(created) FROM inventory_beginning) AND ib.inventory_id = ?";
+                DBAccess.execute(query, [id, dateNow, id]).then(function(res) {
+                    console.log(res);
+                }, function(err) {
+                    Log.write(err);
+                });
+                */
 
                 var dateNow = dateFormatter.standardNoTime(new Date);
                 var query = "SELECT * FROM warehouse_transaction WHERE DATE_FORMAT(created,'%Y-%m-%d') = ? AND type = ?";
@@ -82,8 +84,14 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
                         DBAccess.execute(query, [value.id]).then(function(res) {
                             value.items = res;
                             angular.forEach(value.items, function(itemValue) {
-                                var query = "SELECT wr.approved_quantity ,() FROM warehouse_request wr WHERE wr.id = ?";
-
+                                var query = "SELECT wr.approved_quantity , wr.item_id, (SELECT i._id FROM inventory i WHERE i.id = wr.item_id) AS _id FROM warehouse_request wr WHERE wr.id = ?";
+                                DBAccess.execute(query, [itemValue.wrid]).then(function(res) {
+                                    itemValue._id = res[0]._id;
+                                    itemValue.item_id = res[0].item_id;
+                                    itemValue.approved_quantity = res[0].approved_quantity;
+                                }, function(err) {
+                                    console.log(err);
+                                });
                             });
                         }, function(err) {
                             Log.write(err);
