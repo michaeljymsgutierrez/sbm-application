@@ -64,18 +64,19 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
                         Log.write(err);
                     });
             } else if ($rootScope.numpad_sender == "warehouse-pulloutrequest") {
-                /*
+
                 var id = $rootScope.item.id;
                 var dateNow = dateFormatter.standardNoTime(new Date);
                 var query = "SELECT ib.qty , IFNULL((SELECT SUM(qty) FROM inventory_waste WHERE inventory_id = ? AND DATE_FORMAT(created,'%Y-%m-%d') = ? ),0) AS waste_qty FROM inventory_beginning ib WHERE ib.created = (SELECT max(created) FROM inventory_beginning) AND ib.inventory_id = ?";
                 DBAccess.execute(query, [id, dateNow, id]).then(function(res) {
-                    console.log(res);
+                    // console.log(res);
+                    $scope.total_item = res;
                 }, function(err) {
                     Log.write(err);
                 });
-                */
 
-                var dateNow = dateFormatter.standardNoTime(new Date);
+                // console.log($rootScope.item);
+                // var dateNow = dateFormatter.standardNoTime(new Date);
                 var query = "SELECT * FROM warehouse_transaction WHERE DATE_FORMAT(created,'%Y-%m-%d') = ? AND type = ?";
                 DBAccess.execute(query, [dateNow, 'commissary_delivery']).then(function(res) {
                     $scope.delivery = res;
@@ -97,10 +98,18 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
                             Log.write(err);
                         });
                     });
-                    console.log($scope.delivery);
+                    // console.log($scope.delivery);
                 }, function(err) {
                     Log.write(err);
                 });
+
+                setTimeout(function() {
+                    console.log($scope.delivery);
+                    console.log($scope.total_item);
+                    if ($scope.total_item.length != 0) {
+
+                    }
+                }, 500);
             } else if ($rootScope.numpad_sender == "warehouse-order") {
                 $rootScope.$broadcast('numpad:warehouse-order', $scope.output);
                 Modal.hide();
