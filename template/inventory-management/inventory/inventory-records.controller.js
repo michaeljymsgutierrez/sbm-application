@@ -68,7 +68,6 @@ app.controller('inventoryRecordsCtrl', ['$scope', '$rootScope', 'Username', 'DBA
             "IFNULL((SELECT qty FROM inventory_beginning WHERE inventory_id = i.id AND DATE_FORMAT(created,'%Y-%m-%d') = ?),0) AS beginning, " +
             "(0) AS delivery, (0) AS pullout, (0) AS transin, (0) AS transout, (0) AS sales, " +
             "IFNULL((SELECT SUM(qty) FROM inventory_waste WHERE inventory_id = i.id AND DATE_FORMAT(created,'%Y-%m-%d') =?),0) AS wastage, " +
-            "(SELECT (beginning - wastage)) AS ending, " +
             "IFNULL((SELECT qty FROM inventory_actual WHERE inventory_id = i.id AND DATE_FORMAT(created,'%Y-%m-%d') = ?),0) AS actual " +
             " FROM inventory i  WHERE status = 1";
         DBAccess.execute(query, [$scope.dateSelected, $scope.dateSelected, $scope.dateSelected]).then(function(res) {
