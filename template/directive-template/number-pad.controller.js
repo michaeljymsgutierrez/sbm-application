@@ -72,14 +72,19 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
                 // }, function(err) {
                 //     Log.write(err);
                 // });
+
                 var dateNow = dateFormatter.standardNoTime(new Date);
                 var query = "SELECT * FROM warehouse_transaction WHERE DATE_FORMAT(created,'%Y-%m-%d') = ? AND type = ?";
                 DBAccess.execute(query, [dateNow, 'commissary_delivery']).then(function(res) {
                     $scope.delivery = res;
                     angular.forEach($scope.delivery, function(value) {
-                        var query = "SELECT quantity AS qty, warehouse_request_id AS wrid FROM warehouse_response WHERE transaction_id = ?";
+                        var query = "SELECT warehouse_request_id AS wrid FROM warehouse_response WHERE transaction_id = ?";
                         DBAccess.execute(query, [value.id]).then(function(res) {
                             value.items = res;
+                            angular.forEach(value.items, function(itemValue) {
+                                var query = "SELECT wr.approved_quantity ,() FROM warehouse_request wr WHERE wr.id = ?";
+
+                            });
                         }, function(err) {
                             Log.write(err);
                         });
