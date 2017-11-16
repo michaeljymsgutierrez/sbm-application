@@ -62,6 +62,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             templateUrl: './template/inventory-management/warehouse/warehouse-delivery.html',
             controller: 'warehouseDeliveryCtrl'
         })
+        .state('warehouse-pulloutrequest', {
+            url: '/warehouse-pulloutrequest',
+            templateUrl: './template/inventory-management/warehouse/warehouse-pullout-request.html',
+            controller: ''
+        })
         .state('settings', {
             url: '/settings',
             templateUrl: './template/settings/settings.html',
