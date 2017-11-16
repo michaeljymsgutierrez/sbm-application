@@ -10,7 +10,7 @@ function scriptCycle() {
     jQuery(window).load(function() {
 
         /* Assure that the side script has been loaded succesfully */
-        console.log('Script running on background mode . . .');
+        console.log('Successfully executed script cycle . . .');
 
         var body = jQuery('body');
 
