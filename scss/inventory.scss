@@ -55,10 +55,11 @@
 
 .date-filter span {
     font-size: 22px;
-    position: absolute;
-    margin-left: -538px;
+    // position: absolute;
+    // margin-left: -538px;
+    // padding-top: 9px;
     width: 77%;
-    padding-top: 9px;
+    vertical-align: -16px !important;
 }
 
 .inventory-waste div.waste-item,

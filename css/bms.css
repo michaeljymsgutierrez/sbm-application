@@ -928,10 +928,8 @@ div.clock-container {
 
 .date-filter span {
   font-size: 22px;
-  position: absolute;
-  margin-left: -538px;
   width: 77%;
-  padding-top: 9px; }
+  vertical-align: -16px !important; }
 
 .inventory-waste div.waste-item,
 .inventory-waste div.waste-menu,
