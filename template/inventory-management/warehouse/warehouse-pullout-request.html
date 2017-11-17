@@ -5,8 +5,40 @@
         Warehouse Pullout Request
         <button class="bar-right button" ng-click=""><i class="ion-archive save-wo"></i><span>Request</span></button>
     </div>
-    {{ data }}
     <div class="warehouse-order container-fluid">
+        <div class="wo-category">
+            <button class="category" ng-repeat="x in category" ng-click="filterByCategory(x)">{{ x }}</button>
+        </div>
+        <div class="wo-item">
+            <div ng-repeat="x in warehouse_display" ng-click="addItem(x)">{{ x.name }}</div>
+        </div>
+        <div class="wo-order">
+            <div class="wo-info-header">
+                <div class="wo-label">
+                    <div>PULLOUT #</div>
+                    <div>USER</div>
+                    <div>DATE</div>
+                </div>
+                <div class="wo-info">
+                    <div class="ellipser">{{ transaction_no }}</div>
+                    <div>{{ employee_name }}</div>
+                    <div>{{ datenow }}</div>
+                </div>
+            </div>
+            <div class="wo-item-header">
+                <div>ITEM</div>
+                <div>QTY</div>
+            </div>
+            <div class="wo-selected">
+                <table>
+                    <tr ng-repeat="x in warehouse_item" ng-if="x.qty" ng-click="addItem(x)">
+                        <td><button ng-click="deleteItem(x.id)"><i class="ion-trash-a"></i></button></td>
+                        <td>{{ x.name }}</td>
+                        <td>{{ x.qty }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         <warehouse-tab></warehouse-tab>
     </div>
 </div>
