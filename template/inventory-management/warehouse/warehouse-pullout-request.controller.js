@@ -14,7 +14,7 @@ app.controller('pulloutRequestCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
         $scope.category = ['All'];
         $scope.datenow = dateFormatter.slashFormat(new Date());
         $scope.employee_name = $scope.user.name;
-        $scope.transaction_no = storage.read('store_code') + "-WO-" + dateFormatter.timestamp(new Date());
+        $scope.transaction_no = storage.read('store_code') + "-WPR-" + dateFormatter.timestamp(new Date());
         var query = "SELECT id, _id, name, uom, category_name FROM inventory WHERE status = 1";
         DBAccess.execute(query, []).then(function(res) {
             /* Contain Warehouse Item */
