@@ -53,4 +53,23 @@ app.controller('pulloutRequestCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
         $scope.user = data;
         initWarehouse();
     });
+
+
+    /*
+        Function for adding item to wastage
+    */
+    $scope.addItem = function(item) {
+        NumberPad.show();
+        $rootScope.numpad_sender = "warehouse-pulloutrequest";
+        $rootScope.item = item;
+        var unregisterNumpad = $rootScope.$on('numpad:warehouse-pulloutrequest', function(event, data) {
+            unregisterNumpad();
+            $rootScope.item.qty = parseInt(data);
+            var unregisterReason = $rootScope.$on('reason:warehouse-pulloutrequest', function(event, data) {
+                unregisterReason();
+                $rootScope.item.reason = data;
+            });
+        });
+    };
+
 }]);
