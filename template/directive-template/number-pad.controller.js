@@ -63,6 +63,9 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
                     function(err) {
                         Log.write(err);
                     });
+            } else if ($rootScope.numpad_sender == "warehouse-pulloutrequest") {
+                console.log(1);
+
             } else if ($rootScope.numpad_sender == "warehouse-order") {
                 $rootScope.$broadcast('numpad:warehouse-order', $scope.output);
                 Modal.hide();
