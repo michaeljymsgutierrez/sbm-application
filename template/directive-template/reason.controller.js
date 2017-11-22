@@ -53,6 +53,8 @@ app.controller('reasonCtrl', ['$scope', 'DBAccess', '$rootScope', 'Log', 'Modal'
     $scope.cancel = function() {
         if ($rootScope.reason_sender == "inventory-waste") {
             delete $rootScope.item['qty'];
+        } else if ($rootScope.reason_sender == "warehouse-pulloutrequest") {
+            delete $rootScope.item['qty'];
         }
         Modal.hide();
     };
@@ -60,6 +62,9 @@ app.controller('reasonCtrl', ['$scope', 'DBAccess', '$rootScope', 'Log', 'Modal'
         if ($scope.selected_reason != "") {
             if ($rootScope.reason_sender == "inventory-waste") {
                 $rootScope.$broadcast('reason:inventory-waste', $scope.selected_reason);
+                Modal.hide();
+            } else if ($rootScope.reason_sender == "warehouse-pulloutrequest") {
+                $rootScope.$broadcast('reason:warehouse-pulloutrequest', $scope.selected_reason);
                 Modal.hide();
             }
         } else {
