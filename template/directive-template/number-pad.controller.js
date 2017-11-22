@@ -26,6 +26,10 @@ app.controller('numberPadCtrl', ['$scope', '$rootScope', 'Modal', 'DBAccess', 'L
         if ($rootScope.item.qty) {
             $scope.output = $rootScope.item.qty.toString();
         }
+    } else if ($rootScope.numpad_sender == "warehouse-pulloutrequest") {
+        if ($rootScope.item.qty) {
+            $scope.output = $rootScope.item.qty.toString();
+        }
     }
 
     /* Functions for numpad actions */
