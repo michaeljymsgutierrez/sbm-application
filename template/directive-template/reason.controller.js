@@ -11,7 +11,27 @@ app.controller('reasonCtrl', ['$scope', 'DBAccess', '$rootScope', 'Log', 'Modal'
     $scope.reason = [];
     $scope.selected_reason = "";
     if ($rootScope.reason_sender == "inventory-waste") {
+        /*
+            Fetch Reason for inventory waste
+        */
         var query = "SELECT reason FROM reason WHERE module = 'inventory_wastage'";
+        DBAccess.execute(query, []).then(function(res) {
+            if (res.length != 0) {
+                angular.forEach(res, function(value) {
+                    $scope.reason.push(value.reason);
+                });
+            }
+        }, function(err) {
+            Log.write(err);
+        });
+        if ($rootScope.item.reason) {
+            $scope.selected_reason = $rootScope.item.reason;
+        }
+    } else if ($rootScope.reason_sender == "warehouse-pulloutrequest") {
+        /*
+            Fetch Reason for warehouse pullout request
+        */
+        var query = "SELECT reason FROM reason WHERE module = 'pullout_request'";
         DBAccess.execute(query, []).then(function(res) {
             if (res.length != 0) {
                 angular.forEach(res, function(value) {
