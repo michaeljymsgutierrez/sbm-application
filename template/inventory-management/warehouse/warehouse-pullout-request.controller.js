@@ -72,4 +72,16 @@ app.controller('pulloutRequestCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
         });
     };
 
+
+    /*
+        Delete item function
+    */
+    $scope.deleteItem = function(id) {
+        angular.forEach($scope.warehouse_item, function(value) {
+            if (value.id == id) {
+                delete value['qty'];
+            }
+        });
+    };
+
 }]);
