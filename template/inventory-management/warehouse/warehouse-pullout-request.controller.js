@@ -63,10 +63,10 @@ app.controller('pulloutRequestCtrl', ['$scope', 'Username', '$rootScope', 'DBAcc
         $rootScope.numpad_sender = "warehouse-pulloutrequest";
         $rootScope.item = item;
         var unregisterNumpad = $rootScope.$on('numpad:warehouse-pulloutrequest', function(event, data) {
-            unregisterNumpad();
+            unregisterNumpads();
             $rootScope.item.qty = parseInt(data);
             var unregisterReason = $rootScope.$on('reason:warehouse-pulloutrequest', function(event, data) {
-                unregisterReason();
+                unregisterReasons();
                 $rootScope.item.reason = data;
             });
         });
